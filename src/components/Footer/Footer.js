@@ -8,7 +8,7 @@ import './Footer.css'
 
 const Footer = () => (
   <footer>
-    &copy; Prime Digital Academy
+    SIID GROUP: David Searl, Heather Walls, Thomas Dourgarian, Ayriel Ash, and Patrick Baker
   </footer>
 );
 
