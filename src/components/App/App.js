@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 
 import './App.css';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
+import ResetPassword from '../ResetPassword/ResetPassword';
 
 class App extends Component {
   componentDidMount () {
@@ -40,10 +41,14 @@ class App extends Component {
               path="/about"
               component={AboutPage}
             />
-             <Route
+            <Route
               exact
               path="/forgotPassword"
               component={ForgotPassword}
+            />
+            <Route 
+              path="/reset/:token" 
+              component={ResetPassword} 
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
