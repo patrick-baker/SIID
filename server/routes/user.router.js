@@ -10,6 +10,7 @@ const router = express.Router();
 const crypto = require('crypto');
 require('dotenv').config();
 const nodemailer = require('nodemailer');
+const moment = require('moment');
 
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -20,12 +21,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {  
+router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
+  const email = req.body.email;
 
-  const queryText = 'INSERT INTO "user" (username, password) VALUES ($1, $2) RETURNING id';
-  pool.query(queryText, [username, password])
+  const queryText = 'INSERT INTO "user" (username, password, email) VALUES ($1, $2, $3) RETURNING id';
+  pool.query(queryText, [username, password, email])
     .then(() => res.sendStatus(201))
     .catch(() => res.sendStatus(500));
 });
@@ -62,15 +64,12 @@ router.post('/forgotPassword', (req, res) => {
       res.status(403).send('email not in db');
     } else {
       const token = crypto.randomBytes(20).toString('hex');
-      const tokenExpiration = Date.now() + 3600000;
+      const tokenExpiration = moment().add(1, 'hour');
+      console.log("tokenExpiration:", tokenExpiration);
       const sqlUpdate = `UPDATE "user"
-      SET "resetPasswordToken = $1, 
+      SET "resetPasswordToken" = $1, 
       "resetPasswordExpires" = $2
       WHERE "email" = $3;`;
-      // user.update({
-      //   resetPasswordToken: token,
-      //   resetPasswordExpires: Date.now() + 3600000,
-      // });
       pool.query(sqlUpdate, [token, tokenExpiration, email])
       .then((result) => {
         // sets account email as the sending address for the forgot pass email
@@ -90,7 +89,7 @@ router.post('/forgotPassword', (req, res) => {
             'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n'
             + 'Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:\n\n'
             + `http://localhost:3000/reset/${token}\n\n`
-            + 'If you did not request this, please ignore this email and your password will remain unchanged.\n',
+            + 'If you did not request this, please ignore this email and your password will remain unchanged. Please do not respond to this email.\n',
         };
   
         console.log('sending mail');

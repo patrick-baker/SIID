@@ -32,7 +32,7 @@ class ForgotPassword extends Component {
         } else {
             try {
                 const response = await axios.post(
-                    'http://localhost:3003/forgotPassword',
+                    '/api/user/forgotPassword',
                     {
                         email,
                     },
