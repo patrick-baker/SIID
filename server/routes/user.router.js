@@ -65,8 +65,8 @@ router.post('/forgotPassword', (req, res) => {
     .then((user) => {
       console.log("user result from server:", user);
       if (user.rowCount === 0) {
-        console.error('email not in database');
-        res.status(403).send('email not in db');
+        console.log('email not in database');
+        res.status(403).json('email not in db');
       } else {
         const token = crypto.randomBytes(20).toString('hex');
         const tokenExpiration = moment();

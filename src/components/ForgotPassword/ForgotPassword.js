@@ -6,9 +6,6 @@ import { connect } from 'react-redux';
 class ForgotPassword extends Component {
     state = {
         email: '',
-        showError: false,
-        messageFromServer: '',
-        showNullError: false,
     }
 
     // Event change listeners for altering this.state.email that the user is sending a reset email to
@@ -20,48 +17,15 @@ class ForgotPassword extends Component {
 
     // a post request which is checking for the user's email in the database, 
     // and generating a hashtoken if found
-    sendEmail = async (e) => {
+    sendEmail = (e) => {
         e.preventDefault();
         const { email } = this.state;
-        if (email === '') {
-            this.setState({
-                showError: false,
-                messageFromServer: '',
-                showNullError: true,
-            });
-        } else {
-            try {
-                const response = await axios.post(
-                    '/api/user/forgotPassword',
-                    {
-                        email,
-                    },
-                );
-                console.log(response.data);
-                if (response.data === 'recovery email sent') {
-                    this.setState({
-                        showError: false,
-                        messageFromServer: 'recovery email sent',
-                        showNullError: false,
-                    });
-                }
-            } catch (error) {
-                console.error(error.response.data);
-                if (error.response.data === 'email not in db') {
-                    this.setState({
-                        showError: true,
-                        messageFromServer: '',
-                        showNullError: false,
-                    });
-                }
-            }
-        }
+        this.props.dispatch({type: 'FORGOT_PASSWORD', payload: email})
     };
 
     render() {
-        const {
-            email, messageFromServer, showNullError, showError
-        } = this.state;
+        const { email } = this.state;
+        const { messageFromServer, showNullError, showError } = this.props.forgotPassword
 
         return (
             <div>
@@ -99,6 +63,7 @@ class ForgotPassword extends Component {
                     </div>
                 )}
                 <Link to="/home" > Back To Home </Link>
+                <pre>{JSON.stringify(this.props.forgotPassword)}</pre>
             </div>
         );
     }
