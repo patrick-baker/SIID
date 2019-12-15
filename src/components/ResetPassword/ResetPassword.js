@@ -1,39 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class ResetPassword extends Component {
   state = {
-    username: '',
     password: '',
-    updated: false,
-    isLoading: true,
-    error: false,
   };
 
 
   async componentDidMount() {
     const token = this.props.match.params.token;
     console.log(token);
-    try {
-      const response = await axios.get(`/api/user/reset/${token}`, {
-      });
-      console.log(response);
-      if (response.data.message === 'password reset link a-ok') {
-        this.setState({
-          username: response.data.username,
-          isLoading: false
-        });
-      }
-    } catch (error) {
-      console.log(error.response.data);
-      this.setState({
-        isLoading: false,
-        error: true
-      });
-    }
+    this.props.dispatch({type: 'RESET_PASSWORD', payload: {token: token}});
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch({type: 'CLEAR_RESET_REDUCER'});
   }
 
   handleChange = name => (event) => {
@@ -44,42 +27,19 @@ class ResetPassword extends Component {
 
   updatePassword = async (e) => {
     e.preventDefault();
-    const { username, password } = this.state;
-    const {
-      match: {
-        params: { token },
-      },
-    } = this.props;
-    try {
-      const response = await axios.put(
-        '/api/user/updatePasswordViaEmail',
-        {
-          username,
-          password,
-          resetPasswordToken: token,
-        },
-      );
-      console.log(response.data);
-      if (response.data.message === 'password updated') {
-        this.setState({
-          updated: true,
-          error: false,
-        });
-      } else {
-        this.setState({
-          updated: false,
-          error: true,
-        });
-      }
-    } catch (error) {
-      console.log(error.response.data);
-    }
+    const { password } = this.state;
+    const { username } = this.props.resetPassword;
+    const { token } = this.props.match.params;
+    this.props.dispatch({type: 'UPDATE_PASSWORD', payload: {
+      username: username,
+      password: password,
+      resetPasswordToken: token
+    }})
   };
 
   render() {
-    const {
-      password, error, isLoading, updated
-    } = this.state;
+    const { password } = this.state;
+    const {error, isLoading, updated } = this.props.resetPassword;
 
     if (error) {
       return (
@@ -89,13 +49,13 @@ class ResetPassword extends Component {
             <h4>Problem resetting password. Please send another reset link.</h4>
             <div>
               <Link
-                link="/"
+                to="/"
               > Go Home
             </Link>
             </div>
             <div>
               <Link
-                link="/forgotPassword"
+                to="/forgotPassword"
               >Forgot Password?
             </Link>
             </div>
@@ -135,11 +95,11 @@ class ResetPassword extends Component {
               again.
             </p>
             <Link
-              link="/login"
+              to="/login"
             >Login</Link>
           </div>
         )}
-        <Link link="/" >Go Home</Link>
+        <Link to="/" >Go Home</Link>
       </div>
     );
   }

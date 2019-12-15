@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -8,18 +7,17 @@ class ForgotPassword extends Component {
         email: '',
     }
 
-    // Event change listeners for altering this.state.email that the user is sending a reset email to
+    // Event change listener for altering this.state.email that the user is sending a reset email to
     handleChange = name => (event) => {
         this.setState({
             [name]: event.target.value,
         });
     };
 
-    // a post request which is checking for the user's email in the database, 
-    // and generating a hashtoken if found
     sendEmail = (e) => {
         e.preventDefault();
         const { email } = this.state;
+        // dispatches to forgotPasswordSaga
         this.props.dispatch({type: 'FORGOT_PASSWORD', payload: email})
     };
 
@@ -63,7 +61,6 @@ class ForgotPassword extends Component {
                     </div>
                 )}
                 <Link to="/home" > Back To Home </Link>
-                <pre>{JSON.stringify(this.props.forgotPassword)}</pre>
             </div>
         );
     }
