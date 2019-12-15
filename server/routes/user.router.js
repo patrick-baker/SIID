@@ -122,36 +122,39 @@ router.post('/forgotPassword', (req, res) => {
 
 // matches token to username and retrieves information for reset link
 router.get('/reset/:token', (req, res) => {
-  const {token} = req.params;
+  const { token } = req.params;
   sqlText = `SELECT * from "user" WHERE "resetPasswordToken" = $1;`; // need to also check timestamp for expiration
   pool.query(sqlText, [token])
-  .then((user) => {
-    console.log("user result from server in reset query:", user);
-    if (user.rowCount === 0) {
-      console.error('password reset link is invalid or has expired');
-      res.status(403).send('password reset link is invalid or has expired');
-    } else {
-      res.status(200).send({
-        username: user.rows[0].username,
-        message: 'password reset link a-ok',
-      });
-    }
-  });
-});
-
-  router.put('/updatePasswordViaEmail', (req, res) => {
-    const { username, resetPasswordToken} = req.body;
-    console.log('req.body in updatePasswordViaEmail query:', req.body);
-    sqlText = `SELECT * FROM "user" 
-    WHERE "username" = $1
-    AND "resetPasswordToken" = $2;`; // need to also check timestamp for expiration
-    pool.query(sqlText, [username, resetPasswordToken])
-    .then(user => {
-      console.log("user result from server in update query:", user);
+    .then((user) => {
+      console.log("user result from server in reset query:", user);
       if (user.rowCount === 0) {
         console.error('password reset link is invalid or has expired');
         res.status(403).send('password reset link is invalid or has expired');
+      } else {
+        res.status(200).send({
+          username: user.rows[0].username,
+          message: 'password reset link a-ok',
+        });
+      }
+    });
+});
+
+// updates the database with the user's new password
+router.put('/updatePasswordViaEmail', (req, res) => {
+  const { username, resetPasswordToken } = req.body;
+  console.log('req.body in updatePasswordViaEmail query:', req.body);
+  sqlText = `SELECT * FROM "user" 
+    WHERE "username" = $1
+    AND "resetPasswordToken" = $2;`; // need to also check timestamp for expiration
+  pool.query(sqlText, [username, resetPasswordToken])
+    .then(user => {
+      console.log("user result from server in update query:", user);
+      if (user.rowCount === 0) {
+          // runs if the query finds no match
+        console.error('password reset link is invalid or has expired');
+        res.status(403).send('password reset link is invalid or has expired');
       } else if (user.rowCount !== 0) {
+          // sets the DB password to the correct encrypted password
         console.log('user exists in db');
         const password = encryptLib.encryptPassword(req.body.password);
         sqlUpdate = `UPDATE "user"
@@ -169,6 +172,6 @@ router.get('/reset/:token', (req, res) => {
         res.status(401).json('no user exists in db to update');
       }
     });
-  });
+});
 
 module.exports = router;

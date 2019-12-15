@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class ResetPassword extends Component {
-    state = {
-      username: '',
-      password: '',
-      updated: false,
-      isLoading: true,
-      error: false,
-    };
+  state = {
+    username: '',
+    password: '',
+    updated: false,
+    isLoading: true,
+    error: false,
+  };
 
 
   async componentDidMount() {
@@ -78,8 +78,8 @@ class ResetPassword extends Component {
 
   render() {
     const {
- password, error, isLoading, updated 
-} = this.state;
+      password, error, isLoading, updated
+    } = this.state;
 
     if (error) {
       return (
@@ -87,12 +87,18 @@ class ResetPassword extends Component {
           <h1>Password Reset</h1>
           <div>
             <h4>Problem resetting password. Please send another reset link.</h4>
-            <Link
-              link="/"
-            > Go Home</Link>
-            <Link
-              link="/forgotPassword"
-            >Forgot Password?</Link>
+            <div>
+              <Link
+                link="/"
+              > Go Home
+            </Link>
+            </div>
+            <div>
+              <Link
+                link="/forgotPassword"
+              >Forgot Password?
+            </Link>
+            </div>
           </div>
         </div>
       );
@@ -148,7 +154,7 @@ ResetPassword.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    return state;
-  };
-  
+  return state;
+};
+
 export default connect(mapStateToProps)(ResetPassword);
