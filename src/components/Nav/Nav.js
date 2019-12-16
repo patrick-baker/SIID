@@ -5,27 +5,63 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 
 const Nav = (props) => (
-  <div className="nav">
-    <Link to="/home">
-      <h2 className="nav-title">Prime Solo Project</h2>
-    </Link>
-    <div className="nav-right">
-      <Link className="nav-link" to="/home">
-        {/* Show this link if they are logged in or not,
-        but call this link 'Home' if they are logged in,
-        and call this link 'Login / Register' if they are not */}
-        {props.user.id ? 'Home' : 'Login / Register'}
-      </Link>
-      {/* Show the link to the info page and the logout button if the user is logged in */}
-      {props.user.id && (
-        <>
-          <LogOutButton className="nav-link"/>
-        </>
-      )}
-      {/* Always show this link since the about page is not protected */}
-    </div>
-  </div>
+  <div className="navBar">
+    <h1 className="navTitle" >SIID</h1>
+    <ul className="navUl">
+
+
+      <li className="navOption" >
+        <Link className="navLink" to="/home">
+          <i class="fas fa-th fa-sm navIcon"></i>{props.user.id ? 'Projects' : 'Login / Register'}
+        </Link>
+      </li>
+
+
+      <li className="navOption">
+        <Link className="navLink" to="/rules">
+        <i class="fas fa-clipboard-list navIcon" ></i>Rules
+        </Link>
+      </li>
+
+      <li className="navOption">
+        <Link className="navLink" to="/educators">
+        <i class="fas fa-graduation-cap navIcon"></i>Educators
+        </Link>
+      </li>
+
+
+
+      <li className="navOption">
+        {props.user.id && 
+          <Link className="navLink" onClick={() => props.dispatch({ type: 'LOGOUT' })}>
+            <i class="fas fa-sign-out-alt navIcon"></i>Log out
+          </Link>
+        }
+      </li>
+      
+    </ul>
+  </div >
 );
+
+
+ {/* <LogOutButton className="navLink" /> */}
+
+// // <div className="nav">
+
+//   {/* <div className="nav-right">
+//       <Link className="nav-link" to="/home">
+
+//         {props.user.id ? 'Home' : 'Login / Register'}
+//       </Link>
+
+//       
+
+//     </div> */}
+
+
+//   // {/* </div> */}
+
+
 
 // Instead of taking everything from state, we just want the user
 // object to determine if they are logged in
