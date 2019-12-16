@@ -18,6 +18,8 @@ import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 
 import './App.css';
+import ForgotPassword from '../ForgotPassword/ForgotPassword';
+import ResetPassword from '../ResetPassword/ResetPassword';
 
 class App extends Component {
   componentDidMount () {
@@ -39,6 +41,15 @@ class App extends Component {
               path="/about"
               component={AboutPage}
             />
+            <Route
+              exact
+              path="/forgotPassword"
+              component={ForgotPassword}
+            />
+            <Route 
+              path="/reset/:token" 
+              component={ResetPassword} 
+            />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -54,7 +65,7 @@ class App extends Component {
               exact
               path="/info"
               component={InfoPage}
-            />
+            /> 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
