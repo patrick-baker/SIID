@@ -50,15 +50,13 @@ router.post('/logout', (req, res) => {
 });
 
 
-// Route for sending email for link to reset password
+// Route for sending email with link to reset password
 router.post('/forgotPassword', (req, res) => {
   const { email } = req.body
-
   if (email === '') {
     res.status(400).send('email required');
   }
-
-  console.log("user's email:", email);
+  // console.log("user's email:", email);
 
   const sqlSelect = `SELECT * FROM "user" WHERE "email" = $1;`;
   pool.query(sqlSelect, [email])
@@ -69,7 +67,7 @@ router.post('/forgotPassword', (req, res) => {
         res.status(403).json('email not in db');
       } else {
         const token = crypto.randomBytes(20).toString('hex');
-        const tokenExpiration = moment();
+        const tokenExpiration = moment(); // need to set timezone for correct timestamp in DB
         console.log("tokenExpiration:", tokenExpiration);
         const sqlUpdate = `UPDATE "user"
       SET "resetPasswordToken" = $1, 
@@ -77,6 +75,7 @@ router.post('/forgotPassword', (req, res) => {
       WHERE "email" = $3;`;
         pool.query(sqlUpdate, [token, tokenExpiration, email])
           .then((result) => {
+
             // sets account email as the sending address for the forgot pass email
             const transporter = nodemailer.createTransport({
               service: 'gmail',
@@ -86,6 +85,7 @@ router.post('/forgotPassword', (req, res) => {
               },
             });
 
+            // email information for sending update password link to user
             const mailOptions = {
               from: 'SIIDAccountService@gmail.com',
               to: `${email}`,
@@ -94,11 +94,12 @@ router.post('/forgotPassword', (req, res) => {
                 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n'
                 + 'Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:\n\n'
                 + `http://localhost:3000/#/reset/${token}\n\n`
-                + 'If you did not request this, please ignore this email and your password will remain unchanged. Please do not respond to this email.\n',
+                + 'If you did not request this, please ignore this email and your password will remain unchanged.\n\n' 
+                + 'Please do not respond to this email.\n',
             };
-
             console.log('sending mail');
 
+            // nodemailer options
             transporter.sendMail(mailOptions, (err, response) => {
               if (err) {
                 console.error('there was an error: ', err);
@@ -123,7 +124,8 @@ router.post('/forgotPassword', (req, res) => {
 // matches token to username and retrieves information for reset link
 router.get('/reset/:token', (req, res) => {
   const { token } = req.params;
-  sqlText = `SELECT * from "user" WHERE "resetPasswordToken" = $1;`; // need to also check timestamp for expiration
+  // need to also check timestamp for expiration, how it compares to current time
+  sqlText = `SELECT * from "user" WHERE "resetPasswordToken" = $1;`; 
   pool.query(sqlText, [token])
     .then((user) => {
       console.log("user result from server in reset query:", user);

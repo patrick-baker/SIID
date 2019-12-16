@@ -41,6 +41,5 @@ const resetPassword = (state = {
     }
 };
 
-// loginMode will be on the redux state at:
-// state.loginMode
+// holds state for resetPassword.js, messages and update/error messages
 export default resetPassword;

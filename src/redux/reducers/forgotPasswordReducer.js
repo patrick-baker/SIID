@@ -27,6 +27,5 @@ const forgotPassword = (state = {
     }
 };
 
-// loginMode will be on the redux state at:
-// state.loginMode
+// stores message information based on success on ForgotPassword.js page
 export default forgotPassword;

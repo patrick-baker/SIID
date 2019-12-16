@@ -16,5 +16,5 @@ CREATE TABLE "user" (
     "admin" boolean DEFAULT false,
     "email" VARCHAR UNIQUE NOT NULL,
     "resetPasswordToken" VARCHAR,
-    "resetPasswordExpires" TIMESTAMP
+    "resetPasswordExpires" TIMESTAMPtz
 ); 
