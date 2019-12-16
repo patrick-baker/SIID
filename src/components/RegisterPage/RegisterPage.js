@@ -5,17 +5,19 @@ class RegisterPage extends Component {
   state = {
     username: '',
     password: '',
+    email: '',
   };
 
   registerUser = (event) => {
     event.preventDefault();
-
-    if (this.state.username && this.state.password) {
+    const {username, password, email} = this.state;
+    if (username && password && email) {
       this.props.dispatch({
         type: 'REGISTER',
         payload: {
-          username: this.state.username,
-          password: this.state.password,
+          username: username,
+          password: password,
+          email: email
         },
       });
     } else {
@@ -50,6 +52,17 @@ class RegisterPage extends Component {
                 name="username"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="email">
+              Email:
+              <input
+                type="text"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleInputChangeFor('email')}
               />
             </label>
           </div>

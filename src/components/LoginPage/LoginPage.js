@@ -74,6 +74,7 @@ class LoginPage extends Component {
           </div>
         </form>
         <center>
+          <div>
           <button
             type="button"
             className="link-button"
@@ -81,6 +82,16 @@ class LoginPage extends Component {
           >
             Register
           </button>
+          </div>
+          <div>
+          <button
+            type="button"
+            className="link-button"
+            onClick={() => {this.props.history.push('/forgotPassword')}}
+          >
+            Forgot Password
+          </button>
+          </div>
         </center>
       </div>
     );
