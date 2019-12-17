@@ -4,66 +4,100 @@ import { connect } from 'react-redux';
 class Educators extends Component {
 
     componentDidMount = () => {
-        this.props.dispatch({type:"GET_EDUCATORS"});
+        this.props.dispatch({ type: "GET_EDUCATORS" });
     }
 
     state = {
-        add:false,
+        add: false,
         newEducator: {
-            name:"",
-            bio:"",
-            contact_info:"",
-            image_url:""
+            name: "",
+            bio: "",
+            contact_info: "",
+            image_url: "",
+            specialties:[]
         }
     }
 
     addEducator = () => {
         this.setState({
-            add:!this.state.add
+            add: !this.state.add
         })
     }
 
-    handleChangeFor = (property,event) => {
+    handleChangeFor = (property, event) => {
         this.setState({
             ...this.state,
             newEducator: {
                 ...this.state.newEducator,
-                [property]:event.target.value
+                [property]: event.target.value
+            }
+        })
+    }
+
+    addSpecialites = (event) => {
+        this.setState({
+            newEducator:{
+                ...this.state.newEducator,
+                specialties:[...this.state.newEducator.specialties,event.target.value]
             }
         })
     }
 
     submitEducator = () => {
-        this.props.dispatch({type:"ADD_EDUCATOR",payload:this.state.newEducator});
+        this.props.dispatch({ type: "ADD_EDUCATOR", payload: this.state.newEducator });
     }
 
     render() {
         return (
-            <div>
+            <div className="educatorPage__background">
                 <button onClick={this.addEducator}>
                     Add Educator
                 </button>
 
-                {this.props.educator[0] && this.props.educator.map((educator,i) => (
-                    <div key={i}>
-                        {educator.name} <br/>
-                        {educator.bio}<br/>
-                        {educator.contact_info}<br/>
-                        {educator.image_url}
+                <div className="educatorPage__flexbox">
+                    {this.state.add &&
+                        (
+                            <div >
+                                Name: <input onChange={(event) => this.handleChangeFor('name', event)} />
+                                Bio: <input onChange={(event) => this.handleChangeFor('bio', event)} />
+                                Contact Info:<input onChange={(event) => this.handleChangeFor('contact_info', event)} />
+                                Image: <input onChange={(event) => this.handleChangeFor('image_url', event)} />
+                                <select onChange={(event) => this.addSpecialites(event)}>
+                                    <option>Gender</option>
+                                    <option>Race</option>
+                                    <option>Lgbtq</option>
+                                    <option>Religion</option>
+                                    <option>Disability</option>
+                                </select>
+                                <button onClick={this.submitEducator} >Submit</button>
+                            </div>
+                        )
+                    }
+                </div>
+
+
+                <br />
+                {this.props.educator[0] && this.props.educator.map((educator, i) => (
+                    <div className="card__structure" key={i}>
+                        <img className="card__image" src={educator.image_url} />
+
+                        <div className="card__details" >
+                            <div className="card__title">
+                                {educator.name}
+                            </div>
+
+                            <div className="card__description" >
+                                {educator.bio}
+                            </div>
+
+                            <div className="card__contact" >
+                                <i class="far fa-envelope fa-xs"></i> {educator.contact_info}
+                            </div>
+                        </div>
                     </div>
                 ))}
 
-                {this.state.add && 
-                    (
-                        <div className="card_background">
-                            Name: <input onChange={(event) => this.handleChangeFor('name',event)}/>
-                            Bio: <input onChange={(event) => this.handleChangeFor('bio',event)}/>
-                            Contact Info:<input onChange={(event) => this.handleChangeFor('contact_info',event)}/>
-                            Image: <input onChange={(event) => this.handleChangeFor('image_url',event)}/>
-                            <button onClick={this.submitEducator} >Submit</button>
-                        </div>
-                    )
-                }
+                <pre>{JSON.stringify(this.state)}</pre>
             </div>
         )
     }

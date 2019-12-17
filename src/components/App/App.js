@@ -8,11 +8,8 @@ import {
 
 import {connect} from 'react-redux';
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> master
 import Nav from '../Nav/Nav';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import UserPage from '../UserPage/UserPage';
