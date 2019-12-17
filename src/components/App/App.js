@@ -15,6 +15,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import UserPage from '../UserPage/UserPage';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import ResetPassword from '../ResetPassword/ResetPassword';
+import CreateProject from '../CreateProject/CreateProject';
 
 import '../../sass/main.scss';
 
@@ -41,6 +42,11 @@ class App extends Component {
             <Route
               path="/reset/:token"
               component={ResetPassword}
+            />
+            <Route
+              exact
+              path="/createProject"
+              component={CreateProject}
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
