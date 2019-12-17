@@ -8,7 +8,6 @@ class ResetPassword extends Component {
     password: '',
   };
 
-
   async componentDidMount() {
     const token = this.props.match.params.token;
     console.log(token);
