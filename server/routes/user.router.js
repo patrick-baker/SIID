@@ -10,7 +10,6 @@ const router = express.Router();
 const crypto = require('crypto');
 require('dotenv').config();
 const nodemailer = require('nodemailer');
-const moment = require('moment');
 
 
 // Handles Ajax request for user information if user is authenticated
@@ -67,13 +66,11 @@ router.post('/forgotPassword', (req, res) => {
         res.status(403).json('email not in db');
       } else {
         const token = crypto.randomBytes(20).toString('hex');
-        const tokenExpiration = moment(); // need to set timezone for correct timestamp in DB
-        console.log("tokenExpiration:", tokenExpiration);
         const sqlUpdate = `UPDATE "user"
       SET "resetPasswordToken" = $1, 
-      "resetPasswordExpires" = $2
-      WHERE "email" = $3;`;
-        pool.query(sqlUpdate, [token, tokenExpiration, email])
+      "resetPasswordExpires" = CURRENT_TIMESTAMP + (10 * interval '1 minute')
+      WHERE "email" = $2;`;
+        pool.query(sqlUpdate, [token, email])
           .then((result) => {
 
             // sets account email as the sending address for the forgot pass email
@@ -125,7 +122,7 @@ router.post('/forgotPassword', (req, res) => {
 router.get('/reset/:token', (req, res) => {
   const { token } = req.params;
   // need to also check timestamp for expiration, how it compares to current time
-  sqlText = `SELECT * from "user" WHERE "resetPasswordToken" = $1;`; 
+  sqlText = `SELECT * from "user" WHERE "resetPasswordToken" = $1 AND "resetPasswordExpires" > CURRENT_TIMESTAMP;`; 
   pool.query(sqlText, [token])
     .then((user) => {
       console.log("user result from server in reset query:", user);
@@ -147,7 +144,8 @@ router.put('/updatePasswordViaEmail', (req, res) => {
   console.log('req.body in updatePasswordViaEmail query:', req.body);
   sqlText = `SELECT * FROM "user" 
     WHERE "username" = $1
-    AND "resetPasswordToken" = $2;`; // need to also check timestamp for expiration
+    AND "resetPasswordToken" = $2
+    AND "resetPasswordExpires" > CURRENT_TIMESTAMP;`; // need to also check timestamp for expiration
   pool.query(sqlText, [username, resetPasswordToken])
     .then(user => {
       console.log("user result from server in update query:", user);

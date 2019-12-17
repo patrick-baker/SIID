@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
+    "@material-ui/core": "^4.8.0",
     "axios": "^0.19.0",
     "bcrypt": "^3.0.6",
     "cookie-session": "^2.0.0-beta.3",
@@ -36,6 +37,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "node-sass": "^4.13.0",
     "nodemon": "^1.18.10"
   },
   "browserslist": [

@@ -1,10 +1,7 @@
 const educatorReducer = (state = {}, action) => {
-    // switch (action.type) {
-    //   case 'SET_USER':
-    //     return action.payload;
-    //   case 'UNSET_USER':
-    //     return {};
-    //   default:
+    if (action.type === 'SET_EDUCATORS') {
+        return action.payload;
+    }
         return state;
     //}
   };
