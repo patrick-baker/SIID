@@ -5,8 +5,16 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
-    
+router.get('/', async (req, res) => {
+    const query = `SELECT * FROM educator;`
+
+    try {
+        let educators = await pool.query(query);
+        res.send(educators.rows)
+    } catch(error ) {
+        console.log(error);
+        res.sendStatus(500)
+    }
 });
 
 /**

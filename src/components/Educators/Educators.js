@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 
 class Educators extends Component {
 
+    componentDidMount = () => {
+        this.props.dispatch({type:"GET_EDUCATORS"});
+    }
+
     state = {
         add:false,
         newEducator: {
@@ -31,7 +35,6 @@ class Educators extends Component {
 
     submitEducator = () => {
         this.props.dispatch({type:"ADD_EDUCATOR",payload:this.state.newEducator});
-
     }
 
     render() {
@@ -40,6 +43,15 @@ class Educators extends Component {
                 <button onClick={this.addEducator}>
                     Add Educator
                 </button>
+
+                {this.props.educator[0] && this.props.educator.map((educator,i) => (
+                    <div key={i}>
+                        {educator.name} <br/>
+                        {educator.bio}<br/>
+                        {educator.contact_info}<br/>
+                        {educator.image_url}
+                    </div>
+                ))}
 
                 {this.state.add && 
                     (
@@ -57,8 +69,6 @@ class Educators extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    user: state.user,
-});
+const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(Educators);

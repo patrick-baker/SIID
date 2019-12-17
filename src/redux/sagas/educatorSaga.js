@@ -6,14 +6,24 @@ function* educator(action) {
   // console.log('action.payload of ForgotPasswordSaga:', action.payload);
   try {
     yield axios.post('/educator', action.payload);
+    yield put({type:"GET_EDUCATORS"});
   } catch (error) {
-    //console.log('error in ForgotPasswordSaga', error);
-    //yield put ({ type: 'EMAIL_NOT_IN_DB'});
+    console.log(error);
+  }
+}
+
+function* getEducators() {
+  try { 
+    let educators = yield axios.get('/educator');
+    yield put({type:"SET_EDUCATORS",payload:educators.data});
+  } catch(error) {
+    console.log(error);
   }
 }
 
 function* EducatorSaga() {
   yield takeLatest('ADD_EDUCATOR', educator);
+  yield takeLatest('GET_EDUCATORS',getEducators)
 }
 
 export default EducatorSaga;
