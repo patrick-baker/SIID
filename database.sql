@@ -16,6 +16,14 @@ CREATE TABLE "user" (
     "resetPasswordExpires" TIMESTAMP
 ); 
 
+CREATE TABLE "strategy" (
+    "id" SERIAL PRIMARY KEY,
+    "type" VARCHAR
+);
+
+INSERT INTO "strategy" ("type") VALUES('Marketing Communications'), ('Website'), ('Social Media'), ('Content Marketing'), ('Email Marketing'), ('Advertising'), ('Event Marketing');
+
+
 CREATE TABLE "projects" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INT REFERENCES "user",
@@ -45,7 +53,7 @@ CREATE TABLE "projects" (
     "talent_demographic" VARCHAR,
     "tone" VARCHAR,
     "formal" BOOLEAN,
-    "project_type" VARCHAR,
+    "project_strategy" INT REFERENCES "strategy",
     "date_created" DATE,
     "gender_flags" int,
     "race_flags" int,
@@ -117,15 +125,3 @@ CREATE TABLE "literary_techniques" (
     "oxymoron" boolean DEFAULT FALSE,
     "project_id" INT REFERENCES "projects"
 );
-
-CREATE TABLE "project_type" (
-    "id" SERIAL PRIMARY KEY,
-    "marketing_communication" boolean  DEFAULT FALSE,
-    "website" boolean DEFAULT FALSE,
-    "social_media" boolean DEFAULT FALSE,
-    "content" boolean DEFAULT FALSE,
-    "email" boolean DEFAULT FALSE,
-    "advertising" boolean DEFAULT FALSE,
-    "event" boolean DEFAULT FALSE
-);
-
