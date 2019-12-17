@@ -6,19 +6,21 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import {connect} from 'react-redux';
+
+
 import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
-
 import UserPage from '../UserPage/UserPage';
-
-import './App.css';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import ResetPassword from '../ResetPassword/ResetPassword';
+
+import '../../sass/main.scss';
+
 import Educators from '../Educators/Educators';
+
 
 class App extends Component {
   componentDidMount() {
