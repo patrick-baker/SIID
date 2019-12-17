@@ -64,12 +64,14 @@ CREATE TABLE "educator" (
 
 CREATE TABLE "specialties" (
     "id" SERIAL PRIMARY KEY,
-    "gender" VARCHAR (10),
-    "race" VARCHAR (10),
-    "disability" VARCHAR (10),
-    "religion" VARCHAR (10),
-    "lgbtq" VARCHAR (10)
+    "specialty" VARCHAR(20),
 );
+
+INSERT INTO "specialties" ("specialty") VALUES ('gender');
+INSERT INTO "specialties" ("specialty") VALUES ('race');
+INSERT INTO "specialties" ("specialty") VALUES ('disability');
+INSERT INTO "specialties" ("specialty") VALUES ('religion');
+INSERT INTO "specialties" ("specialty") VALUES ('lgbtq');
 
 CREATE TABLE "educator_specialties" (
     "id" SERIAL PRIMARY KEY,
