@@ -55,7 +55,7 @@ class Educators extends Component {
 
                 {this.state.add && 
                     (
-                        <div>
+                        <div className="card_background">
                             Name: <input onChange={(event) => this.handleChangeFor('name',event)}/>
                             Bio: <input onChange={(event) => this.handleChangeFor('bio',event)}/>
                             Contact Info:<input onChange={(event) => this.handleChangeFor('contact_info',event)}/>

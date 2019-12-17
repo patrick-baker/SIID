@@ -9,7 +9,6 @@ import {
 import {connect} from 'react-redux';
 
 
-import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
