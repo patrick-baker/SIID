@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   HashRouter as Router,
   Route,
@@ -9,26 +9,26 @@ import {
 import {connect} from 'react-redux';
 
 import Nav from '../Nav/Nav';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
-
 import UserPage from '../UserPage/UserPage';
-
-import './App.css';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import CreateProject from '../CreateProject/CreateProject';
 
+import '../../sass/main.scss';
+
+import Educators from '../Educators/Educators';
+
+
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
   }
 
   render() {
     return (
       <Router>
-        <div className="flexBoxStructure" >
+        <div className="App" >
           {this.props.user.id && <Nav />}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -36,14 +36,10 @@ class App extends Component {
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
 
+
             <Route
-              exact
-              path="/forgotPassword"
-              component={ForgotPassword}
-            />
-            <Route 
-              path="/reset/:token" 
-              component={ResetPassword} 
+              path="/reset/:token"
+              component={ResetPassword}
             />
             <Route
               exact
@@ -59,6 +55,12 @@ class App extends Component {
               path="/home"
               component={UserPage}
             />
+
+
+            <Route
+              path="/educators"
+              component={Educators}
+            />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
             {/* If none of the other routes matched, we will show a 404. */}
@@ -66,7 +68,8 @@ class App extends Component {
           </Switch>
         </div>
       </Router>
-  )}
+    )
+  }
 }
 
 const mapStateToProps = state => ({
