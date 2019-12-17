@@ -15,14 +15,23 @@ class Educators extends Component {
 
     addEducator = () => {
         this.setState({
-            add:true
+            add:!this.state.add
         })
     }
 
     handleChangeFor = (property,event) => {
         this.setState({
-            [property]:event.target.value
+            ...this.state,
+            newEducator: {
+                ...this.state.newEducator,
+                [property]:event.target.value
+            }
         })
+    }
+
+    submitEducator = () => {
+        this.props.dispatch({type:"ADD_EDUCATOR",payload:this.state.newEducator});
+
     }
 
     render() {
@@ -35,17 +44,14 @@ class Educators extends Component {
                 {this.state.add && 
                     (
                         <div>
-                            <input onChange={(event) => this.handleChangeFor('name',event)}/>
-                            <input onChange={(event) => this.handleChangeFor('bio',event)}/>
-                            <input onChange={(event) => this.handleChangeFor('contact_info',event)}/>
-                            <input onChange={(event) => this.handleChangeFor('image_url',event)}/>
-                            <button >Submit</button>
+                            Name: <input onChange={(event) => this.handleChangeFor('name',event)}/>
+                            Bio: <input onChange={(event) => this.handleChangeFor('bio',event)}/>
+                            Contact Info:<input onChange={(event) => this.handleChangeFor('contact_info',event)}/>
+                            Image: <input onChange={(event) => this.handleChangeFor('image_url',event)}/>
+                            <button onClick={this.submitEducator} >Submit</button>
                         </div>
                     )
                 }
-                <pre>
-                    {JSON.stringify(this.state)}
-                </pre>
             </div>
         )
     }

@@ -3,22 +3,17 @@ import axios from 'axios';
 
 // sends axios request to server to send update password email to user
 function* educator(action) {
-    // console.log('action.payload of ForgotPasswordSaga:', action.payload);
+  // console.log('action.payload of ForgotPasswordSaga:', action.payload);
   try {
-    if (action.payload === '') {
-        //yield put ({type: 'NO_EMAIL_SUBMITTED'});
-    } else {
-        // runs the server function to send email
-    
-        }
-    } catch (error) {
-        //console.log('error in ForgotPasswordSaga', error);
-        //yield put ({ type: 'EMAIL_NOT_IN_DB'});
-    }
+    yield axios.post('/educator', action.payload);
+  } catch (error) {
+    //console.log('error in ForgotPasswordSaga', error);
+    //yield put ({ type: 'EMAIL_NOT_IN_DB'});
+  }
 }
 
 function* EducatorSaga() {
-  //yield takeLatest('FORGOT_PASSWORD', project);
+  yield takeLatest('ADD_EDUCATOR', educator);
 }
 
 export default EducatorSaga;

@@ -12,7 +12,7 @@ const Nav = (props) => (
 
       <li className="navOption" >
         <Link className="navLink" to="/home">
-          <i class="fas fa-th fa-sm navIcon"></i>{props.user.id ? 'Projects' : 'Login / Register'}
+          <i className="fas fa-th fa-sm navIcon"></i>{props.user.id ? 'Projects' : 'Login / Register'}
         </Link>
       </li>
 
@@ -33,7 +33,7 @@ const Nav = (props) => (
 
       <li className="navOption">
         {props.user.id && 
-          <Link className="navLink" onClick={() => props.dispatch({ type: 'LOGOUT' })}>
+          <Link className="navLink" to="/home" onClick={() => props.dispatch({ type: 'LOGOUT' })}>
             <i class="fas fa-sign-out-alt navIcon"></i>Log out
           </Link>
         }
