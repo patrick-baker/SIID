@@ -3,7 +3,7 @@
 -- ex. SELECT * FROM "user";
 -- Otherwise you will have errors!
 
- CREATE TABLE SIID;
+ ---CREATE DATABASE NAMED SIID;
 
 -- need to look at timestamps for the forgot password query, need to use local timezones?
 CREATE TABLE "user" (
@@ -18,7 +18,7 @@ CREATE TABLE "user" (
 
 CREATE TABLE "projects" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" FOREIGN KEY REFERENCES "user" (id),
+    "user_id" INT REFERENCES "user" ("id"),
     "title" VARCHAR,
     "client" VARCHAR,
     "description" VARCHAR,
@@ -63,14 +63,15 @@ CREATE TABLE "educator" (
     "image_url" VARCHAR 
 );
 
-CREATE TABLE "educator_specialties" (
-    "id" SERIAL PRIMARY KEY,
-    "educator_id" INT REFERENCES "educator",
-    "specialty_id" INT REFERENCES "specialty"
-);
-
 CREATE TABLE "specialties" (
     "id" SERIAL PRIMARY KEY,
     "specialty" VARCHAR (20)
 );
+
+CREATE TABLE "educator_specialties" (
+    "id" SERIAL PRIMARY KEY,
+    "educator_id" INT REFERENCES "educator",
+    "specialty_id" INT REFERENCES "specialties"
+);
+
 
