@@ -64,7 +64,7 @@ CREATE TABLE "educator" (
 
 CREATE TABLE "specialties" (
     "id" SERIAL PRIMARY KEY,
-    "specialty" VARCHAR(20),
+    "specialty" VARCHAR(20)
 );
 
 INSERT INTO "specialties" ("specialty") VALUES ('gender');
