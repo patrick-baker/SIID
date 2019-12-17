@@ -5,7 +5,7 @@ const flagReducer = (state = {}, action) => {
     //   case 'UNSET_USER':
     //     return {};
     //   default:
-    //     return state;
+        return state;
     //}
   };
   
