@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   HashRouter as Router,
   Route,
@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 
@@ -18,10 +18,11 @@ import UserPage from '../UserPage/UserPage';
 import './App.css';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import ResetPassword from '../ResetPassword/ResetPassword';
+import Educators from '../Educators/Educators';
 
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
   }
 
   render() {
@@ -35,14 +36,10 @@ class App extends Component {
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
 
+
             <Route
-              exact
-              path="/forgotPassword"
-              component={ForgotPassword}
-            />
-            <Route 
-              path="/reset/:token" 
-              component={ResetPassword} 
+              path="/reset/:token"
+              component={ResetPassword}
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
@@ -53,6 +50,12 @@ class App extends Component {
               path="/home"
               component={UserPage}
             />
+
+
+            <Route
+              path="/educators"
+              component={Educators}
+            />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
             {/* If none of the other routes matched, we will show a 404. */}
@@ -60,7 +63,8 @@ class App extends Component {
           </Switch>
         </div>
       </Router>
-  )}
+    )
+  }
 }
 
 const mapStateToProps = state => ({
