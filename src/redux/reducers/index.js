@@ -4,6 +4,11 @@ import loginMode from './loginModeReducer';
 import user from './userReducer';
 import forgotPassword from './forgotPasswordReducer';
 import resetPassword from './resetPasswordReducer';
+import project from './projectReducer';
+import rule from './ruleReducer';
+import flag from './flagReducer';
+import educator from './educatorReducer';
+import category from './categroyReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +22,11 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   forgotPassword, // will contain message to the user contingent on forgotPassword submission
   resetPassword, 
+  project,
+  rule,
+  flag,
+  educator,
+  category,
 });
 
 export default rootReducer;
