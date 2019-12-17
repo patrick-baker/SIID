@@ -5,19 +5,14 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import {connect} from 'react-redux';
-
 import Nav from '../Nav/Nav';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
-
 import UserPage from '../UserPage/UserPage';
-
-import './App.css';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import ResetPassword from '../ResetPassword/ResetPassword';
+import './App.css';
+import '../../sass/main.scss';
 
 class App extends Component {
   componentDidMount () {

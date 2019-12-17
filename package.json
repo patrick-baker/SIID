@@ -33,8 +33,7 @@
     "server": "nodemon --watch server server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "compile:sass": "node-sass ./sass/main.scss ./src/index.css"
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "node-sass": "^4.13.0",
