@@ -8,9 +8,6 @@ import {
 
 import {connect} from 'react-redux';
 
-
-import { connect } from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import UserPage from '../UserPage/UserPage';
@@ -30,7 +27,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="flexBoxStructure" >
+        <div className="App" >
           {this.props.user.id && <Nav />}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
