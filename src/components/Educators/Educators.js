@@ -14,7 +14,7 @@ class Educators extends Component {
             bio: "",
             contact_info: "",
             image_url: "",
-            specialties:[]
+            specialties: []
         }
     }
 
@@ -35,12 +35,14 @@ class Educators extends Component {
     }
 
     addSpecialites = (event) => {
-        this.setState({
-            newEducator:{
-                ...this.state.newEducator,
-                specialties:[...this.state.newEducator.specialties,event.target.value]
-            }
-        })
+        if (!this.state.newEducator.specialties.includes(event.target.value)) {
+            this.setState({
+                newEducator: {
+                    ...this.state.newEducator,
+                    specialties: [...this.state.newEducator.specialties, event.target.value]
+                }
+            })
+        }
     }
 
     submitEducator = () => {
@@ -63,12 +65,16 @@ class Educators extends Component {
                                 Contact Info:<input onChange={(event) => this.handleChangeFor('contact_info', event)} />
                                 Image: <input onChange={(event) => this.handleChangeFor('image_url', event)} />
                                 <select onChange={(event) => this.addSpecialites(event)}>
-                                    <option>Gender</option>
-                                    <option>Race</option>
-                                    <option>Lgbtq</option>
-                                    <option>Religion</option>
-                                    <option>Disability</option>
+                                    {/* In future loop through specialties to display options */}
+                                    <option value="gender">gender</option>
+                                    <option value="race">race</option>
+                                    <option value="lgbtq">lgbtq</option>
+                                    <option value="religion">religion</option>
+                                    <option value="disability">disability</option>
                                 </select>
+                                <ul>
+                                    {this.state.newEducator.specialties.map((specialty, i) => <li>{specialty}</li>)}
+                                </ul>
                                 <button onClick={this.submitEducator} >Submit</button>
                             </div>
                         )
@@ -90,6 +96,13 @@ class Educators extends Component {
                                 {educator.bio}
                             </div>
 
+
+                            <ul className="card__specialties">
+                                Specialties: 
+                                {educator.specialties.map((specialty, i) => <li key={i} > - {specialty}</li>)}
+                            </ul>
+
+
                             <div className="card__contact" >
                                 <i class="far fa-envelope fa-xs"></i> {educator.contact_info}
                             </div>
@@ -97,7 +110,7 @@ class Educators extends Component {
                     </div>
                 ))}
 
-                <pre>{JSON.stringify(this.state)}</pre>
+                <pre>{JSON.stringify(this.state, null, 2)}</pre>
             </div>
         )
     }

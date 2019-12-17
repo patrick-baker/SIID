@@ -6,12 +6,18 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', async (req, res) => {
-    const query = `SELECT * FROM educator;`
+    const query = 
+    `
+        SELECT name,bio,contact_info,image_url,ARRAY_AGG(specialty) AS specialties FROM educator 
+        JOIN educator_specialties ON educator_id = educator.id
+        JOIN specialties ON specialty_id=specialties.id
+        GROUP BY name,bio,contact_info,image_url
+    ;`
 
     try {
         let educators = await pool.query(query);
         res.send(educators.rows)
-    } catch(error ) {
+    } catch (error) {
         console.log(error);
         res.sendStatus(500)
     }
@@ -21,13 +27,28 @@ router.get('/', async (req, res) => {
  * POST route template
  */
 router.post('/', async (req, res) => {
-    const query = `INSERT INTO educator (name,bio,contact_info,image_url) VALUES ($1,$2,$3,$4)`;
+
+
+    const client = await pool.connect();
     try {
-        await pool.query(query,[req.body.name,req.body.bio,req.body.contact_info,req.body.image_url]);
+        const queryEducator = `INSERT INTO educator (name,bio,contact_info,image_url) VALUES ($1,$2,$3,$4) RETURNING id;`;
+       
+        await client.query(`BEGIN`);
+        let educatorId =  await client.query(queryEducator, [req.body.name, req.body.bio, req.body.contact_info, req.body.image_url]);
+
+        for(specialty of req.body.specialties) {
+            let specialtyId = await client.query(`SELECT id FROM specialties WHERE specialty=$1`,[specialty]);
+            await client.query(`INSERT INTO educator_specialties(educator_id,specialty_id) VALUES ($1,$2)`,[educatorId.rows[0].id,specialtyId.rows[0].id]);
+        }
+        
+
+        await client.query(`COMMIT`);
         res.sendStatus(200);
     } catch (error) {
         console.log(error);
         res.sendStatus(500)
+    } finally {
+        client.release();
     }
 });
 
