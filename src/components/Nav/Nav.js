@@ -2,66 +2,42 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
 
 const Nav = (props) => (
-  <div className="navBar">
-    <h1 className="navTitle" >SIID</h1>
-    <ul className="navUl">
+  <div className="navigation">
+    <div className="navigation__background">
+      <h1 className="navigation__title heading-primary" >SIID</h1>
+      <ul className="navigation__list">
 
-
-      <li className="navOption" >
-        <Link className="navLink" to="/home">
-          <i class="fas fa-th fa-sm navIcon"></i>{props.user.id ? 'Projects' : 'Login / Register'}
-        </Link>
-      </li>
-
-
-      <li className="navOption">
-        <Link className="navLink" to="/rules">
-        <i class="fas fa-clipboard-list navIcon" ></i>Rules
-        </Link>
-      </li>
-
-      <li className="navOption">
-        <Link className="navLink" to="/educators">
-        <i class="fas fa-graduation-cap navIcon"></i>Educators
-        </Link>
-      </li>
-
-
-
-      <li className="navOption">
-        {props.user.id && 
-          <Link className="navLink" onClick={() => props.dispatch({ type: 'LOGOUT' })}>
-            <i class="fas fa-sign-out-alt navIcon"></i>Log out
+        <li className="navigation__item" >
+          <Link className="navigation__link" to="/home">
+            <i class="fas fa-th fa-2x navigation__icon"></i>{props.user.id ? 'Projects' : 'Login / Register'}
           </Link>
-        }
-      </li>
-      
-    </ul>
+        </li>
+
+        <li className="navigation__item">
+          <Link className="navigation__link" to="/rules">
+            <i class="fas fa-clipboard-list fa-2x navigation__icon" ></i>Rules
+        </Link>
+        </li>
+
+        <li className="navigation__item">
+          <Link className="navigation__link" to="/educators">
+            <i class="fas fa-graduation-cap fa-2x navigation__icon"></i>Educators
+          </Link>
+        </li>
+
+        <li className="navigation__item">
+          {props.user.id &&
+            <Link className="navigation__link" onClick={() => props.dispatch({ type: 'LOGOUT' })}>
+            <i class="fas fa-sign-out-alt fa-2x navigation__icon"></i>Log out
+            </Link>
+          }
+        </li>
+      </ul>
+    </div>
   </div >
 );
-
-
- {/* <LogOutButton className="navLink" /> */}
-
-// // <div className="nav">
-
-//   {/* <div className="nav-right">
-//       <Link className="nav-link" to="/home">
-
-//         {props.user.id ? 'Home' : 'Login / Register'}
-//       </Link>
-
-//       
-
-//     </div> */}
-
-
-//   // {/* </div> */}
-
-
 
 // Instead of taking everything from state, we just want the user
 // object to determine if they are logged in

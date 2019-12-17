@@ -11,7 +11,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import UserPage from '../UserPage/UserPage';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import ResetPassword from '../ResetPassword/ResetPassword';
-import './App.css';
 import '../../sass/main.scss';
 
 class App extends Component {
