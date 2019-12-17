@@ -4,6 +4,11 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import forgotPasswordSaga from './forgotPasswordSaga';
 import resetPasswordSaga from './resetPasswordSaga';
+import projectSaga from './projectSaga';
+import ruleSaga from './ruleSaga';
+import flagSaga from './flagSaga';
+import educatorSaga from './educatorSaga';
+import categorySaga from './categorySaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -19,5 +24,10 @@ export default function* rootSaga() {
     userSaga(),
     forgotPasswordSaga(),
     resetPasswordSaga(),
+    projectSaga(),
+    ruleSaga(),
+    flagSaga(),
+    educatorSaga(),
+    categorySaga(),
   ]);
 }
