@@ -10,7 +10,7 @@ CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-    "admin" boolean DEFAULT false,
+    "admin" boolean DEFAULT FALSE,
     "email" VARCHAR UNIQUE NOT NULL,
     "resetPasswordToken" VARCHAR,
     "resetPasswordExpires" TIMESTAMP
@@ -18,7 +18,7 @@ CREATE TABLE "user" (
 
 CREATE TABLE "projects" (
     "id" SERIAL PRIMARY KEY,
-    "user_id" INT REFERENCES "user" ("id"),
+    "user_id" INT REFERENCES "user",
     "title" VARCHAR,
     "client" VARCHAR,
     "description" VARCHAR,
@@ -44,10 +44,9 @@ CREATE TABLE "projects" (
     "target_audience_language" VARCHAR,
     "talent_demographic" VARCHAR,
     "tone" VARCHAR,
-    "style" VARCHAR,
-    "literary_technique" VARCHAR,
+    "formal" BOOLEAN,
     "project_type" VARCHAR,
-    "date_created" date,
+    "date_created" DATE,
     "gender_flags" int,
     "race_flags" int,
     "disability_flags" int,
@@ -79,3 +78,54 @@ CREATE TABLE "educator_specialties" (
     "educator_id" INT REFERENCES "educator",
     "specialty_id" INT REFERENCES "specialties"
 );
+
+--create table to store rules
+--rules are stored in a JSON object
+CREATE TABLE "rules"(
+	"id" SERIAL PRIMARY KEY,
+	"data" JSONB
+);
+
+
+--create table to store flags for a given project
+CREATE TABLE "flags"(
+    "id" SERIAL PRIMARY KEY,
+    "project_id" INT REFERENCES "projects",
+    "rule_id" INT REFERENCES "rules"
+);
+
+CREATE TABLE "tone" (
+    "id" SERIAL PRIMARY KEY,
+    "humor" boolean DEFAULT FALSE,
+    "empowering" boolean DEFAULT FALSE,
+    "uplifting" boolean DEFAULT FALSE,
+    "friendly" boolean DEFAULT FALSE,
+    "project_id" INT REFERENCES "projects"
+);
+
+CREATE TABLE "literary_techniques" (
+    "id" SERIAL PRIMARY KEY,
+    "alliteration" boolean DEFAULT FALSE,
+    "personification" boolean DEFAULT FALSE,
+    "simile" boolean DEFAULT FALSE,
+    "foreshadowing" boolean DEFAULT FALSE,
+    "satire" boolean DEFAULT FALSE,
+    "symbolism" boolean DEFAULT FALSE,
+    "onomatopoeia" boolean DEFAULT FALSE,
+    "metaphor" boolean DEFAULT FALSE,
+    "hyperbole" boolean DEFAULT FALSE,
+    "oxymoron" boolean DEFAULT FALSE,
+    "project_id" INT REFERENCES "projects"
+);
+
+CREATE TABLE "project_type" (
+    "id" SERIAL PRIMARY KEY,
+    "marketing_communication" boolean  DEFAULT FALSE,
+    "website" boolean DEFAULT FALSE,
+    "social_media" boolean DEFAULT FALSE,
+    "content" boolean DEFAULT FALSE,
+    "email" boolean DEFAULT FALSE,
+    "advertising" boolean DEFAULT FALSE,
+    "event" boolean DEFAULT FALSE
+);
+
