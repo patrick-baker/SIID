@@ -1,0 +1,17 @@
+/* Cancel out any padding/margins added by browsers 
+and changes box model so borders and paddings are no longer 
+added to total width or height that we specify */
+*,
+*::after,
+*::before {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: inherit;
+}
+
+html {
+    // Default font size of browsers is 16px
+    // For ease of use in Sass we want the default to be 10px
+    // This defines what 1rem is
+    font-size: 62.5%;
+}

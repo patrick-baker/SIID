@@ -1,0 +1,36 @@
+// FONTS
+$open-sans: 'Open Sans', sans-serif;
+
+// TEXT COLOR
+$color-black: black;
+
+// NEUTRAL COLORS
+$color-dark-gray: #9EA1A4;
+$color-medium-gray: #DCDDDE;
+$color-light-gray: #EFF0F1;
+$color-white-gray: #FAFAFA;
+
+// PRIMARY COLORS
+// PURPLE
+$color-primary-purple: #422997;
+$color-neutral-purple: #704AD6;
+$color-light-purple: #9E8DF8;
+$color-pastel-purple: #E9E5FC;
+// BLUE
+$color-primary-blue: #4035A3;
+$color-neutral-blue: #5B63DA;
+$color-light-blue: #7793F0;
+$color-pastel-blue: #FAFAFA;
+// PINK
+$color-primary-pink: #B534E6;
+$color-neutral-pink: #B76AD4;
+$color-light-pink: #D9B8E6;
+$color-pastel-pink: #F8EDFC;
+
+// GRADIENTS
+$gradient-pink: linear-gradient(to right, $color-primary-pink, $color-neutral-pink);
+$gradient-purple: linear-gradient(to right, $color-neutral-purple, $color-neutral-blue);
+
+// ERROR COLORS
+$color-error-orange:#FD931A;
+$color-error-red:#A00B44;
