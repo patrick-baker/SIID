@@ -71,10 +71,6 @@ CREATE TABLE "educator_specialties" (
 
 CREATE TABLE "specialties" (
     "id" SERIAL PRIMARY KEY,
-    "gender" VARCHAR (10),
-    "race" VARCHAR (10),
-    "disability" VARCHAR (10),
-    "religion" VARCHAR (10),
-    "lgbtq" VARCHAR (10)
+    "specialty" VARCHAR (20)
 );
 
