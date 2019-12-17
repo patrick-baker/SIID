@@ -8,7 +8,6 @@ const Nav = (props) => (
     <div className="navigation__background">
       <h1 className="navigation__title heading-primary" >SIID</h1>
       <ul className="navigation__list">
-
         <li className="navigation__item" >
           <Link className="navigation__link" to="/home">
             <i class="fas fa-th fa-2x navigation__icon"></i>{props.user.id ? 'Projects' : 'Login / Register'}
