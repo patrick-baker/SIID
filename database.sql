@@ -77,3 +77,4 @@ CREATE TABLE "specialties" (
     "religion" VARCHAR (10),
     "lgbtq" VARCHAR (10)
 );
+
