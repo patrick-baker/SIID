@@ -23,7 +23,6 @@ CREATE TABLE "strategy" (
 
 INSERT INTO "strategy" ("type") VALUES('Marketing Communications'), ('Website'), ('Social Media'), ('Content Marketing'), ('Email Marketing'), ('Advertising'), ('Event Marketing');
 
-
 CREATE TABLE "projects" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INT REFERENCES "user",
@@ -51,7 +50,6 @@ CREATE TABLE "projects" (
     "target_audience_interests" VARCHAR,
     "target_audience_language" VARCHAR,
     "talent_demographic" VARCHAR,
-    "tone" VARCHAR,
     "formal" BOOLEAN,
     "project_strategy" INT REFERENCES "strategy",
     "date_created" DATE,
