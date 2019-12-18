@@ -35,6 +35,8 @@
     "retext-stringify": "^2.0.4",
     "sequelize": "^5.21.3",
     "unified": "^8.4.2"
+    "semantic-ui-react": "^0.88.2",
+    "sequelize": "^5.21.3"
   },
   "scripts": {
     "start": "node server/server.js",
