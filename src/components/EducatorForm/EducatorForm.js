@@ -3,25 +3,23 @@ import { connect } from 'react-redux';
 
 class EducatorForm extends Component {
     state = {
-        add: false,
         newEducator: {
-            name: "",
-            bio: "",
-            contact_info: "",
-            image_url: "",
-            specialties: []
+            id:this.props.singleEducator.id || "",
+            name: this.props.singleEducator.name || "",
+            bio: this.props.singleEducator.bio  ||"",
+            contact_info: this.props.singleEducator.contact_info ||"",
+            image_url: this.props.singleEducator.image_url ||"",
+            specialties: this.props.singleEducator.specialties || [] ,
         }
     }
 
-    addEducator = () => {
-        this.setState({
-            add: !this.state.add
-        })
+    componentDidMount= () => {
+        console.log(this.props.singleEducator);
     }
+
 
     handleChangeFor = (property, event) => {
         this.setState({
-            ...this.state,
             newEducator: {
                 ...this.state.newEducator,
                 [property]: event.target.value
@@ -47,7 +45,29 @@ class EducatorForm extends Component {
             this.state.newEducator.contact_info &&
             this.state.newEducator.specialties
         ) {
-            this.props.dispatch({ type: "ADD_EDUCATOR", payload: this.state.newEducator });
+
+            if (this.props.educator[0]) {
+                this.props.dispatch({type:"UPDATE_EDUCATOR",payload:this.state.newEducator})
+            } else {
+                this.props.dispatch({ type:"ADD_EDUCATOR", payload: this.state.newEducator });
+            }
+            this.props.addEducator();
+
+
+            this.setState({
+                newEducator:{
+                    id:"",
+                    name:"",
+                    bio:"",
+                    contact_url:"",
+                    image_url:"",
+                    specialties:[]
+                }
+            },() => {
+                console.log(this.state);
+            })
+
+
         } else {
             alert('Please fill in all the fields')
         }
@@ -68,66 +88,59 @@ class EducatorForm extends Component {
     render() {
         return (
             <>
-                <div className="card__createCard" onClick={this.addEducator}>
-                    <div className="card__plusIconDiv">
-                        <i class="fas fa-user-graduate fa-4x card__plusIcon"></i> <br />
-                        <span>Add Educator</span>
-                    </div>
-                </div>
-
-                {this.state.add &&
-                    (<div className="modal__structure">
-                        <div className="modal__modal-content" >
-                            <i onClick={this.addEducator} className="fas fa-times fa-2x modal__cancelIcon"></i>
-
-                            <div className="modal__form">
-                                <div>
-                                    <label>
-                                        <div className="formInput__labelText" >Name:</div><input placeholder="Name" className="formInput__average" onChange={(event) => this.handleChangeFor('name', event)} />
-                                    </label>
-                                </div>
-
-                                <div>
-                                    <label>
-                                        <div className="formInput__labelText" >Bio:</div><input placeholder="Bio" className="formInput__average" onChange={(event) => this.handleChangeFor('bio', event)} />
-                                    </label>
-                                </div>
 
 
-                                <div>
-                                    <label>
-                                        <div className="formInput__labelText">Email:</div><input placeholder="Email" className="formInput__average" onChange={(event) => this.handleChangeFor('contact_info', event)} />
-                                    </label>
-                                </div>
+                <div className="modal__structure">
+                    <div className="modal__modal-content" >
+                        <i onClick={this.props.addEducator} className="fas fa-times fa-2x modal__cancelIcon"></i>
 
+                        <div className="modal__form">
+                            <div>
+                                <label>
+                                    <div className="formInput__labelText" >Name:</div><input placeholder="Name" value={this.state.newEducator.name} className="formInput__average" onChange={(event) => this.handleChangeFor('name', event)} />
+                                </label>
+                            </div>
 
-
-                                <div>
-                                    <label>
-                                        <div className="formInput__labelText">Image:</div><input placeholder="Image" className="formInput__average" onChange={(event) => this.handleChangeFor('image_url', event)} />
-                                    </label>
-                                </div>
-
-                                <div className="formInput__labelText">Specialties:</div>
-                                <select onChange={(event) => this.addSpecialites(event)}>
-                                    {/* In future loop through specialties to display options */}
-                                    <option value="gender">gender</option>
-                                    <option value="race">race</option>
-                                    <option value="lgbtq">lgbtq</option>
-                                    <option value="religion">religion</option>
-                                    <option value="disability">disability</option>
-                                </select>
-                                <ul>
-                                    {this.state.newEducator.specialties.map((specialty, i) => <li key={i} onClick={() => this.removeSpecialty(specialty)} className="formInput__specialtyDisplay">- {specialty}</li>)}
-                                </ul>
-                                <button className="formInput__submitButton" onClick={this.submitEducator} >Submit</button>
-
+                            <div>
+                                <label>
+                                    <div className="formInput__labelText" >Bio:</div><input placeholder="Bio"  value={this.state.newEducator.bio} className="formInput__average" onChange={(event) => this.handleChangeFor('bio', event)} />
+                                </label>
                             </div>
 
 
+                            <div>
+                                <label>
+                                    <div className="formInput__labelText">Email:</div><input placeholder="Email"  value={this.state.newEducator.contact_info} className="formInput__average" onChange={(event) => this.handleChangeFor('contact_info', event)} />
+                                </label>
+                            </div>
+
+
+
+                            <div>
+                                <label>
+                                    <div className="formInput__labelText">Image:</div><input placeholder="Image"  value={this.state.newEducator.image_url} className="formInput__average" onChange={(event) => this.handleChangeFor('image_url', event)} />
+                                </label>
+                            </div>
+
+                            <div className="formInput__labelText">Specialties:</div>
+                            <select onChange={(event) => this.addSpecialites(event)}>
+                                {/* In future loop through specialties to display options */}
+                                <option value="gender">gender</option>
+                                <option value="race">race</option>
+                                <option value="lgbtq">lgbtq</option>
+                                <option value="religion">religion</option>
+                                <option value="disability">disability</option>
+                            </select>
+                            <ul>
+                                {this.state.newEducator.specialties.map((specialty, i) => <li key={i} onClick={() => this.removeSpecialty(specialty)} className="formInput__specialtyDisplay">- {specialty}</li>)}
+                            </ul>
+                            <button className="formInput__submitButton" onClick={this.submitEducator} >Submit</button>
+
                         </div>
+
                     </div>
-                    )}
+                </div>
+        
             </>
         )
     }

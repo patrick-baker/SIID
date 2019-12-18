@@ -93,7 +93,18 @@
 
         &:hover {
             cursor: pointer;
-            transform: rotate(20deg);
+        }
+    }
+
+    &__edit {
+        right:3.2rem;
+        bottom:1.2rem;
+        position: absolute;
+        color:$color-neutral-blue;
+        opacity: .85;
+
+        &:hover {
+            cursor: pointer;
         }
     }
 }
