@@ -21,14 +21,14 @@ const ColorlibConnector = withStyles({
     },
     active: {
       '& $line': {
-        backgroundImage:
-          'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        backgroundColor:
+        '#704AD6',
       },
     },
     completed: {
       '& $line': {
-        backgroundImage:
-          'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        backgroundColor:
+          '#704AD6',
       },
     },
     line: {
@@ -53,12 +53,12 @@ const ColorlibConnector = withStyles({
     },
     active: {
       backgroundImage:
-        'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+        'linear-gradient( 136deg, #422997 0%, #5B63DA 100%)',
       boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
     },
     completed: {
       backgroundImage:
-        'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+        'linear-gradient( 136deg, #704AD6 0%, #5B63DA 100%)',
     },
   });
   
@@ -145,7 +145,7 @@ export default function HorizontalLabelPositionBelowStepper() {
       <Stepper activeStep={activeStep} connector={<ColorlibConnector />} alternativeLabel>
         {steps.map(label => (
           <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+            <StepLabel className="label" StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
