@@ -8,7 +8,11 @@ const CreateProject = (props) => (
       Welcome, { props.user.username }!
     </h1>
     <p>Your ID is: {props.user.id}</p>
+    <div className="flex">
+    <div>
     <ProgressStepper />
+    </div>
+    </div>
   </div>
 );
 
