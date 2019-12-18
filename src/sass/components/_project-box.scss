@@ -1,0 +1,12 @@
+.project-box {
+    height: 60%;
+    width: 12%;
+    min-width: 100px;
+    background-image: $gradient-purple;
+    justify-content: center;
+    text-align: center;
+
+    p{
+        color: white;
+    }
+}

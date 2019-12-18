@@ -21,21 +21,21 @@ const ColorlibConnector = withStyles({
     },
     active: {
       '& $line': {
-        backgroundColor:
-        '#704AD6',
+        backgroundImage:
+        'linear-gradient( 136deg, #5B63DA 0%, #9E8DF8 100%)'
       },
     },
     completed: {
       '& $line': {
-        backgroundColor:
-          '#704AD6',
+        backgroundImage:
+        'linear-gradient( 136deg, #5B63DA 0%, #9E8DF8 100%)'
       },
     },
     line: {
-      height: 3,
+      height: 6,
       border: 0,
       backgroundColor: '#eaeaf0',
-      borderRadius: 1,
+      borderRadius: 4,
     },
   })(StepConnector);
   
