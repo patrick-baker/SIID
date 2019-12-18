@@ -12,6 +12,8 @@
     "crypto": "^1.0.1",
     "dotenv": "^4.0.0",
     "express": "^4.16.4",
+    "lodash.difference": "^4.5.0",
+    "material-table": "^1.54.2",
     "moment": "^2.24.0",
     "nodemailer": "^6.4.2",
     "passport": "^0.4.0",
@@ -27,7 +29,12 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.2",
-    "sequelize": "^5.21.3"
+    "retext": "^7.0.1",
+    "retext-english": "^3.0.4",
+    "retext-equality": "^4.3.0",
+    "retext-stringify": "^2.0.4",
+    "sequelize": "^5.21.3",
+    "unified": "^8.4.2"
   },
   "scripts": {
     "start": "node server/server.js",
