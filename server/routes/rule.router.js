@@ -14,14 +14,8 @@ module.exports = router;
  * GET route template
  */
 router.get("/", (req, res) => {
-  let pattern = [];
   pool.query(`SELECT "data" FROM rules`).then(result => {
-    for (let row of result.rows) {
-      pattern.push(row.data);
-    }
-    console.log(result.rows);
-
-    res.send(pattern);
+    res.send(result.rows[0].array_agg);
   });
 });
 
@@ -58,3 +52,104 @@ router.post("/", async (req, res) => {
   await console.log("rule router sees", response);
   await res.send(response);
 });
+
+// Example of the JSON stored in the database:
+// [
+//     {
+//       "id": "Test-1",
+//       "type": "simple",
+//       "categories": [
+//         "a"
+//       ],
+//       "considerate": {
+//         "Thomas": "a"
+//       },
+//       "inconsiderate": {
+//         "tommy": "a"
+//       },
+//       "note": "Refer to the person, rather than the disability, first."
+//     },
+//     {
+//       "id": "Test-2",
+//       "type": "simple",
+//       "categories": [
+//         "a"
+//       ],
+//       "considerate": {
+//         "Patrick": "a",
+//         "Mr. Baker": "a"
+//       },
+//       "inconsiderate": {
+//         "Patty": "a",
+//         "patty": "a"
+//       },
+//       "note": "Refer to the person, rather than the disability, first."
+//     }
+//   ]
+
+
+// Example response is of the format:
+// {
+//     "data": {},
+//     "messages": [
+//         {
+//             "message": "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead",
+//             "name": "1:2-1:7",
+//             "reason": "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead",
+//             "line": 1,
+//             "column": 2,
+//             "location": {
+//                 "start": {
+//                     "line": 1,
+//                     "column": 2,
+//                     "offset": 1
+//                 },
+//                 "end": {
+//                     "line": 1,
+//                     "column": 7,
+//                     "offset": 6
+//                 }
+//             },
+//             "source": "retext-SIID-SSID",
+//             "ruleId": "Test-2",
+//             "fatal": false,
+//             "actual": "Patty",
+//             "expected": [
+//                 "Patrick",
+//                 "Mr. Baker"
+//             ],
+//             "note": "Refer to the person, rather than the disability, first."
+//         },
+//         {
+//             "message": "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead",
+//             "name": "1:2-1:7",
+//             "reason": "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead",
+//             "line": 1,
+//             "column": 2,
+//             "location": {
+//                 "start": {
+//                     "line": 1,
+//                     "column": 2,
+//                     "offset": 1
+//                 },
+//                 "end": {
+//                     "line": 1,
+//                     "column": 7,
+//                     "offset": 6
+//                 }
+//             },
+//             "source": "retext-SIID-SSID",
+//             "ruleId": "Test-2",
+//             "fatal": false,
+//             "actual": "Patty",
+//             "expected": [
+//                 "Patrick",
+//                 "Mr. Baker"
+//             ],
+//             "note": "Refer to the person, rather than the disability, first."
+//         }
+//     ],
+//     "history": [],
+//     "cwd": "/Users/davidsearl/prime/tier3/SIID",
+//     "contents": "\"Patty went for a beer\""
+// }
