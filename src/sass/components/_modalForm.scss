@@ -14,10 +14,9 @@
       
       /* Modal Content/Box */
       &__modal-content {
-        background-color: #e4e4e4da;
+        background-color: #ffffffda;
         margin: 10% auto; /* 15% from the top and centered */
         height:55%;
-        padding-left: 4rem;
         border: 1px solid $color-neutral-blue;
         border-radius: 4px;
         width: 40%; /* Could be more or less, depending on screen size */
@@ -31,6 +30,14 @@
         &:hover {
             cursor: pointer;
         }
+      }
+
+      &__form {
+        position:relative;
+        margin:auto;
+        margin-left:30%;
+        width:40%;
+        height:100%;
       }
       /* The Close Button */
 }

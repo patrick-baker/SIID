@@ -21,15 +21,17 @@ const Nav = (props) => (
         </li>
 
         <li className="navigation__item">
-          <Link className="navigation__link" to="/educators">
-            <i class="fas fa-graduation-cap fa-2x navigation__icon"></i>Educators
-          </Link>
+          {props.user.id &&
+            <Link className="navigation__link" to="/educators">
+              <i class="fas fa-graduation-cap fa-2x navigation__icon"></i>Educators
+            </Link>
+          }
         </li>
 
         <li className="navigation__item">
           {props.user.id &&
             <Link className="navigation__link" onClick={() => props.dispatch({ type: 'LOGOUT' })}>
-            <i class="fas fa-sign-out-alt fa-2x navigation__icon"></i>Log out
+              <i class="fas fa-sign-out-alt fa-2x navigation__icon"></i>Log out
             </Link>
           }
         </li>
