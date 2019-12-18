@@ -1,11 +1,11 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
-const ruleChecker = require("../ruleChecker");
+// const ruleChecker = require("../ruleChecker");
 // var patterns = require("../rules/lib/SIID.json");
 var factory = require("../modules/factory.js");
-var vfile = require('to-vfile')
-var report = require('vfile-reporter')
+// var vfile = require('to-vfile')
+// var report = require('vfile-reporter')
 var unified = require('unified')
 var english = require('retext-english')
 var stringify = require('retext-stringify')
@@ -14,8 +14,9 @@ module.exports = router;
  * GET route template
  */
 router.get("/", (req, res) => {
-  pool.query(`SELECT "data" FROM rules`).then(result => {
-    res.send(result.rows[0].array_agg);
+  pool.query(`SELECT "id", "data" FROM rules`).then(result => {
+      console.log(result)
+    res.send(result.rows);
   });
 });
 
