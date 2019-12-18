@@ -54,6 +54,20 @@ router.post("/", async (req, res) => {
   await res.send(response);
 });
 
+router.post("/add", (req, res) => {
+    const queryText = `INSERT INTO "rules"("data")VALUES($1)`
+    const queryArgs = [req.body.jsonObject]
+    pool.query(queryText,queryArgs)
+    .then((resonse)=>{
+        console.log("Rule Add Success",response);
+        res.sendStatus(200);
+    })
+    .catch((error)=>{
+        console.log("Rule Add Error", error);
+        res.sendStatus(500);        
+    })
+})
+
 // Example of the JSON stored in the database:
 // [
 //     {
