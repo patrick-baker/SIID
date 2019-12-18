@@ -8,22 +8,25 @@
         top: 0;
         width: 100%; /* Full width */
         height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
         background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        background-color: rgba(0, 0, 0, 0.651); /* Black w/ opacity */
     }
       
       /* Modal Content/Box */
       &__modal-content {
-        background-color: #fefefe;
-        margin: 15% auto; /* 15% from the top and centered */
-        padding: 20px;
-        border: 1px solid #888;
+        background-color: #e4e4e4da;
+        margin: 10% auto; /* 15% from the top and centered */
+        height:55%;
+        padding-left: 4rem;
+        border: 1px solid $color-neutral-blue;
+        border-radius: 4px;
         width: 40%; /* Could be more or less, depending on screen size */
+        overflow: none;
+        box-shadow: 0px 0px 10px 0px rgb(197, 197, 197);
       }
       
       &__cancelIcon {
-          right: 0;
+        padding:1rem;
         color:rgb(218, 0, 0);
         &:hover {
             cursor: pointer;

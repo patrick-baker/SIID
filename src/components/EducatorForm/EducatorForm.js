@@ -41,7 +41,28 @@ class EducatorForm extends Component {
     }
 
     submitEducator = () => {
-        this.props.dispatch({ type: "ADD_EDUCATOR", payload: this.state.newEducator });
+        if (
+            this.state.newEducator.name &&
+            this.state.newEducator.bio &&
+            this.state.newEducator.contact_info &&
+            this.state.newEducator.specialties
+        ) {
+            this.props.dispatch({ type: "ADD_EDUCATOR", payload: this.state.newEducator });
+        } else {
+            alert('Please fill in all the fields')
+        }
+    }
+
+    removeSpecialty = (specialty) => {
+        let copySpecialties = this.state.newEducator.specialties;
+        copySpecialties.splice(copySpecialties.indexOf(specialty), 1 );
+    
+        this.setState({
+            newEducator: {
+                ...this.state.newEducator,
+                specialties:copySpecialties
+            }
+        })
     }
 
     render() {
@@ -61,10 +82,22 @@ class EducatorForm extends Component {
 
 
                             <div>
-                                Name: <input onChange={(event) => this.handleChangeFor('name', event)} />
-                                Bio: <input onChange={(event) => this.handleChangeFor('bio', event)} />
-                                Contact Info:<input onChange={(event) => this.handleChangeFor('contact_info', event)} />
-                                Image: <input onChange={(event) => this.handleChangeFor('image_url', event)} />
+                                <label>
+                                    <div className="formInput__labelText" >Name:</div><input placeholder="Name" className="formInput__average" onChange={(event) => this.handleChangeFor('name', event)} />
+                                </label>
+
+                                <label>
+                                    <div className="formInput__labelText" >Bio:</div><input placeholder="Bio" className="formInput__average" onChange={(event) => this.handleChangeFor('bio', event)} />
+                                </label>
+                                <label>
+                                    <div className="formInput__labelText">Email:</div><input placeholder="Email" className="formInput__average" onChange={(event) => this.handleChangeFor('contact_info', event)} />
+                                </label>
+
+                                <label>
+                                    <div className="formInput__labelText">Image:</div><input placeholder="Image" className="formInput__average" onChange={(event) => this.handleChangeFor('image_url', event)} />
+                                </label>
+
+                                <div className="formInput__labelText">Specialties:</div>
                                 <select onChange={(event) => this.addSpecialites(event)}>
                                     {/* In future loop through specialties to display options */}
                                     <option value="gender">gender</option>
@@ -74,9 +107,9 @@ class EducatorForm extends Component {
                                     <option value="disability">disability</option>
                                 </select>
                                 <ul>
-                                    {this.state.newEducator.specialties.map((specialty, i) => <li>{specialty}</li>)}
+                                    {this.state.newEducator.specialties.map((specialty, i) => <li key={i} onClick={() => this.removeSpecialty(specialty)} className="formInput__specialtyDisplay">- {specialty}</li>)}
                                 </ul>
-                                <button onClick={this.submitEducator} >Submit</button>
+                                <button className="formInput__submitButton" onClick={this.submitEducator} >Submit</button>
                             </div>
 
 
