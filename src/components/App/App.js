@@ -8,12 +8,15 @@ import {
 
 import {connect} from 'react-redux';
 
+
+
 import Nav from '../Nav/Nav';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import UserPage from '../UserPage/UserPage';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import CreateProject from '../CreateProject/CreateProject';
+import RuleTable from '../RuleTable/RuleTable'
 
 import '../../sass/main.scss';
 
@@ -30,13 +33,16 @@ class App extends Component {
       <Router>
         <div className="App" >
           {this.props.user.id && <Nav />}
+          <div className="content">
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
-
-
+            <Route
+              path="/forgotPassword"
+              component={ForgotPassword}
+            />
             <Route
               path="/reset/:token"
               component={ResetPassword}
@@ -56,6 +62,11 @@ class App extends Component {
               component={UserPage}
             />
 
+            <ProtectedRoute
+              exact
+              path="/rules"
+              component={RuleTable}
+            />
 
             <Route
               path="/educators"
@@ -66,6 +77,7 @@ class App extends Component {
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
+          </div>
         </div>
       </Router>
     )

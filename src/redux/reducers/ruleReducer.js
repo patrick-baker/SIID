@@ -1,12 +1,17 @@
-const ruleReducer = (state = [], action) => {
+
+import { combineReducers } from 'redux';
+
+const ruleReducer = (state = [{}], action) => {
     switch (action.type) {
-      case 'SET_PROJECT':
+      case 'SET_RULES':
         return action.payload;
-      case 'CLEAR_PROJECT':
-        return [];
       default:
-        return state;
-    }
-  };
-  
-  export default ruleReducer;
+        return state; 
+  }
+}
+  // user will be on the redux state at:
+  // state.user
+  export default combineReducers({
+      ruleReducer,
+  })
+
