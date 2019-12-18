@@ -10,18 +10,6 @@
         display: flex;
     }
 
-    &__createCard {
-        display: inline-block;
-        width: 27%;
-        height:43%;
-        border:.1rem solid black;
-        margin:1%;
-        border-radius: .4rem;
-        box-shadow: 0 .3rem .8rem -.3rem #313131;
-        overflow:hidden;
-        &:hover {
-            box-shadow: 0rem .3rem .8rem -.1rem #313131;
-        }
-    }
+    
    
 }

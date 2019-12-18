@@ -46,34 +46,44 @@ class EducatorForm extends Component {
 
     render() {
         return (
-            <div className="educatorPage__createCard" >
-                <div onClick={this.addEducator} >
-                    Hello
+            <>
+                <div className="card__createCard" onClick={this.addEducator}>
+                    <div className="card__plusIconDiv">
+                        <i class="fas fa-user-graduate fa-4x card__plusIcon"></i> <br />
+                        <span>Add Educator</span>
+                    </div>
                 </div>
-                {this.state.add &&
-                    (
-                        <div>
-                            Name: <input onChange={(event) => this.handleChangeFor('name', event)} />
-                            Bio: <input onChange={(event) => this.handleChangeFor('bio', event)} />
-                            Contact Info:<input onChange={(event) => this.handleChangeFor('contact_info', event)} />
-                            Image: <input onChange={(event) => this.handleChangeFor('image_url', event)} />
-                            <select onChange={(event) => this.addSpecialites(event)}>
-                                {/* In future loop through specialties to display options */}
-                                <option value="gender">gender</option>
-                                <option value="race">race</option>
-                                <option value="lgbtq">lgbtq</option>
-                                <option value="religion">religion</option>
-                                <option value="disability">disability</option>
-                            </select>
-                            <ul>
-                                {this.state.newEducator.specialties.map((specialty, i) => <li>{specialty}</li>)}
-                            </ul>
-                            <button onClick={this.submitEducator} >Submit</button>
-                        </div>
 
-                    )
-                }
-            </div>
+                {this.state.add &&
+                    (<div className="modal__structure">
+                        <div className="modal__modal-content" >
+                            <i onClick={this.addEducator} className="fas fa-times fa-2x modal__cancelIcon"></i>
+
+
+                            <div>
+                                Name: <input onChange={(event) => this.handleChangeFor('name', event)} />
+                                Bio: <input onChange={(event) => this.handleChangeFor('bio', event)} />
+                                Contact Info:<input onChange={(event) => this.handleChangeFor('contact_info', event)} />
+                                Image: <input onChange={(event) => this.handleChangeFor('image_url', event)} />
+                                <select onChange={(event) => this.addSpecialites(event)}>
+                                    {/* In future loop through specialties to display options */}
+                                    <option value="gender">gender</option>
+                                    <option value="race">race</option>
+                                    <option value="lgbtq">lgbtq</option>
+                                    <option value="religion">religion</option>
+                                    <option value="disability">disability</option>
+                                </select>
+                                <ul>
+                                    {this.state.newEducator.specialties.map((specialty, i) => <li>{specialty}</li>)}
+                                </ul>
+                                <button onClick={this.submitEducator} >Submit</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    )}
+            </>
         )
     }
 }
