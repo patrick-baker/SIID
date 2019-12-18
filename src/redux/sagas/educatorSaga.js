@@ -21,9 +21,20 @@ function* getEducators() {
   }
 }
 
+function* deleteEducator(action) {
+  console.log('ACTION.PAYLOAD',action.payload)
+    try {
+      yield axios.delete(`/educator/${action.payload.id}`);
+      yield put({type:"GET_EDUCATORS"});
+    }catch(error) {
+      console.log(error);
+    }
+}
+
 function* EducatorSaga() {
   yield takeLatest('ADD_EDUCATOR', educator);
   yield takeLatest('GET_EDUCATORS',getEducators)
+  yield takeLatest('DELETE_EDUCATOR',deleteEducator)
 }
 
 export default EducatorSaga;

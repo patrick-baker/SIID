@@ -8,10 +8,10 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const query = 
     `
-        SELECT name,bio,contact_info,image_url,ARRAY_AGG(specialty) AS specialties FROM educator 
+        SELECT educator.id,name,bio,contact_info,image_url,ARRAY_AGG(specialty) AS specialties FROM educator 
         JOIN educator_specialties ON educator_id = educator.id
         JOIN specialties ON specialty_id=specialties.id
-        GROUP BY name,bio,contact_info,image_url
+        GROUP BY educator.id,name,bio,contact_info,image_url
     ;`
 
     try {
@@ -51,5 +51,29 @@ router.post('/', async (req, res) => {
         client.release();
     }
 });
+
+
+
+router.delete('/:id', async (req,res) => {
+    const client = await pool.connect();
+    try {
+
+        await client.query(`BEGIN`);
+
+        const deleteSpecialites = `DELETE FROM educator_specialties WHERE educator_id=$1`
+        await client.query(deleteSpecialites,[req.params.id]);
+
+        const deleteEducator = `DELETE FROM educator WHERE id=$1;`;
+        await client.query(deleteEducator,[req.params.id]);
+    
+        await client.query(`COMMIT`);
+        res.sendStatus(200);
+    } catch(error) {
+        console.log(error);
+        res.sendStatus(500);
+    } finally {
+        client.release();
+    }
+})
 
 module.exports = router;

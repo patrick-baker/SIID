@@ -55,12 +55,12 @@ class EducatorForm extends Component {
 
     removeSpecialty = (specialty) => {
         let copySpecialties = this.state.newEducator.specialties;
-        copySpecialties.splice(copySpecialties.indexOf(specialty), 1 );
-    
+        copySpecialties.splice(copySpecialties.indexOf(specialty), 1);
+
         this.setState({
             newEducator: {
                 ...this.state.newEducator,
-                specialties:copySpecialties
+                specialties: copySpecialties
             }
         })
     }
@@ -80,22 +80,33 @@ class EducatorForm extends Component {
                         <div className="modal__modal-content" >
                             <i onClick={this.addEducator} className="fas fa-times fa-2x modal__cancelIcon"></i>
 
+                            <div className="modal__form">
+                                <div>
+                                    <label>
+                                        <div className="formInput__labelText" >Name:</div><input placeholder="Name" className="formInput__average" onChange={(event) => this.handleChangeFor('name', event)} />
+                                    </label>
+                                </div>
 
-                            <div>
-                                <label>
-                                    <div className="formInput__labelText" >Name:</div><input placeholder="Name" className="formInput__average" onChange={(event) => this.handleChangeFor('name', event)} />
-                                </label>
+                                <div>
+                                    <label>
+                                        <div className="formInput__labelText" >Bio:</div><input placeholder="Bio" className="formInput__average" onChange={(event) => this.handleChangeFor('bio', event)} />
+                                    </label>
+                                </div>
 
-                                <label>
-                                    <div className="formInput__labelText" >Bio:</div><input placeholder="Bio" className="formInput__average" onChange={(event) => this.handleChangeFor('bio', event)} />
-                                </label>
-                                <label>
-                                    <div className="formInput__labelText">Email:</div><input placeholder="Email" className="formInput__average" onChange={(event) => this.handleChangeFor('contact_info', event)} />
-                                </label>
 
-                                <label>
-                                    <div className="formInput__labelText">Image:</div><input placeholder="Image" className="formInput__average" onChange={(event) => this.handleChangeFor('image_url', event)} />
-                                </label>
+                                <div>
+                                    <label>
+                                        <div className="formInput__labelText">Email:</div><input placeholder="Email" className="formInput__average" onChange={(event) => this.handleChangeFor('contact_info', event)} />
+                                    </label>
+                                </div>
+
+
+
+                                <div>
+                                    <label>
+                                        <div className="formInput__labelText">Image:</div><input placeholder="Image" className="formInput__average" onChange={(event) => this.handleChangeFor('image_url', event)} />
+                                    </label>
+                                </div>
 
                                 <div className="formInput__labelText">Specialties:</div>
                                 <select onChange={(event) => this.addSpecialites(event)}>
@@ -110,6 +121,7 @@ class EducatorForm extends Component {
                                     {this.state.newEducator.specialties.map((specialty, i) => <li key={i} onClick={() => this.removeSpecialty(specialty)} className="formInput__specialtyDisplay">- {specialty}</li>)}
                                 </ul>
                                 <button className="formInput__submitButton" onClick={this.submitEducator} >Submit</button>
+
                             </div>
 
 

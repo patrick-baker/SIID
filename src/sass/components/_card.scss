@@ -1,7 +1,8 @@
 .card {
     &__structure {
         display: inline-block;
-        width: 27%;
+        position: relative;
+        width: 23%;
         height:43%;
         border:.2rem solid $color-neutral-blue;
         margin:1%;
@@ -37,8 +38,10 @@
     }
 
     &__contact {
-        margin-top:10%;
         color:rgb(155, 155, 155);
+        position: absolute;
+        bottom:1.2rem;
+        left:1.2rem;
     }
 
     &__specialties {
@@ -54,7 +57,7 @@
 
     &__createCard {
         display: inline-block;
-        width: 27%;
+        width: 23%;
         height:43%;
         border:.2rem solid $color-neutral-blue;
         margin:1%;
@@ -78,6 +81,19 @@
         width:100%;
         margin-top:45%;
         color:$color-neutral-blue;
+    }
 
+
+    &__delete {
+        right:1.2rem;
+        bottom:1.2rem;
+        position: absolute;
+        color:$color-neutral-blue;
+        opacity: .85;
+
+        &:hover {
+            cursor: pointer;
+            transform: rotate(20deg);
+        }
     }
 }

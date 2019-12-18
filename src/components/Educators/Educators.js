@@ -7,14 +7,16 @@ class Educators extends Component {
     componentDidMount = () => {
         this.props.dispatch({ type: "GET_EDUCATORS" });
     }
-    submitEducator = () => {
-        this.props.dispatch({ type: "ADD_EDUCATOR", payload: this.state.newEducator });
+
+    deleteEducator = (educator) => {
+        console.log(educator);
+        this.props.dispatch({type:"DELETE_EDUCATOR",payload:educator});
     }
 
     render() {
         return (
             <div className="educatorPage__background">
-                <EducatorForm/>
+                {this.props.user.admin && <EducatorForm/>}
                 {this.props.educator[0] && this.props.educator.map((educator, i) => (
                     <div className="card__structure" key={i}>
                         <img className="card__image" src={educator.image_url} />
@@ -38,6 +40,11 @@ class Educators extends Component {
                             <div className="card__contact" >
                                 <i className="far fa-envelope fa-xs"></i> {educator.contact_info}
                             </div>
+
+                            <div className="card__delete">
+                                <i onClick={() => this.deleteEducator(educator)} class="fas fa-trash-alt fa-lg"></i>
+                            </div>
+                            
                         </div>
                     </div>
                 ))}
