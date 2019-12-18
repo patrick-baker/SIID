@@ -1,15 +1,17 @@
+@import "abstracts/variables";
 @import "abstracts/functions";
 @import "abstracts/mixins";
-@import "abstracts/variables";
 
+@import "base/typography";
 @import "base/animations";
 @import "base/base";
-@import "base/typography";
 @import "base/utilities";
 
 @import "components/button";
 @import "components/card";
+@import "components/project-box";
 
 @import "layout/navigation";
 @import "layout/flexbox";
 @import "layout/content";
+@import "layout/create-project";
