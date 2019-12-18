@@ -1,3 +1,4 @@
+
 import { combineReducers } from 'redux';
 
 const ruleReducer = (state = [{}], action) => {
@@ -13,3 +14,4 @@ const ruleReducer = (state = [{}], action) => {
   export default combineReducers({
       ruleReducer,
   })
+
