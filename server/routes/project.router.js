@@ -8,7 +8,7 @@ let verbose = true;
  */
 router.get('/', (req, res) => {
     const queryText=`SELECT "title","client", "description", "date_created" 
-    FROM "projects" WHERE "user_id"=$1`;
+    FROM "project" WHERE "user_id"=$1`;
     const queryValues=[req.user.id];
     
     pool.query(queryText, queryValues)
