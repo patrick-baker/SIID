@@ -13,8 +13,19 @@ function* FETCH_RULES() {
     }
 }
 
+function* ANALYZE_TEXT(action) {
+  try {
+    const rules = yield axios.post('/rule',{text:action.payload})
+    const bias = yield axios.post('/automl',{text:action.payload});
+    console.log(rules.data.messages);
+ } catch (error) {
+     console.log('error in FETCH_RULES saga', error);
+ }
+}
+
 function* RuleSaga() {
-  yield takeEvery('FETCH_RULES',FETCH_RULES)
+  yield takeEvery('FETCH_RULES',FETCH_RULES);
+  yield takeEvery('ANALYZE_TEXT',ANALYZE_TEXT);
 }
 
 export default RuleSaga;
