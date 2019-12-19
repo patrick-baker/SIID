@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Modal from '../Modal/Modal'
 
 class EducatorForm extends Component {
     state = {
         newEducator: {
-            id:this.props.singleEducator.id || "",
+            id: this.props.singleEducator.id || "",
             name: this.props.singleEducator.name || "",
-            bio: this.props.singleEducator.bio  ||"",
-            contact_info: this.props.singleEducator.contact_info ||"",
-            image_url: this.props.singleEducator.image_url ||"",
-            specialties: this.props.singleEducator.specialties || [] ,
+            bio: this.props.singleEducator.bio || "",
+            contact_info: this.props.singleEducator.contact_info || "",
+            image_url: this.props.singleEducator.image_url || "",
+            specialties: this.props.singleEducator.specialties || [],
         }
     }
 
-    componentDidMount= () => {
+    componentDidMount = () => {
         console.log(this.props.singleEducator);
     }
 
@@ -47,23 +48,23 @@ class EducatorForm extends Component {
         ) {
 
             if (this.props.educator[0]) {
-                this.props.dispatch({type:"UPDATE_EDUCATOR",payload:this.state.newEducator})
+                this.props.dispatch({ type: "UPDATE_EDUCATOR", payload: this.state.newEducator })
             } else {
-                this.props.dispatch({ type:"ADD_EDUCATOR", payload: this.state.newEducator });
+                this.props.dispatch({ type: "ADD_EDUCATOR", payload: this.state.newEducator });
             }
             this.props.addEducator();
 
 
             this.setState({
-                newEducator:{
-                    id:"",
-                    name:"",
-                    bio:"",
-                    contact_url:"",
-                    image_url:"",
-                    specialties:[]
+                newEducator: {
+                    id: "",
+                    name: "",
+                    bio: "",
+                    contact_url: "",
+                    image_url: "",
+                    specialties: []
                 }
-            },() => {
+            }, () => {
                 console.log(this.state);
             })
 
@@ -89,58 +90,55 @@ class EducatorForm extends Component {
         return (
             <>
 
+                <Modal>
+                    <i onClick={this.props.addEducator} className="fas fa-times fa-2x modal__cancelIcon"></i>
 
-                <div className="modal__structure">
-                    <div className="modal__modal-content" >
-                        <i onClick={this.props.addEducator} className="fas fa-times fa-2x modal__cancelIcon"></i>
-
-                        <div className="modal__form">
-                            <div>
-                                <label>
-                                    <div className="formInput__labelText" >Name:</div><input placeholder="Name" value={this.state.newEducator.name} className="formInput__average" onChange={(event) => this.handleChangeFor('name', event)} />
-                                </label>
-                            </div>
-
-                            <div>
-                                <label>
-                                    <div className="formInput__labelText" >Bio:</div><input placeholder="Bio"  value={this.state.newEducator.bio} className="formInput__average" onChange={(event) => this.handleChangeFor('bio', event)} />
-                                </label>
-                            </div>
-
-
-                            <div>
-                                <label>
-                                    <div className="formInput__labelText">Email:</div><input placeholder="Email"  value={this.state.newEducator.contact_info} className="formInput__average" onChange={(event) => this.handleChangeFor('contact_info', event)} />
-                                </label>
-                            </div>
-
-
-
-                            <div>
-                                <label>
-                                    <div className="formInput__labelText">Image:</div><input placeholder="Image"  value={this.state.newEducator.image_url} className="formInput__average" onChange={(event) => this.handleChangeFor('image_url', event)} />
-                                </label>
-                            </div>
-
-                            <div className="formInput__labelText">Specialties:</div>
-                            <select onChange={(event) => this.addSpecialites(event)}>
-                                {/* In future loop through specialties to display options */}
-                                <option value="gender">gender</option>
-                                <option value="race">race</option>
-                                <option value="lgbtq">lgbtq</option>
-                                <option value="religion">religion</option>
-                                <option value="disability">disability</option>
-                            </select>
-                            <ul>
-                                {this.state.newEducator.specialties.map((specialty, i) => <li key={i} onClick={() => this.removeSpecialty(specialty)} className="formInput__specialtyDisplay">- {specialty}</li>)}
-                            </ul>
-                            <button className="formInput__submitButton" onClick={this.submitEducator} >Submit</button>
-
+                    <div className="modal__form">
+                        <div>
+                            <label>
+                                <div className="formInput__labelText" >Name:</div><input placeholder="Name" value={this.state.newEducator.name} className="formInput__average" onChange={(event) => this.handleChangeFor('name', event)} />
+                            </label>
                         </div>
 
+                        <div>
+                            <label>
+                                <div className="formInput__labelText" >Bio:</div><input placeholder="Bio" value={this.state.newEducator.bio} className="formInput__average" onChange={(event) => this.handleChangeFor('bio', event)} />
+                            </label>
+                        </div>
+
+
+                        <div>
+                            <label>
+                                <div className="formInput__labelText">Email:</div><input placeholder="Email" value={this.state.newEducator.contact_info} className="formInput__average" onChange={(event) => this.handleChangeFor('contact_info', event)} />
+                            </label>
+                        </div>
+
+
+
+                        <div>
+                            <label>
+                                <div className="formInput__labelText">Image:</div><input placeholder="Image" value={this.state.newEducator.image_url} className="formInput__average" onChange={(event) => this.handleChangeFor('image_url', event)} />
+                            </label>
+                        </div>
+
+                        <div className="formInput__labelText">Specialties:</div>
+                        <select onChange={(event) => this.addSpecialites(event)}>
+                            {/* In future loop through specialties to display options */}
+                            <option value="gender">gender</option>
+                            <option value="race">race</option>
+                            <option value="lgbtq">lgbtq</option>
+                            <option value="religion">religion</option>
+                            <option value="disability">disability</option>
+                        </select>
+                        <ul>
+                            {this.state.newEducator.specialties.map((specialty, i) => <li key={i} onClick={() => this.removeSpecialty(specialty)} className="formInput__specialtyDisplay">- {specialty}</li>)}
+                        </ul>
+                        <button className="formInput__submitButton" onClick={this.submitEducator} >Submit</button>
+
                     </div>
-                </div>
-        
+
+
+                </Modal>
             </>
         )
     }
