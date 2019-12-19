@@ -1,12 +1,13 @@
 .stepper {
-    height: 20%;
+    height: 20vh;
     width: 80%;
-    position: static;
-    top: 0px;
+    position: sticky;
+    top: 0;
 }
 
 .project-metadata-page {
-    height: 80%;
+    height: 80vh;
+    width: 100%;
     text-align: center;
 }
 
