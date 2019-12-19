@@ -10,6 +10,8 @@ import flag from './flagReducer';
 import educator from './educatorReducer';
 import category from './categroyReducer';
 import step from './stepReducer';
+import tone from './toneReducer';
+import literaryTechnique from './literaryTechniqueReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -29,6 +31,8 @@ const rootReducer = combineReducers({
   educator,
   category,
   step,
+  tone,
+  literaryTechnique,
 });
 
 export default rootReducer;

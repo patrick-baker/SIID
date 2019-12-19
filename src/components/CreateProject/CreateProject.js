@@ -3,8 +3,14 @@ import { connect } from 'react-redux';
 import ProgressStepper from '../ProgressStepper/ProgressStepper';
 import IntegrationsDropdown from './SelectIntegrations';
 import TargetAudience from './TargetAudience';
+import CampaignStyle from './CampaignStyle';
 
 class CreateProject extends Component {
+
+  componentDidMount() {
+    this.props.dispatch({type: 'FETCH_TONE'});
+    this.props.dispatch({type: 'FETCH_LITERARY_TECHNIQUES'});
+  }
 
   nextStep = () => {
     this.props.dispatch({type: 'NEXT_STEP'})
@@ -30,10 +36,15 @@ class CreateProject extends Component {
           <IntegrationsDropdown />
           {this.props.step === 0 && <button onClick={this.nextStep}>Stepper Button</button>}
         </div>
-        {this.props.step > 0 && <div className="flex-row-center flex-row-center__project-form" style={{width: '60%'}}>
+        {this.props.step > 0 && <div className="flex-row-center flex-row-center__project-form">
           <TargetAudience />
           {this.props.step === 1 && <button onClick={this.nextStep}>Stepper Button</button>}
         </div> }
+        {this.props.step > 1 && <div className="flex-row-center flex-row-center__project-form">
+          <CampaignStyle />
+          {this.props.step === 2 && <button onClick={this.nextStep}>Stepper Button</button>}
+        </div> }
+      {/* <pre>{JSON.stringify(this.props)}</pre> */}
       </div>
     );
   }
