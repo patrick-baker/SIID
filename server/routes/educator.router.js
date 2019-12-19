@@ -30,14 +30,15 @@ router.post('/', async (req, res) => {
     const client = await pool.connect();
     try {
         const queryEducator = `INSERT INTO educator (name,bio,contact_info,image_url) VALUES ($1,$2,$3,$4) RETURNING id;`;
-
         await client.query(`BEGIN`);
+        //add the educator record to the educator table
         let educatorId = await client.query(queryEducator, [req.body.name, req.body.bio, req.body.contact_info, req.body.image_url]);
 
-        await Promise.all(specialty.map(res => {
-            const foodRestrictionAdd=`INSERT INTO "food_restriction" ( "food_id", "restriction_id" ) VALUES ($1, $2)`;
-            const foodRestrictionValues=[foodId,res.id];
-            return client.query(foodRestrictionAdd,foodRestrictionValues);
+        //add educator's bias specialty areas in educator_bias
+        await Promise.all(req.body.specialties.map(val => {
+            const educatorBiasAdd=`INSERT INTO "educator_bias" ( "educator_id", "bias_id") VALUES ($1, $2)`;
+            const educatorBiasValues=[educatorId.rows[0].id,val];
+            return client.query(educatorBiasAdd,educatorBiasValues);
         }));
      
         // for (specialty of req.body.specialties) {

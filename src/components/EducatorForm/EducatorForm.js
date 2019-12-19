@@ -50,7 +50,7 @@ class EducatorForm extends Component {
             this.state.newEducator.specialties
         ) {
 
-            if (this.props.educator[0]) {
+            if (this.props.singleEducator[0]) {
                 this.props.dispatch({ type: "UPDATE_EDUCATOR", payload: this.state.newEducator })
             } else {
                 this.props.dispatch({ type: "ADD_EDUCATOR", payload: this.state.newEducator });
