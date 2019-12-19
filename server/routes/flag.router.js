@@ -6,7 +6,7 @@ const router = express.Router();
  * GET selected project flags
  */
 router.get('/', (req, res) => {
-    const queryText = `SELECT `
+
 })
 
 /**

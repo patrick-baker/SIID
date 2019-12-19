@@ -22,20 +22,19 @@ router.get("/", (req, res) => {
 
 
 router.post("/", async (req, res) => {
+  console.log('BODYYYYY',req.body);
   const textInput = req.body.text;
 
   let pattern_db = await pool.query(`SELECT array_agg("data") FROM rules`);
-  console.log('pattern: ', pattern_db);
+  // console.log('pattern: ', pattern_db);
   
   patterns_bad = pattern_db.rows[0].array_agg;
-  console.log('from db', patterns_bad)
-
-  await ruleChecker(textInput);
+  // console.log('from db', patterns_bad)
 
   let response = "";
 
   const runMe = async function(textIn) {
-      console.log('runMe running');
+      // console.log('runMe running');
       
       try {
         response = await unified()
@@ -46,7 +45,7 @@ router.post("/", async (req, res) => {
       } catch(error) {
           console.log(error);
       }
-      console.log('runMe response', response);
+      // console.log('runMe response', response);
   };
 
   await runMe(textInput);

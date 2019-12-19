@@ -15,6 +15,8 @@ const educatorRouter = require('./routes/educator.router');
 const categoryRouter = require('./routes/category.router');
 const ruleRouter = require('./routes/rule.router');
 const flagRouter = require('./routes/flag.router');
+const reportRouter = require('./routes/report.router');
+const autoMLRouter = require('./routes/autoML.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -34,6 +36,8 @@ app.use('/educator', educatorRouter);
 app.use('/category', categoryRouter);
 app.use('/rule', ruleRouter);
 app.use('/flag', flagRouter);
+app.use('/report', reportRouter);
+app.use('/automl',autoMLRouter)
 
 
 // Serve static files
