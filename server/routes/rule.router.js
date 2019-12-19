@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
   patterns_bad = pattern_db.rows[0].array_agg;
   console.log('from db', patterns_bad)
 
-  await ruleChecker(textInput);
+//   await ruleChecker(textInput);
 
   let response = "";
 

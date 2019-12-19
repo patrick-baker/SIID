@@ -123,3 +123,36 @@ CREATE TABLE "literary_techniques" (
     "oxymoron" boolean DEFAULT FALSE,
     "project_id" INT REFERENCES "projects"
 );
+INSERT INTO rules("data") VALUES('{
+    "id": "Test-1",
+    "type": "simple",
+    "categories": [
+      "a"
+    ],
+    "considerate": {
+      "Thomas": "a"
+    },
+    "inconsiderate": {
+      "tommy": "a"
+    },
+    "note": "Refer to the person, rather than the disability, first."
+  }');
+  
+  INSERT INTO rules("data") VALUES('{
+    "id": "Test-2",
+    "type": "simple",
+    "categories": [
+      "a"
+    ],
+    "considerate": {
+      "Patrick": "a",
+      "Mr. Baker": "a"
+    },
+    "inconsiderate": {
+      "Patty": "a",
+      "patty": "a"
+    },
+    "note": "Refer to the person, rather than the disability, first."
+  }');
+  
+  SELECT array_agg("data") FROM rules;
