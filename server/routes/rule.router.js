@@ -49,14 +49,9 @@ router.post("/", async (req, res) => {
 
   await runMe(textInput);
   console.log("rule router sees", response);
+  await pool.query(`INSERT INTO flags(project_id,messages) VALUES($1,$2)`,[1,{messages:response.messages}]);
 
-  for(flag of response.messages) {
-    let ruleId = await pool.query(`SELECT id FROM rules WHERE data=$1`,[flag]);
-    console.log(ruleId);
-    await pool.query(`INSERT INTO flags(project_id,rule_id)`,[1,ruleId.rows[0].id]);
-  } 
-
-  res.send(response);
+  res.send(response.messages);
 });
 
 router.post("/add", (req, res) => {
