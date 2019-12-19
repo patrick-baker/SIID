@@ -8,14 +8,14 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const query =
         `
-        SELECT educator.id,name,bio,contact_info,image_url,ARRAY_AGG(specialty) AS specialties FROM educator 
-        JOIN educator_specialties ON educator_id = educator.id
-        JOIN specialties ON specialty_id=specialties.id
+        SELECT educator.id,name,bio,contact_info,image_url,ARRAY_AGG(b.type) AS specialties FROM educator 
+        JOIN educator_bias eb ON eb.educator_id = educator.id
+        JOIN bias b ON eb.bias_id=b.id
         GROUP BY educator.id,name,bio,contact_info,image_url
     ;`
-
     try {
-        let educators = await pool.query(query);
+        const educators = await pool.query(query);
+        //console.log(`this is educators.rows in the router`, educators.rows);
         res.send(educators.rows)
     } catch (error) {
         console.log(error);
@@ -27,8 +27,6 @@ router.get('/', async (req, res) => {
  * POST route template
  */
 router.post('/', async (req, res) => {
-
-
     const client = await pool.connect();
     try {
         const queryEducator = `INSERT INTO educator (name,bio,contact_info,image_url) VALUES ($1,$2,$3,$4) RETURNING id;`;
@@ -36,10 +34,16 @@ router.post('/', async (req, res) => {
         await client.query(`BEGIN`);
         let educatorId = await client.query(queryEducator, [req.body.name, req.body.bio, req.body.contact_info, req.body.image_url]);
 
-        for (specialty of req.body.specialties) {
-            let specialtyId = await client.query(`SELECT id FROM specialties WHERE specialty=$1`, [specialty]);
-            await client.query(`INSERT INTO educator_specialties(educator_id,specialty_id) VALUES ($1,$2)`, [educatorId.rows[0].id, specialtyId.rows[0].id]);
-        }
+        await Promise.all(specialty.map(res => {
+            const foodRestrictionAdd=`INSERT INTO "food_restriction" ( "food_id", "restriction_id" ) VALUES ($1, $2)`;
+            const foodRestrictionValues=[foodId,res.id];
+            return client.query(foodRestrictionAdd,foodRestrictionValues);
+        }));
+     
+        // for (specialty of req.body.specialties) {
+        //     let specialtyId = await client.query(`SELECT id FROM specialties WHERE specialty=$1`, [specialty]);
+        //     await client.query(`INSERT INTO educator_specialties(educator_id,specialty_id) VALUES ($1,$2)`, [educatorId.rows[0].id, specialtyId.rows[0].id]);
+        // }
 
 
         await client.query(`COMMIT`);

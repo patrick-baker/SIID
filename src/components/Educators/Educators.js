@@ -11,6 +11,7 @@ class Educators extends Component {
 
     componentDidMount = () => {
         this.props.dispatch({ type: "GET_EDUCATORS" });
+        
     }
 
     deleteEducator = (educator) => {

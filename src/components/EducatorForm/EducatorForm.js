@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from '../Modal/Modal'
+import { Checkbox } from '@material-ui/core';
 
 class EducatorForm extends Component {
     state = {
@@ -15,6 +16,8 @@ class EducatorForm extends Component {
     }
 
     componentDidMount = () => {
+        this.props.dispatch({type: "GET_CATEGORY"});
+       
         console.log(this.props.singleEducator);
     }
 
@@ -28,16 +31,16 @@ class EducatorForm extends Component {
         })
     }
 
-    addSpecialites = (event) => {
-        if (!this.state.newEducator.specialties.includes(event.target.value)) {
-            this.setState({
-                newEducator: {
-                    ...this.state.newEducator,
-                    specialties: [...this.state.newEducator.specialties, event.target.value]
-                }
-            })
-        }
-    }
+    // addSpecialites = (event) => {
+    //     if (!this.state.newEducator.specialties.includes(event.target.value)) {
+    //         this.setState({
+    //             newEducator: {
+    //                 ...this.state.newEducator,
+    //                 specialties: [...this.state.newEducator.specialties, event.target.value]
+    //             }
+    //         })
+    //     }
+    // }
 
     submitEducator = () => {
         if (
@@ -74,16 +77,36 @@ class EducatorForm extends Component {
         }
     }
 
-    removeSpecialty = (specialty) => {
-        let copySpecialties = this.state.newEducator.specialties;
-        copySpecialties.splice(copySpecialties.indexOf(specialty), 1);
+    // removeSpecialty = (specialty) => {
+    //     let copySpecialties = this.state.newEducator.specialties;
+    //     copySpecialties.splice(copySpecialties.indexOf(specialty), 1);
 
-        this.setState({
-            newEducator: {
-                ...this.state.newEducator,
-                specialties: copySpecialties
-            }
-        })
+    //     this.setState({
+    //         newEducator: {
+    //             ...this.state.newEducator,
+    //             specialties: copySpecialties
+    //         }
+    //     })
+    // }
+
+    flipCheck = (event) =>{
+        let id=Number(event.target.name);
+        console.log('in flip check', id)
+        if (this.state.newEducator.specialties.includes(id)){
+            this.setState({
+                newEducator: {
+                    ...this.state.newEducator,
+                    specialties: this.state.newEducator.specialties.filter(x=>x!==id),
+                }
+            })
+        } else {
+            this.setState({
+                newEducator: {
+                    ...this.state.newEducator,
+                    specialties: [...this.state.newEducator.specialties, id]
+                }
+            })
+        }
     }
 
     render() {
@@ -96,20 +119,32 @@ class EducatorForm extends Component {
                     <div className="modal__form">
                         <div>
                             <label>
-                                <div className="formInput__labelText" >Name:</div><input placeholder="Name" value={this.state.newEducator.name} className="formInput__average" onChange={(event) => this.handleChangeFor('name', event)} />
+                                <div className="formInput__labelText" >Name:</div>
+                                <input placeholder="Name" 
+                                value={this.state.newEducator.name} 
+                                className="formInput__average" 
+                                onChange={(event) => this.handleChangeFor('name', event)} />
                             </label>
                         </div>
 
                         <div>
                             <label>
-                                <div className="formInput__labelText" >Bio:</div><input placeholder="Bio" value={this.state.newEducator.bio} className="formInput__average" onChange={(event) => this.handleChangeFor('bio', event)} />
+                                <div className="formInput__labelText" >Bio:</div>
+                                <input placeholder="Bio" 
+                                value={this.state.newEducator.bio} 
+                                className="formInput__average" 
+                                onChange={(event) => this.handleChangeFor('bio', event)} />
                             </label>
                         </div>
 
 
                         <div>
                             <label>
-                                <div className="formInput__labelText">Email:</div><input placeholder="Email" value={this.state.newEducator.contact_info} className="formInput__average" onChange={(event) => this.handleChangeFor('contact_info', event)} />
+                                <div className="formInput__labelText">Email:</div>
+                                <input placeholder="Email" 
+                                value={this.state.newEducator.contact_info} 
+                                className="formInput__average" 
+                                onChange={(event) => this.handleChangeFor('contact_info', event)} />
                             </label>
                         </div>
 
@@ -117,22 +152,45 @@ class EducatorForm extends Component {
 
                         <div>
                             <label>
-                                <div className="formInput__labelText">Image:</div><input placeholder="Image" value={this.state.newEducator.image_url} className="formInput__average" onChange={(event) => this.handleChangeFor('image_url', event)} />
+                                <div className="formInput__labelText">Image:</div>
+                                <input placeholder="Image" 
+                                value={this.state.newEducator.image_url} 
+                                className="formInput__average" 
+                                onChange={(event) => this.handleChangeFor('image_url', event)} />
                             </label>
                         </div>
 
                         <div className="formInput__labelText">Specialties:</div>
-                        <select onChange={(event) => this.addSpecialites(event)}>
-                            {/* In future loop through specialties to display options */}
-                            <option value="gender">gender</option>
+                        {/* <select onChange={(event) => this.addSpecialites(event)}>
+                            {this.props.category.map((category)=>{
+                                return <option key={category.id} value={category.id}>{category.type}</option>
+                            })}
+                            {/* <option value="gender">gender</option>
                             <option value="race">race</option>
                             <option value="lgbtq">lgbtq</option>
                             <option value="religion">religion</option>
-                            <option value="disability">disability</option>
+                            <option value="disability">disability</option> 
                         </select>
                         <ul>
-                            {this.state.newEducator.specialties.map((specialty, i) => <li key={i} onClick={() => this.removeSpecialty(specialty)} className="formInput__specialtyDisplay">- {specialty}</li>)}
-                        </ul>
+                            {this.state.newEducator.specialties.map((specialty) => {
+                            return <li key={specialty.id} 
+                                onClick={() => this.removeSpecialty(specialty)} 
+                                className="formInput__specialtyDisplay">- {specialty.type}</li>})}
+                        </ul> */}
+                        <div className="checkboxArray">
+                            {this.props.category.map(item => {
+                                return <><label key={item.id}>
+                                    {item.type}
+                                    <Checkbox
+                                        key={item.id}
+                                        name={item.id}
+                                        checked={this.state.newEducator.specialties.includes(item.id)}
+                                        color="primary"
+                                        variant="contained"
+                                        onChange={(event) => this.flipCheck(event)} />
+                                </label> <br></br> </>
+                            })}
+                        </div>
                         <button className="formInput__submitButton" onClick={this.submitEducator} >Submit</button>
 
                     </div>
