@@ -21,7 +21,6 @@ async function sh(cmd) {
 
 
 router.post("/", async (req, res) => {
-
     let text = req.body.text.replace(/\r?\n|\r/g, '').split(/[.?!]/);
     try {
         let data = await getData(text);
@@ -60,12 +59,10 @@ let getData = async (text) => {
         try {
             if (sentence) {
                 let sentenceData = await getBias(sentence);
-                console.log('SENTENCE DATA', sentenceData);
                 if (sentenceData != 'NO BIAS') {
                     biasCounter['total']++;
                     biasCounter[sentenceData].count++;
                     biasCounter[sentenceData].percentage = (biasCounter[sentenceData].count / biasCounter['total']) * 100;
-                    console.log(biasCounter[sentenceData])
                 }
             }
 
