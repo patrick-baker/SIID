@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProgressStepper from '../ProgressStepper/ProgressStepper';
+
+import SIIDTool from '../SIIDTool/SIIDTool';
+
 import IntegrationsDropdown from './SelectIntegrations';
 import TargetAudience from './TargetAudience';
+
 
 class CreateProject extends Component {
 
