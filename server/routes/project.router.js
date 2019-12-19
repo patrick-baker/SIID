@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+let verbose = true;
 
 /**
  * GET projects created by the user
@@ -14,7 +15,7 @@ router.get('/', (req, res) => {
         .then(results=>{
             res.send(results.rows);})
             .catch((error)=>{
-            console.log('Error GET /project', error);
+            if(verbose)console.log('Error GET /project', error);
             res.sendStatus(500);
         })
 });
@@ -59,7 +60,7 @@ router.delete('/:id', async (req, res) => {
         res.sendStatus(201);
     } catch (error) {
         await client.query('ROLLBACK')
-        console.log('Error delete /project', error);
+        if(verbose)console.log('Error delete /project', error);
         res.sendStatus(500);
     } finally {
         client.release();
@@ -70,8 +71,8 @@ router.delete('/:id', async (req, res) => {
  * POST for new project
  */
 router.post('/', async (req, res) => {
-    console.log('in project.router POST, req.user is: ', req.user);
-    console.log('in project.router POST, req.body is: ', req.body);
+    if(verbose)console.log('in project.router POST, req.user is: ', req.user);
+    if(verbose)console.log('in project.router POST, req.body is: ', req.body);
     // SETUP POOL CONNECT
     const client = await pool.connect();
     try {
@@ -80,7 +81,7 @@ router.post('/', async (req, res) => {
         const tone = req.body.tone;
         // BEGIN INCASE OF ERROR/ROLLBACK
         await client.query('BEGIN');
-        // INSERT INTO PROJECTS TABLE
+        // INSERT INTO PROJECT TABLE
         const projectQueryText = `INSERT INTO "project" 
         ("user_id", "title", "client", "description", "text", "integration", "campaign_goals", "goals_ctr", "goals_conversion", 
         "goals_sales_conversion", "goals_sales_length", "revenue_goals", "goals_social_shares", "goals_follow", "goals_impressions", "goals_views", "goals_comments", 
