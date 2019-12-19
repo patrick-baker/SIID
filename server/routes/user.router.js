@@ -11,13 +11,11 @@ const crypto = require('crypto');
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 
-
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
   res.send(req.user);
 });
-
 
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
@@ -47,7 +45,6 @@ router.post('/logout', (req, res) => {
   req.logout();
   res.sendStatus(200);
 });
-
 
 // Route for sending email with link to reset password
 router.post('/forgotPassword', (req, res) => {

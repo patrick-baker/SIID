@@ -9,6 +9,7 @@ import rule from './ruleReducer';
 import flag from './flagReducer';
 import educator from './educatorReducer';
 import category from './categroyReducer';
+import step from './stepReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   flag,
   educator,
   category,
+  step,
 });
 
 export default rootReducer;
