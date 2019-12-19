@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     FROM "projects" WHERE "user_id"=$1`;
     const queryValues=[req.user.id];
     
-    pool.query(queryText,queryValues)
+    pool.query(queryText, queryValues)
         .then(results=>{
             res.send(results.rows);})
             .catch((error)=>{
