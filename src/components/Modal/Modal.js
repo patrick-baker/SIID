@@ -5,7 +5,6 @@ const ThomasModal = (props) =>{
         <div className="modal__structure">
                     <div className="modal__modal-content" >
                         {props.children}
-
                         </div>
                     </div>
     )
