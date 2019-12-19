@@ -18,8 +18,6 @@ async function sh(cmd) {
     });
 }
 
-
-
 router.post("/", async (req, res) => {
     let text = req.body.text.replace(/\r?\n|\r/g, '').split(/[.?!]/);
     try {
