@@ -75,13 +75,13 @@ router.post('/', async (req, res) => {
     // SETUP POOL CONNECT
     const client = await pool.connect();
     try {
-        // CREATE VARS FOR SEPARATE TABLES
-        const literaryTechniques = req.body.literaryTechniques;
+        // CREATE VARS FOR ARRAYS
+        const literaryTechnique = req.body.literaryTechnique;
         const tone = req.body.tone;
         // BEGIN INCASE OF ERROR/ROLLBACK
         await client.query('BEGIN');
         // INSERT INTO PROJECTS TABLE
-        const projectQueryText = `INSERT INTO "projects" 
+        const projectQueryText = `INSERT INTO "project" 
         ("user_id", "title", "client", "description", "text", "integration", "campaign_goals", "goals_ctr", "goals_conversion", 
         "goals_sales_conversion", "goals_sales_length", "revenue_goals", "goals_social_shares", "goals_follow", "goals_impressions", "goals_views", "goals_comments", 
         "target_audience_age", "target_audience_race", "target_audience_region", "target_audience_ethnicity", "target_audience_gender", "target_audience_interests",
@@ -93,22 +93,22 @@ router.post('/', async (req, res) => {
         req.body.targetAudienceInterests, req.body.targetAudienceLanguage, req.body.talentDemographic, req.body.formal, req.body.projectStrategy, req.body.dateCreated];
         // STORE RETURNED PROJECT ID
         const projectId = await client.query(projectQueryText, projectQueryValues);
-        // INSERT INTO TONES TABLE
-        const toneQueryText = `INSERT INTO "tone"
-        ("humor", "empowering", "uplifting", "friendly", "project_id") 
-        VALUES ($1, $2, $3, $4, $5);`
-        const toneQueryValues = [tone.humor, tone.empowering, tone.uplifting, tone.friendly, projectId];
-        await client.query(toneQueryText, toneQueryValues);
-        // INSERT INTO LITERARY TECHNIQUES TABLE
-        const literaryQueryText = `INSERT INTO "literary_techniques"
-        ("alliteration", "personification", "simile", "foreshadowing", "satire", 
-        "symbolism", "onomatopoeia", "metaphor", "hyperbole", "oxymoron", "project_id")
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`
-        const literaryQueryValues = [literaryTechniques.alliteration, literaryTechniques.personification, 
-        literaryTechniques.simile, literaryTechniques.foreshadowing, literaryTechniques.satire, 
-        literaryTechniques.symbolism, literaryTechniques.onomatopoeia, literaryTechniques.metaphor,
-        literaryTechniques.hyperbole, literaryTechniques.oxymoron, projectId];
-        await client.query(literaryQueryText, literaryQueryValues);
+        // INSERT INTO PROJECT_TONE TABLE
+        await Promise.all(
+            tone.map(type => {
+                const queryText = `INSERT INTO "project_tone" ("tone_id", "project_id") VALUES ($1, $2);`;
+                let queryValues = [type, projectId];
+                return client.query(queryText, queryValues);
+            })
+        );
+        // INSERT INTO PROJECT_LITERARY TABLE
+        await Promise.all(
+            literaryTechnique.map(type => {
+                const queryText = `INSERT INTO "project_literary" ("literary_id", "project_id") VALUES ($1, $2);`;
+                const queryValues = [type, projectId];
+                return client.query(queryText, queryValues);
+            })
+        );
         // END SQL TRX
         await client.query('COMMIT');
         res.sendStatus(201);
