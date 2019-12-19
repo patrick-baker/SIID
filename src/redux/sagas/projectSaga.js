@@ -1,24 +1,42 @@
 import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-// sends axios request to server to send update password email to user
-function* project(action) {
-    // console.log('action.payload of ForgotPasswordSaga:', action.payload);
+// gets the list of the user's projects
+function* getProject() {
   try {
-    if (action.payload === '') {
-        //yield put ({type: 'NO_EMAIL_SUBMITTED'});
-    } else {
-        // runs the server function to send email
-    
-        }
+    const project=yield axios.get(`/project`);
+    yield put({type: 'SET_PROJECT', payload: project.data});
     } catch (error) {
-        //console.log('error in ForgotPasswordSaga', error);
-        //yield put ({ type: 'EMAIL_NOT_IN_DB'});
+    console.log('error in getProject for projectSaga', error);
+    }
+}
+
+// insert the project
+function* createProject(action) {
+  try {
+    const newProject=action.payload
+    yield axios.post(`/project`, newProject);
+    yield put({type: 'GET_PROJECT'});
+    } catch (error) {
+    console.log('error in createProject for projectSaga', error);
+    }
+}
+
+// remove the project
+function* removeProject(action) {
+  try {
+    const projectId=action.payload.id
+    yield axios.delete(`/project/$projectId`);
+    yield put({type: 'GET_PROJECT'});
+    } catch (error) {
+    console.log('error in removeProject for projectSaga', error);
     }
 }
 
 function* ProjectSaga() {
-  //yield takeLatest('FORGOT_PASSWORD', project);
+  yield takeEvery('GET_PROJECT', getProject);
+  yield takeEvery('CREATE_PROJECT', createProject);
+  yield takeEvery('REMOVE_PROJECT', removeProject); 
 }
 
 export default ProjectSaga;

@@ -8,12 +8,15 @@ import {
 
 import {connect} from 'react-redux';
 
+
+
 import Nav from '../Nav/Nav';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import UserPage from '../UserPage/UserPage';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import CreateProject from '../CreateProject/CreateProject';
+import RuleTable from '../RuleTable/RuleTable'
 
 import '../../sass/main.scss';
 
@@ -59,6 +62,11 @@ class App extends Component {
               component={UserPage}
             />
 
+            <ProtectedRoute
+              exact
+              path="/rules"
+              component={RuleTable}
+            />
 
             <Route
               path="/educators"

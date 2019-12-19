@@ -1,0 +1,58 @@
+.formInput {
+
+    &__average {
+        display: inline-block;
+        color:rgb(32, 32, 32);
+        padding:2.3%;
+        margin-top: 2%;
+        margin-bottom:2%;
+        width:100%;
+        border-style: none;
+        border:1px solid $color-neutral-blue;
+        border-radius:4px;
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__labelText {
+        font-size: 1.3rem;
+        padding:.5%;
+        display:inline-block;
+    }
+
+    &__submitButton {
+        position:absolute;
+        bottom:15%;
+        left:30%;
+        padding:1rem;
+        padding-left:1.5rem;
+        padding-right:1.5rem;
+        width:20%;
+        font-size: 1.3rem;;
+        background-color:$color-neutral-blue;
+        color:rgb(241, 241, 241);
+        border-radius: 4px;
+
+        &:hover {
+            cursor: pointer;
+            border:1px solid rgb(247, 247, 247);
+        }
+
+        &:select {
+            outline: none;
+        }
+    }   
+
+    &__specialtyDisplay {
+        list-style: none;
+        display: inline-block;
+        font-size: 1.3rem;
+        padding: 1%;
+
+        &:hover {
+            cursor: pointer;
+            color:rgb(156, 0, 0);
+        }
+    }
+}
