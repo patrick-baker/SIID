@@ -15,14 +15,13 @@ module.exports = router;
  */
 router.get("/", (req, res) => {
   pool.query(`SELECT "id", "data" FROM rules`).then(result => {
-      console.log(result)
+      //console.log(result)
     res.send(result.rows);
   });
 });
 
 
 router.post("/", async (req, res) => {
-  console.log('BODYYYYY',req.body);
   const textInput = req.body.text;
 
   let pattern_db = await pool.query(`SELECT array_agg("data") FROM rules`);
@@ -49,15 +48,17 @@ router.post("/", async (req, res) => {
   };
 
   await runMe(textInput);
-  await console.log("rule router sees", response);
-  await res.send(response);
+  console.log("rule router sees", response);
+  await pool.query(`INSERT INTO flags(project_id,messages) VALUES($1,$2)`,[1,{messages:response.messages}]);
+
+  res.send(response.messages);
 });
 
 router.post("/add", (req, res) => {
     const queryText = `INSERT INTO "rules"("data")VALUES($1)`
-    const queryArgs = [req.body.jsonObject]
+    const queryArgs = [req.body]
     pool.query(queryText,queryArgs)
-    .then((resonse)=>{
+    .then((response)=>{
         console.log("Rule Add Success",response);
         res.sendStatus(200);
     })

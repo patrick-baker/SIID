@@ -6,12 +6,13 @@ import forgotPassword from './forgotPasswordReducer';
 import resetPassword from './resetPasswordReducer';
 import project from './projectReducer';
 import rule from './ruleReducer';
-import flag from './flagReducer';
+import flagReducer from './flagReducer';
 import educator from './educatorReducer';
-import category from './categroyReducer';
+import biasDataReducer from './biasDataReducer';
 import step from './stepReducer';
 import tone from './toneReducer';
 import literaryTechnique from './literaryTechniqueReducer';
+import form from './formReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -27,12 +28,13 @@ const rootReducer = combineReducers({
   resetPassword, 
   project,
   rule,
-  flag,
+  flagReducer,
   educator,
-  category,
+  biasDataReducer,
   step,
   tone,
   literaryTechnique,
+  form
 });
 
 export default rootReducer;

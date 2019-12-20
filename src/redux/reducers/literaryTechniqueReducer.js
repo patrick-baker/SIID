@@ -1,6 +1,3 @@
-
-import { combineReducers } from 'redux';
-
 const literaryTechniqueReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_LITERARY_TECHNIQUES':

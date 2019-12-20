@@ -1,4 +1,4 @@
-const educatorReducer = (state = {}, action) => {
+const educatorReducer = (state = [], action) => {
     if (action.type === 'SET_EDUCATORS') {
         return action.payload;
     }
