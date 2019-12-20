@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function* GET_BIAS_DATA(action) {
     try {
-        let biasData = yield axios.get('/bias', { id: action.payload.id });
+        let biasData = yield axios.get(`/bias/${action.payload.id}`);
         yield put({type:"SET_BIAS_DATA",payload:biasData.data});
     } catch (error) {
         console.log('error in FETCH_RULES saga', error);

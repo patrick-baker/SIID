@@ -7,7 +7,7 @@ router.get('/', async(req, res) => {
     
     try {
         const queryText=`SELECT * FROM project_bias JOIN bias ON bias.id=project_bias.bias_id WHERE project_id=$1;`;
-        let biasData = await pool.query(queryText,[req.body.id]);
+        let biasData = await pool.query(queryText,[req.params.id]);
         res.send(biasData.rows);
     } catch(error) {
         console.log(error);
