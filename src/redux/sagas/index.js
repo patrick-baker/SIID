@@ -9,6 +9,8 @@ import ruleSaga from './ruleSaga';
 import flagSaga from './flagSaga';
 import educatorSaga from './educatorSaga';
 import categorySaga from './categorySaga';
+import toneSaga from './toneSaga';
+import literaryTechniques from './literaryTechniquesSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -29,5 +31,7 @@ export default function* rootSaga() {
     flagSaga(),
     educatorSaga(),
     categorySaga(),
+    toneSaga(),
+    literaryTechniques(),
   ]);
 }

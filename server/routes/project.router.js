@@ -1,20 +1,21 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+let verbose = true;
 
 /**
  * GET projects created by the user
  */
 router.get('/', (req, res) => {
-    const queryText=`SELECT "title","client", "description", "date_created" 
-    FROM "projects" WHERE "user_id"=$1`;
+    const queryText =`SELECT "title","client", "description", "date_created" 
+    FROM "project" WHERE "user_id"=$1 ORDER BY "date_created"`;
     const queryValues=[req.user.id];
     
-    pool.query(queryText,queryValues)
+    pool.query(queryText, queryValues)
         .then(results=>{
             res.send(results.rows);})
             .catch((error)=>{
-            console.log('Error GET /project', error);
+            if(verbose)console.log('Error GET /project', error);
             res.sendStatus(500);
         })
 });
@@ -28,7 +29,7 @@ router.delete('/:id', async (req, res) => {
     try{ 
         await client.query('BEGIN');
         //check if the user  is the owner of the project
-        const checkAuthority=`SELECT user_id FROM "projects" WHERE id=$1`
+        const checkAuthority=`SELECT user_id FROM "project" WHERE id=$1`
         const checkAuthorityValues=[req.params.id];
         const user=await client.query(checkAuthority,checkAuthorityValues);
         //check returned id against the user request
@@ -43,15 +44,15 @@ router.delete('/:id', async (req, res) => {
         await client.query(queryFlagText,projectId);
 
         //delete the values from tone
-        const queryToneText=`DELETE * FROM "tone" WHERE project_id=$1`;
+        const queryToneText=`DELETE * FROM "project_tone" WHERE project_id=$1`;
         await client.query(queryToneText,projectId);
 
         //delete row from literary techniques
-        const queryLiteraryText=`DELETE * FROM "literary_techniques" WHERE project_id=$1`;
+        const queryLiteraryText=`DELETE * FROM "project_literary" WHERE project_id=$1`;
         await client.query(queryLiteraryText,projectId);
 
         //delete the row from projects
-        const queryText=`DELETE * FROM "projects" WHERE id=$1`;
+        const queryText=`DELETE * FROM "project" WHERE id=$1`;
         await client.query(queryText,projectId);
         
         //commit the changes
@@ -59,7 +60,7 @@ router.delete('/:id', async (req, res) => {
         res.sendStatus(201);
     } catch (error) {
         await client.query('ROLLBACK')
-        console.log('Error delete /project', error);
+        if(verbose)console.log('Error delete /project', error);
         res.sendStatus(500);
     } finally {
         client.release();
@@ -67,11 +68,11 @@ router.delete('/:id', async (req, res) => {
 });
 
 /*
- * POST for new project
+ * POST new project
  */
 router.post('/', async (req, res) => {
-    console.log('in project.router POST, req.user is: ', req.user);
-    console.log('in project.router POST, req.body is: ', req.body);
+    if(verbose)console.log('in project.router POST, req.user is: ', req.user);
+    if(verbose)console.log('in project.router POST, req.body is: ', req.body);
     // SETUP POOL CONNECT
     const client = await pool.connect();
     try {
@@ -80,7 +81,7 @@ router.post('/', async (req, res) => {
         const tone = req.body.tone;
         // BEGIN INCASE OF ERROR/ROLLBACK
         await client.query('BEGIN');
-        // INSERT INTO PROJECTS TABLE
+        // INSERT INTO PROJECT TABLE
         const projectQueryText = `INSERT INTO "project" 
         ("user_id", "title", "client", "description", "text", "integration", "campaign_goals", "goals_ctr", "goals_conversion", 
         "goals_sales_conversion", "goals_sales_length", "revenue_goals", "goals_social_shares", "goals_follow", "goals_impressions", "goals_views", "goals_comments", 
@@ -109,7 +110,7 @@ router.post('/', async (req, res) => {
                 return client.query(queryText, queryValues);
             })
         );
-        // END SQL TRX
+        // COMMIT CHANGED, END SQL TRX
         await client.query('COMMIT');
         res.sendStatus(201);
     }
@@ -120,6 +121,34 @@ router.post('/', async (req, res) => {
     finally {
         connection.release();
     }
+});
+
+// Get Request to retrieve all entries in Tone table
+router.get('/tone', (req, res) => {
+    const queryText=`SELECT "id","type"
+    FROM "tone";`;
+    
+    pool.query(queryText)
+        .then(results=>{
+            res.send(results.rows);})
+        .catch((error)=>{
+            console.log('Error GET /project', error);
+            res.sendStatus(500);
+        })
+});
+
+// Get Request to retrieve all entries in literary-techniques table
+router.get('/literary-techniques', (req, res) => {
+    const queryText=`SELECT "id","type"
+    FROM "literary_techniques";`;
+    pool.query(queryText)
+        .then(results=>{
+            // console.log('literary-techniques results:', results)
+            res.send(results.rows);})
+        .catch((error)=>{
+            console.log('Error GET /project', error);
+            res.sendStatus(500);
+        })
 });
 
 module.exports = router;

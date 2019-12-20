@@ -15,6 +15,7 @@ const educatorRouter = require('./routes/educator.router');
 const biasRouter = require('./routes/bias.router');
 const ruleRouter = require('./routes/rule.router');
 const flagRouter = require('./routes/flag.router');
+const reportRouter = require('./routes/report.router');
 const autoMLRouter = require('./routes/autoML.router');
 
 // Body parser middleware
@@ -35,6 +36,7 @@ app.use('/educator', educatorRouter);
 app.use('/bias', biasRouter);
 app.use('/rule', ruleRouter);
 app.use('/flag', flagRouter);
+app.use('/report', reportRouter);
 app.use('/automl',autoMLRouter)
 
 
