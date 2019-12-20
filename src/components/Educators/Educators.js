@@ -6,7 +6,8 @@ class Educators extends Component {
 
     state = {
         add: false,
-        edit: false
+        edit: false,
+        toEdit: {},
     }
 
     componentDidMount = () => {
@@ -31,6 +32,13 @@ class Educators extends Component {
         })
     }
 
+    openEdit=(selected)=>{
+      this.setState({
+          toEdit: selected,
+      });
+      this.editToggle();
+    }
+
     render() {
         return (
             <div className="educatorPage__background">
@@ -44,38 +52,35 @@ class Educators extends Component {
                         </div>
                     </>
                 )}
-
                 {
                     this.state.add && <EducatorForm addEducator={this.addEducator}  singleEducator={{}}/>
                 }
-
-
-                {this.props.educator[0] && this.props.educator.map((educator, i) => (
+                {this.props.educator[0] && this.props.educator.map((edu, i) => (
                     <div className="card__structure" key={i}>
-                        <img className="card__image" src={educator.image_url} />
+                        <img className="card__image" src={edu.image_url} />
 
                         <div className="card__details" >
                             <div className="card__title">
-                                {educator.name}
+                                {edu.name}
                             </div>
 
                             <div className="card__description" >
-                                {educator.bio}
+                                {edu.bio}
                             </div>
 
 
                             <ul className="card__specialties">
                                 Specialties:
-                                {educator.specialties.map((specialty, i) => <li key={i} > - {specialty}</li>)}
+                                {edu.specialties.map((specialty, i) => <li key={i} > - {specialty[1]}</li>)}
                             </ul>
 
 
                             <div className="card__contact" >
-                                <i className="far fa-envelope fa-xs"></i> {educator.contact_info}
+                                <i className="far fa-envelope fa-xs"></i> {edu.contact_info}
                             </div>
 
                             {
-                                this.state.edit && <EducatorForm addEducator={this.editToggle} singleEducator={educator} />
+                                this.state.edit && <EducatorForm addEducator={this.editToggle} singleEducator={this.state.toEdit} />
                             }
 
                             {
@@ -83,11 +88,12 @@ class Educators extends Component {
                                 (
                                     <>
                                         <div className="card__delete">
-                                            <i onClick={() => this.deleteEducator(educator)} class="fas fa-trash-alt fa-lg"></i>
+                                            <i onClick={() => this.deleteEducator(edu)} class="fas fa-trash-alt fa-lg"></i>
                                         </div>
 
                                         <div className="card__edit">
-                                            <i onClick={this.editToggle} class="fas fa-user-edit fa-lg"></i>
+                                            {/*this passes the current educator to be set to the toEdit state and passed into the educatorform*/} 
+                                            <i onClick={()=>{this.openEdit(edu)}} class="fas fa-user-edit fa-lg"></i>
                                         </div>
                                     </>
                                 )

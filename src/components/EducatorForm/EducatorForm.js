@@ -11,14 +11,15 @@ class EducatorForm extends Component {
             bio: this.props.singleEducator.bio || "",
             contact_info: this.props.singleEducator.contact_info || "",
             image_url: this.props.singleEducator.image_url || "",
-            specialties: this.props.singleEducator.specialties || [],
+            //if this is an existing educator clean up so it's just the id's 
+            specialties:   this.props.singleEducator.specialties&&this.props.singleEducator.specialties.map(x=>{
+                return Number(x[0]);
+            }) || [],
         }
     }
 
     componentDidMount = () => {
         this.props.dispatch({type: "GET_CATEGORY"});
-       
-        console.log(this.props.singleEducator);
     }
 
 
@@ -118,6 +119,7 @@ class EducatorForm extends Component {
 
                     <div className="modal__form">
                         <div>
+                        <pre>{JSON.stringify(this.state,null,2)}</pre>
                             <label>
                                 <div className="formInput__labelText" >Name:</div>
                                 <input placeholder="Name" 
@@ -126,7 +128,6 @@ class EducatorForm extends Component {
                                 onChange={(event) => this.handleChangeFor('name', event)} />
                             </label>
                         </div>
-
                         <div>
                             <label>
                                 <div className="formInput__labelText" >Bio:</div>
@@ -136,8 +137,6 @@ class EducatorForm extends Component {
                                 onChange={(event) => this.handleChangeFor('bio', event)} />
                             </label>
                         </div>
-
-
                         <div>
                             <label>
                                 <div className="formInput__labelText">Email:</div>
@@ -147,9 +146,6 @@ class EducatorForm extends Component {
                                 onChange={(event) => this.handleChangeFor('contact_info', event)} />
                             </label>
                         </div>
-
-
-
                         <div>
                             <label>
                                 <div className="formInput__labelText">Image:</div>
@@ -192,7 +188,7 @@ class EducatorForm extends Component {
                             })}
                         </div>
                         <button className="formInput__submitButton" onClick={this.submitEducator} >Submit</button>
-
+                       
                     </div>
 
 

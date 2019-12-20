@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const query =
         `
-        SELECT educator.id,name,bio,contact_info,image_url,ARRAY_AGG(b.type) AS specialties FROM educator 
+        SELECT educator.id,name,bio,contact_info,image_url,ARRAY_AGG(ARRAY[b.id::text,b."type"]) AS specialties FROM educator 
         JOIN educator_bias eb ON eb.educator_id = educator.id
         JOIN bias b ON eb.bias_id=b.id
         GROUP BY educator.id,name,bio,contact_info,image_url
@@ -65,7 +65,7 @@ router.delete('/:id', async (req, res) => {
 
         await client.query(`BEGIN`);
 
-        const deleteSpecialites = `DELETE FROM educator_specialties WHERE educator_id=$1`
+        const deleteSpecialites = `DELETE FROM educator_bias WHERE educator_id=$1`
         await client.query(deleteSpecialites, [req.params.id]);
 
         const deleteEducator = `DELETE FROM educator WHERE id=$1;`;
@@ -87,24 +87,25 @@ router.put('/', async (req, res) => {
     try {
         await client.query(`BEGIN`);
 
+        //delete the existing bias specialties
         const deleteSpecialites = `DELETE FROM educator_specialties WHERE educator_id=$1`
         await client.query(deleteSpecialites, [req.body.id]);
 
+        //add in all the bias specialties with the updated info
+        await Promise.all(req.body.specialties.map(val => {
+            const educatorBiasAdd=`INSERT INTO "educator_bias" ( "educator_id", "bias_id") VALUES ($1, $2)`;
+            const educatorBiasValues=[req.body.id,val];
+            return client.query(educatorBiasAdd,educatorBiasValues);
+        }));
 
-        for (specialty of req.body.specialties) {
-            let specialtyId = await client.query(`SELECT id FROM specialties WHERE specialty=$1`, [specialty]);
-            await client.query(`INSERT INTO educator_specialties(educator_id,specialty_id) VALUES ($1,$2)`, [req.body.id, specialtyId.rows[0].id]);
-        }
-
+        //update the educator record
         const updateEducator = 
         `UPDATE educator
         SET name=$1,
             bio=$2,
             contact_info=$3,
             image_url=$4
-        WHERE id=$5;
-        `
-
+        WHERE id=$5;`
         await client.query(updateEducator,[req.body.name,req.body.bio,req.body.contact_info,req.body.image_url,req.body.id]);
 
         await client.query(`COMMIT`);
