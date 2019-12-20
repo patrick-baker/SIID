@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -28,7 +29,10 @@ class IntegrationsDropdown extends React.Component {
   };
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.props.dispatch({type: 'SET_FORM_METADATA', payload: {
+      property: event.target.name, 
+      value: event.target.value 
+    }});
   };
 
   render() {
@@ -43,7 +47,7 @@ class IntegrationsDropdown extends React.Component {
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
           name='goal'
-          value={this.state.integration}
+          value={this.props.form.goal}
           onChange={this.handleChange}
         >
           <MenuItem value="">
@@ -56,7 +60,7 @@ class IntegrationsDropdown extends React.Component {
         </Select>
       </FormControl>
       </form>
-      <GoalFields Goals={this.state.goal} />
+      <GoalFields Goals={this.props.form.goal} />
       </>
     );
   }
@@ -66,4 +70,8 @@ IntegrationsDropdown.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(IntegrationsDropdown);
+const mapStateToProps = state => ({
+    form: state.form
+ });
+
+export default connect(mapStateToProps)(withStyles(styles)(IntegrationsDropdown));
