@@ -23,6 +23,8 @@ class AddRule extends Component {
     // then send as payload.
     // Potential future improvment: currently only allows one 
     // entry into considerate and inconsiderate.
+    // Next step, add dashes betwen spaces to find multiple word entries
+    // ex: inconsiderate: dumb blonde should be in format: dumb-blonde
     handleSubmit = () => {
         const preparedObject = {
             "id": this.state.id,
@@ -36,7 +38,9 @@ class AddRule extends Component {
         }
         preparedObject.considerate[this.state.considerate] = "a"
         preparedObject.inconsiderate[this.state.inconsiderate] = "a"
-        this.props.dispatch({ type: "ADD_RULE", payload: JSON.stringify(preparedObject) })
+        console.log(preparedObject)
+        this.props.dispatch({ type: "ADD_RULE", payload: preparedObject })
+
     }
 
     render() {
