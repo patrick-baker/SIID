@@ -108,8 +108,9 @@ CREATE TABLE "rules"(
 CREATE TABLE "flags"(
     "id" SERIAL PRIMARY KEY,
     "project_id" INT REFERENCES "project",
-    "rule_id" INT REFERENCES "rules"
+    "messages" json
 );
+
 
 -- Create table to store types of tone utilized in marketing campaigns
 CREATE TABLE "tone" (
@@ -128,6 +129,7 @@ CREATE TABLE "project_tone" (
 
 -- Create table to store literary techniques used in marketing campaigns
 CREATE TABLE "literary_techniques" (
+
 	"id" SERIAL PRIMARY KEY,
 	"type" VARCHAR (150)
 );
@@ -140,3 +142,37 @@ CREATE TABLE "project_literary" (
 	"literary_id" INT REFERENCES "literary_techniques",
 	"project_id" INT REFERENCES "project"
 );
+
+INSERT INTO rules("data") VALUES('{
+    "id": "Test-1",
+    "type": "simple",
+    "categories": [
+      "a"
+    ],
+    "considerate": {
+      "Thomas": "a"
+    },
+    "inconsiderate": {
+      "tommy": "a"
+    },
+    "note": "Refer to the person, rather than the disability, first."
+  }');
+  
+  INSERT INTO rules("data") VALUES('{
+    "id": "Test-2",
+    "type": "simple",
+    "categories": [
+      "a"
+    ],
+    "considerate": {
+      "Patrick": "a",
+      "Mr. Baker": "a"
+    },
+    "inconsiderate": {
+      "Patty": "a",
+      "patty": "a"
+    },
+    "note": "Refer to the person, rather than the disability, first."
+  }');
+  
+  SELECT array_agg("data") FROM rules;

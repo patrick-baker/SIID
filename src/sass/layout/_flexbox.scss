@@ -8,10 +8,16 @@
     justify-content: space-evenly;
     align-items: center;
     height: auto;
+
+    &__project-form {
+        width: 60%;
+        margin: 10% 0 10% 0;
+    }
 }
 
 .flex-column {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    align-items: center;
 }

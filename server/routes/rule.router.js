@@ -25,17 +25,15 @@ router.post("/", async (req, res) => {
   const textInput = req.body.text;
 
   let pattern_db = await pool.query(`SELECT array_agg("data") FROM rules`);
-  console.log('pattern: ', pattern_db);
+  // console.log('pattern: ', pattern_db);
   
   patterns_bad = pattern_db.rows[0].array_agg;
-  console.log('from db', patterns_bad)
-
-  await ruleChecker(textInput);
+  // console.log('from db', patterns_bad)
 
   let response = "";
 
   const runMe = async function(textIn) {
-      console.log('runMe running');
+      // console.log('runMe running');
       
       try {
         response = await unified()
@@ -46,19 +44,21 @@ router.post("/", async (req, res) => {
       } catch(error) {
           console.log(error);
       }
-      console.log('runMe response', response);
+      // console.log('runMe response', response);
   };
 
   await runMe(textInput);
-  await console.log("rule router sees", response);
-  await res.send(response);
+  console.log("rule router sees", response);
+  await pool.query(`INSERT INTO flags(project_id,messages) VALUES($1,$2)`,[1,{messages:response.messages}]);
+
+  res.send(response.messages);
 });
 
 router.post("/add", (req, res) => {
     const queryText = `INSERT INTO "rules"("data")VALUES($1)`
-    const queryArgs = [req.body.jsonObject]
+    const queryArgs = [req.body]
     pool.query(queryText,queryArgs)
-    .then((resonse)=>{
+    .then((response)=>{
         console.log("Rule Add Success",response);
         res.sendStatus(200);
     })

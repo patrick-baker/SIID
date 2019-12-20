@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EducatorForm from '../EducatorForm/EducatorForm';
+import AddCard from '../AddCard/AddCard';
 
 class Educators extends Component {
 
@@ -23,6 +24,8 @@ class Educators extends Component {
     addEducator = () => {
         this.setState({
             add: !this.state.add
+        },() => {
+            console.log(this.state.add)
         })
     }
 
@@ -43,17 +46,15 @@ class Educators extends Component {
         return (
             <div className="educatorPage__background">
                 {this.props.user.admin && (
-                    <>
-                        <div className="card__createCard" onClick={this.addEducator}>
-                            <div className="card__plusIconDiv">
-                                <i class="fas fa-user-graduate fa-4x card__plusIcon"></i> <br />
-                                <span>Add Educator</span>
-                            </div>
-                        </div>
-                    </>
+
+                    <AddCard addEducator={this.addEducator}>
+                        <i class="fas fa-user-graduate fa-4x card__plusIcon"></i> <br />
+                        <span>Add Educator</span>
+                    </AddCard>
+                    
                 )}
                 {
-                    this.state.add && <EducatorForm addEducator={this.addEducator}  singleEducator={{}}/>
+                    this.state.add && <EducatorForm addEducator={this.addEducator} singleEducator={{}} />
                 }
                 {this.props.educator[0] && this.props.educator.map((edu, i) => (
                     <div className="card__structure" key={i}>
