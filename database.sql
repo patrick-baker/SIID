@@ -108,8 +108,9 @@ CREATE TABLE "rules"(
 CREATE TABLE "flags"(
     "id" SERIAL PRIMARY KEY,
     "project_id" INT REFERENCES "project",
-    "rule_id" INT REFERENCES "rules"
+    "messages" json
 );
+
 
 -- Create table to store types of tone utilized in marketing campaigns
 CREATE TABLE "tone" (

@@ -42,7 +42,7 @@ class Educators extends Component {
                         <i class="fas fa-user-graduate fa-4x card__plusIcon"></i> <br />
                         <span>Add Educator</span>
                     </AddCard>
-
+                    
                 )}
 
                 {
@@ -97,8 +97,6 @@ class Educators extends Component {
                         </div>
                     </div>
                 ))}
-                <pre>{JSON.stringify(this.props, null, 2)}</pre>
-
             </div>
         )
     }

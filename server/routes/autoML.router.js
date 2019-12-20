@@ -18,13 +18,17 @@ async function sh(cmd) {
     });
 }
 
-
-
 router.post("/", async (req, res) => {
     let text = req.body.text.replace(/\r?\n|\r/g, '').split(/[.?!]/);
     try {
         let data = await getData(text);
-        console.log(data)
+
+        for (biasKey of Object.keys(data)) {
+            if (data[biasKey].count > 0) {
+                let biasId = await pool.query(`SELECT id FROM bias WHERE type=$1;`,[biasKey])
+                await pool.query(`INSERT INTO project_bias(project_id,bias_id,bias_count) VALUES($1,$2,$3)`,[1,biasId.rows[0].id,data[biasKey].count])
+            }
+        }
         res.send(data);
     } catch (error) {
         console.log(error);
@@ -37,22 +41,17 @@ router.post("/", async (req, res) => {
 let getData = async (text) => {
     let biasCounter = {
         'race': {
-            percentage: 0,
             count: 0
         },
         'lgbtq': {
-            percentage: 0,
             count: 0
         },
         'religion': {
-            percentage: 0,
             count: 0
         },
         'gender': {
-            percentage: 0,
             count: 0
-        },
-        'total': 0
+        }
     }
 
     for (sentence of text) {
@@ -60,9 +59,7 @@ let getData = async (text) => {
             if (sentence) {
                 let sentenceData = await getBias(sentence);
                 if (sentenceData != 'NO BIAS') {
-                    biasCounter['total']++;
                     biasCounter[sentenceData].count++;
-                    biasCounter[sentenceData].percentage = (biasCounter[sentenceData].count / biasCounter['total']) * 100;
                 }
             }
 
@@ -93,7 +90,6 @@ const getBias = async (sentence) => {
         }
     );
 
-
     if (bias.data.payload[0].displayName == 'biased') {
         let biasCategory = await axios.post('https://automl.googleapis.com/v1beta1/projects/742916648841/locations/us-central1/models/TCN2279960505495846912:predict',
             {
@@ -112,7 +108,7 @@ const getBias = async (sentence) => {
         if (biasCategory.data.payload[0].displayName == 'good') {
             biasCategory.data.payload[0].displayName = biasCategory.data.payload[1].displayName
         }
-        console.log('BIAS CATEGORY',biasCategory.data.payload[0].displayName)
+        console.log('BIAS CATEGORY', biasCategory.data.payload[0].displayName)
         return biasCategory.data.payload[0].displayName;
     } else {
         return 'NO BIAS';

@@ -6,9 +6,9 @@ import forgotPassword from './forgotPasswordReducer';
 import resetPassword from './resetPasswordReducer';
 import project from './projectReducer';
 import rule from './ruleReducer';
-import flag from './flagReducer';
+import flagReducer from './flagReducer';
 import educator from './educatorReducer';
-import category from './categroyReducer';
+import biasDataReducer from './biasDataReducer';
 import step from './stepReducer';
 import tone from './toneReducer';
 import literaryTechnique from './literaryTechniqueReducer';
@@ -28,9 +28,9 @@ const rootReducer = combineReducers({
   resetPassword, 
   project,
   rule,
-  flag,
+  flagReducer,
   educator,
-  category,
+  biasDataReducer,
   step,
   tone,
   literaryTechnique,

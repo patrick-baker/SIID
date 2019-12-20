@@ -22,7 +22,6 @@ router.get("/", (req, res) => {
 
 
 router.post("/", async (req, res) => {
-  console.log('BODYYYYY',req.body);
   const textInput = req.body.text;
 
   let pattern_db = await pool.query(`SELECT array_agg("data") FROM rules`);
@@ -49,8 +48,10 @@ router.post("/", async (req, res) => {
   };
 
   await runMe(textInput);
-  await console.log("rule router sees", response);
-  await res.send(response);
+  console.log("rule router sees", response);
+  await pool.query(`INSERT INTO flags(project_id,messages) VALUES($1,$2)`,[1,{messages:response.messages}]);
+
+  res.send(response.messages);
 });
 
 router.post("/add", (req, res) => {
