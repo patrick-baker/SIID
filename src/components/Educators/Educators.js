@@ -49,7 +49,6 @@ class Educators extends Component {
                     this.state.add && <EducatorForm addEducator={this.addEducator} singleEducator={{}} />
                 }
 
-
                 {this.props.educator[0] && this.props.educator.map((educator, i) => (
                     <div className="card__structure" key={i}>
                         <img className="card__image" src={educator.image_url} />
