@@ -18,6 +18,11 @@ class AddRule extends Component {
             [e.target.name]: e.target.value
         })
     }
+
+    // This will turn the state into the correct format 
+    // then send as payload.
+    // Potential future improvment: currently only allows one 
+    // entry into considerate and inconsiderate.
     handleSubmit = () => {
         const preparedObject = {
             "id": this.state.id,

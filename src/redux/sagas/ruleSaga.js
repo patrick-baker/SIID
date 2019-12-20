@@ -23,6 +23,7 @@ function* ANALYZE_TEXT(action) {
  }
 }
 
+// JSON object is created in the AddRule.js and sent as payload
 function* ADD_RULE(action) {
   try {
        yield axios.post('/rule/add', action.payload)
