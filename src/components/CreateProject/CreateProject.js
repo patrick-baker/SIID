@@ -7,6 +7,7 @@ import SIIDTool from '../SIIDTool/SIIDTool';
 import IntegrationsDropdown from './SelectIntegrations';
 import TargetAudience from './TargetAudience';
 import CampaignStyle from './CampaignStyle';
+import CampaignGoals from './CampaignGoals';
 
 
 class CreateProject extends Component {
@@ -41,12 +42,16 @@ class CreateProject extends Component {
           {this.props.step === 0 && <button onClick={this.nextStep}>Stepper Button</button>}
         </div>
         {this.props.step > 0 && <div className="flex-row-center flex-row-center__project-form">
-          <TargetAudience />
+          <CampaignGoals />
           {this.props.step === 1 && <button onClick={this.nextStep}>Stepper Button</button>}
         </div> }
         {this.props.step > 1 && <div className="flex-row-center flex-row-center__project-form">
-          <CampaignStyle />
+          <TargetAudience />
           {this.props.step === 2 && <button onClick={this.nextStep}>Stepper Button</button>}
+        </div> }
+        {this.props.step > 2 && <div className="flex-row-center flex-row-center__project-form">
+          <CampaignStyle />
+          {this.props.step === 3 && <button onClick={this.nextStep}>Stepper Button</button>}
         </div> }
       {/* <pre>{JSON.stringify(this.props)}</pre> */}
       </div>

@@ -12,6 +12,7 @@ import biasDataReducer from './biasDataReducer';
 import step from './stepReducer';
 import tone from './toneReducer';
 import literaryTechnique from './literaryTechniqueReducer';
+import form from './formReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   step,
   tone,
   literaryTechnique,
+  form
 });
 
 export default rootReducer;

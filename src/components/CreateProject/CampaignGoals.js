@@ -6,6 +6,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import GoalFields from './CampaignGoalsFields';
 
 const styles = theme => ({
   root: {
@@ -22,6 +23,11 @@ const styles = theme => ({
 });
 
 class IntegrationsDropdown extends React.Component {
+  state = {
+    goal: '',
+    labelWidth: 0,
+  };
+
   handleChange = event => {
     this.props.dispatch({type: 'SET_FORM_METADATA', payload: {
       property: event.target.name, 
@@ -33,26 +39,29 @@ class IntegrationsDropdown extends React.Component {
     const { classes } = this.props;
 
     return (
+    <>
       <form className={classes.root} autoComplete="off">
         <FormControl variant="filled" className={classes.formControl}>
         <InputLabel id="demo-simple-select-filled-label">Choose Integration</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
-          name='integration'
-          // value={this.props.form.integration}
+          name='goal'
+          value={this.props.form.goal}
           onChange={this.handleChange}
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={'Salesforce'}>Salesforce</MenuItem>
-          <MenuItem value={'Adobe'}>Adobe Marketing</MenuItem>
-          <MenuItem value={'Hubspot'}>Hubspot</MenuItem>
+          <MenuItem value={'Lead_Generation'}>Lead Generation</MenuItem>
+          <MenuItem value={'Sales_Enablement'}>Sales Enablement</MenuItem>
+          <MenuItem value={'Brand_Awareness'}>Brand Awareness</MenuItem>
+          <MenuItem value={'Audience_Engagement'}>Audience Engagement</MenuItem>
         </Select>
       </FormControl>
-      {/* <pre>{JSON.stringify(this.props)}</pre> */}
       </form>
+      <GoalFields Goals={this.props.form.goal} />
+      </>
     );
   }
 }
@@ -62,7 +71,7 @@ IntegrationsDropdown.propTypes = {
 };
 
 const mapStateToProps = state => ({
-   form: state.form
-});
+    form: state.form
+ });
 
 export default connect(mapStateToProps)(withStyles(styles)(IntegrationsDropdown));
