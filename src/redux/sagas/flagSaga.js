@@ -2,23 +2,32 @@ import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 // sends axios request to server to send update password email to user
-function* flag(action) {
-    // console.log('action.payload of ForgotPasswordSaga:', action.payload);
+
+function* ANALYZE_TEXT(action) {
   try {
-    if (action.payload === '') {
-        //yield put ({type: 'NO_EMAIL_SUBMITTED'});
-    } else {
-        // runs the server function to send email
+    const rules = yield axios.post('/rule',{text:action.payload})
+    const bias = yield axios.post('/automl',{text:action.payload});
     
-        }
-    } catch (error) {
-        //console.log('error in ForgotPasswordSaga', error);
-        //yield put ({ type: 'EMAIL_NOT_IN_DB'});
-    }
+    yield put ({type:"SET_FLAGS",payload:rules.data})
+    yield put({type:"SET_BIAS_DATA",payload:bias.data});
+ } catch (error) {
+     console.log('error in FETCH_RULES saga', error);
+ }
 }
 
-function* FlagSaga() {
-  //yield takeLatest('FORGOT_PASSWORD', project);
+function* getFlagsSaga(action) {
+  try {
+    let flags = yield axios.get(`/flag/${action.payload.id}`);
+    yield put({type:"SET_FLAGS",payload:flags.data})
+  } catch(error) {
+    console.log(error);
+  }
 }
 
-export default FlagSaga;
+function* RuleSaga() {
+  yield takeEvery('ANALYZE_TEXT',ANALYZE_TEXT);
+  yield takeEvery('GET_FLAGS',getFlagsSaga);
+
+}
+
+export default RuleSaga;

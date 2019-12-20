@@ -12,6 +12,7 @@ function* FETCH_RULES() {
     }
 }
 
+
 function* ANALYZE_TEXT(action) {
   try {
     const rules = yield axios.post('/rule',{text:action.payload})
@@ -36,8 +37,7 @@ function* ADD_RULE(action) {
 function* RuleSaga() {
   yield takeEvery('FETCH_RULES', FETCH_RULES)
   yield takeLatest('ADD_RULE', ADD_RULE)
-  yield takeEvery('ANALYZE_TEXT',ANALYZE_TEXT);
-
+  yield takeLatest('ANALYZE_TEXT', ANALYZE_TEXT)
 }
 
 export default RuleSaga;
