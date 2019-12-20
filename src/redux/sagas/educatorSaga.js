@@ -15,7 +15,7 @@ function* addEducator(action) {
 function* getEducators() {
   try { 
     let educators = yield axios.get('/educator');
-    yield put({type:"SET_EDUCATORS",payload:educators.data});
+    yield put({type:"SET_EDUCATORS",payload: educators.data});
   } catch(error) {
     console.log(error);
   }
