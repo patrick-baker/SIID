@@ -11,6 +11,7 @@ import educatorSaga from './educatorSaga';
 import categorySaga from './categorySaga';
 import toneSaga from './toneSaga';
 import literaryTechniques from './literaryTechniquesSaga';
+import biasSaga from './biasSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -33,5 +34,6 @@ export default function* rootSaga() {
     categorySaga(),
     toneSaga(),
     literaryTechniques(),
+    biasSaga(),
   ]);
 }
