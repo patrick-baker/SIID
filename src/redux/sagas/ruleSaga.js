@@ -3,7 +3,6 @@ import axios from 'axios';
 
 // sends axios request to server to send update password email to user
 function* FETCH_RULES() {
-    // console.log('action.payload of ForgotPasswordSaga:', action.payload);
   try {
        const rules = yield axios.get('/rule')
        console.log(rules)
@@ -24,15 +23,12 @@ function* ANALYZE_TEXT(action) {
  }
 }
 
-
-function* ADD_RULE() {
-
+function* ADD_RULE(action) {
   try {
-       yield axios.post('/rule/add', )
-    //    console.log(rules)
-       yield put({ type: "FETCH_RULES" })
+       yield axios.post('/rule/add', action.payload)
+       yield put({ type: "FETCH_RULES"})
     } catch (error) {
-        console.log('error in FETCH_RULES saga', error);
+        console.log('error in ADD_RULES saga', error);
     }
 }
 
