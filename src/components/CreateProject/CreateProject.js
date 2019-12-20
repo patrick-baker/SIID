@@ -53,6 +53,7 @@ class CreateProject extends Component {
           <CampaignStyle />
           {this.props.step === 3 && <button onClick={this.nextStep}>Stepper Button</button>}
         </div> }
+        {this.props.step === 4 && <button onClick={() => this.props.history.push('/SIID')}>Analyze Project</button>}
       {/* <pre>{JSON.stringify(this.props)}</pre> */}
       </div>
     );
