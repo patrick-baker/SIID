@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+
 /**
  * GET selected project flags
  */
@@ -14,8 +15,8 @@ router.get('/:id', async (req, res) => {
       console.log(error);
       res.sendStatus(500);
     }
-
 })
+
 
 
 module.exports = router;
