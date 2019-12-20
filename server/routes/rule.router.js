@@ -56,9 +56,9 @@ router.post("/", async (req, res) => {
 
 router.post("/add", (req, res) => {
     const queryText = `INSERT INTO "rules"("data")VALUES($1)`
-    const queryArgs = [req.body.jsonObject]
+    const queryArgs = [req.body]
     pool.query(queryText,queryArgs)
-    .then((resonse)=>{
+    .then((response)=>{
         console.log("Rule Add Success",response);
         res.sendStatus(200);
     })
