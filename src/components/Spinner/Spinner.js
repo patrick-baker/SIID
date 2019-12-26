@@ -4,7 +4,7 @@ import {Backdrop, CircularProgress} from '@material-ui/core'
 const Spinner = () => {
 
         return (
-           <Backdrop >
+           <Backdrop open>
                <CircularProgress color="inherit" />
            </Backdrop>
         )

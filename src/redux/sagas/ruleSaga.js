@@ -15,10 +15,11 @@ function* FETCH_RULES() {
 
 function* ANALYZE_TEXT(action) {
   try {
-    const rules = yield axios.post('/rule',{text:action.payload})
+    const flags = yield axios.post('/rule',{text:action.payload})
+    yield put({type:"SET_RULES",payload:flags.data});
+
     const bias = yield axios.post('/automl',{text:action.payload});
-    console.log(bias.data);
-    console.log(rules.data.messages);
+    yield put({type:'SET_BIAS_DATA',payload:bias.data})
  } catch (error) {
      console.log('error in FETCH_RULES saga', error);
  }
