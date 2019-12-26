@@ -19,9 +19,9 @@ class SIIDTool extends Component {
 
   render() {
     return (
-      <div>
-        <textarea onChange={(event) => this.addText(event)}/>
-        <button onClick={this.analyze}>Analyze</button>
+      <div className="page__pad" >
+        <textarea className='formInput__large' onChange={(event) => this.addText(event)}/>
+        <button className="button__analyze" onClick={this.analyze}><i class="fas fa-cog"></i> Analyze</button>
       </div>
     );
   }

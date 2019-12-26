@@ -8,7 +8,7 @@ function* ANALYZE_TEXT(action) {
     const rules = yield axios.post('/rule',{text:action.payload})
     const bias = yield axios.post('/automl',{text:action.payload});
     
-    yield put ({type:"SET_FLAGS",payload:rules.data})
+    yield put ({type:"GET_FLAGS"})
     yield put({type:"SET_BIAS_DATA",payload:bias.data});
  } catch (error) {
      console.log('error in FETCH_RULES saga', error);
