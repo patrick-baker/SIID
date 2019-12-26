@@ -17,6 +17,7 @@ const ruleRouter = require('./routes/rule.router');
 const flagRouter = require('./routes/flag.router');
 const reportRouter = require('./routes/report.router');
 const autoMLRouter = require('./routes/autoML.router');
+const categoryRouter =require('./routes/category.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -37,7 +38,8 @@ app.use('/bias', biasRouter);
 app.use('/rule', ruleRouter);
 app.use('/flag', flagRouter);
 app.use('/report', reportRouter);
-app.use('/automl',autoMLRouter)
+app.use('/automl',autoMLRouter);
+app.use('/category', categoryRouter);
 
 
 // Serve static files

@@ -21,7 +21,7 @@ function* ANALYZE_TEXT(action) {
     const bias = yield axios.post('/automl',{text:action.payload});
     yield put({type:'SET_BIAS_DATA',payload:bias.data})
  } catch (error) {
-     console.log('error in FETCH_RULES saga', error);
+     console.log('error in ANALYZE TEXT saga', error);
  }
 }
 
@@ -31,14 +31,24 @@ function* ADD_RULE(action) {
        yield axios.post('/rule/add', action.payload)
        yield put({ type: "FETCH_RULES"})
     } catch (error) {
-        console.log('error in ADD_RULES saga', error);
+        console.log('error in ADD_RULE saga', error);
     }
 }
+// Pass ID as action.payload to delete, then fetch new set of rules.
+function* DELETE_RULE(action) {
+    try {
+         yield axios.delete(`/rule/${action.payload}`)
+         yield put({ type: "FETCH_RULES"})
+      } catch (error) {
+          console.log('error in DELETE_RULE saga', error);
+      }
+  }
 
 function* RuleSaga() {
   yield takeEvery('FETCH_RULES', FETCH_RULES)
   yield takeLatest('ADD_RULE', ADD_RULE)
   yield takeLatest('ANALYZE_TEXT', ANALYZE_TEXT)
+  yield takeLatest('DELETE_RULE', DELETE_RULE)
 }
 
 export default RuleSaga;

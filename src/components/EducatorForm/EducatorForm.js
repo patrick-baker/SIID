@@ -119,7 +119,7 @@ class EducatorForm extends Component {
 
                     <div className="modal__form">
                         <div>
-                        <pre>{JSON.stringify(this.state,null,2)}</pre>
+                        {/* <pre>{JSON.stringify(this.state,null,2)}</pre> */}
                             <label>
                                 <div className="formInput__labelText" >Name:</div>
                                 <input placeholder="Name" 
