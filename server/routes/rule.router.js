@@ -15,7 +15,7 @@ module.exports = router;
  */
 router.get("/", (req, res) => {
   pool.query(`SELECT "id", "data" FROM rules`).then(result => {
-      console.log(result)
+      //console.log(result)
     res.send(result.rows);
   });
 });
