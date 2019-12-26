@@ -67,6 +67,19 @@ router.post("/add", (req, res) => {
         res.sendStatus(500);        
     })
 })
+router.delete('/rule/:id', (req,res) =>{
+    const rule_id = req.params.rule_id
+    const queryText = 'DELETE FROM rules WHERE id=$1'
+    pool.query(queryText, [rule_id])
+    .then((response)=>{
+        console.log("DELETE SUCCESS for rule", rule_id)
+        res.sendStatus(200);
+    })
+    .catch((error)=>{
+        console.log("Error in DELETE route:",error)
+        res.sendStatus(500)
+    })
+})
 
 // Example of the JSON stored in the database:
 // [
