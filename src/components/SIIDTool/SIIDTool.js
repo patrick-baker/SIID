@@ -15,6 +15,7 @@ class SIIDTool extends Component {
 
     analyze = () => {
         this.props.dispatch({type:"ANALYZE_TEXT",payload:this.state.text});
+        this.props.history.push(`/report/1`);
     }
 
   render() {
