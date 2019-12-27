@@ -10,11 +10,16 @@ class SIIDTool extends Component {
     addText = (event) => {
         this.setState({
             text:event.target.value
-        })
+        });
     }
 
     analyze = () => {
-        this.props.dispatch({type:"ANALYZE_TEXT",payload:this.state.text});
+        this.props.dispatch({type:"CREATE_PROJECT",payload:{
+            ...this.props.form,
+            literaryTechnique:['oxymoron'],
+            tone:['humor'],
+            text:this.state.text
+        }});
         this.props.history.push(`/report/1`);
     }
 

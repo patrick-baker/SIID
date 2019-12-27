@@ -5,13 +5,13 @@ import axios from 'axios';
 
 function* ANALYZE_TEXT(action) {
   try {
-    const rules = yield axios.post('/rule',{text:action.payload})
-    const bias = yield axios.post('/automl',{text:action.payload});
-    
-    yield put ({type:"GET_FLAGS"})
-    yield put({type:"SET_BIAS_DATA",payload:bias.data});
+    const flags = yield axios.post('/rule',{text:action.payload.text,project_id:action.payload.project_id})
+    yield put({type:"SET_RULES",payload:flags.data});
+
+    const bias = yield axios.post('/automl',{text:action.payload.text, project_id: action.payload.project_id});
+    yield put({type:'SET_BIAS_DATA',payload:bias.data})
  } catch (error) {
-     console.log('error in FETCH_RULES saga', error);
+     console.log('error in ANALYZE TEXT saga', error);
  }
 }
 

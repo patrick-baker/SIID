@@ -93,33 +93,41 @@ router.post('/', async (req, res) => {
         req.body.goalsComments, req.body.targetAudienceAge, req.body.targetAudienceRace, req.body.targetAudienceRegion, req.body.targetAudienceEthnicity, req.body.targetAudienceGender, 
         req.body.targetAudienceInterests, req.body.targetAudienceLanguage, req.body.talentDemographic, req.body.formal, req.body.projectStrategy, req.body.dateCreated];
         // STORE RETURNED PROJECT ID
-        const projectId = await client.query(projectQueryText, projectQueryValues);
+        let projectId = await client.query(projectQueryText, projectQueryValues);
+        projectId = projectId.rows[0].id;
         // INSERT INTO PROJECT_TONE TABLE
         await Promise.all(
-            tone.map(type => {
+            tone.map( async (type) => {
                 const queryText = `INSERT INTO "project_tone" ("tone_id", "project_id") VALUES ($1, $2);`;
-                let queryValues = [type, projectId];
+                const toneQuery = 'SELECT id FROM tone WHERE type=$1';
+
+                let toneID = await client.query(toneQuery,[type]);
+                let queryValues = [toneID.rows[0].id, projectId];
                 return client.query(queryText, queryValues);
             })
         );
         // INSERT INTO PROJECT_LITERARY TABLE
         await Promise.all(
-            literaryTechnique.map(type => {
+            literaryTechnique.map( async (type) => {
                 const queryText = `INSERT INTO "project_literary" ("literary_id", "project_id") VALUES ($1, $2);`;
-                const queryValues = [type, projectId];
+                const toneQuery = 'SELECT id FROM literary_techniques WHERE type=$1';
+
+                let literaryId = await client.query(toneQuery,[type]);
+                const queryValues = [literaryId.rows[0].id, projectId];
                 return client.query(queryText, queryValues);
             })
         );
         // COMMIT CHANGED, END SQL TRX
         await client.query('COMMIT');
-        res.sendStatus(201);
+        res.send({project_id:projectId});
     }
     catch (error) {
+        console.log('THIS IS THE ERROR',error);
         await client.query('ROLLBACK');
         res.sendStatus(500);
     }
     finally {
-        connection.release();
+        client.release();
     }
 });
 
