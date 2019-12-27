@@ -1,6 +1,24 @@
 .formInput {
 
+    &__large {
+        display: inline-block;
+        color:rgb(32, 32, 32);
+        resize: none;
+        height:60%;
+        width:40%;
+        font-size: 1.2rem;
+        border-style: none;
+        border:1px solid $color-neutral-blue;
+        border-radius:4px;
+        padding:2%;
+        &:focus {
+            outline: none;
+            box-shadow: 1px 1px 10px -5px #363636;
+        }
+    }
+
     &__average {
+        box-shadow: 0 6px 8px -5px #363636;
         display: inline-block;
         color:rgb(32, 32, 32);
         padding:2.3%;
@@ -39,7 +57,7 @@
             border:1px solid rgb(247, 247, 247);
         }
 
-        &:select {
+        &:focus {
             outline: none;
         }
     }   
