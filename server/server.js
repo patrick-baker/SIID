@@ -12,11 +12,12 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const projectRouter = require('./routes/project.router');
 const educatorRouter = require('./routes/educator.router');
-const categoryRouter = require('./routes/category.router');
+const biasRouter = require('./routes/bias.router');
 const ruleRouter = require('./routes/rule.router');
 const flagRouter = require('./routes/flag.router');
 const reportRouter = require('./routes/report.router');
 const autoMLRouter = require('./routes/autoML.router');
+const categoryRouter =require('./routes/category.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -33,11 +34,12 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/project', projectRouter);
 app.use('/educator', educatorRouter);
-app.use('/category', categoryRouter);
+app.use('/bias', biasRouter);
 app.use('/rule', ruleRouter);
 app.use('/flag', flagRouter);
 app.use('/report', reportRouter);
-app.use('/automl',autoMLRouter)
+app.use('/automl',autoMLRouter);
+app.use('/category', categoryRouter);
 
 
 // Serve static files

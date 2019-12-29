@@ -1,5 +1,8 @@
-.page-padding {
-    padding:2 rem;
-
+.page {
+    &__pad {
+        margin:4rem;
+        height:100%;
+        display:flex;
+    }
 
 }

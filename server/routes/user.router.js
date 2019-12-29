@@ -142,7 +142,7 @@ router.put('/updatePasswordViaEmail', (req, res) => {
   sqlText = `SELECT * FROM "user" 
     WHERE "username" = $1
     AND "resetPasswordToken" = $2
-    AND "resetPasswordExpires" > CURRENT_TIMESTAMP;`; // need to also check timestamp for expiration
+    AND "resetPasswordExpires" > CURRENT_TIMESTAMP;`; 
   pool.query(sqlText, [username, resetPasswordToken])
     .then(user => {
       console.log("user result from server in update query:", user);

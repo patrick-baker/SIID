@@ -2,23 +2,17 @@ import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 // sends axios request to server to send update password email to user
-function* category(action) {
-    // console.log('action.payload of ForgotPasswordSaga:', action.payload);
+function* getCategory(action) {
   try {
-    if (action.payload === '') {
-        //yield put ({type: 'NO_EMAIL_SUBMITTED'});
-    } else {
-        // runs the server function to send email
-    
-        }
+      const category=yield axios.get(`/category`);
+      yield put({type: 'SET_CATEGORY', payload: category.data});
     } catch (error) {
-        //console.log('error in ForgotPasswordSaga', error);
-        //yield put ({ type: 'EMAIL_NOT_IN_DB'});
+      console.log('error in getCategory in category saga trying to get list of biases', error);  
     }
 }
 
 function* CategorySaga() {
-  //yield takeLatest('FORGOT_PASSWORD', project);
+  yield takeLatest('GET_CATEGORY', getCategory);
 }
 
 export default CategorySaga;

@@ -13,6 +13,8 @@ import step from './stepReducer';
 import tone from './toneReducer';
 import literaryTechnique from './literaryTechniqueReducer';
 import form from './formReducer';
+import category from './categoryReducer';
+import reportReducer from './reportReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -34,7 +36,9 @@ const rootReducer = combineReducers({
   step,
   tone,
   literaryTechnique,
-  form
+  reportReducer,
+  form,
+  category,
 });
 
 export default rootReducer;

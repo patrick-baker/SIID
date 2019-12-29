@@ -19,14 +19,15 @@ async function sh(cmd) {
 }
 
 router.post("/", async (req, res) => {
-    let text = req.body.text.replace(/\r?\n|\r/g, '').split(/[.?!]/);
+    console.log(req.body)
     try {
+        let text = req.body.text.replace(/\r?\n|\r/g, '').split(/[.?!]/);
         let data = await getData(text);
 
         for (biasKey of Object.keys(data)) {
             if (data[biasKey].count > 0) {
                 let biasId = await pool.query(`SELECT id FROM bias WHERE type=$1;`,[biasKey])
-                await pool.query(`INSERT INTO project_bias(project_id,bias_id,bias_count) VALUES($1,$2,$3)`,[1,biasId.rows[0].id,data[biasKey].count])
+                await pool.query(`INSERT INTO project_bias(project_id,bias_id,bias_count) VALUES($1,$2,$3)`,[req.body.project_id,biasId.rows[0].id,data[biasKey].count])
             }
         }
         res.send(data);
