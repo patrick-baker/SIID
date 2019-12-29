@@ -12,7 +12,7 @@ class CampaignGoalFields extends Component {
       };
 
     renderGoalFields = () => {
-        if (this.props.Goals === 'Lead_Generation') {
+        if (this.props.Goals === 'Lead Generation') {
             return (<>
                 <ModalInput label={"CTR"} >
                     <input placeholder="Place text here..."
@@ -32,7 +32,7 @@ class CampaignGoalFields extends Component {
                 </ModalInput>
             </>)
         }
-        else if (this.props.Goals === 'Sales_Enablement') {
+        else if (this.props.Goals === 'Sales Enablement') {
             return (<>
                 <ModalInput label={"Sales Conversion"} >
                     <input placeholder="Place text here..."
@@ -60,7 +60,7 @@ class CampaignGoalFields extends Component {
                 </ModalInput>
             </>)
         }
-        else if (this.props.Goals === 'Brand_Awareness') {
+        else if (this.props.Goals === 'Brand Awareness') {
             return (<>
                 <ModalInput label={"Social Share"} >
                     <input placeholder="Place text here..."
@@ -96,7 +96,7 @@ class CampaignGoalFields extends Component {
                 </ModalInput>
             </>)
         }
-        else if (this.props.Goals === 'Audience_Engagement') {
+        else if (this.props.Goals === 'Audience Engagement') {
             return (<>
                 <ModalInput label={"Social Share"} >
                     <input placeholder="Place text here..."
