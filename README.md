@@ -118,5 +118,3 @@ Customize this ReadMe and the code comments in this project to read less like a 
 ## TO_DO
 
 ### Patrick
-- [] Password regen needs correct timestamps for expiration
-- [] Look into JWTs so that the url parameter for password reset is not simply a random string
