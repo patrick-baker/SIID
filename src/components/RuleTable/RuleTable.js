@@ -90,8 +90,6 @@ class RuleTable extends Component {
                         columns={[
                             { title: 'id', field: 'id' },
                             { title: 'Name', field: 'data.id' },
-                            // { title: 'Type', field: 'data.type' },
-                            // { title: 'Categories', field: 'data.categories' },
                             { title: 'Considerate', field: 'data.considerate', render: rowData => rowData.data && rowData.data.considerate && Object.keys(rowData.data.considerate).join(" ") },
                             { title: 'Inconsiderate', field: 'data.inconsiderate', render: rowData => rowData.data && rowData.data.inconsiderate && Object.keys(rowData.data.inconsiderate).join(" ") },
                             { title: 'Note', field: 'data.note' },
