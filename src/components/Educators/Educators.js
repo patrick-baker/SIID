@@ -13,7 +13,7 @@ class Educators extends Component {
 
     componentDidMount = () => {
         this.props.dispatch({ type: "GET_EDUCATORS" });
-        
+
     }
 
     deleteEducator = (educator) => {
@@ -24,7 +24,7 @@ class Educators extends Component {
     addEducator = () => {
         this.setState({
             add: !this.state.add
-        },() => {
+        }, () => {
             console.log(this.state.add)
         })
     }
@@ -35,11 +35,11 @@ class Educators extends Component {
         })
     }
 
-    openEdit=(selected)=>{
-      this.setState({
-          toEdit: selected,
-      });
-      this.editToggle();
+    openEdit = (selected) => {
+        this.setState({
+            toEdit: selected,
+        });
+        this.editToggle();
     }
 
     render() {
@@ -51,15 +51,16 @@ class Educators extends Component {
                         <i class="fas fa-user-graduate fa-4x card__plusIcon"></i> <br />
                         <span>Add Educator</span>
                     </AddCard>
-                    
+
                 )}
                 {
                     this.state.add && <EducatorForm addEducator={this.addEducator} singleEducator={{}} />
                 }
                 {this.props.educator[0] && this.props.educator.map((edu, i) => (
                     <div className="card__structure" key={i}>
-                        <img className="card__image" src={edu.image_url} />
-
+                        <div className="card__imageContainer">
+                            <img className="card__image" src={edu.image_url} />
+                        </div>
                         <div className="card__details" >
                             <div className="card__title">
                                 {edu.name}
@@ -93,8 +94,8 @@ class Educators extends Component {
                                         </div>
 
                                         <div className="card__edit">
-                                            {/*this passes the current educator to be set to the toEdit state and passed into the educatorform*/} 
-                                            <i onClick={()=>{this.openEdit(edu)}} class="fas fa-user-edit fa-lg"></i>
+                                            {/*this passes the current educator to be set to the toEdit state and passed into the educatorform*/}
+                                            <i onClick={() => { this.openEdit(edu) }} class="fas fa-user-edit fa-lg"></i>
                                         </div>
                                     </>
                                 )
