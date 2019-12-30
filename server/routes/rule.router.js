@@ -1,26 +1,28 @@
+// Imports for all of this project
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
-// const ruleChecker = require("../ruleChecker");
-// var patterns = require("../rules/lib/SIID.json");
+const { rejectNonAdmin } = require('../modules/admin-middleware');
+
+module.exports = router;
+
+// Imports needed for Rextext 
 var factory = require("../modules/factory.js");
-// var vfile = require('to-vfile')
-// var report = require('vfile-reporter')
 var unified = require('unified')
 var english = require('retext-english')
 var stringify = require('retext-stringify')
-module.exports = router;
+
+
 /**
  * GET route template
  */
 router.get("/", (req, res) => {
   pool.query(`SELECT "id", "data" FROM rules`).then(result => {
-    //console.log(result)
     res.send(result.rows);
   });
 });
 
-
+// Post route to text text against rules in database.
 router.post("/", async (req, res) => {
   try {
     const textInput = req.body.text;
@@ -73,7 +75,7 @@ router.post("/add", (req, res) => {
       res.sendStatus(500);
     })
 })
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectNonAdmin, (req, res) => {
   const rule_id = req.params.id
   const queryText = 'DELETE FROM rules WHERE id=$1'
   pool.query(queryText, [rule_id])
