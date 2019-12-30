@@ -6,36 +6,68 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 const Nav = (props) => (
   <div className="navigation">
     <div className="navigation__background">
-      <h1 className="navigation__title heading-primary" >SIID</h1>
-      <ul className="navigation__list">
-        <li className="navigation__item" >
+      
+      <div className="navigation__list">
+          <div className="navigation__logo" >
+          <h1 className="heading-primary" >SIID</h1>
+          </div>
+        <div className="navigation__item" >
           <Link className="navigation__link" to="/home">
             <i class="fas fa-th fa-2x navigation__icon"></i>{props.user.id ? 'Projects' : 'Login / Register'}
           </Link>
-        </li>
+        </div>
 
-        <li className="navigation__item">
+        <div className="navigation__item">
           <Link className="navigation__link" to="/rules">
             <i class="fas fa-clipboard-list fa-2x navigation__icon" ></i>Rules
         </Link>
-        </li>
+        </div>
 
-        <li className="navigation__item">
+        <div className="navigation__item">
           {props.user.id &&
             <Link className="navigation__link" to="/educators">
               <i class="fas fa-graduation-cap fa-2x navigation__icon"></i>Educators
             </Link>
           }
-        </li>
+        </div>
 
-        <li className="navigation__item">
+        <div className="navigation__item">
           {props.user.id &&
             <Link className="navigation__link" onClick={() => props.dispatch({ type: 'LOGOUT' })}>
               <i class="fas fa-sign-out-alt fa-2x navigation__icon"></i>Log out
             </Link>
           }
-        </li>
-      </ul>
+        </div>
+      </div>
+      {/* <ul className="navigation__list">
+        <div className="navigation__item" >
+          <Link className="navigation__link" to="/home">
+            <i class="fas fa-th fa-2x navigation__icon"></i>{props.user.id ? 'Projects' : 'Login / Register'}
+          </Link>
+        </div>
+
+        <div className="navigation__item">
+          <Link className="navigation__link" to="/rules">
+            <i class="fas fa-clipboard-list fa-2x navigation__icon" ></i>Rules
+        </Link>
+        </div>
+
+        <div className="navigation__item">
+          {props.user.id &&
+            <Link className="navigation__link" to="/educators">
+              <i class="fas fa-graduation-cap fa-2x navigation__icon"></i>Educators
+            </Link>
+          }
+        </div>
+
+        <div className="navigation__item">
+          {props.user.id &&
+            <Link className="navigation__link" onClick={() => props.dispatch({ type: 'LOGOUT' })}>
+              <i class="fas fa-sign-out-alt fa-2x navigation__icon"></i>Log out
+            </Link>
+          }
+        </div>
+      </ul> */}
     </div>
   </div >
 );
