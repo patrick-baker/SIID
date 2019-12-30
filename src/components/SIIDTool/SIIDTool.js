@@ -16,8 +16,6 @@ class SIIDTool extends Component {
     analyze = () => {
         this.props.dispatch({type:"CREATE_PROJECT",payload:{
             ...this.props.form,
-            literaryTechnique:['oxymoron'],
-            tone:['humor'],
             text:this.state.text
         }});
         this.props.history.push(`/report/1`);

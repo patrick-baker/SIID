@@ -12,113 +12,113 @@ class CampaignGoalFields extends Component {
       };
 
     renderGoalFields = () => {
-        if (this.props.Goals === 'Lead Generation') {
+        if (this.props.form.campaign_goals === 'Lead Generation') {
             return (<>
                 <ModalInput label={"CTR"} >
                     <input placeholder="Place text here..."
-                        value={this.props.form.CTR}
+                        value={this.props.form.goals_ctr}
                         className="formInput__average"
-                        name="CTR"
+                        name="goals_ctr"
                         onChange={this.handleChange}
                     />
                 </ModalInput>
                 <ModalInput label={"Conversion"} >
                     <input placeholder="Place text here..."
-                        value={this.props.form.conversion}
+                        value={this.props.form.goals_conversion}
                         className="formInput__average"
-                        name="Conversion"
+                        name="goals_conversion"
                         onChange={this.handleChange}
                     />
                 </ModalInput>
             </>)
         }
-        else if (this.props.Goals === 'Sales Enablement') {
+        else if (this.props.form.campaign_goals === 'Sales Enablement') {
             return (<>
                 <ModalInput label={"Sales Conversion"} >
                     <input placeholder="Place text here..."
-                        value={this.props.form.sales_conversion}
+                        value={this.props.form.goals_sales_conversion}
                         className="formInput__average"
-                        name="sales_conversion"
+                        name="goals_sales_conversion"
                         onChange={this.handleChange}
                     />
                 </ModalInput>
-                <ModalInput label={"Conversion"} >
+                <ModalInput label={"Sales Length"} >
                     <input placeholder="Place text here..."
-                        value={this.props.form.sales_length}
+                        value={this.props.form.goals_sales_length}
                         className="formInput__average"
-                        name="sales_length"
+                        name="goals_sales_length"
                         onChange={this.handleChange}
                     />
                 </ModalInput>
                 <ModalInput label={"Revenue Goals"} >
                     <input placeholder="Place text here..."
-                        value={this.props.form.revenue_goals}
+                        value={this.props.form.goals_revenue_goals}
                         className="formInput__average"
-                        name="revenue_goals"
+                        name="goals_revenue_goals"
                         onChange={this.handleChange}
                     />
                 </ModalInput>
             </>)
         }
-        else if (this.props.Goals === 'Brand Awareness') {
+        else if (this.props.form.campaign_goals === 'Brand Awareness') {
             return (<>
                 <ModalInput label={"Social Share"} >
                     <input placeholder="Place text here..."
-                        value={this.props.form.social_share}
+                        value={this.props.form.goals_social_shares}
                         className="formInput__average"
-                        name="social_share"
+                        name="goals_social_shares"
                         onChange={this.handleChange}
                     />
                 </ModalInput>
                 <ModalInput label={"Follow"} >
                     <input placeholder="Place text here..."
-                        value={this.props.form.follow}
+                        value={this.props.form.goals_follow}
                         className="formInput__average"
-                        name="follow"
+                        name="goals_follow"
                         onChange={this.handleChange}
                     />
                 </ModalInput>
                 <ModalInput label={"Impressions"} >
                     <input placeholder="Place text here..."
-                        value={this.props.form.impressions}
+                        value={this.props.form.goals_impressions}
                         className="formInput__average"
-                        name="impressions"
+                        name="goals_impressions"
                         onChange={this.handleChange}
                     />
                 </ModalInput>
                 <ModalInput label={"Views"} >
                     <input placeholder="Place text here..."
-                        value={this.props.form.views}
+                        value={this.props.form.goals_views}
                         className="formInput__average"
-                        name="views"
+                        name="goals_views"
                         onChange={this.handleChange}
                     />
                 </ModalInput>
             </>)
         }
-        else if (this.props.Goals === 'Audience Engagement') {
+        else if (this.props.form.campaign_goals === 'Audience Engagement') {
             return (<>
                 <ModalInput label={"Social Share"} >
                     <input placeholder="Place text here..."
-                        value={this.props.form.social_share}
+                        value={this.props.form.goals_social_shares}
                         className="formInput__average"
-                        name="social_share"
+                        name="goals_social_shares"
                         onChange={this.handleChange}
                     />
                 </ModalInput>
                 <ModalInput label={"Comments"} >
                     <input placeholder="Place text here..."
-                        value={this.props.form.comments}
+                        value={this.props.form.goals_comments}
                         className="formInput__average"
-                        name="comments"
+                        name="goals_comments"
                         onChange={this.handleChange}
                     />
                 </ModalInput>
                 <ModalInput label={"CTR"} >
                     <input placeholder="Place text here..."
-                        value={this.props.form.CTR}
+                        value={this.props.form.goals_ctr}
                         className="formInput__average"
-                        name="CTR"
+                        name="goals_ctr"
                         onChange={this.handleChange}
                     />
                 </ModalInput>

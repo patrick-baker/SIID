@@ -46,7 +46,7 @@ class IntegrationsDropdown extends React.Component {
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
-          name='goal'
+          name='campaign_goals'
           value={this.props.form.goal}
           onChange={this.handleChange}
         >

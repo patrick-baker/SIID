@@ -1,4 +1,4 @@
-const formReducer = (state = {radioValue: 'Formal'}, action) => {
+const formReducer = (state = {formal: true}, action) => {
     switch (action.type) {
         case 'SET_FORM_METADATA':
             return { ...state, [action.payload.property]: action.payload.value };

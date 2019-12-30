@@ -94,7 +94,7 @@ class ResetPassword extends Component {
               again.
             </p>
             <Link
-              to="/login"
+              to="/"
             >Login</Link>
           </div>
         )}
