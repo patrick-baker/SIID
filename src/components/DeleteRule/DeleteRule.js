@@ -21,7 +21,7 @@ class DeleteRule extends Component {
                     {/* DELETE CONFIRMATION DISPLAY */}
                     
                     <p></p>
-                        <div className="modal__deleteBodyButtons">
+                        <div className="modal__centeredButtons">
                             <button className="button__generic" onClick={this.props.handleDeleteModal}>Cancel</button>
                             <button className="button__generic" onClick={this.props.handleDeleteConfirmation}>Delete</button>
                         </div>
