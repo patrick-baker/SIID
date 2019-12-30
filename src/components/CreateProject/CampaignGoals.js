@@ -53,10 +53,10 @@ class IntegrationsDropdown extends React.Component {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={'Lead_Generation'}>Lead Generation</MenuItem>
-          <MenuItem value={'Sales_Enablement'}>Sales Enablement</MenuItem>
-          <MenuItem value={'Brand_Awareness'}>Brand Awareness</MenuItem>
-          <MenuItem value={'Audience_Engagement'}>Audience Engagement</MenuItem>
+          <MenuItem value={'Lead Generation'}>Lead Generation</MenuItem>
+          <MenuItem value={'Sales Enablement'}>Sales Enablement</MenuItem>
+          <MenuItem value={'Brand Awareness'}>Brand Awareness</MenuItem>
+          <MenuItem value={'Audience Engagement'}>Audience Engagement</MenuItem>
         </Select>
       </FormControl>
       </form>

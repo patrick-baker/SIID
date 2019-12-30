@@ -15,56 +15,75 @@ module.exports = router;
  */
 router.get("/", (req, res) => {
   pool.query(`SELECT "id", "data" FROM rules`).then(result => {
-      //console.log(result)
+    //console.log(result)
     res.send(result.rows);
   });
 });
 
 
 router.post("/", async (req, res) => {
-  const textInput = req.body.text;
+  try {
+    const textInput = req.body.text;
+    const project_id = req.body.project_id;
+    let pattern_db = await pool.query(`SELECT array_agg("data") FROM rules`);
+    // console.log('pattern: ', pattern_db);
 
-  let pattern_db = await pool.query(`SELECT array_agg("data") FROM rules`);
-  // console.log('pattern: ', pattern_db);
-  
-  patterns_bad = pattern_db.rows[0].array_agg;
-  // console.log('from db', patterns_bad)
+    patterns_bad = pattern_db.rows[0].array_agg;
+    // console.log('from db', patterns_bad)
 
-  let response = "";
+    let response = "";
 
-  const runMe = async function(textIn) {
+    const runMe = async function (textIn) {
       // console.log('runMe running');
-      
+
       try {
         response = await unified()
-        .use(await english)
-        .use(await factory(patterns_bad, "SSID"))
-        .use(await stringify)
-        .process(textIn);
-      } catch(error) {
-          console.log(error);
+          .use(await english)
+          .use(await factory(patterns_bad, "SSID"))
+          .use(await stringify)
+          .process(textIn);
+      } catch (error) {
+        console.log(error);
       }
       // console.log('runMe response', response);
-  };
+    };
+    await runMe(textInput);
+    console.log("rule router sees", response);
+    await pool.query(`INSERT INTO flags(project_id,messages) VALUES($1,$2)`, [project_id, { messages: response.messages }]);
 
-  await runMe(textInput);
-  console.log("rule router sees", response);
-  await pool.query(`INSERT INTO flags(project_id,messages) VALUES($1,$2)`,[1,{messages:response.messages}]);
+    res.send(response.messages);
+  } catch (error) {
+    console.log(error)
+    res.sendStatus(500);
+  }
 
-  res.send(response.messages);
+
 });
 
 router.post("/add", (req, res) => {
-    const queryText = `INSERT INTO "rules"("data")VALUES($1)`
-    const queryArgs = [req.body]
-    pool.query(queryText,queryArgs)
-    .then((response)=>{
-        console.log("Rule Add Success",response);
-        res.sendStatus(200);
+  const queryText = `INSERT INTO "rules"("data")VALUES($1)`
+  const queryArgs = [req.body]
+  pool.query(queryText, queryArgs)
+    .then((response) => {
+      console.log("Rule Add Success", response);
+      res.sendStatus(200);
     })
-    .catch((error)=>{
-        console.log("Rule Add Error", error);
-        res.sendStatus(500);        
+    .catch((error) => {
+      console.log("Rule Add Error", error);
+      res.sendStatus(500);
+    })
+})
+router.delete('/rule/:id', (req, res) => {
+  const rule_id = req.params.rule_id
+  const queryText = 'DELETE FROM rules WHERE id=$1'
+  pool.query(queryText, [rule_id])
+    .then((response) => {
+      console.log("DELETE SUCCESS for rule", rule_id)
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log("Error in DELETE route:", error)
+      res.sendStatus(500)
     })
 })
 

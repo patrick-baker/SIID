@@ -15,8 +15,10 @@ function* getProject() {
 function* createProject(action) {
   try {
     const newProject=action.payload
-    yield axios.post(`/project`, newProject);
+    let project_id = yield axios.post(`/project`, newProject);
+    console.log('PROKJSE:KFJNSD:KJNSDF:KJNDSF:J', project_id);
     yield put({type: 'GET_PROJECT'});
+    yield put({type:"ANALYZE_TEXT",payload:{text:newProject.text,project_id:project_id.data.project_id}});
     } catch (error) {
     console.log('error in createProject for projectSaga', error);
     }
@@ -26,7 +28,7 @@ function* createProject(action) {
 function* removeProject(action) {
   try {
     const projectId=action.payload.id
-    yield axios.delete(`/project/$projectId`);
+    yield axios.delete(`/project/${projectId}`);
     yield put({type: 'GET_PROJECT'});
     } catch (error) {
     console.log('error in removeProject for projectSaga', error);

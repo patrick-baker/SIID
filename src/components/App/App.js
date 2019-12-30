@@ -18,6 +18,7 @@ import ResetPassword from '../ResetPassword/ResetPassword';
 import CreateProject from '../CreateProject/CreateProject';
 import RuleTable from '../RuleTable/RuleTable'
 import SIIDTool from '../SIIDTool/SIIDTool';
+import Report from '../Report/Report';
 
 import '../../sass/main.scss';
 
@@ -78,6 +79,11 @@ class App extends Component {
               <ProtectedRoute
                 path="/educators"
                 component={Educators}
+              />
+
+              <Route 
+                path="/report/:id"
+                component={Report}
               />
               {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
