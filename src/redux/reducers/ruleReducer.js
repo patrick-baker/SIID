@@ -52,6 +52,12 @@ const ruleReducer = (state = [{}], action) => {
                 messageFromServer: 'delete failure',
                 showNullError: false,
             }
+        case 'RULE_DEL_RESET':
+            return {
+                showError: false,
+                messageFromServer: '',
+                showNullError: false,
+            }    
         default:
             return state;
     }

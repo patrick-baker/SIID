@@ -77,6 +77,7 @@ class RuleTable extends Component {
                 deleteOpenRule: null,
                 deleteOpen: false
             })
+            this.props.dispatch({type:"RULE_DEL_RESET"})
         }
     }
 
