@@ -37,10 +37,14 @@ function* ADD_RULE(action) {
 // Pass ID as action.payload to delete, then fetch new set of rules.
 function* DELETE_RULE(action) {
     try {
+        console.log("in delete rule saga with", action.payload)
          yield axios.delete(`/rule/${action.payload}`)
+         yield put({type:"RULE_DEL_SUCCESS"})
          yield put({ type: "FETCH_RULES"})
       } catch (error) {
-          console.log('error in DELETE_RULE saga', error);
+        yield put({type:"RULE_DEL_FAILURE"})
+        yield put({ type: "FETCH_RULES"})
+        console.log('error in DELETE_RULE saga', error);
       }
   }
 
