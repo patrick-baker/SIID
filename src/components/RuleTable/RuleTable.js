@@ -77,55 +77,59 @@ class RuleTable extends Component {
                 deleteOpenRule: null,
                 deleteOpen: false
             })
-            this.props.dispatch({type:"RULE_DEL_RESET"})
+            this.props.dispatch({ type: "RULE_DEL_RESET" })
         }
     }
 
     renderContent = () => {
-        if (!this.state.add && !this.state.deleteOpen && this.props.rule.ruleReducer.length > 0) {
+        if (this.props.rule.ruleReducer.length > 0) {
+            // if (!this.state.add && !this.state.deleteOpen && this.props.rule.ruleReducer.length > 0) {
+
             // Show the table
-            return (<>
-                <div className="page__pad" >
-                    <button className="button__generic" style={{marginLeft:'0'}} onClick={this.addRule}><i class="fas fa-plus"></i><span style={{ marginLeft: '1rem' }}>Add rule</span></button>
-                    {/* <pre>{JSON.stringify(this.state,null,2)}</pre> */}
-                    
-                </div>
+            return (
+                <>
+                    <div className="page__pad" >
+                        <button className="button__generic" style={{ marginLeft: '0' }} onClick={this.addRule}><i class="fas fa-plus"></i><span style={{ marginLeft: '1rem' }}>Add rule</span></button>
+                        {/* <pre>{JSON.stringify(this.state,null,2)}</pre> */}
 
-                <div className="page__pad">
-                    <MaterialTable
-                        icons={tableIcons}
-                        title="Rule Table"
-                        columns={[
-                            { title: 'id', field: 'id' },
-                            { title: 'Name', field: 'data.id' },
-                            { title: 'Considerate', field: 'data.considerate', render: rowData => rowData.data && rowData.data.considerate && Object.keys(rowData.data.considerate).join(" ") },
-                            { title: 'Inconsiderate', field: 'data.inconsiderate', render: rowData => rowData.data && rowData.data.inconsiderate && Object.keys(rowData.data.inconsiderate).join(" ") },
-                            { title: 'Note', field: 'data.note' },
-                        ]}
-                        data={this.props.rule.ruleReducer}
-                        actions={[
-                            {
-                                icon: DeleteIcon,
-                                tooltip: 'Delete Row',
-                                onClick: (event, rowData) => this.handleDelete(rowData)
-                            }
-                        ]}
-                        options={{
-                            pageSize: 10,
-                            exportButton: true
-                        }}
-                    />
-                </div>
-            </>)
-        }
-        if (this.state.add) {
-            // Show the add Rule Modal
-            return <AddRule addRule={this.addRule} />
-        }
-        if (this.state.deleteOpen) {
-            return <DeleteRule specificRule={this.state.deleteOpenRule} handleDeleteModal={this.handleDelete} />
-        }
+                    </div>
+                    {/* Show the Add Rule Modal */}
+                    {
+                        this.state.add && <AddRule addRule={this.addRule} />
 
+                    }
+                    {/* Show the Delete Rule Modal */}
+                    {
+                        this.state.deleteOpen && <DeleteRule specificRule={this.state.deleteOpenRule} handleDeleteModal={this.handleDelete} />
+                    }
+                    <div className="page__pad">
+                        <MaterialTable
+                            icons={tableIcons}
+                            title="Rule Table"
+                            columns={[
+                                { title: 'id', field: 'id' },
+                                { title: 'Name', field: 'data.id' },
+                                { title: 'Considerate', field: 'data.considerate', render: rowData => rowData.data && rowData.data.considerate && Object.keys(rowData.data.considerate).join(" ") },
+                                { title: 'Inconsiderate', field: 'data.inconsiderate', render: rowData => rowData.data && rowData.data.inconsiderate && Object.keys(rowData.data.inconsiderate).join(" ") },
+                                { title: 'Note', field: 'data.note' },
+                            ]}
+                            data={this.props.rule.ruleReducer}
+                            actions={[
+                                {
+                                    icon: DeleteIcon,
+                                    tooltip: 'Delete Row',
+                                    onClick: (event, rowData) => this.handleDelete(rowData)
+                                }
+                            ]}
+                            options={{
+                                pageSize: 10,
+                                exportButton: true
+                            }}
+                        />
+                    </div>
+                </>
+            )
+        }
         return <Spinner message="Loading Table" />
     }
     render() {
