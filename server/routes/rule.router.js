@@ -75,8 +75,8 @@ router.post("/add", (req, res) => {
       res.sendStatus(500);
     })
 })
-router.delete('/rule/:id', rejectNonAdmin, (req, res) => {
-  const rule_id = req.params.rule_id
+router.delete('/:id', rejectNonAdmin, (req, res) => {
+  const rule_id = req.params.id
   const queryText = 'DELETE FROM rules WHERE id=$1'
   pool.query(queryText, [rule_id])
     .then((response) => {

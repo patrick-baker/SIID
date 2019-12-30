@@ -1,11 +1,11 @@
 const pool = require("../modules/pool");
 
-const rejectNonAdmin = (req, res, next) => {
+const rejectNonAdmin = async (req, res, next) => {
     // check if logged in
     console.log("Middlewhere sees req.user as: ", req.user);
     const queryText = `SELECT "admin" FROM "user" WHERE "id"=$1`
     const queryArgs = [req.user.id]
-    pool.query(queryText, queryArgs)
+    await pool.query(queryText, queryArgs)
         .then((result) => {
             console.log("Result.rows is", result.rows)
             if (result.rows[0].admin) {
