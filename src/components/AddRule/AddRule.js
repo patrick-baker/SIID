@@ -80,9 +80,10 @@ class AddRule extends Component {
                             onChange={this.handleChangeFor}
                         />
                     </ModalInput>
-
-                    <button className="formInput__submitButton" onClick={this.handleSubmit} >Submit</button>
-                    <pre>{JSON.stringify(this.state, null, 2)}</pre>
+                    <div className="modal__centeredButtons">
+                        <button className="formInput__submitButton" onClick={this.handleSubmit} >Submit</button>
+                        </div>
+                    {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
 
                 </ModalForm>
             </Modal >

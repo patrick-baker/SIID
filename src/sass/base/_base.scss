@@ -15,3 +15,16 @@ html {
     // This defines what 1rem is
     font-size: 62.5%;
 }
+
+// These rules are here to make the table more readable
+// Sorry for the important
+.MuiTableCell-root{
+    font-size: 1.3rem !important;
+}
+
+.MuiTableCell-paddingNone {
+    padding-left: 1rem !important;
+}
+th[class*='MuiTableCell-root MuiTableCell-head MTableHeader-header-'] {
+    padding-left: 1rem !important;
+}

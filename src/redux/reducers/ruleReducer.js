@@ -33,7 +33,31 @@ const ruleReducer = (state = [{}], action) => {
 // }
   // user will be on the redux state at:
   // state.user
+
+  const ruleDeleteStatus = (state = {
+    showError: false,
+    messageFromServer: '',
+    showNullError: false,
+}, action) => {
+    switch (action.type) {
+        case 'RULE_DEL_SUCCESS':
+            return {
+                showError: false,
+                messageFromServer: 'delete success',
+                showNullError: false,
+            };
+        case 'RULE_DEL_FAILURE':
+            return {
+                showError: true,
+                messageFromServer: 'delete failure',
+                showNullError: false,
+            }
+        default:
+            return state;
+    }
+};
   export default combineReducers({
       ruleReducer,
+      ruleDeleteStatus,
   })
 
