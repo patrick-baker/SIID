@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { withRouter } from 'react-router-dom'
 
 class SIIDTool extends Component {
     state = {
@@ -35,4 +35,4 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default connect(mapStateToProps)(SIIDTool);
+export default withRouter(connect(mapStateToProps)(SIIDTool));
