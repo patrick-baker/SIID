@@ -34,7 +34,7 @@ class SIIDTool extends Component {
     return (
       <div className="page__pad" >
         <textarea className='formInput__large' onChange={(event) => this.addText(event)}/>
-        <button className="button__analyze" onClick={this.analyze}><i class="fas fa-cog"></i> Analyze</button>
+        <button className="button button__analyze" onClick={this.analyze}><i class="fas fa-cog"></i> Analyze</button>
       </div>
     );
   }

@@ -12,8 +12,6 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import LanguageIcon from '@material-ui/icons/Language';
 import PeopleIcon from '@material-ui/icons/People';
 import StepConnector from '@material-ui/core/StepConnector';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
@@ -23,7 +21,7 @@ const styles = theme => ({
     marginRight: theme.spacing(1),
   },
   instructions: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(2),
     marginBottom: theme.spacing(1),
   },
   connectorActive: {
@@ -45,10 +43,12 @@ const styles = theme => ({
   },
   connectorLine: {
     transition: theme.transitions.create('border-color'),
-    height: 6,
-    border: 0,
+    height: 5,
+    border: 2,
     backgroundColor: '#eaeaf0',
     borderRadius: 4,
+    position: 'relative',
+    top: '15px'
   }
 });
 
@@ -57,8 +57,8 @@ const useColorlibStepIconStyles = makeStyles({
     backgroundColor: '#ccc',
     zIndex: 1,
     color: '#fff',
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     display: 'flex',
     borderRadius: '50%',
     justifyContent: 'center',
@@ -144,21 +144,6 @@ class ProgressStepper extends React.Component {
             </Step>
           ))}
         </Stepper>
-        {/* <div>
-          {activeStep === steps.length ? (
-            <div>
-              <Typography className={classes.instructions}>
-                All steps completed - you&apos;re finished
-              </Typography>
-            </div>
-          ) : (
-            <div>
-              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-              <div>
-              </div>
-            </div>
-          )}
-        </div> */}
       </div>
     );
   }
