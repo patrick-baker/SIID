@@ -56,7 +56,7 @@ class CampaignStyle extends React.Component {
   handleRadioChange = event => {
     this.props.dispatch({
       type: 'SET_FORM_METADATA', payload: {
-        property: 'radioValue', 
+        property: 'formal', 
         value: event.target.value 
       }
     });
@@ -92,13 +92,13 @@ class CampaignStyle extends React.Component {
             <FormLabel component="legend">Formality</FormLabel>
             <RadioGroup
               aria-label="Formality"
-              name="gender1"
-              value={this.props.form.radioValue}
+              name="formality"
+              value={this.props.form.formal}
               className={classes.group}
               onChange={this.handleRadioChange}
             >
-              <FormControlLabel value="Formal" control={<Radio />} label="Formal" />
-              <FormControlLabel value="Informal" control={<Radio />} label="Informal" />
+              <FormControlLabel value= "true" control={<Radio />} label="Formal" />
+              <FormControlLabel value= "false" control={<Radio />} label="Informal" />
             </RadioGroup>
           </FormControl>
           {this.props.form.literaryTechniques &&

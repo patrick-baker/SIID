@@ -14,7 +14,7 @@ function* getProject() {
 // insert the project
 function* createProject(action) {
   try {
-    const newProject=action.payload
+    const newProject = action.payload;
     let project_id = yield axios.post(`/project`, newProject);
     console.log('PROKJSE:KFJNSD:KJNSDF:KJNDSF:J', project_id);
     yield put({type: 'GET_PROJECT'});

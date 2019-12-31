@@ -76,9 +76,26 @@ router.post('/', async (req, res) => {
     // SETUP POOL CONNECT
     const client = await pool.connect();
     try {
-        // CREATE VARS FOR ARRAYS
-        const literaryTechnique = req.body.literaryTechnique;
-        const tone = req.body.tone;
+        // Create mappable literaryTechnique array for promise requests from iterating over req.body object, checking for true values of keys
+        const literaryTechnique = [];
+        Object.keys(req.body.literaryTechniques).forEach(function (key) {
+            if(verbose)console.log('literaryTechniques key, value:', key, req.body.literaryTechniques[key])
+            if (req.body.literaryTechniques[key]) {
+                literaryTechnique.push(key);
+            }
+          });
+        console.log('literaryTechnique:', literaryTechnique);
+
+        // Create mappable tone array for promise requests from iterating over req.body object, checking for true values of keys
+        const tone = [];
+        for (key in req.body.tones) {
+            if(verbose)console.log('tones key, value:', key, req.body.tones[key])
+            if (req.body.tones[key]) {
+                tone.push(key);
+            }
+        }
+        console.log('tone:', tone);
+        
         // BEGIN INCASE OF ERROR/ROLLBACK
         await client.query('BEGIN');
         // INSERT INTO PROJECT TABLE
@@ -88,10 +105,10 @@ router.post('/', async (req, res) => {
         "target_audience_age", "target_audience_race", "target_audience_region", "target_audience_ethnicity", "target_audience_gender", "target_audience_interests",
         "target_audience_language", "talent_demographic", "formal", "project_strategy", "date_created") VALUES ($1, $2, $3, $4, $5 , $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, 
         $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28 ) RETURNING "id";`
-        const projectQueryValues = [req.user.id, req.body.title, req.body.client, req.body.description, req.body.text, req.body.integration, req.body.campaignGoals, req.body.goalsCtr, req.body.goalsConversion, 
-        req.body.goalsSalesConversion, req.body.goalsSalesLength, req.body.revenueGoals, req.body.goalsSocialShares, req.body.goalsFollow, req.body.goalsImpressions, req.body.goalsViews, 
-        req.body.goalsComments, req.body.targetAudienceAge, req.body.targetAudienceRace, req.body.targetAudienceRegion, req.body.targetAudienceEthnicity, req.body.targetAudienceGender, 
-        req.body.targetAudienceInterests, req.body.targetAudienceLanguage, req.body.talentDemographic, req.body.formal, req.body.projectStrategy, req.body.dateCreated];
+        const projectQueryValues = [req.user.id, req.body.title, req.body.client, req.body.description, req.body.text, req.body.integration, req.body.campaign_goals, req.body.goals_ctr, req.body.goals_conversion, 
+        req.body.goals_sales_conversion, req.body.goals_sales_length, req.body.revenue_goals, req.body.goals_social_shares, req.body.goals_follow, req.body.goals_impressions, req.body.goals_views, 
+        req.body.goals_comments, req.body.target_audience_age, req.body.target_audience_race, req.body.target_audience_region, req.body.target_audience_ethnicity, req.body.target_audience_gender, 
+        req.body.target_audience_interests, req.body.target_audience_language, req.body.talent_demographic, req.body.formal, req.body.project_strategy, req.body.date_created];
         // STORE RETURNED PROJECT ID
         let projectId = await client.query(projectQueryText, projectQueryValues);
         projectId = projectId.rows[0].id;
