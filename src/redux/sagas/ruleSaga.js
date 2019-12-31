@@ -13,18 +13,6 @@ function* FETCH_RULES() {
 }
 
 
-function* ANALYZE_TEXT(action) {
-  try {
-    const flags = yield axios.post('/rule',{text:action.payload.text,project_id:action.payload.project_id})
-    yield put({type:"SET_RULES",payload:flags.data});
-
-    const bias = yield axios.post('/automl',{text:action.payload.text, project_id: action.payload.project_id});
-    yield put({type:'SET_BIAS_DATA',payload:bias.data})
- } catch (error) {
-     console.log('error in ANALYZE TEXT saga', error);
- }
-}
-
 // JSON object is created in the AddRule.js and sent as payload
 function* ADD_RULE(action) {
   try {
@@ -51,7 +39,6 @@ function* DELETE_RULE(action) {
 function* RuleSaga() {
   yield takeEvery('FETCH_RULES', FETCH_RULES)
   yield takeLatest('ADD_RULE', ADD_RULE)
-  yield takeLatest('ANALYZE_TEXT', ANALYZE_TEXT)
   yield takeLatest('DELETE_RULE', DELETE_RULE)
 }
 
