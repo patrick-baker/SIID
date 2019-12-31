@@ -32,3 +32,11 @@
         text-align: center;
     }
 }
+.checkboxArray{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    // align-items: flex-start;
+    flex-direction: column;
+    height: 100px;
+}

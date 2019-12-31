@@ -26,4 +26,59 @@
         }
     }
 
+    &__text {
+        font-size: 1.3rem;
+        color: $color-neutral-blue;
+        border: none;
+    }
+
+    &__generic {
+        height:25px;
+        width:120px;
+        margin:1.5%;
+        margin-top:50px;
+        font-size: 1.3rem;
+        background-color:$color-neutral-blue;
+        color:rgb(241, 241, 241);
+        border-radius: 4px;
+        border: 1px solid rgb(70, 77, 173);
+        display:block;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:active {
+            box-shadow: 1px 1px 10px -3px #363636;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__stepper {
+        
+        height:2.5rem;
+        width:12rem;
+        font-size: 1.3rem;
+        background-color:$color-neutral-blue;
+        color:rgb(241, 241, 241);
+        border-radius: 4px;
+        border: 1px solid rgb(70, 77, 173);
+        display:block;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:active {
+            box-shadow: 1px 1px 10px -3px #363636;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+    }
 }

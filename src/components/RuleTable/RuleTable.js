@@ -1,17 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, forwardRef } from 'react';
 import { connect } from 'react-redux';
+import DeleteRule from '../DeleteRule/DeleteRule'
+import AddRule from '../AddRule/AddRule'
+import Spinner from '../Spinner/Spinner'
+
 import MaterialTable from 'material-table'
-// import AddIcon from '@material-ui/icons/Add';
-// import FirstPageIcon from '@material-ui/icons/FirstPage';
-// import SearchIcon from '@material-ui/icons/Search'
-// import PreviousPageIcon from '@material-ui/icons/ChevronLeft'
-// import ClearIcon from '@material-ui/icons/Clear'
-// import NextPageIcon from '@material-ui/icons/ChevronRight'
-// import LastPageIcon from '@material-ui/icons/LastPage'
 import DeleteIcon from '@material-ui/icons/Delete'
-
-import { forwardRef } from 'react';
-
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
@@ -27,8 +21,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import AddRule from '../AddRule/AddRule'
-import Spinner from '../Spinner/Spinner'
+
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -48,14 +41,15 @@ const tableIcons = {
     SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
-  };
+};
 
 
 class RuleTable extends Component {
     state = {
         add: false,
         edit: false,
-        deleteOpen:false,
+        deleteOpen: false,
+        deleteOpenRule: null
     }
     componentDidMount() {
         this.props.dispatch({ type: "FETCH_RULES" })
@@ -65,59 +59,78 @@ class RuleTable extends Component {
             add: !this.state.add
         })
     }
+    handleDelete = (rowData) => {
+        // set current ID in local state
+        // set modal to "open" Maybe in reducer
+
+        // If closed, then open:
+        if (!this.state.deleteOpen) {
+            this.setState({
+                deleteOpenRule: rowData,
+                deleteOpen: true
+            })
+        }
+        // If open, close and set ID to null
+        // Pass this fuction as props to modal box
+        if (this.state.deleteOpen) {
+            this.setState({
+                deleteOpenRule: null,
+                deleteOpen: false
+            })
+            this.props.dispatch({ type: "RULE_DEL_RESET" })
+        }
+    }
 
     renderContent = () => {
-        if (!this.state.add && this.props.rule.ruleReducer.length > 0) {
+        if (this.props.rule.ruleReducer.length > 0) {
+            // if (!this.state.add && !this.state.deleteOpen && this.props.rule.ruleReducer.length > 0) {
+
             // Show the table
-            return (<>
-                <div className="page__pad">
-                    <button onClick={this.addRule} >Add Rule</button>
-                    <MaterialTable
-                        style={{fontSize:'4rem'}}
-                        icons={tableIcons}
-                        // icons={{
-                        //     FirstPage: FirstPageIcon,
-                        //     Add: AddIcon,
-                        //     Search: SearchIcon,
-                        //     PreviousPage: PreviousPageIcon,
-                        //     Clear: ClearIcon,
-                        //     NextPage: NextPageIcon,
-                        //     ResetSearch: ClearIcon,
-                        //     LastPage: LastPageIcon,
-                        //     Delete: DeleteIcon
-                        // }}
-                        title="SIID Rule Table"
-                        columns={[
-                            { title: 'id', field: 'id' },
-                            { title: 'Name', field: 'data.id' },
-                            // { title: 'Type', field: 'data.type' },
-                            // { title: 'Categories', field: 'data.categories' },
-                            { title: 'Considerate', field: 'data.considerate', render: rowData => rowData.data && rowData.data.considerate && Object.keys(rowData.data.considerate).join(" ") },
-                            { title: 'Inconsiderate', field: 'data.inconsiderate', render: rowData => rowData.data && rowData.data.inconsiderate && Object.keys(rowData.data.inconsiderate).join(" ") },
-                            { title: 'Note', field: 'data.note' },
-                        ]}
-                        data={this.props.rule.ruleReducer}
-                        actions={[
-                            {
-                                icon: DeleteIcon,
-                                tooltip: 'Delete Row',
-                                onClick: this.props.dispatch({type:"DELETE_RULE", })
-                                // onClick: (event, rowData) => this.handleClickOpen(rowData.id)
-                            }
-                        ]}
-                        options={{
-                            pageSize: 20,
-                            exportButton: true
-                        }}
-                    />
-                </div>
-            </>)
+            return (
+                <>
+                    <div className="page__pad" >
+                        <button className="button__generic" style={{ marginLeft: '0' }} onClick={this.addRule}><i class="fas fa-plus"></i><span style={{ marginLeft: '1rem' }}>Add rule</span></button>
+                        {/* <pre>{JSON.stringify(this.state,null,2)}</pre> */}
+
+                    </div>
+                    {/* Show the Add Rule Modal */}
+                    {
+                        this.state.add && <AddRule addRule={this.addRule} />
+
+                    }
+                    {/* Show the Delete Rule Modal */}
+                    {
+                        this.state.deleteOpen && <DeleteRule specificRule={this.state.deleteOpenRule} handleDeleteModal={this.handleDelete} />
+                    }
+                    <div className="page__pad" style={{width:'95%'}} >
+                        <MaterialTable
+                            icons={tableIcons}
+                            title="Rule Table"
+                            columns={[
+                                { title: 'id', field: 'id' },
+                                { title: 'Name', field: 'data.id' },
+                                { title: 'Considerate', field: 'data.considerate', render: rowData => rowData.data && rowData.data.considerate && Object.keys(rowData.data.considerate).join(" ") },
+                                { title: 'Inconsiderate', field: 'data.inconsiderate', render: rowData => rowData.data && rowData.data.inconsiderate && Object.keys(rowData.data.inconsiderate).join(" ") },
+                                { title: 'Note', field: 'data.note' },
+                            ]}
+                            data={this.props.rule.ruleReducer}
+                            actions={[
+                                {
+                                    icon: DeleteIcon,
+                                    tooltip: 'Delete Row',
+                                    onClick: (event, rowData) => this.handleDelete(rowData)
+                                }
+                            ]}
+                            options={{
+                                search: true,
+                                pageSize: 10,
+                                exportButton: true
+                            }}
+                        />
+                    </div>
+                </>
+            )
         }
-        if (this.state.add) {
-            // Show the add Rule Modal
-            return <AddRule addRule={this.addRule} />
-        }
-        
         return <Spinner message="Loading Table" />
     }
     render() {

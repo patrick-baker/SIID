@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import LanguageIcon from '@material-ui/icons/Language';
@@ -83,6 +84,7 @@ function ColorlibStepIcon(props) {
     2: <ThumbUpIcon />,
     3: <PeopleIcon />,
     4: <LanguageIcon />,
+    5:<AssessmentIcon/>
   };
 
   return (
@@ -98,7 +100,7 @@ function ColorlibStepIcon(props) {
 }
 
 function getSteps() {
-  return ['Select Integrations.', 'Choose the Campaign Goals.', 'What is the Target Audience?', 'Style and Tone?'];
+  return ['Integrations', 'Campaign Goals', 'Target Audience', 'Style and Tone', 'Analyze'];
 }
 
 function getStepContent(step) {
