@@ -19,6 +19,7 @@ import CreateProject from '../CreateProject/CreateProject';
 import RuleTable from '../RuleTable/RuleTable'
 import SIIDTool from '../SIIDTool/SIIDTool';
 import Report from '../Report/Report';
+import Projects from '../Projects/Projects';
 
 import '../../sass/main.scss';
 
@@ -61,7 +62,7 @@ class App extends Component {
               <ProtectedRoute
                 exact
                 path="/home"
-                component={UserPage}
+                component={Projects}
               />
 
               <ProtectedRoute
