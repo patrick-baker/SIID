@@ -25,7 +25,7 @@ class Educators extends Component {
         this.setState({
             add: !this.state.add
         }, () => {
-            console.log(this.state.add)
+            console.log('add flag is:',this.state.add)
         })
     }
 
@@ -73,7 +73,7 @@ class Educators extends Component {
 
                             <ul className="card__specialties">
                                 Specialties:
-                                {edu.specialties.map((specialty, i) => <li key={i} > - {specialty[1]}</li>)}
+                {edu.specialties[0][0]!==null&&edu.specialties.map((specialty, i) => { return <li key={i} > - {specialty[1]}</li>})}
                             </ul>
 
 
@@ -105,7 +105,7 @@ class Educators extends Component {
                         </div>
                     </div>
                 ))}
-                {/* <pre>{JSON.stringify(this.props,null,2)}</pre> */}
+                <pre>{JSON.stringify(this.props.educator,null,2)}</pre>
 
             </div>
         )

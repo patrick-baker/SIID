@@ -9,9 +9,10 @@ router.get('/', async (req, res) => {
     const query =
         `
         SELECT educator.id,name,bio,contact_info,image_url,ARRAY_AGG(ARRAY[b.id::text,b."type"]) AS specialties FROM educator 
-        JOIN educator_bias eb ON eb.educator_id = educator.id
-        JOIN bias b ON eb.bias_id=b.id
+        LEFT OUTER JOIN educator_bias eb ON eb.educator_id = educator.id
+        LEFT OUTER JOIN bias b ON eb.bias_id=b.id
         GROUP BY educator.id,name,bio,contact_info,image_url
+        ORDER BY educator.id DESC
     ;`
     try {
         const educators = await pool.query(query);
@@ -88,7 +89,7 @@ router.put('/', async (req, res) => {
         await client.query(`BEGIN`);
 
         //delete the existing bias specialties
-        const deleteSpecialites = `DELETE FROM educator_specialties WHERE educator_id=$1`
+        const deleteSpecialites = `DELETE FROM educator_bias WHERE educator_id=$1`
         await client.query(deleteSpecialites, [req.body.id]);
 
         //add in all the bias specialties with the updated info
