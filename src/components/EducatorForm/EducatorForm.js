@@ -12,7 +12,9 @@ class EducatorForm extends Component {
             contact_info: this.props.singleEducator.contact_info || "",
             image_url: this.props.singleEducator.image_url || "",
             //if this is an existing educator clean up so it's just the id's 
-            specialties: this.props.singleEducator.specialties && this.props.singleEducator.specialties.map(x => {
+            //first check if this list is populated since it's not for the add new educator action
+            //then check if the specialty value is null and don't bother mapping if it is
+            specialties: this.props.singleEducator.specialties&&this.props.singleEducator.specialties[0][0] !== null && this.props.singleEducator.specialties.map(x => {
                 return Number(x[0]);
             }) || [],
         }
@@ -44,14 +46,15 @@ class EducatorForm extends Component {
     // }
 
     submitEducator = () => {
+        console.log('in submitEdu')
         if (
             this.state.newEducator.name &&
             this.state.newEducator.bio &&
             this.state.newEducator.contact_info &&
             this.state.newEducator.specialties
         ) {
-
-            if (this.props.singleEducator[0]) {
+           //check if the new educator id is blank. if blank do add and if not run an update
+            if (this.state.newEducator.id!=='') {
                 this.props.dispatch({ type: "UPDATE_EDUCATOR", payload: this.state.newEducator })
             } else {
                 this.props.dispatch({ type: "ADD_EDUCATOR", payload: this.state.newEducator });
@@ -119,7 +122,7 @@ class EducatorForm extends Component {
 
                     <div className="modal__form">
                         <div>
-                            {/* <pre>{JSON.stringify(this.state,null,2)}</pre> */}
+                            {/* <pre>{JSON.stringify(this.state,null,2)}</pre>  */}
                             <label>
                                 <div className="formInput__labelText" >Name:</div>
                                 <input placeholder="Name"

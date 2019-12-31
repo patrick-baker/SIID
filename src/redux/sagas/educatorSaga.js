@@ -32,7 +32,7 @@ function* deleteEducator(action) {
 
 function* updateEducator(action) {
     try {
-      yield axios.put(`/educator`,action.payload);
+      yield axios.put(`/educator/`,action.payload);
       yield put({type:"GET_EDUCATORS"});
     }catch(error) {
       console.log(error);
