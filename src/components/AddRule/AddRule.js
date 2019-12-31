@@ -27,7 +27,7 @@ class AddRule extends Component {
     // ex: inconsiderate: dumb blonde should be in format: dumb-blonde
     handleSubmit = () => {
         const preparedObject = {
-            "id": this.state.id,
+            "id": `Use ${this.state.considerate} not ${this.state.inconsiderate}`, // Insetad of this.state.id
             "type": "simple",
             "note": this.state.note,
             "categories": [
@@ -36,11 +36,11 @@ class AddRule extends Component {
             "considerate": {},
             "inconsiderate": {}
         }
-        preparedObject.considerate[this.state.considerate] = "a"
-        preparedObject.inconsiderate[this.state.inconsiderate] = "a"
+        preparedObject.considerate[this.state.considerate.toLowerCase()] = "a"
+        preparedObject.inconsiderate[this.state.inconsiderate.toLowerCase()] = "a"
         console.log(preparedObject)
         this.props.dispatch({ type: "ADD_RULE", payload: preparedObject })
-
+        this.props.addRule() // Get rid of when it works.
     }
 
     render() {
@@ -48,15 +48,16 @@ class AddRule extends Component {
             <Modal>
                 <i onClick={this.props.addRule} className="fas fa-times fa-2x modal__cancelIcon"></i>
                 <ModalForm>
-                    <ModalInput label={"Name"} >
+                    {/* <ModalInput label={"Name"} >
                         <input placeholder="Name"
                             value={this.state.id}
                             className="formInput__average"
                             name="id"
                             onChange={this.handleChangeFor}
                         />
-                    </ModalInput>
-                    <ModalInput label={"Inconsiderate"} >
+                    </ModalInput> */}
+                    <div style={{paddingTop:'2rem'}} ></div>
+                    <ModalInput label={"Inconsiderate word/phrase"} >
                         <input placeholder="Inconsiderate"
                             value={this.state.inconsiderate}
                             className="formInput__average"
@@ -73,7 +74,9 @@ class AddRule extends Component {
                         />
                     </ModalInput>
                     <ModalInput label={"Note"} >
-                        <input placeholder="Note"
+                        <textarea
+                            rows="5"
+                            placeholder="Sources, more context and other information"
                             value={this.state.note}
                             className="formInput__average"
                             name="note"
@@ -82,7 +85,7 @@ class AddRule extends Component {
                     </ModalInput>
                     <div className="modal__centeredButtons">
                         <button className="formInput__submitButton" onClick={this.handleSubmit} >Submit</button>
-                        </div>
+                    </div>
                     {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
 
                 </ModalForm>
