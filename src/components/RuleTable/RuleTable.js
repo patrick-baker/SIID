@@ -102,7 +102,7 @@ class RuleTable extends Component {
                     {
                         this.state.deleteOpen && <DeleteRule specificRule={this.state.deleteOpenRule} handleDeleteModal={this.handleDelete} />
                     }
-                    <div className="page__pad">
+                    <div className="page__pad" style={{width:'95%'}} >
                         <MaterialTable
                             icons={tableIcons}
                             title="Rule Table"
@@ -122,6 +122,7 @@ class RuleTable extends Component {
                                 }
                             ]}
                             options={{
+                                search: true,
                                 pageSize: 10,
                                 exportButton: true
                             }}
