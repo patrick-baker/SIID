@@ -9,11 +9,12 @@
 }
 
 .project-metadata-page {
-    height: 80vh;
     width: 100%;
     text-align: center;
 }
 
 .overview-boxes {
     height: 70%;
+    flex-wrap: wrap;
+    margin: 50px 0 50px 0;
 }
