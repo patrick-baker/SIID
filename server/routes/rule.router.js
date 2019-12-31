@@ -3,27 +3,31 @@ const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
 const { rejectNonAdmin } = require('../modules/admin-middleware');
-
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+// Export
 module.exports = router;
 
-// Imports needed for Rextext 
+// Imports needed for Retext
 var factory = require("../modules/factory.js");
 var unified = require('unified')
 var english = require('retext-english')
 var stringify = require('retext-stringify')
 
 
-/**
- * GET route template
- */
-router.get("/", (req, res) => {
+// GET route -returns all the rules for the rule table
+router.get("/", rejectUnauthenticated, (req, res) => {
   pool.query(`SELECT "id", "data" FROM rules`).then(result => {
     res.send(result.rows);
+  })
+  .catch((error)=>{
+      console.log("Error in rule.router getting rules from database",error)
+      res.sendStatus(500)
   });
 });
 
-// Post route to text text against rules in database.
-router.post("/", async (req, res) => {
+// POST route to test text against rules in database.
+// Requires being authenticated
+router.post("/", rejectUnauthenticated, async (req, res) => {
   try {
     const textInput = req.body.text;
     const project_id = req.body.project_id;
@@ -50,19 +54,19 @@ router.post("/", async (req, res) => {
       // console.log('runMe response', response);
     };
     await runMe(textInput);
-    console.log("rule router sees", response);
+    console.log("Rule based system returns:", response);
     await pool.query(`INSERT INTO flags(project_id,messages) VALUES($1,$2)`, [project_id, { messages: response.messages }]);
 
     res.send(response.messages);
   } catch (error) {
-    console.log(error)
+    console.log('Error testing the text:',req.body.text,'\nError message is:',error)
     res.sendStatus(500);
   }
-
-
 });
 
-router.post("/add", (req, res) => {
+// Logged in users can add rules. Admins can delete (see below)
+
+router.post("/add", rejectUnauthenticated, (req, res) => {
   const queryText = `INSERT INTO "rules"("data")VALUES($1)`
   const queryArgs = [req.body]
   pool.query(queryText, queryArgs)
@@ -75,6 +79,9 @@ router.post("/add", (req, res) => {
       res.sendStatus(500);
     })
 })
+
+// Delete route uses the rejectNonAdmin middeware
+
 router.delete('/:id', rejectNonAdmin, (req, res) => {
   const rule_id = req.params.id
   const queryText = 'DELETE FROM rules WHERE id=$1'
