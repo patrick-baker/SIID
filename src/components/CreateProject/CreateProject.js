@@ -4,7 +4,7 @@ import ProgressStepper from '../ProgressStepper/ProgressStepper';
 
 import SIIDTool from '../SIIDTool/SIIDTool';
 
-import IntegrationsDropdown from './SelectIntegrations';
+import SelectIntegrations from './SelectIntegrations';
 import TargetAudience from './TargetAudience';
 import CampaignStyle from './CampaignStyle';
 import CampaignGoals from './CampaignGoals';
@@ -13,12 +13,12 @@ import CampaignGoals from './CampaignGoals';
 class CreateProject extends Component {
 
   componentDidMount() {
-    this.props.dispatch({type: 'FETCH_TONE'});
-    this.props.dispatch({type: 'FETCH_LITERARY_TECHNIQUES'});
+    this.props.dispatch({ type: 'FETCH_TONE' });
+    this.props.dispatch({ type: 'FETCH_LITERARY_TECHNIQUES' });
   }
 
   nextStep = () => {
-    this.props.dispatch({type: 'NEXT_STEP'})
+    this.props.dispatch({ type: 'NEXT_STEP' })
   }
   render() {
     return (
@@ -33,28 +33,41 @@ class CreateProject extends Component {
           </div>
         </div>
         <div className="flex-row-center stepper">
-          <div style={{width: '100%'}}>
+          <div style={{ width: '100%' }}>
             <ProgressStepper />
           </div>
         </div>
-        <div className="flex-row-center flex-row-center__project-form">
-          <IntegrationsDropdown />
-          {this.props.step === 0 && <button onClick={this.nextStep}>Stepper Button</button>}
+        <div className="flex-column flex-column__project-form">
+          <h3 className="heading-secondary">Where did you create your marketing strategy?</h3>
+          <div className="flex-row-center flex-row-center__project-form">
+            <SelectIntegrations />
+            {this.props.step === 0 && <button className="button" onClick={this.nextStep}>Next</button>}
+          </div>
         </div>
-        {this.props.step > 0 && <div className="flex-row-center flex-row-center__project-form">
-          <CampaignGoals />
-          {this.props.step === 1 && <button onClick={this.nextStep}>Stepper Button</button>}
-        </div> }
-        {this.props.step > 1 && <div className="flex-row-center flex-row-center__project-form">
-          <TargetAudience />
-          {this.props.step === 2 && <button onClick={this.nextStep}>Stepper Button</button>}
-        </div> }
+        {this.props.step > 0 && 
+          <div className="flex-column flex-column__project-form">
+            <h3 className="heading-secondary">Please describe your campaign goals.</h3>
+            <div className="flex-row-center flex-row-center__project-form">
+              <CampaignGoals />
+            {this.props.step === 1 && <button className="button" onClick={this.nextStep}>Next</button>}
+            </div>
+          </div>
+        }
+        {this.props.step > 1 && 
+          <div className="flex-column flex-column__project-form">
+            <h3 className="heading-secondary">Please describe your target audience.</h3>
+            <div className="flex-row-center flex-row-center__project-form">
+              <TargetAudience />
+            {this.props.step === 2 && <button className="button" onClick={this.nextStep}>Next</button>}
+            </div>
+          </div>
+        }
         {this.props.step > 2 && <div className="flex-row-center flex-row-center__project-form">
           <CampaignStyle />
-          {this.props.step === 3 && <button onClick={this.nextStep}>Stepper Button</button>}
-        </div> }
-        {this.props.step === 4 && <button onClick={() => this.props.history.push('/SIID')}>Analyze Project</button>}
-      {/* <pre>{JSON.stringify(this.props)}</pre> */}
+          {this.props.step === 3 && <button className="button" onClick={this.nextStep}>Next</button>}
+        </div>}
+        {this.props.step === 4 && <button className="button" onClick={() => this.props.history.push('/SIID')}>Analyze Text</button>}
+        {/* <pre>{JSON.stringify(this.props)}</pre> */}
       </div>
     );
   }

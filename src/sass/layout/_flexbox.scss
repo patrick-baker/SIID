@@ -10,9 +10,14 @@
     height: auto;
 
     &__project-form {
-        width: 60%;
-        margin: 10% 0 10% 0;
+        margin: 5rem 0 5rem 0;
     }
+
+    &__target_audience {
+        flex-wrap: wrap;
+        width: 70%;
+    }
+
 }
 
 .flex-column {
@@ -20,4 +25,10 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+
+    &__project-form {
+        width: 60%;
+        margin: 5rem 0 5rem 0;
+        text-align: center;
+    }
 }

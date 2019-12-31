@@ -33,14 +33,14 @@ class IntegrationsDropdown extends React.Component {
     const { classes } = this.props;
 
     return (
-      <form className={classes.root} autoComplete="off">
+      <form className={classes.root} autoComplete="off" className="flex-column">
         <FormControl variant="filled" className={classes.formControl}>
         <InputLabel id="demo-simple-select-filled-label">Choose Integration</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
           name='integration'
-          // value={this.props.form.integration}
+          value={this.props.form.integration}
           onChange={this.handleChange}
         >
           <MenuItem value="">
@@ -51,7 +51,6 @@ class IntegrationsDropdown extends React.Component {
           <MenuItem value={'Hubspot'}>Hubspot</MenuItem>
         </Select>
       </FormControl>
-      {/* <pre>{JSON.stringify(this.props)}</pre> */}
       </form>
     );
   }
