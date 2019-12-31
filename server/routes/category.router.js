@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
         console.log('Error on select all categories from the bias table category router', error);
         res.sendStatus(500);
     })
-    
 });
 
 /**

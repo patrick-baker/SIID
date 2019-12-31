@@ -1,4 +1,4 @@
-const reportReducer = (state = [], action) => {
+const reportReducer = (state = {}, action) => {
     if (action.type === 'SET_REPORT') {
         return action.payload;
     }

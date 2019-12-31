@@ -7,6 +7,9 @@ body {
   font-size: 3.8rem;
   font-weight: normal;
   line-height: 4rem;
+  margin-top:2rem;
+  margin-bottom:2rem;
+  color:$color-neutral-blue;
 }
 
 .heading-secondary {
@@ -24,23 +27,37 @@ body {
 .body-bold {
   font-size: 1.6rem;
   font-weight: 600;
-  line-height: 2rem; 
+  line-height: 2rem;
 }
 
 .body-normal {
   font-size: 1.6rem;
   font-weight: normal;
-  line-height: 2rem; 
+  line-height: 2rem;
 }
 
 .label {
   font-size: 1.4rem;
   font-weight: normal;
-  line-height: 2.4rem; 
+  line-height: 2.4rem;
 }
 
 .caption {
   font-size: 1.2rem;
   font-weight: normal;
-  line-height: 1.6rem; 
+  line-height: 1.6rem;
+}
+
+.project {
+  &__title {
+    color: $color-primary-blue;
+  }
+
+  &__client {
+    text-transform: uppercase;
+  }
+
+  // &__date {
+  //   text-transform: uppercase;
+  // }
 }

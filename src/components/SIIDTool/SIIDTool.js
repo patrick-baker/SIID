@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 
 class SIIDTool extends Component {
@@ -18,8 +19,16 @@ class SIIDTool extends Component {
             ...this.props.form,
             text:this.state.text
         }});
-        this.props.history.push(`/report/1`);
+
+
     }
+
+
+    componentDidUpdate(){
+        if(this.props.reportReducer.id) {
+            this.props.history.push(`/report/${this.props.reportReducer.id}`);
+        }
+     }
 
   render() {
     return (
@@ -35,4 +44,5 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default connect(mapStateToProps)(SIIDTool);
+export default withRouter(connect(mapStateToProps)(SIIDTool));;
+
