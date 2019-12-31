@@ -133,7 +133,7 @@ class Educators extends Component {
                         </div>
                     </div>
                 ))}
-                <pre>{JSON.stringify(this.props.educator.educatorReducer, null, 2)}</pre>
+                {/* <pre>{JSON.stringify(this.props.educator.educatorReducer, null, 2)}</pre> */}
 
             </div>
         )
