@@ -30,6 +30,7 @@ class CreateProject extends Component {
             <div className="project-box flex-column"><p className="heading-secondary">Campaign Goals</p></div>
             <div className="project-box flex-column"><p className="heading-secondary">Target Audience</p></div>
             <div className="project-box flex-column"><p className="heading-secondary">Tone & Style</p></div>
+            <div className="project-box flex-column"><p className="heading-secondary">Analyze</p></div>
           </div>
         </div>
         <div className="flex-row-center stepper">
@@ -53,8 +54,9 @@ class CreateProject extends Component {
           <CampaignStyle />
           {this.props.step === 3 && <button onClick={this.nextStep}>Stepper Button</button>}
         </div> }
-        {this.props.step === 4 && <button onClick={() => this.props.history.push('/SIID')}>Analyze Project</button>}
-      {/* <pre>{JSON.stringify(this.props)}</pre> */}
+
+        {this.props.step === 4 && <SIIDTool />}
+      {/* <pre>{JSON.stringify(this.props)}</pre> */} 
       </div>
     );
   }
