@@ -1,12 +1,35 @@
 .project-box {
-    height: 60%;
-    width: 12%;
+    margin: 15px;
     min-width: 100px;
     background-image: $gradient-purple;
     justify-content: center;
     text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    border-radius: 2px;
+
+    @media (max-width: 425px) {
+        width: 200px;
+        height: 100px;
+    }
+    @media (min-width: 426px) and (max-width: 850px) {
+        width: 250px;
+        height: 125px;
+    }
+    @media (min-width: 851px) and (max-width: 1150px) {
+        width: 150px;
+        height: 250px;
+    }
+    @media (min-width: 1151px) {
+        width: 180px;
+        height: 300px;
+    }
 
     p{
         color: white;
     }
 }
+  
+  .project-box:hover {
+    box-shadow: 0 18px 32px rgba(163, 126, 126, 0.28), 0 10px 10px rgba(0,0,0,0.22);
+  }
