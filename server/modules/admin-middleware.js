@@ -9,7 +9,7 @@ const rejectNonAdmin = async (req, res, next) => {
         .then((result) => {
             console.log("Result.rows is", result.rows)
             if (result.rows[0].admin) {
-                console.log("let them in!")
+                console.log("Let 'em in!")
                 // They were authenticated! User may do the next thing
                 // Note! They may not be Authorized to do all things
                 next();
