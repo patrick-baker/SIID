@@ -42,7 +42,7 @@ class IntegrationsDropdown extends React.Component {
     <>
       <form className={classes.root} autoComplete="off">
         <FormControl variant="filled" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-filled-label">Choose Integration</InputLabel>
+        <InputLabel id="demo-simple-select-filled-label">Campaign Goals</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"

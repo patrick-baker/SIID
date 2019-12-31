@@ -71,12 +71,6 @@ class App extends Component {
               />
 
               <ProtectedRoute
-                exact
-                path="/SIID"
-                component={SIIDTool}
-              />
-
-              <ProtectedRoute
                 path="/educators"
                 component={Educators}
               />
