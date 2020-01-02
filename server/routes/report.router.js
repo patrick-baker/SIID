@@ -43,14 +43,14 @@ router.get('/project/:id', async (req, res) => {
         res.send({ ...projectTableData.rows[0], tone: tone.rows[0].tones, literaryTechniques: literaryTechniques.rows[0].techniques});
         // END SQL TRX
         await client.query('COMMIT');
-        res.sendStatus(201);
+        // res.sendStatus(201);
     }
     catch (error) {
         await client.query('ROLLBACK');
         res.sendStatus(500);
     }
     finally {
-        connection.release();
+        client.release();
     }
 });
 

@@ -8,7 +8,7 @@ import SelectIntegrations from './SelectIntegrations';
 import TargetAudience from './TargetAudience';
 import CampaignStyle from './CampaignStyle';
 import CampaignGoals from './CampaignGoals';
-
+import BasicInfo from './BasicInfo'
 
 class CreateProject extends Component {
 
@@ -38,6 +38,11 @@ class CreateProject extends Component {
           </div>
         </div>
         <div className="flex-column flex-column__project-form">
+        <h3 className="heading-secondary">Campaign Basics</h3>
+        <div className="flex-row-center flex-row-center__project-form">
+            <BasicInfo />
+        </div>
+
           <h3 className="heading-secondary">Where did you create your marketing strategy?</h3>
           <div className="flex-row-center flex-row-center__project-form">
             <SelectIntegrations />
