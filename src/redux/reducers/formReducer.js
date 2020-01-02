@@ -1,5 +1,7 @@
 const formReducer = (state = {formal: true}, action) => {
     switch (action.type) {
+        case 'CLEAR_FORM_METADATA':
+            return {formal: true};
         case 'SET_FORM_METADATA':
             return { ...state, [action.payload.property]: action.payload.value };
         case 'INITIALIZE_FORM_TONE':

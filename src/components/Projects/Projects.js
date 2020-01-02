@@ -14,7 +14,10 @@ class Projects extends Component {
     }
 
     handleClick = () => {
-        console.log('button clicked');
+        // clears prior project metadata from redux when user chooses to create new project
+        this.props.dispatch({ type: 'CLEAR_FORM_METADATA'});
+        // resets the stepper to step 1 on create project page
+        this.props.dispatch({ type: 'RESET_STEPPER'});
         this.props.history.push(`/createproject`);
     }
 
