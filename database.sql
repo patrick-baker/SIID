@@ -61,7 +61,7 @@ CREATE TABLE "project" (
     "talent_demographic" VARCHAR (120),
     "formal" BOOLEAN,
     "project_strategy" INT REFERENCES "strategy",
-    "date_created" DATE
+    "date_created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create table to store educator information
