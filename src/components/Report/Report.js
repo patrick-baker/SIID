@@ -12,7 +12,9 @@ class Report extends Component {
     render() {
         return (
             <div className='page__pad' >
-                <pre>{this.props.match.params.id}</pre>
+               <h1>Report Number {this.props.match.params.id} </h1>
+                <pre>{JSON.stringify(this.props.reportReducer,null,2)}</pre>
+                
             </div>
         )
     }
