@@ -13,10 +13,8 @@ function* getMetaData(action) {
 }
 
 function* getProjectReportData(action) {
-    console.log('WE IN HERE',action.payload)
     try {
       const project=yield axios.get(`/report/project/${action.payload.id}`);
-      console.log('THIS WILL BE REPORT REDUCER DATA', project.data);
       yield put({type: 'SET_REPORT', payload: {id:action.payload.id, ...project.data}});
       } catch (error) {
       console.log('error in getProject for projectSaga', error);
