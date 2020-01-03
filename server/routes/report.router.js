@@ -77,28 +77,4 @@ router.get('/bias/:id', async (req, res) => {
         res.sendStatus(500);
     }
 });
-
-router.get('/literary/:id', async (req, res) => {
-
-    try {
-        if (verbose) console.log('in report.router /bias GET, req.params.id is: ', req.params.id);
-        const projectId = req.params.id;
-
-        const queryText = `SELECT array_agg(type) as literary_techniques
-        FROM project_literary
-        JOIN literary_techniques 
-        ON literary_techniques.id=project_literary.literary_id
-        WHERE project_id=$1;
-        `
-
-        let results = await pool.query(queryText, [projectId])
-        res.send(results.rows);
-
-    } catch (error) {
-        console.log(error)
-        res.sendStatus(500);
-    }
-
-})
-
 module.exports = router;

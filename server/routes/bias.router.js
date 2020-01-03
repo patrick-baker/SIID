@@ -8,7 +8,29 @@ router.get('/:id', async(req, res) => {
     try {
         const queryText=`SELECT * FROM project_bias JOIN bias ON bias.id=project_bias.bias_id WHERE project_id=$1;`;
         let biasData = await pool.query(queryText,[req.params.id]);
-        res.send(biasData.rows);
+
+        let biasCounter = {
+            'race': {
+                count: 0
+            },
+            'lgbtq': {
+                count: 0
+            },
+            'religion': {
+                count: 0
+            },
+            'gender': {
+                count: 0
+            }
+        }
+
+        for (let bias of biasData.rows) {
+            console.log(bias.type);
+            biasCounter[bias.type].count++;
+        }
+
+
+        res.send(biasCounter);
     } catch(error) {
         console.log(error);
         res.sendStatus(500);
