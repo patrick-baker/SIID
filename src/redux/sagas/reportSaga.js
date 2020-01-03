@@ -1,4 +1,4 @@
-import { put, takeLatest, takeEvery, actionChannel } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 // gets the list of the user's projects
@@ -20,6 +20,7 @@ function* getProjectReportData(action) {
       console.log('error in getProject for projectSaga', error);
       }
   }
+  
 
 function* ReportSaga() {
     yield takeEvery('GET_PROJECT_METADATA', getMetaData);

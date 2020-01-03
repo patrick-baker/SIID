@@ -27,6 +27,10 @@ class Report extends Component {
         this.setState({ successMessage: 'Copied!' });
       };
 
+    componentWillUnmount = () => {
+        this.props.dispatch({ type: "AUTO_ML_RESET" })
+    }
+
     render() {
         return (
             <div className='page__pad' >
@@ -46,11 +50,16 @@ class Report extends Component {
                     ref={(textarea) => this.textArea = textarea}
                     value={this.state.url}
                  />
+                </pre>
+                Bias Reducer back from database: {this.props.biasDataReducer.status ? "YES" : "NO"}
+                {this.props.biasDataReducer.status &&
+                    <pre>{JSON.stringify(this.props.biasDataReducer.data, null, 2)}</pre>}
+
             </div>
-                )
-            }
-        }
-        
-        const mapStateToProps = state => state;
-        
-        export default connect(mapStateToProps)(Report);
+        )
+    }
+}
+
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps)(Report);

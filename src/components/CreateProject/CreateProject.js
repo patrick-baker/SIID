@@ -77,7 +77,6 @@ class CreateProject extends Component {
           <SIIDTool/>
           </>
         )}
-        {/* <pre>{JSON.stringify(this.props)}</pre> */}
       </div>
     );
   }

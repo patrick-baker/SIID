@@ -35,7 +35,7 @@ class Projects extends Component {
         // Clear out reducers
         this.props.dispatch({type: 'CLEAR_PROJECT'});
         this.props.dispatch({ type: 'CLEAR_REPORT'})
-        // Should clear form next but we'll keep it this way for testing.
+        
     }
 
     handleClick = () => {
