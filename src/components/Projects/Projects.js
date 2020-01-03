@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectItem from './ProjectItem';
 import { withRouter } from 'react-router-dom'
-
+import DeleteProject from '../DeleteProject/DeleteProject'
 class Projects extends Component {
     state={
         deleteOpen: false,
@@ -49,6 +49,10 @@ class Projects extends Component {
     render() {
         return (
             <div>
+                {/* Show the Delete Educator Modal */}
+                {
+                    this.state.deleteOpen && <DeleteProject specificProject={this.state.deleteOpenProject} handleDeleteModal={this.handleDelete} />
+                }
                 {/* Display Create Project card */}
                 <div className="card__project">
                     <div className="card__details">
@@ -57,15 +61,15 @@ class Projects extends Component {
                     </div>
                 </div>
                 {/* Display past project cards */}
-                {this.props.project.map(item => {
+                {this.props.project.projectReducer.map(item => {
                     console.log('in projects map project is: ', item)
                     return (
                         <div className="card__project">
-                            <ProjectItem key={item.id} item={item} />
+                            <ProjectItem key={item.id} item={item} deleteProject={this.handleDelete} />
                         </div>
                     )
                 })}
-                <pre>{JSON.stringify(this.props.project, null, 2)}</pre>
+                <pre>{JSON.stringify(this.props.project.projectReducer, null, 2)}</pre>
             </div>
         )
     }
