@@ -32,27 +32,32 @@ router.delete('/:id', async (req, res) => {
         const checkAuthority=`SELECT user_id FROM "project" WHERE id=$1`
         const checkAuthorityValues=[req.params.id];
         const user=await client.query(checkAuthority,checkAuthorityValues);
+        console.log('userId in project delete route', user.rows[0].user_id);
         //check returned id against the user request
-        if (req.user.id!==user){
+        if (req.user.id!==user.rows[0].user_id){
             let error = new Error("You are not authorized to delete this project ");
             throw error
         }
         
-        //delete the row from flags
-        const queryFlagText=`DELETE * FROM "flags" WHERE project_id=$1`;
+        //delete the row from project_bias
+        const queryBiasText=`DELETE FROM "project_bias" WHERE project_id=$1`;
         const projectId=[req.params.id];
+        await client.query(queryBiasText,projectId);
+
+        //delete the row from flags
+        const queryFlagText=`DELETE FROM "flags" WHERE project_id=$1`;
         await client.query(queryFlagText,projectId);
 
         //delete the values from tone
-        const queryToneText=`DELETE * FROM "project_tone" WHERE project_id=$1`;
+        const queryToneText=`DELETE FROM "project_tone" WHERE project_id=$1`;
         await client.query(queryToneText,projectId);
 
         //delete row from literary techniques
-        const queryLiteraryText=`DELETE * FROM "project_literary" WHERE project_id=$1`;
+        const queryLiteraryText=`DELETE FROM "project_literary" WHERE project_id=$1`;
         await client.query(queryLiteraryText,projectId);
 
         //delete the row from projects
-        const queryText=`DELETE * FROM "project" WHERE id=$1`;
+        const queryText=`DELETE FROM "project" WHERE id=$1`;
         await client.query(queryText,projectId);
         
         //commit the changes
@@ -127,9 +132,9 @@ router.post('/', async (req, res) => {
         await Promise.all(
             literaryTechnique.map( async (type) => {
                 const queryText = `INSERT INTO "project_literary" ("literary_id", "project_id") VALUES ($1, $2);`;
-                const toneQuery = 'SELECT id FROM literary_techniques WHERE type=$1';
+                const literaryTechniquesQuery = 'SELECT id FROM literary_techniques WHERE type=$1';
 
-                let literaryId = await client.query(toneQuery,[type]);
+                let literaryId = await client.query(literaryTechniquesQuery,[type]);
                 const queryValues = [literaryId.rows[0].id, projectId];
                 return client.query(queryText, queryValues);
             })

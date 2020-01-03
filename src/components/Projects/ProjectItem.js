@@ -10,6 +10,10 @@ class ProjectItem extends Component {
         this.props.history.push(`/report/${this.props.item.id}`);
     }
 
+    handleDeleteProject = (id) => {
+        this.props.dispatch({type: 'REMOVE_PROJECT', payload: id})
+    }
+
     render() {
         // Create vars for project object and date
         const project = this.props.item;
@@ -22,6 +26,7 @@ class ProjectItem extends Component {
                 <h2 className="project__client label">{project.client}</h2>
                 <p className="caption">{project.description}</p>
                 <button className="button__text" onClick={this.routeToReport}>REPORT</button>
+                <i onClick={() => this.handleDeleteProject(project.id)} class="fas fa-trash-alt fa-lg"></i>
             </div>
         )
     }
