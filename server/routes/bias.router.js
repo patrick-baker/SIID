@@ -26,7 +26,7 @@ router.get('/:id', async(req, res) => {
 
         for (let bias of biasData.rows) {
             console.log(bias.type);
-            biasCounter[bias.type].count++;
+            biasCounter[bias.type] = bias.bias_count;
         }
 
 

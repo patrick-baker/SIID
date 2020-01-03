@@ -54,7 +54,6 @@ class Report extends Component {
                         value={this.state.url}
                     />
                 </pre>
-
             </div>
         )
     }
