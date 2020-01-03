@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class DeleteProject extends Component {
     handleDeleteConfirmation = () => {
         console.log("in handleDelete Confirmation with project", this.props.specificProject.title, this.props.specificProject.client)
-        this.props.dispatch({ type: "DELETE_RULE", payload: this.props.specificProject.id })
+        this.props.dispatch({ type: "DELETE_PROJECT", payload: this.props.specificProject.id })
     }
     render() {
         return (

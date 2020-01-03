@@ -28,6 +28,7 @@ function* createProject(action) {
 // delete the project
 function* deleteProject(action) {
   try {
+      console.log("action is",action)
     const projectId=action.payload;
     yield axios.delete(`/project/${projectId}`);
     yield put({ type: "PROJECT_DEL_SUCCESS" })

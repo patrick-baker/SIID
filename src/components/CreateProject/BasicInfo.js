@@ -36,7 +36,7 @@ class BasicInfo extends React.Component {
     return (
       <form className={classes.root} autoComplete="off" className="flex-column">
 
-        <ModalInput label={"title"} >
+        <ModalInput label={"Title"} >
                     <input placeholder="Campaign Title"
                         value={this.props.form.title}
                         className="formInput__average"
@@ -44,7 +44,7 @@ class BasicInfo extends React.Component {
                         onChange={this.handleChange}
                     />
                 </ModalInput>
-                <ModalInput label={"client"} >
+                <ModalInput label={"Client"} >
                     <input placeholder="Client Name"
                         value={this.props.form.client}
                         className="formInput__average"
@@ -52,7 +52,7 @@ class BasicInfo extends React.Component {
                         onChange={this.handleChange}
                     />
                 </ModalInput>
-                <ModalInput label={"description"} >
+                <ModalInput label={"Description"} >
                     <textarea placeholder="Place text here..."
                         value={this.props.form.description}
                         className="formInput__average"
