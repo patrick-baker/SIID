@@ -7,7 +7,7 @@ let verbose = true;
  * GET projects created by the user
  */
 router.get('/', (req, res) => {
-    const queryText =`SELECT "title","client", "description", "date_created" 
+    const queryText =`SELECT "id","title","client", "description", "date_created" 
     FROM "project" WHERE "user_id"=$1 ORDER BY "date_created"`;
     const queryValues=[req.user.id];
     
@@ -32,27 +32,32 @@ router.delete('/:id', async (req, res) => {
         const checkAuthority=`SELECT user_id FROM "project" WHERE id=$1`
         const checkAuthorityValues=[req.params.id];
         const user=await client.query(checkAuthority,checkAuthorityValues);
+        console.log('userId in project delete route', user.rows[0].user_id);
         //check returned id against the user request
-        if (req.user.id!==user){
+        if (req.user.id!==user.rows[0].user_id){
             let error = new Error("You are not authorized to delete this project ");
             throw error
         }
         
-        //delete the row from flags
-        const queryFlagText=`DELETE * FROM "flags" WHERE project_id=$1`;
+        //delete the row from project_bias
+        const queryBiasText=`DELETE FROM "project_bias" WHERE project_id=$1`;
         const projectId=[req.params.id];
+        await client.query(queryBiasText,projectId);
+
+        //delete the row from flags
+        const queryFlagText=`DELETE FROM "flags" WHERE project_id=$1`;
         await client.query(queryFlagText,projectId);
 
         //delete the values from tone
-        const queryToneText=`DELETE * FROM "project_tone" WHERE project_id=$1`;
+        const queryToneText=`DELETE FROM "project_tone" WHERE project_id=$1`;
         await client.query(queryToneText,projectId);
 
         //delete row from literary techniques
-        const queryLiteraryText=`DELETE * FROM "project_literary" WHERE project_id=$1`;
+        const queryLiteraryText=`DELETE FROM "project_literary" WHERE project_id=$1`;
         await client.query(queryLiteraryText,projectId);
 
         //delete the row from projects
-        const queryText=`DELETE * FROM "project" WHERE id=$1`;
+        const queryText=`DELETE FROM "project" WHERE id=$1`;
         await client.query(queryText,projectId);
         
         //commit the changes
@@ -103,12 +108,12 @@ router.post('/', async (req, res) => {
         ("user_id", "title", "client", "description", "text", "integration", "campaign_goals", "goals_ctr", "goals_conversion", 
         "goals_sales_conversion", "goals_sales_length", "revenue_goals", "goals_social_shares", "goals_follow", "goals_impressions", "goals_views", "goals_comments", 
         "target_audience_age", "target_audience_race", "target_audience_region", "target_audience_ethnicity", "target_audience_gender", "target_audience_interests",
-        "target_audience_language", "talent_demographic", "formal", "project_strategy", "date_created") VALUES ($1, $2, $3, $4, $5 , $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, 
-        $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28 ) RETURNING "id";`
+        "target_audience_language", "talent_demographic", "formal", "project_strategy") VALUES ($1, $2, $3, $4, $5 , $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, 
+        $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27 ) RETURNING "id";`
         const projectQueryValues = [req.user.id, req.body.title, req.body.client, req.body.description, req.body.text, req.body.integration, req.body.campaign_goals, req.body.goals_ctr, req.body.goals_conversion, 
         req.body.goals_sales_conversion, req.body.goals_sales_length, req.body.revenue_goals, req.body.goals_social_shares, req.body.goals_follow, req.body.goals_impressions, req.body.goals_views, 
         req.body.goals_comments, req.body.target_audience_age, req.body.target_audience_race, req.body.target_audience_region, req.body.target_audience_ethnicity, req.body.target_audience_gender, 
-        req.body.target_audience_interests, req.body.target_audience_language, req.body.talent_demographic, req.body.formal, req.body.project_strategy, req.body.date_created];
+        req.body.target_audience_interests, req.body.target_audience_language, req.body.talent_demographic, req.body.formal, req.body.project_strategy];
         // STORE RETURNED PROJECT ID
         let projectId = await client.query(projectQueryText, projectQueryValues);
         projectId = projectId.rows[0].id;
@@ -127,9 +132,9 @@ router.post('/', async (req, res) => {
         await Promise.all(
             literaryTechnique.map( async (type) => {
                 const queryText = `INSERT INTO "project_literary" ("literary_id", "project_id") VALUES ($1, $2);`;
-                const toneQuery = 'SELECT id FROM literary_techniques WHERE type=$1';
+                const literaryTechniquesQuery = 'SELECT id FROM literary_techniques WHERE type=$1';
 
-                let literaryId = await client.query(toneQuery,[type]);
+                let literaryId = await client.query(literaryTechniquesQuery,[type]);
                 const queryValues = [literaryId.rows[0].id, projectId];
                 return client.query(queryText, queryValues);
             })
@@ -146,34 +151,6 @@ router.post('/', async (req, res) => {
     finally {
         client.release();
     }
-});
-
-// Get Request to retrieve all entries in Tone table
-router.get('/tone', (req, res) => {
-    const queryText=`SELECT "id","type"
-    FROM "tone";`;
-    
-    pool.query(queryText)
-        .then(results=>{
-            res.send(results.rows);})
-        .catch((error)=>{
-            console.log('Error GET /project', error);
-            res.sendStatus(500);
-        })
-});
-
-// Get Request to retrieve all entries in literary-techniques table
-router.get('/literary-techniques', (req, res) => {
-    const queryText=`SELECT "id","type"
-    FROM "literary_techniques";`;
-    pool.query(queryText)
-        .then(results=>{
-            // console.log('literary-techniques results:', results)
-            res.send(results.rows);})
-        .catch((error)=>{
-            console.log('Error GET /project', error);
-            res.sendStatus(500);
-        })
 });
 
 module.exports = router;

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EducatorForm from '../EducatorForm/EducatorForm';
 import AddCard from '../AddCard/AddCard';
+import DeleteEducator from '../DeleteEducator/DeleteEducator'
+
 
 class Educators extends Component {
 
@@ -9,6 +11,8 @@ class Educators extends Component {
         add: false,
         edit: false,
         toEdit: {},
+        deleteOpen: false,
+        deleteOpenEducator: null
     }
 
     componentDidMount = () => {
@@ -16,16 +20,36 @@ class Educators extends Component {
 
     }
 
-    deleteEducator = (educator) => {
-        console.log(educator);
-        this.props.dispatch({ type: "DELETE_EDUCATOR", payload: educator });
+    // deleteEducator = (educator) => {
+    //     console.log(educator);
+    //     this.props.dispatch({ type: "DELETE_EDUCATOR", payload: educator });
+    // }
+    handleDelete = (educator) => {
+        // set current educator in local state
+
+        // If closed, then open:
+        if (!this.state.deleteOpen) {
+            this.setState({
+                deleteOpenEducator: educator,
+                deleteOpen: true
+            })
+        }
+        // If open, close and set ID to null
+        // Pass this fuction as props to modal box
+        if (this.state.deleteOpen) {
+            this.setState({
+                deleteOpenEducator: null,
+                deleteOpen: false
+            })
+            this.props.dispatch({ type: "EDUCATOR_DEL_RESET" })
+        }
     }
 
     addEducator = () => {
         this.setState({
             add: !this.state.add
         }, () => {
-            console.log('add flag is:',this.state.add)
+            console.log('add flag is:', this.state.add)
         })
     }
 
@@ -56,7 +80,11 @@ class Educators extends Component {
                 {
                     this.state.add && <EducatorForm addEducator={this.addEducator} singleEducator={{}} />
                 }
-                {this.props.educator[0] && this.props.educator.map((edu, i) => (
+                {/* Show the Delete Educator Modal */}
+                {
+                    this.state.deleteOpen && <DeleteEducator specificEducator={this.state.deleteOpenEducator} handleDeleteModal={this.handleDelete} />
+                }
+                {this.props.educator.educatorReducer[0] && this.props.educator.educatorReducer.map((edu, i) => (
                     <div className="card__structure" key={i}>
                         <div className="card__imageContainer">
                             <img className="card__image" src={edu.image_url} />
@@ -73,7 +101,7 @@ class Educators extends Component {
 
                             <ul className="card__specialties">
                                 Specialties:
-                {edu.specialties[0][0]!==null&&edu.specialties.map((specialty, i) => { return <li key={i} > - {specialty[1]}</li>})}
+                {edu.specialties[0][0] !== null && edu.specialties.map((specialty, i) => { return <li key={i} > - {specialty[1]}</li> })}
                             </ul>
 
 
@@ -90,7 +118,7 @@ class Educators extends Component {
                                 (
                                     <>
                                         <div className="card__delete">
-                                            <i onClick={() => this.deleteEducator(edu)} class="fas fa-trash-alt fa-lg"></i>
+                                            <i onClick={() => this.handleDelete(edu)} class="fas fa-trash-alt fa-lg"></i>
                                         </div>
 
                                         <div className="card__edit">
@@ -105,7 +133,6 @@ class Educators extends Component {
                         </div>
                     </div>
                 ))}
-                <pre>{JSON.stringify(this.props.educator,null,2)}</pre>
 
             </div>
         )

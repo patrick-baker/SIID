@@ -1,5 +1,9 @@
 import * as d3 from "d3";
 
+//for other chart 
+const biasData={gender:{count: 4},lgbtq:{count: 0},race:{count: 6}}
+
+//sample of input for this chart
 const data=[{
     "data": {},
     "messages": [
@@ -102,7 +106,7 @@ const newData=distinctWords.map(word=>{
 
 /* example of new data
 [{
-    Patty:(2) [
+    Patty: [
     {
     message: "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead" ,
     name: "1:2-1:7" ,
@@ -151,8 +155,7 @@ const newData=distinctWords.map(word=>{
 
 
 
-//for other chart 
-const biasData={gender:{count: 4},lgbtq:{count: 0},race:{count: 6}}
+
 
 const width = 932; 
 const height = width;

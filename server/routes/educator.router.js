@@ -1,11 +1,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectNonAdmin } = require('../modules/admin-middleware');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-router.get('/', async (req, res) => {
+// GET educators
+router.get('/', rejectUnauthenticated, async (req, res) => {
     const query =
         `
         SELECT educator.id,name,bio,contact_info,image_url,ARRAY_AGG(ARRAY[b.id::text,b."type"]) AS specialties FROM educator 
@@ -24,10 +24,9 @@ router.get('/', async (req, res) => {
     }
 });
 
-/**
- * POST route template
- */
-router.post('/', async (req, res) => {
+
+// POST route requires you being authenticated
+router.post('/',rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
     try {
         const queryEducator = `INSERT INTO educator (name,bio,contact_info,image_url) VALUES ($1,$2,$3,$4) RETURNING id;`;
@@ -59,8 +58,8 @@ router.post('/', async (req, res) => {
 });
 
 
-
-router.delete('/:id', async (req, res) => {
+// DELETE route requires being an admin user
+router.delete('/:id', rejectNonAdmin, async (req, res) => {
     const client = await pool.connect();
     try {
 
@@ -82,8 +81,8 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-
-router.put('/', async (req, res) => {
+// PUT route - Updating of educator details.
+router.put('/', rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
     try {
         await client.query(`BEGIN`);

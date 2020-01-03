@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectItem from './ProjectItem';
+import { withRouter } from 'react-router-dom'
 
 class Projects extends Component {
     componentDidMount() {
         // Get all projects for this user
         this.props.dispatch({ type: 'GET_PROJECT' });
+        // Clear out reducers
+        this.props.dispatch({type: 'CLEAR_PROJECT'});
+        this.props.dispatch({ type: 'CLEAR_REPORT'})
+        // Should clear form next but we'll keep it this way for testing.
     }
 
     handleClick = () => {
-        console.log('button clicked');
-        
+        // clears prior project metadata from redux when user chooses to create new project
+        this.props.dispatch({ type: 'CLEAR_FORM_METADATA'});
+        // resets the stepper to step 1 on create project page
+        this.props.dispatch({ type: 'RESET_STEPPER'});
+        this.props.history.push(`/createproject`);
     }
 
     render() {
@@ -43,4 +51,4 @@ const mapStateToProps = (reduxState) => {
     return reduxState
 }
 
-export default connect(mapStateToProps)(Projects)
+export default withRouter(connect(mapStateToProps)(Projects))
