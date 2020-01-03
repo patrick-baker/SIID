@@ -14,16 +14,24 @@ function* getMetaData(action) {
 
 function* getProjectReportData(action) {
     try {
-      const project=yield axios.get(`/report/project/${action.payload.id}`);
-      yield put({type: 'SET_REPORT', payload: {id:action.payload.id, ...project.data}});
-      } catch (error) {
-      console.log('error in getProject for projectSaga', error);
-      }
-  }
+        const project = yield axios.get(`/report/project/${action.payload.id}`);
+        yield put({ type: 'SET_REPORT', payload: { id: action.payload.id, ...project.data } });
+    } catch (error) {
+        console.log('error in getProject for projectSaga', error);
+    }
+}
+
+function* getSuggestedEducators(action) {
+    try{
+
+    } catch (error){
+        console.log('Error in reportSaga getSuggestedEducators: ', error);   
+    }
+}
 
 function* ReportSaga() {
     yield takeEvery('GET_PROJECT_METADATA', getMetaData);
-    yield takeEvery('GET_SPECIFIC_PROJECT',getProjectReportData);
+    yield takeEvery('GET_SPECIFIC_PROJECT', getProjectReportData);
 }
 
 export default ReportSaga;
