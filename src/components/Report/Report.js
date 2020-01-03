@@ -25,7 +25,7 @@ class Report extends Component {
         // I prefer to not show the the whole text area selected.
         e.target.focus();
         this.setState({ successMessage: 'Copied!' });
-      };
+    };
 
     componentWillUnmount = () => {
         this.props.dispatch({ type: "AUTO_ML_RESET" })
@@ -34,8 +34,8 @@ class Report extends Component {
     render() {
         return (
             <div className='page__pad' >
-                {this.props.user.id === this.props.reportReducer.user_id && 
-                <button onClick={(e) => this.copyToClipboard(e)}>Copy to Clipboard</button>}
+                {this.props.user.id === this.props.reportReducer.user_id &&
+                    <button onClick={(e) => this.copyToClipboard(e)}>Copy to Clipboard</button>}
                 <h4>{this.state.successMessage}</h4>
                 <h1>Report Number {this.props.match.params.id} </h1>
                 <pre>
@@ -43,18 +43,17 @@ class Report extends Component {
                     {JSON.stringify(this.props.reportReducer, null, 2)}
                     Flag Reducer:
                 {JSON.stringify(this.props.flagReducer, null, 2)}
-                    Bias Reducer back from database:
-                {JSON.stringify(this.props.biasDataReducer, null, 2)}</pre>
-                {/* Holds urls value */}
-                <textarea
-                    ref={(textarea) => this.textArea = textarea}
-                    value={this.state.url}
-                 />
-                </pre>
-                Bias Reducer back from database: {this.props.biasDataReducer.status ? "YES" : "NO"}
-                {this.props.biasDataReducer.status &&
-                    <pre>{JSON.stringify(this.props.biasDataReducer.data, null, 2)}</pre>}
 
+                    Bias Reducer back from database: {this.props.biasDataReducer.status ? "YES" : "NO"}
+                    {this.props.biasDataReducer.status &&
+                        <pre>{JSON.stringify(this.props.biasDataReducer.data, null, 2)}</pre>}
+                        
+                    {/* Holds urls value */}
+                    <textarea
+                        ref={(textarea) => this.textArea = textarea}
+                        value={this.state.url}
+                    />
+                </pre>
             </div>
         )
     }
