@@ -40,7 +40,7 @@ router.get('/project/:id', async (req, res) => {
         const literaryTechniques = await client.query(literaryQueryText, [projectId]);
         if (verbose) console.log('In report.router /project get, literaryTechniques.rows[0].techniques is: ', literaryTechniques.rows[0].techniques);
         // SEND MAIN PROJECT DATA TOGETHER
-        res.send({ ...projectTableData.rows[0], tone: tone.rows[0].tones, literaryTechniques: literaryTechniques.rows[0].techniques});
+        res.send({ ...projectTableData.rows[0], tone: tone.rows[0].tones, literaryTechniques: literaryTechniques.rows[0].techniques });
         // END SQL TRX
         await client.query('COMMIT');
         // res.sendStatus(201);
@@ -57,24 +57,24 @@ router.get('/project/:id', async (req, res) => {
 /**
  * GET selected project bias count for report
  */
-router.get('/bias/:id', (req, res) => {
-    if (verbose) console.log('in report.router /bias GET, req.params.id is: ', req.params.id);
-    // CREATE VAR FOR PROJECT ID
-    const projectId = req.params.id;
-    // SELECT BIAS TYPES AND COUNTS
-    const queryText = `SELECT "bias"."type", "project_bias"."bias_count"
-    FROM "project_bias"
-    JOIN "bias"
-    ON "project_bias"."bias_id" = "bias"."id"
-    WHERE "project_bias"."project_id" = $1;`;
-    pool.query(queryText, [projectId])
-        .then(result => {
-            res.send(result.rows);
-        })
-        .catch(error => {
-            console.log('Error in report.router /bias GET: ', error);
-            res.sendStatus(500);
-        })
-});
+router.get('/bias/:id', async (req, res) => {
 
+    try {
+        if (verbose) console.log('in report.router /bias GET, req.params.id is: ', req.params.id);
+        // CREATE VAR FOR PROJECT ID
+        const projectId = req.params.id;
+        // SELECT BIAS TYPES AND COUNTS
+        const queryText = `SELECT "bias"."type", "project_bias"."bias_count"
+        FROM "project_bias"
+        JOIN "bias"
+        ON "project_bias"."bias_id" = "bias"."id"
+        WHERE "project_bias"."project_id" = $1;`;
+        let results = await pool.query(queryText, [projectId])
+        res.send(results.rows);
+
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
 module.exports = router;
