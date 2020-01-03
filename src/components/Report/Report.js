@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Report extends Component {
+    state = {
+        url: '',
+        successMessage: ''
+    }
 
     componentDidMount = () => {
         console.log(this.props.match.params.id);
         this.props.dispatch({ type: "GET_BIAS_DATA", payload: { id: this.props.match.params.id } });
         this.props.dispatch({ type: "GET_FLAGS", payload: { id: this.props.match.params.id } });
         this.props.dispatch({ type: "GET_SPECIFIC_PROJECT", payload: { id: this.props.match.params.id } });
+        this.setState({
+            url: `http://localhost:3000/#/report/${this.props.match.params.id}`
+        })
     }
     render() {
         return (
@@ -20,7 +27,7 @@ class Report extends Component {
                 {JSON.stringify(this.props.flagReducer, null, 2)}
                     Bias Reducer back from database:
                 {JSON.stringify(this.props.biasDataReducer, null, 2)}</pre>
-                
+                <h3>url: {this.state.url}</h3>
             </div>
                 )
             }
