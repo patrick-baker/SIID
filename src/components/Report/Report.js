@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import BubbleChart from './BubbleChartWrapper';
 
 class Report extends Component {
 
@@ -12,7 +13,7 @@ class Report extends Component {
     render() {
         return (
             <div className='page__pad' >
-                <h1>Report Number {this.props.match.params.id} </h1>
+                 <h1>Report Number {this.props.match.params.id} </h1>
                 <pre>
                     Report Reducer:
                     {JSON.stringify(this.props.reportReducer, null, 2)}
@@ -20,12 +21,13 @@ class Report extends Component {
                 {JSON.stringify(this.props.flagReducer, null, 2)}
                     Bias Reducer back from database:
                 {JSON.stringify(this.props.biasDataReducer, null, 2)}</pre>
-                
+
+                <BubbleChart />
             </div>
-                )
-            }
-        }
-        
-        const mapStateToProps = state => state;
-        
-        export default connect(mapStateToProps)(Report);
+        )
+    }
+}
+
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps)(Report);
