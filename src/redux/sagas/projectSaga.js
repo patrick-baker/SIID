@@ -16,7 +16,7 @@ function* createProject(action) {
   try {
     const newProject = action.payload;
     let project = yield axios.post(`/project`, newProject);
-
+    // retrieves metadata for this created project, to be displayed on the report
     yield put ({type:"GET_SPECIFIC_PROJECT",payload:{id:project.data.project_id}});
     yield put({type: 'GET_PROJECT'});
     yield put({type:"ANALYZE_TEXT",payload:{text:newProject.text,project_id:project.data.project_id}});
@@ -28,7 +28,7 @@ function* createProject(action) {
 // remove the project
 function* removeProject(action) {
   try {
-    const projectId=action.payload.id
+    const projectId=action.payload;
     yield axios.delete(`/project/${projectId}`);
     yield put({type: 'GET_PROJECT'});
     } catch (error) {

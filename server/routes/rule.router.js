@@ -65,7 +65,6 @@ router.post("/", rejectUnauthenticated, async (req, res) => {
 });
 
 // Logged in users can add rules. Admins can delete (see below)
-
 router.post("/add", rejectUnauthenticated, (req, res) => {
   const queryText = `INSERT INTO "rules"("data")VALUES($1)`
   const queryArgs = [req.body]
