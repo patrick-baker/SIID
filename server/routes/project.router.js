@@ -9,7 +9,7 @@ let verbose = true;
  * GET projects created by the user
  */
 router.get('/', (req, res) => {
-    const queryText =`SELECT "id","title","client", "description", "date_created" 
+    const queryText =`SELECT "id","title","client", "description", "date_created", "project_token" 
     FROM "project" WHERE "user_id"=$1 ORDER BY "date_created"`;
     const queryValues=[req.user.id];
     

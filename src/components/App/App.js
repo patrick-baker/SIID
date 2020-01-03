@@ -77,7 +77,7 @@ class App extends Component {
               />
 
               <Route 
-                path="/report/:id"
+                path="/report/:id/:token"
                 component={Report}
               />
               {/* This works the same as the other protected route, except that if the user is logged in,
