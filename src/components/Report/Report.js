@@ -43,18 +43,6 @@ class Report extends Component {
                     {JSON.stringify(this.props.reportReducer, null, 2)}
                     Flag Reducer:
                 {JSON.stringify(this.props.flagReducer, null, 2)}
-<<<<<<< HEAD
-                    Bias Reducer back from database:
-                {JSON.stringify(this.props.biasDataReducer, null, 2)}</pre>
-
-
-
-                {/* Holds urls value */}
-                <textarea
-                    ref={(textarea) => this.textArea = textarea}
-                    value={this.state.url}
-                />
-=======
 
                     Bias Reducer back from database: {this.props.biasDataReducer.status ? "YES" : "NO"}
                     {this.props.biasDataReducer.status && <>
@@ -67,7 +55,6 @@ class Report extends Component {
                     />
                 </pre>
 
->>>>>>> master
             </div>
         )
     }
