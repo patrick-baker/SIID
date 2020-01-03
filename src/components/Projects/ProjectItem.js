@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 class ProjectItem extends Component {
 
     routeToReport = () => {
-        this.props.history.push(`/report/${this.props.item.id}`);
+        this.props.history.push(`/report/${this.props.item.id}/${this.props.item.project_token}`);
     }
 
     render() {
