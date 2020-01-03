@@ -45,9 +45,9 @@ class Report extends Component {
                 {JSON.stringify(this.props.flagReducer, null, 2)}
 
                     Bias Reducer back from database: {this.props.biasDataReducer.status ? "YES" : "NO"}
-                    {this.props.biasDataReducer.status &&
-                        <pre>{JSON.stringify(this.props.biasDataReducer.data, null, 2)}</pre>}
-                        
+                    {this.props.biasDataReducer.status && <>
+                        {JSON.stringify(this.props.biasDataReducer.data, null, 2)}</>}
+
                     {/* Holds urls value */}
                     <textarea
                         ref={(textarea) => this.textArea = textarea}
