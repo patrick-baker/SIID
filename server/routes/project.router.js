@@ -152,5 +152,31 @@ router.post('/', async (req, res) => {
         client.release();
     }
 });
+// Get Request to retrieve all entries in Tone table	
+router.get('/tone', (req, res) => {	
+    const queryText=`SELECT "id","type"	
+    FROM "tone";`;	
 
+    pool.query(queryText)	
+        .then(results=>{	
+            res.send(results.rows);})	
+        .catch((error)=>{	
+            console.log('Error GET /project', error);	
+            res.sendStatus(500);	
+        })	
+});	
+
+// Get Request to retrieve all entries in literary-techniques table	
+router.get('/literary-techniques', (req, res) => {	
+    const queryText=`SELECT "id","type"	
+    FROM "literary_techniques";`;	
+    pool.query(queryText)	
+        .then(results=>{	
+            // console.log('literary-techniques results:', results)	
+            res.send(results.rows);})	
+        .catch((error)=>{	
+            console.log('Error GET /project', error);	
+            res.sendStatus(500);	
+        })	
+});
 module.exports = router;

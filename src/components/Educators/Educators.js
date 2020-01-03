@@ -20,10 +20,6 @@ class Educators extends Component {
 
     }
 
-    // deleteEducator = (educator) => {
-    //     console.log(educator);
-    //     this.props.dispatch({ type: "DELETE_EDUCATOR", payload: educator });
-    // }
     handleDelete = (educator) => {
         // set current educator in local state
 
