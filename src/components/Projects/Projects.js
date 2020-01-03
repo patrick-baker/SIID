@@ -4,6 +4,31 @@ import ProjectItem from './ProjectItem';
 import { withRouter } from 'react-router-dom'
 
 class Projects extends Component {
+    state={
+        deleteOpen: false,
+        deleteOpenProject: null
+    }
+
+    handleDelete = (project) => {
+        // set current project in local state
+
+        // If closed, then open:
+        if (!this.state.deleteOpen) {
+            this.setState({
+                deleteOpenProject: project,
+                deleteOpen: true
+            })
+        }
+        // If open, close and set ID to null
+        // Pass this fuction as props to modal box
+        if (this.state.deleteOpen) {
+            this.setState({
+                deleteOpenProject: null,
+                deleteOpen: false
+            })
+            this.props.dispatch({ type: "PROJECT_DEL_RESET" })
+        }
+    }
     componentDidMount() {
         // Get all projects for this user
         this.props.dispatch({ type: 'GET_PROJECT' });

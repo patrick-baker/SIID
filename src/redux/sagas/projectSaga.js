@@ -25,14 +25,16 @@ function* createProject(action) {
     }
 }
 
-// remove the project
-function* removeProject(action) {
+// delete the project
+function* deleteProject(action) {
   try {
     const projectId=action.payload;
     yield axios.delete(`/project/${projectId}`);
+    yield put({ type: "PROJECT_DEL_SUCCESS" })
     yield put({type: 'GET_PROJECT'});
     } catch (error) {
-    console.log('error in removeProject for projectSaga', error);
+        yield put({ type: "PROJECT_DEL_FAILURE" })
+    console.log('error in deleteProject for projectSaga', error);
     }
 }
 
@@ -40,8 +42,7 @@ function* removeProject(action) {
 function* ProjectSaga() {
   yield takeEvery('GET_PROJECT', getProject);
   yield takeEvery('CREATE_PROJECT', createProject);
-  yield takeEvery('REMOVE_PROJECT', removeProject); 
-  
+  yield takeEvery('DELETE_PROJECT', deleteProject);
 }
 
 export default ProjectSaga;
