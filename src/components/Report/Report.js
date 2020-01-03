@@ -43,6 +43,7 @@ class Report extends Component {
                     {JSON.stringify(this.props.reportReducer, null, 2)}
                     Flag Reducer:
                 {JSON.stringify(this.props.flagReducer, null, 2)}
+
                     Bias Reducer back from database:
                 {JSON.stringify(this.props.biasDataReducer, null, 2)}</pre>
                 {/* Holds urls value */}
@@ -51,10 +52,11 @@ class Report extends Component {
                     value={this.state.url}
                  />
                 </pre>
-                Bias Reducer back from database: {this.props.biasDataReducer.status ? "YES" : "NO"}
-                {this.props.biasDataReducer.status &&
-                    <pre>{JSON.stringify(this.props.biasDataReducer.data, null, 2)}</pre>}
 
+                Bias Reducer back from database: {this.props.biasDataReducer.status ? "YES" : "NO"}
+                {this.props.biasDataReducer.status &&<>
+                    {JSON.stringify(this.props.biasDataReducer.data, null, 2)}</>}
+</pre>
             </div>
         )
     }
