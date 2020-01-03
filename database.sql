@@ -5,13 +5,6 @@
 
  ---CREATE DATABASE NAMED SIID;
 
--- USER is a reserved keyword with Postgres
--- You must use double quotes in every query that user is in:
--- ex. SELECT * FROM "user";
--- Otherwise you will have errors!
-
- ---CREATE DATABASE NAMED SIID;
-
 -- need to look at timestamps for the forgot password query, need to use local timezones?
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
@@ -61,6 +54,7 @@ CREATE TABLE "project" (
     "talent_demographic" VARCHAR (120),
     "formal" BOOLEAN,
     "project_strategy" INT REFERENCES "strategy",
+    "project_token" VARCHAR (120),
     "date_created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { thisExpression } from '@babel/types';
 
 class Report extends Component {
     state = {
@@ -19,6 +20,8 @@ class Report extends Component {
     render() {
         return (
             <div className='page__pad' >
+                {this.props.user.id === this.props.reportReducer.user_id && 
+                <button>Copy to Clipboard</button>}
                 <h1>Report Number {this.props.match.params.id} </h1>
                 <pre>
                     Report Reducer:
