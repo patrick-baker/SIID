@@ -7,12 +7,8 @@ import { withRouter } from 'react-router-dom';
 class ProjectItem extends Component {
 
     routeToReport = () => {
-        this.props.history.push(`/report/${this.props.item.id}`);
+        this.props.history.push(`/report/${this.props.item.id}/${this.props.item.project_token}`);
     }
-
-    // handleDeleteProject = (id) => {
-    //     this.props.dispatch({type: 'REMOVE_PROJECT', payload: id})
-    // }
 
     render() {
         // Create vars for project object and date

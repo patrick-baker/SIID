@@ -1,13 +1,15 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+// import for project report link
+const crypto = require('crypto');
 let verbose = true;
 
 /**
  * GET projects created by the user
  */
 router.get('/', (req, res) => {
-    const queryText =`SELECT "id","title","client", "description", "date_created" 
+    const queryText =`SELECT "id","title","client", "description", "date_created", "project_token" 
     FROM "project" WHERE "user_id"=$1 ORDER BY "date_created"`;
     const queryValues=[req.user.id];
     
@@ -24,7 +26,6 @@ router.get('/', (req, res) => {
  * DELETE project from flag, tone, literary_techniques and projects 
  */
 router.delete('/:id', async (req, res) => { 
-    console.log("Test req.params is",req.params.id)
     const client = await pool.connect();
       
     try{ 
@@ -101,6 +102,9 @@ router.post('/', async (req, res) => {
             }
         }
         console.log('tone:', tone);
+
+        // creates token for shareable project report link
+        const token = crypto.randomBytes(20).toString('hex');
         
         // BEGIN INCASE OF ERROR/ROLLBACK
         await client.query('BEGIN');
@@ -109,12 +113,12 @@ router.post('/', async (req, res) => {
         ("user_id", "title", "client", "description", "text", "integration", "campaign_goals", "goals_ctr", "goals_conversion", 
         "goals_sales_conversion", "goals_sales_length", "revenue_goals", "goals_social_shares", "goals_follow", "goals_impressions", "goals_views", "goals_comments", 
         "target_audience_age", "target_audience_race", "target_audience_region", "target_audience_ethnicity", "target_audience_gender", "target_audience_interests",
-        "target_audience_language", "talent_demographic", "formal", "project_strategy") VALUES ($1, $2, $3, $4, $5 , $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, 
-        $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27 ) RETURNING "id";`
+        "target_audience_language", "talent_demographic", "formal", "project_strategy", "project_token") VALUES ($1, $2, $3, $4, $5 , $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, 
+        $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28 ) RETURNING "id";`
         const projectQueryValues = [req.user.id, req.body.title, req.body.client, req.body.description, req.body.text, req.body.integration, req.body.campaign_goals, req.body.goals_ctr, req.body.goals_conversion, 
         req.body.goals_sales_conversion, req.body.goals_sales_length, req.body.revenue_goals, req.body.goals_social_shares, req.body.goals_follow, req.body.goals_impressions, req.body.goals_views, 
         req.body.goals_comments, req.body.target_audience_age, req.body.target_audience_race, req.body.target_audience_region, req.body.target_audience_ethnicity, req.body.target_audience_gender, 
-        req.body.target_audience_interests, req.body.target_audience_language, req.body.talent_demographic, req.body.formal, req.body.project_strategy];
+        req.body.target_audience_interests, req.body.target_audience_language, req.body.talent_demographic, req.body.formal, req.body.project_strategy, token];
         // STORE RETURNED PROJECT ID
         let projectId = await client.query(projectQueryText, projectQueryValues);
         projectId = projectId.rows[0].id;

@@ -1,4 +1,4 @@
-import { put, takeLatest, takeEvery, actionChannel } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 // gets the list of the user's projects
@@ -18,14 +18,6 @@ function* getProjectReportData(action) {
         yield put({ type: 'SET_REPORT', payload: { id: action.payload.id, ...project.data } });
     } catch (error) {
         console.log('error in getProject for projectSaga', error);
-    }
-}
-
-function* getSuggestedEducators(action) {
-    try{
-
-    } catch (error){
-        console.log('Error in reportSaga getSuggestedEducators: ', error);   
     }
 }
 

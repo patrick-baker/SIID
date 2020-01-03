@@ -16,10 +16,10 @@ router.get('/project/:id', async (req, res) => {
         // BEGIN INCASE OF ERROR/ROLLBACK
         await client.query('BEGIN');
         // SELECT FROM PROJECTS TABLE
-        const projectQueryText = `SELECT "title", "client", "description", "text", "integration", "campaign_goals", "goals_ctr", "goals_conversion", 
+        const projectQueryText = `SELECT "user_id", "title", "client", "description", "text", "integration", "campaign_goals", "goals_ctr", "goals_conversion", 
         "goals_sales_conversion", "goals_sales_length", "revenue_goals", "goals_social_shares", "goals_follow", "goals_impressions", "goals_views", "goals_comments", 
         "target_audience_age", "target_audience_race", "target_audience_region", "target_audience_ethnicity", "target_audience_gender", "target_audience_interests",
-        "target_audience_language", "talent_demographic", "formal", "project_strategy", "date_created"
+        "target_audience_language", "talent_demographic", "formal", "project_strategy", "project_token", "date_created"
         FROM "project" WHERE "id"=$1;`;
         const projectTableData = await client.query(projectQueryText, [projectId]);
         if (verbose) console.log('In report.router /project get, projectTableData.rows[0] is: ', projectTableData.rows[0]);
