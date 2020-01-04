@@ -25,8 +25,8 @@ class SIIDTool extends Component {
 
 
     componentDidUpdate(){
-        if(this.props.reportReducer.id) {
-            this.props.history.push(`/report/${this.props.reportReducer.id}`);
+        if(this.props.reportReducer.id && this.props.reportReducer.project_token) {
+            this.props.history.push(`/report/${this.props.reportReducer.id}/${this.props.reportReducer.project_token}`);
         }
      }
 
