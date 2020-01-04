@@ -157,7 +157,7 @@ const newData=distinctWords.map(word=>{
 
 
 
-const width = 932; 
+const width = 600; 
 const height = width;
 const format = d3.format(",d");
 

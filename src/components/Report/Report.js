@@ -14,15 +14,16 @@ class Report extends Component {
         return (
             <div className='page__pad' >
                  <h1>Report Number {this.props.match.params.id} </h1>
+                 {this.props.flagReducer[0]&&<BubbleChart />}
                 <pre>
                     Report Reducer:
                     {JSON.stringify(this.props.reportReducer, null, 2)}
                     Flag Reducer:
                 {JSON.stringify(this.props.flagReducer, null, 2)}
                     Bias Reducer back from database:
-                {JSON.stringify(this.props.biasDataReducer, null, 2)}</pre>
+                {JSON.stringify(this.props.biasDataReducer, null, 2)}</pre> 
 
-                <BubbleChart />
+                
             </div>
         )
     }

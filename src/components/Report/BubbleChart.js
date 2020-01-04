@@ -1,174 +1,77 @@
-import * as d3 from "d3";
+import * as d3 from 'd3';
 
-//for other chart 
-const biasData={gender:{count: 4},lgbtq:{count: 0},race:{count: 6}}
-
-//sample of input for this chart
-const data=[{
-    "data": {},
-    "messages": [
-        {
-            "message": "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead",
-            "name": "1:2-1:7",
-            "reason": "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead",
-            "line": 1,
-            "column": 2,
-            "location": {
-                "start": {
-                    "line": 1,
-                    "column": 2,
-                    "offset": 1
-                },
-                "end": {
-                    "line": 1,
-                    "column": 7,
-                    "offset": 6
-                }
-            },
-            "source": "retext-SIID-SSID",
-            "ruleId": "Test-2",
-            "fatal": false,
-            "actual": "Patty",
-            "expected": [
-                "Patrick",
-                "Mr. Baker"
-            ],
-            "note": "Refer to the person, rather than the disability, first."
-        },
-        {
-            "message": "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead",
-            "name": "1:2-1:7",
-            "reason": "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead",
-            "line": 1,
-            "column": 2,
-            "location": {
-                "start": {
-                    "line": 1,
-                    "column": 2,
-                    "offset": 1
-                },
-                "end": {
-                    "line": 1,
-                    "column": 7,
-                    "offset": 6
-                }
-            },
-            "source": "retext-SIID-SSID",
-            "ruleId": "Test-2",
-            "fatal": false,
-            "actual": "Patty",
-            "expected": [
-                "Patrick",
-                "Mr. Baker"
-            ],
-            "note": "Refer to the person, rather than the disability, first."
-        },
-        {
-            "message": "`Tommy` may be insensitive, use `Thomas` instead",
-            "name": "1:2-1:7",
-            "reason": "`Tommy` may be insensitive, use `Patrick` instead",
-            "line": 1,
-            "column": 2,
-            "location": {
-                "start": {
-                    "line": 1,
-                    "column": 2,
-                    "offset": 1
-                },
-                "end": {
-                    "line": 1,
-                    "column": 7,
-                    "offset": 6
-                }
-            },
-            "source": "retext-SIID-SSID",
-            "ruleId": "Test-2",
-            "fatal": false,
-            "actual": "Tommy",
-            "expected": [
-                "Thomas"
-            ],
-            "note": "Refer to the person, rather than the disability, first."
-        }
-    ],
-    "history": [],
-    "cwd": "/Users/davidsearl/prime/tier3/SIID",
-    "contents": "\"Patty went for a beer\""
-}];
 //grab array of distinct problem words
-const distinctWords=[...new Set(data[0].messages.map(obj=> obj.actual))];
+//const distinctWords=[...new Set(data[0].messages.map(obj=> obj.actual))];
 
 //loop new array and build sub arrays for each value 
-const newData=distinctWords.map(word=>{
-    return{[word]: data[0].messages.filter(obj=>obj.actual===word)}
-}) 
+// const newData=distinctWords.map((word,i)=>{
+//     return{[word]: data[0].messages.filter(obj=>obj.actual===word)}
+// }) 
 
+//clean up the data 
+// const clean=newData.map((d,i)=>{
+//   const current=d[distinctWords[i]];
+//   const newObj={
+//     actual: current[0].actual,
+//     count: current.length,
+//     expected: current[0].expected,
+//     messsage: current[0].message,
+//     note: current[0].note,
+//   } 
+//   return newObj;
+// });
 
-/* example of new data
-[{
-    Patty: [
-    {
-    message: "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead" ,
-    name: "1:2-1:7" ,
-    reason: "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead" ,
-    line: 1 ,
-    column: 2 ,
-    location: {...},
-    source: "retext-SIID-SSID" ,
-    ruleId: "Test-2" ,
-    fatal: false ,
-    actual: "Patty" ,
-    expected:(2) [...],
-    note: "Refer to the person, rather than the disability, first."
-    },
-    {
-    message: "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead" ,
-    name: "1:2-1:7" ,
-    reason: "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead" ,
-    line: 1 ,
-    column: 2 ,
-    location: {...},
-    source: "retext-SIID-SSID" ,
-    ruleId: "Test-2" ,
-    fatal: false ,
-    actual: "Patty" ,
-    expected:(2) [...],
-    note: "Refer to the person, rather than the disability, first."
-    }]},
-    {
-    Tommy:(1) [
-    {
-    message: "`Tommy` may be insensitive, use `Thomas` instead" ,
-    name: "1:2-1:7" ,
-    reason: "`Tommy` may be insensitive, use `Patrick` instead" ,
-    line: 1 ,
-    column: 2 ,
-    location: {...},
-    source: "retext-SIID-SSID" ,
-    ruleId: "Test-2" ,
-    fatal: false ,
-    actual: "Tommy" ,
-    expected:(1) [...],
-    note: "Refer to the person, rather than the disability, first."
-    }]
-}] */
+// const clean=[{
+//     actual: "Patty" ,
+//     count: 2 ,
+//     expected: ["Patrick" , "Mr. Baker"],
+//     message: "`Patty` may be insensitive, use `Patrick`, `Mr. Baker` instead" ,
+//     note: "Refer to the person, rather than the disability, first."
+//     },
+//     {
+//     actual: "Tommy" ,
+//     count: 1 ,
+//     expected: [ "Thomas" ],
+//     message: "`Tommy` may be insensitive, use `Thomas` instead" ,
+//     note: "Refer to the person, rather than the disability, first."
+//     },
+//     {
+//         actual: "Ariel" ,
+//         count: 5 ,
+//         expected: [ "Ayriel" ],
+//         message: "`Ariel` may be insensitive, use `Ayriel` instead" ,
+//         note: "Refer to the person, rather than the disability, first."
+//     },
+//     {
+//         actual: "heather" ,
+//         count: 4 ,
+//         expected: [ "Heather" ],
+//         message: "`heather` may be insensitive, use `Heather` instead" ,
+//         note: "Refer to the person, rather than the disability, first."
+//     },
+//     {
+//         actual: "Davey" ,
+//         count: 15 ,
+//         expected: [ "David" ],
+//         message: "`Davey` may be insensitive, use `David` instead" ,
+//         note: "Refer to the person, rather than the disability, first."
+//     }
+// ];
 
-
-
-
-
-const width = 932; 
+const width = 300; 
 const height = width;
 const format = d3.format(",d");
+//const color = d3.scaleOrdinal(data.map(d => d.group), d3.schemeCategory10);
 
 export default class BubbleChart {
-    constructor(element){
+    constructor(element, clean){
         const pack = data => d3.pack()
                                 .size([width - 2, height - 2])
                                 .padding(3)
-                                (d3.hierarchy({children: data}).sum(d => d.value));
-        const root = pack(data);
-        const color = d3.scaleOrdinal(data.map(d => d.group), d3.schemeCategory10);
+                                (d3.hierarchy({children: data}).sum(d => d.count));
+        const root = pack(clean);
+        const color = d3.scaleOrdinal(clean.map(d => d.actual), d3.schemeCategory10)
+                        .range(["#9E8DF8","#7793F0","#D9B8E6","#704AD6","#5B63DA","#B76AD4","#B534E6","#E9E5FC","#FAFAFA", "#F8EDFC"]);
         const svg = d3.select(element).append("svg")
             .attr("viewBox", [0, 0, width, height])
             .attr("font-size", 10)
@@ -185,7 +88,7 @@ export default class BubbleChart {
             .attr("id", (d,i) => (d.leafUid = i))
             .attr("r", d => d.r)
             .attr("fill-opacity", 0.7)
-            .attr("fill", d => color(d.data.group));
+            .attr("fill", d => color(d.data.actual));
       
         leaf.append("clipPath")
             //.attr("id", d => (d.clipUid = DOM.uid("clip")).id)
@@ -196,14 +99,14 @@ export default class BubbleChart {
         leaf.append("text")
             .attr("clip-path", d => d.clipUid)
           .selectAll("tspan")
-          .data(d => d.data.name.split(/(?=[A-Z][^A-Z])/g))
+          .data(d => d.data.actual.split(/(?=[A-Z][^A-Z])/g))
           .join("tspan")
             .attr("x", 0)
             .attr("y", (d, i, nodes) => `${i - nodes.length / 2 + 0.8}em`)
             .text(d => d);
       
         leaf.append("title")
-            .text(d => `${d.data.title}\n${format(d.value)}`);
+            .text(d => `${d.data.message}\n This word was used: ${format(d.data.count)} time(s)`);
           
         return svg.node();
       
