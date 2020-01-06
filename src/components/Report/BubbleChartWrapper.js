@@ -15,7 +15,7 @@ class BubbleChartWrapper extends Component {
             return{[word]: data.filter(obj=>obj.actual===word)}
         })  
 
-        //clean up the data 
+        //clean up the data by making it an object 
         const clean=newData.map((d,i)=>{
             const current=d[distinctWords[i]];
             const newObj={
@@ -25,10 +25,10 @@ class BubbleChartWrapper extends Component {
                 messsage: current[0].message,
                 note: current[0].note,
             } 
-        return newObj;
+            return newObj;
         });
         
-        new BubbleChart(this.refs.chart, clean)
+        clean[0] && new BubbleChart(this.refs.chart, clean)
     }
 
     render() {

@@ -35,6 +35,7 @@ class Report extends Component {
     render() {
         return (
             <div className='page__pad' >
+
                 {/* Only loads report if the url token matches the project token in DB */}
                 {this.props.reportReducer.project_token === this.props.match.params.token &&
                     <div>
@@ -42,13 +43,17 @@ class Report extends Component {
                             <button onClick={(e) => this.copyToClipboard(e)}>Copy to Clipboard</button>}
                         <h4>{this.state.successMessage}</h4>
                         <h1>Report Number {this.props.match.params.id} </h1>
-                        {/* {this.props.flagReducer[0] && <BubbleChart />} */}
+                        {
+                    this.props.flagReducer[0] 
+                    && this.props.flagReducer[0].messages 
+                    && this.props.flagReducer[0].messages.messages 
+                    && <BubbleChart />
+                    }
                         <pre>
                             Report Reducer:
                         {JSON.stringify(this.props.reportReducer, null, 2)}
                             Flag Reducer:
                     {JSON.stringify(this.props.flagReducer, null, 2)}
-
                             Bias Reducer back from database: {this.props.biasDataReducer.status ? "YES" : "NO"}
                             {this.props.biasDataReducer.status && <>
                                 {JSON.stringify(this.props.biasDataReducer.data, null, 2)}</>}
