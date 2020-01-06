@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+
 class LoginPage extends Component {
   state = {
     username: '',
@@ -31,7 +32,7 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="login__main">
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -47,7 +48,7 @@ class LoginPage extends Component {
               Username:
               <input
                 type="text"
-                name="username"
+                className="login__input"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
               />
@@ -73,26 +74,25 @@ class LoginPage extends Component {
             />
           </div>
         </form>
-        <center>
-          <div>
+
+        <div>
           <button
             type="button"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
           >
             Register
           </button>
-          </div>
-          <div>
+        </div>
+        <div>
           <button
             type="button"
             className="link-button"
-            onClick={() => {this.props.history.push('/forgotPassword')}}
+            onClick={() => { this.props.history.push('/forgotPassword') }}
           >
             Forgot Password
           </button>
-          </div>
-        </center>
+        </div>
       </div>
     );
   }

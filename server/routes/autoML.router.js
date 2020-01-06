@@ -30,6 +30,8 @@ router.post("/", async (req, res) => {
                 await pool.query(`INSERT INTO project_bias(project_id,bias_id,bias_count) VALUES($1,$2,$3)`,[req.body.project_id,biasId.rows[0].id,data[biasKey].count])
             }
         }
+        await pool.query('UPDATE project SET analyzed=$1 WHERE id=$2;',[true,req.body.project_id])
+
         res.send(data);
     } catch (error) {
         console.log(error);
@@ -41,18 +43,12 @@ router.post("/", async (req, res) => {
 
 let getData = async (text) => {
     let biasCounter = {
-        'race': {
-            count: 0
-        },
-        'lgbtq': {
-            count: 0
-        },
-        'religion': {
-            count: 0
-        },
-        'gender': {
-            count: 0
-        }
+        'race': 0,
+        'lgbtq': 0,
+        'religion':0,
+        'gender': 0,
+        'disability': 0,
+        'total':0
     }
 
     for (sentence of text) {
@@ -60,7 +56,8 @@ let getData = async (text) => {
             if (sentence) {
                 let sentenceData = await getBias(sentence);
                 if (sentenceData != 'NO BIAS') {
-                    biasCounter[sentenceData].count++;
+                    biasCounter[sentenceData]++;
+                    biasCounter['total']++;
                 }
             }
 
