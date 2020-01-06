@@ -30,6 +30,8 @@ router.post("/", async (req, res) => {
                 await pool.query(`INSERT INTO project_bias(project_id,bias_id,bias_count) VALUES($1,$2,$3)`,[req.body.project_id,biasId.rows[0].id,data[biasKey].count])
             }
         }
+        await pool.query('UPDATE project SET analyzed=$1 WHERE id=$2;',[true,req.body.project_id])
+
         res.send(data);
     } catch (error) {
         console.log(error);
@@ -52,6 +54,9 @@ let getData = async (text) => {
         },
         'gender': {
             count: 0
+        },
+        'disability': {
+            counter:0
         }
     }
 
