@@ -43,21 +43,12 @@ router.post("/", async (req, res) => {
 
 let getData = async (text) => {
     let biasCounter = {
-        'race': {
-            count: 0
-        },
-        'lgbtq': {
-            count: 0
-        },
-        'religion': {
-            count: 0
-        },
-        'gender': {
-            count: 0
-        },
-        'disability': {
-            counter:0
-        }
+        'race': 0,
+        'lgbtq': 0,
+        'religion':0,
+        'gender': 0,
+        'disability': 0,
+        'total':0
     }
 
     for (sentence of text) {
@@ -65,7 +56,8 @@ let getData = async (text) => {
             if (sentence) {
                 let sentenceData = await getBias(sentence);
                 if (sentenceData != 'NO BIAS') {
-                    biasCounter[sentenceData].count++;
+                    biasCounter[sentenceData]++;
+                    biasCounter['total']++;
                 }
             }
 
