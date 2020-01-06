@@ -26,7 +26,6 @@ router.get('/', (req, res) => {
  * DELETE project from flag, tone, literary_techniques and projects 
  */
 router.delete('/:id', async (req, res) => { 
-    console.log("Test req.params is",req.params.id)
     const client = await pool.connect();
       
     try{ 
