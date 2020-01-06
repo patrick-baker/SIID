@@ -34,16 +34,6 @@ class EducatorForm extends Component {
         })
     }
 
-    // addSpecialites = (event) => {
-    //     if (!this.state.newEducator.specialties.includes(event.target.value)) {
-    //         this.setState({
-    //             newEducator: {
-    //                 ...this.state.newEducator,
-    //                 specialties: [...this.state.newEducator.specialties, event.target.value]
-    //             }
-    //         })
-    //     }
-    // }
 
     submitEducator = () => {
         console.log('in submitEdu')
@@ -81,18 +71,6 @@ class EducatorForm extends Component {
         }
     }
 
-    // removeSpecialty = (specialty) => {
-    //     let copySpecialties = this.state.newEducator.specialties;
-    //     copySpecialties.splice(copySpecialties.indexOf(specialty), 1);
-
-    //     this.setState({
-    //         newEducator: {
-    //             ...this.state.newEducator,
-    //             specialties: copySpecialties
-    //         }
-    //     })
-    // }
-
     flipCheck = (event) => {
         let id = Number(event.target.name);
         console.log('in flip check', id)
@@ -122,7 +100,7 @@ class EducatorForm extends Component {
 
                     <div className="modal__form">
                         <div>
-                            {/* <pre>{JSON.stringify(this.state,null,2)}</pre>  */}
+                            
                             <label>
                                 <div className="formInput__labelText" >Name:</div>
                                 <input placeholder="Name"
