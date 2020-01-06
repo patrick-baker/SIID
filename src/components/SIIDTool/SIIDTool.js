@@ -19,12 +19,11 @@ class SIIDTool extends Component {
             ...this.props.form,
             text:this.state.text
         }});
-
-
     }
 
 
     componentDidUpdate(){
+        console.log(this.props.reportReducer);
         if(this.props.reportReducer.id && this.props.reportReducer.project_token) {
             this.props.history.push(`/report/${this.props.reportReducer.id}/${this.props.reportReducer.project_token}`);
         }

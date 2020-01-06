@@ -6,27 +6,22 @@ const router = express.Router();
 router.get('/:id', async(req, res) => {
     
     try {
-        const queryText=`SELECT * FROM project_bias JOIN bias ON bias.id=project_bias.bias_id WHERE project_id=$1;`;
+        const queryText=`SELECT type, bias_count FROM project_bias JOIN bias ON bias.id=project_bias.bias_id WHERE project_id=$1;`;
         let biasData = await pool.query(queryText,[req.params.id]);
 
         let biasCounter = {
-            'race': {
-                count: 0
-            },
-            'lgbtq': {
-                count: 0
-            },
-            'religion': {
-                count: 0
-            },
-            'gender': {
-                count: 0
-            }
+            'race': 0,
+            'lgbtq': 0,
+            'religion': 0,
+            'gender': 0,
+            'disability':0,
+            'total':0
         }
 
+
         for (let bias of biasData.rows) {
-            console.log(bias.type);
             biasCounter[bias.type] = bias.bias_count;
+            biasCounter['total'] += bias.bias_count;
         }
 
 
