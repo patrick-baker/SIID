@@ -39,7 +39,12 @@ class Report extends Component {
                     <button onClick={(e) => this.copyToClipboard(e)}>Copy to Clipboard</button>}
                 <h4>{this.state.successMessage}</h4>
                 <h1>Report Number {this.props.match.params.id} </h1>
-                {this.props.flagReducer[0]&&<BubbleChart />}
+                {
+                    this.props.flagReducer[0] 
+                    && this.props.flagReducer[0].messages 
+                    && this.props.flagReducer[0].messages.messages 
+                    && <BubbleChart />
+                    }
                 <pre>
                     Report Reducer:
                     {JSON.stringify(this.props.reportReducer, null, 2)}
