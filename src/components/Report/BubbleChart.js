@@ -99,7 +99,7 @@ export default class BubbleChart {
         leaf.append("text")
             .attr("clip-path", d => d.clipUid)
           .selectAll("tspan")
-        //   .data(d => d.data.actual.split(/(?=[A-Z][^A-Z])/g))
+          .data(d => d.data.actual.split(/(?=[A-Z][^A-Z])/g))
           .join("tspan")
             .attr("x", 0)
             .attr("y", (d, i, nodes) => `${i - nodes.length / 2 + 0.8}em`)
