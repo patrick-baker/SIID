@@ -79,4 +79,10 @@
         margin: 1rem;
         width: 10rem;
     }
+
+    &__report-textarea {
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+    }
 }
