@@ -26,10 +26,33 @@
         }
     }
 
-    &__text {
+    &__report {
         font-size: 1.3rem;
-        color: $color-neutral-blue;
-        border: none;
+        color: white;
+        background: $color-neutral-blue;
+        border-radius: 4px;
+        width:5rem;
+        height:1.5rem;
+        padding:2%;
+        border: 1px solid rgb(32, 32, 32);
+        box-shadow: 1px 1px 10px -3px #363636;
+        left:1.2rem;
+        bottom:1.2rem;
+        position: absolute;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:active {
+            box-shadow: 1px 1px 10px -3px #363636;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+
     }
 
     &__generic {
