@@ -43,9 +43,7 @@ class IntegrationsDropdown extends React.Component {
           value={this.props.form.integration}
           onChange={this.handleChange}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
+          <MenuItem value={'None'}>None</MenuItem>
           <MenuItem value={'Salesforce'}>Salesforce</MenuItem>
           <MenuItem value={'Adobe'}>Adobe Marketing</MenuItem>
           <MenuItem value={'Hubspot'}>Hubspot</MenuItem>
