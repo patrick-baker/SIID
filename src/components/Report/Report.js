@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BubbleChart from './BubbleChartWrapper';
+import DonutChartWrapper from './DonutChart.js/DonutChartWrapper';
 
 class Report extends Component {
     state = {
@@ -47,6 +48,11 @@ class Report extends Component {
                     && this.props.flagReducer[0].messages.messages 
                     && <BubbleChart />
                     }
+
+                    {this.props.biasDataReducer.status &&
+                        <DonutChartWrapper />
+                    }
+
                         <pre>
                             Report Reducer:
                         {JSON.stringify(this.props.reportReducer, null, 2)}
