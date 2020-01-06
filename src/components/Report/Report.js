@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import BubbleChart from './BubbleChartWrapper';
 import { thisExpression } from '@babel/types';
 
 class Report extends Component {
@@ -38,6 +39,7 @@ class Report extends Component {
                     <button onClick={(e) => this.copyToClipboard(e)}>Copy to Clipboard</button>}
                 <h4>{this.state.successMessage}</h4>
                 <h1>Report Number {this.props.match.params.id} </h1>
+                {this.props.flagReducer[0]&&<BubbleChart />}
                 <pre>
                     Report Reducer:
                     {JSON.stringify(this.props.reportReducer, null, 2)}
