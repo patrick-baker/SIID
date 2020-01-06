@@ -3,7 +3,7 @@
         display: inline-block;
         position: relative;
         width: 20rem;
-        height:32rem;
+        height:28rem;
         border:.2rem solid $color-neutral-blue;
         margin:1rem;
         border-radius: .4rem;
@@ -16,8 +16,9 @@
 
     &__project {
         display: inline-block;
+        position: relative;
         width: 20rem;
-        height:20rem;
+        height:28rem;
         border:.2rem solid $color-neutral-blue;
         margin:1rem;
         border-radius: .4rem;
@@ -32,7 +33,7 @@
 
     &__imageContainer{
         width:100%;
-        height:200px;
+        height:150px;
         display:flex;
         justify-content:center;
         align-items:center;
@@ -79,7 +80,7 @@
     &__createCard {
         display: inline-block;
         width: 20rem;
-        height:32rem;
+        height:28rem;
         border:.2rem solid $color-neutral-blue;
         margin:1rem;
         border-radius: .4rem;
@@ -90,6 +91,21 @@
             cursor: pointer;
         }
     }
+
+    // &__createCardProject {
+    //     display: inline-block;
+    //     width: 20rem;
+    //     height:20rem;
+    //     border:.2rem solid $color-neutral-blue;
+    //     margin:1rem;
+    //     border-radius: .4rem;
+    //     box-shadow: 0 .3rem .8rem -.3rem #313131;
+    //     overflow:hidden;
+    //     &:hover {
+    //         box-shadow: 0rem .3rem .8rem -.1rem #313131;
+    //         cursor: pointer;
+    //     }
+    // }
 
     &__plusIcon {
         display:block;

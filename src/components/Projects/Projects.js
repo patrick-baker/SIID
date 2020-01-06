@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import ProjectItem from './ProjectItem';
 import { withRouter } from 'react-router-dom'
 import DeleteProject from '../DeleteProject/DeleteProject'
+import AddCard from '../AddCard/AddCard';
+
 class Projects extends Component {
-    state={
+    state = {
         deleteOpen: false,
         deleteOpenProject: null
     }
@@ -33,16 +35,16 @@ class Projects extends Component {
         // Get all projects for this user
         this.props.dispatch({ type: 'GET_PROJECT' });
         // Clear out reducers
-        this.props.dispatch({type: 'CLEAR_PROJECT'});
-        this.props.dispatch({ type: 'CLEAR_REPORT'})
-        
+        this.props.dispatch({ type: 'CLEAR_PROJECT' });
+        this.props.dispatch({ type: 'CLEAR_REPORT' })
+
     }
 
     handleClick = () => {
         // clears prior project metadata from redux when user chooses to create new project
-        this.props.dispatch({ type: 'CLEAR_FORM_METADATA'});
+        this.props.dispatch({ type: 'CLEAR_FORM_METADATA' });
         // resets the stepper to step 1 on create project page
-        this.props.dispatch({ type: 'RESET_STEPPER'});
+        this.props.dispatch({ type: 'RESET_STEPPER' });
         this.props.history.push(`/createproject`);
     }
 
@@ -54,10 +56,10 @@ class Projects extends Component {
                     this.state.deleteOpen && <DeleteProject specificProject={this.state.deleteOpenProject} handleDeleteModal={this.handleDelete} />
                 }
                 {/* Display Create Project card */}
-                <div className="card__project">
-                    <div className="card__details">
-                        <h1 className="heading-secondary">CREATE NEW PROJECT</h1>
-                        <button onClick={this.handleClick}><i class="fas fa-plus"></i></button>
+                <div className="card__createCard">
+                    <div className="card__plusIconDiv">
+                        <i class="fas fa-clipboard-list fa-4x card__plusIcon"></i>
+                        Create Project
                     </div>
                 </div>
                 {/* Display past project cards */}
