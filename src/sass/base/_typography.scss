@@ -43,6 +43,9 @@ body {
 }
 
 .caption {
+  color:rgb(31, 31, 31);
+  margin-left:5%;
+  margin-right:5%;
   font-size: 1.2rem;
   font-weight: normal;
   line-height: 1.6rem;
@@ -50,14 +53,19 @@ body {
 
 .project {
   &__title {
+    margin:5%;
     color: $color-primary-blue;
   }
 
   &__client {
-    text-transform: uppercase;
+    color:rgb(31, 31, 31);
+    margin:5%;
   }
 
-  // &__date {
-  //   text-transform: uppercase;
-  // }
+  &__date {
+    position: absolute;
+    left:1.35rem;
+    bottom:4.5rem;
+    color:rgb(158, 158, 158);
+  }
 }
