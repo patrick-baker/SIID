@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BubbleChart from './BubbleChartWrapper';
+import Spinner from '../Spinner/Spinner';
 
 class Report extends Component {
     state = {
@@ -33,7 +34,14 @@ class Report extends Component {
 
     render() {
         return (
-            <div className='page__pad' >
+            <>
+            {
+                this.props.reportReducer.analyzed === false &&
+                <Spinner/>
+            }
+            {
+                this.props.reportReducer.analyzed === true && 
+                <div className='page__pad' >
                 {/* Only loads report if the url token matches the project token in DB */}
                 {this.props.reportReducer.project_token === this.props.match.params.token &&
                     <div>
@@ -58,6 +66,7 @@ class Report extends Component {
 
                             {/* Holds urls value */}
                             <textarea
+                                className="formInput__report-textarea"
                                 ref={(textarea) => this.textArea = textarea}
                                 value={this.state.url}
                             />
@@ -65,6 +74,8 @@ class Report extends Component {
                     </div>
                 }
             </div>
+            }
+        </>
         )
     }
 }
