@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class RegisterPage extends Component {
   state = {
     username: '',
     password: '',
+    confirmPassword: '',
     email: '',
   };
 
   registerUser = (event) => {
     event.preventDefault();
-    const {username, password, email} = this.state;
-    if (username && password && email) {
+    const { username, password, email, confirmPassword } = this.state;
+    if (username && password && email && password == confirmPassword) {
       this.props.dispatch({
         type: 'REGISTER',
         payload: {
@@ -21,7 +22,7 @@ class RegisterPage extends Component {
         },
       });
     } else {
-      this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+      this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
     }
   } // end registerUser
 
@@ -33,7 +34,7 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="login__main">
         {this.props.errors.registrationMessage && (
           <h2
             className="alert"
@@ -43,59 +44,77 @@ class RegisterPage extends Component {
           </h2>
         )}
         <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
+          <h1 className="login__header" >Register User</h1>
           <div>
-            <label htmlFor="username">
+            <label htmlFor="username" className="login__inputLabel">
               Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="email">
-              Email:
-              <input
-                type="text"
-                name="email"
-                value={this.state.email}
-                onChange={this.handleInputChangeFor('email')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
+              </label>
             <input
-              className="register"
+              type="text"
+              name="username"
+              className="login__input"
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+            />
+
+          </div>
+          <div>
+            <label htmlFor="email" className="login__inputLabel">
+              Email:
+              </label>
+            <input
+              type="text"
+              name="email"
+              className="login__input"
+              value={this.state.email}
+              onChange={this.handleInputChangeFor('email')}
+            />
+
+          </div>
+          <div>
+            <label htmlFor="password" className="login__inputLabel">
+              Password:
+              </label>
+            <input
+              type="password"
+              name="password"
+              className="login__input"
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+            />
+
+          </div>
+          <div>
+            <label htmlFor="confirmPassword" className="login__inputLabel">
+              Confirm password:
+            </label>
+            <input
+              type="password"
+              name="confirmPassword"
+              className="login__input"
+              value={this.state.confirmPassword}
+              onChange={this.handleInputChangeFor('confirmPassword')}
+            />
+
+          </div>
+          <div>
+            <button
+              className="register login__loginButton"
               type="submit"
               name="submit"
-              value="Register"
-            />
-          </div>
-        </form>
-        <center>
+            >Register</button>
+          
+
           <button
             type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
+            className="link-button login__loginButton"
+            onClick={() => { this.props.dispatch({ type: 'SET_TO_LOGIN_MODE' }) }}
           >
             Login
           </button>
-        </center>
-      </div>
+          </div>
+        </form>
+      </div >
     );
   }
 }
