@@ -106,7 +106,7 @@ export default class BubbleChart {
             .text(d => d);
       
         leaf.append("title")
-            .text(d => `${d.data.message}\n This word was used: ${format(d.data.count)} time(s)`);
+            .text(d => `Instead use: ${d.data.expected}\n This word was used: ${format(d.data.count)} time(s)`);
           
         return svg.node();
       
