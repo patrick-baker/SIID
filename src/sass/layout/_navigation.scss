@@ -1,11 +1,12 @@
 .navigation {
 
-  position: static;
+  position: fixed;
   top: 0px;
+  left: 0px;
 
   &__background {
     height: 100vh;
-    width: 20rem;
+    width: 15vw;
   }
 
   &__logo {
