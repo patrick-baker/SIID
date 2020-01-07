@@ -1,7 +1,3 @@
-.App {
-    // display: flex;
-}
-
 .flex-row-center {
     width: 100%;
     display: flex;
@@ -17,7 +13,6 @@
         flex-wrap: wrap;
         width: 70%;
     }
-
 }
 
 .flex-column {
@@ -32,6 +27,7 @@
         text-align: center;
     }
 }
+
 .checkboxArray{
     display: flex;
     flex-wrap: wrap;
