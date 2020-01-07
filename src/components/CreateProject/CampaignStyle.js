@@ -66,10 +66,11 @@ class CampaignStyle extends React.Component {
     const { classes } = this.props;
 
     return (
-      <>
+      <div className="flex-row-center">
         {this.props.form.tones &&
-          <FormGroup row>
-            <p className="heading-tertiary">Select the Strategy's Tones</p>
+        <div className="flex-column">
+          <p className="heading-tertiary">Select the Strategy's Tones</p>
+          <FormGroup column>
             {this.props.tone[0] &&
               this.props.tone.map(item =>
                 <FormControlLabel
@@ -87,7 +88,8 @@ class CampaignStyle extends React.Component {
                   }
                   label={item.type}
                 />)}
-          </FormGroup>}
+          </FormGroup>
+          </div>}
           <FormControl component="fieldset" className={classes.formControl}>
             <FormLabel component="legend">Formality</FormLabel>
             <RadioGroup
@@ -102,8 +104,9 @@ class CampaignStyle extends React.Component {
             </RadioGroup>
           </FormControl>
           {this.props.form.literaryTechniques &&
-          <FormGroup row>
-            <p className="heading-tertiary">Select the Strategy's Literary Techniques</p>
+          <div className="flex-column">
+          <p className="heading-tertiary">Select the Strategy's Literary Techniques</p>
+          <FormGroup column>
             {this.props.literaryTechnique[0] &&
               this.props.literaryTechnique.map(item =>
                 <FormControlLabel
@@ -122,8 +125,9 @@ class CampaignStyle extends React.Component {
                   label={item.type}
                 />)}
           </FormGroup>
+          </div>
           }
-      </>
+      </div>
     );
   }
 }
