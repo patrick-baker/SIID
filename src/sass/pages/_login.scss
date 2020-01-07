@@ -38,11 +38,13 @@
     }
 
     &__inputLabel {
+        text-align: right;
         display:inline-block;
-        width:5.5rem;
+        width:14rem;
         font-size:14px;
         color:rgb(32, 32, 32);
         padding:1%;
+        padding-right:0;
     }
 
     &__loginButton {
