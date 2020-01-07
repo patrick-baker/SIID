@@ -17,12 +17,22 @@ class ProjectItem extends Component {
         return (
             // Create cards for each project
             <div>
-                <h1 className="project__title heading-tertiary">{project.title}</h1>
-                <h3 className="project__date body-bold">{moment(date).format("MMM Do, YYYY")}</h3>
-                <h2 className="project__client label">{project.client}</h2>
-                <p className="caption">{project.description}</p>
-                <button className="button__text" onClick={this.routeToReport}>REPORT</button>
-                <i onClick={() => this.props.deleteProject(project)} class="fas fa-trash-alt fa-lg"></i>
+                <h1 className="project__title">{project.title}</h1>
+                <h2 className="project__client label"> Client: {project.client}</h2>
+
+                {
+                    project.description.length > 90 ? 
+                    <p className="caption">{project.description.substring(0,90)}...</p> :
+                    <p className="caption">{project.description}</p>
+                }
+
+                
+                <h3 className="project__date">{moment(date).format("MMM Do, YYYY")}</h3>
+                <button className="button__report" onClick={this.routeToReport}>REPORT</button>
+                <div className="card__delete">
+                    <i onClick={() => this.props.deleteProject(project)} class="fas fa-trash-alt fa-lg"></i>
+                </div>
+                
             </div>
         )
     }
