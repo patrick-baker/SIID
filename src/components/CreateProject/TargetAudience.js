@@ -29,7 +29,7 @@ class TargetAudience extends React.Component {
     const { classes } = this.props;
 
     return (
-      <form className={classes.container} noValidate autoComplete="off" className="flex-row-center flex-row-center__target_audience">
+      <form className={classes.container} noValidate autoComplete="off" className="flex-column">
         <ModalInput label={"Age"}>
           <input placeholder="Place text here..."
             value={this.props.form.target_audience_age}
