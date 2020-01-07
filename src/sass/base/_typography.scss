@@ -54,6 +54,8 @@ body {
 .project {
   &__title {
     margin:5%;
+    margin-right: 15px;
+    // margin-left: 25px;  // was there to prevent corner from overlapping
     color: $color-primary-blue;
   }
 

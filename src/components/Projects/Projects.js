@@ -56,7 +56,8 @@ class Projects extends Component {
                     this.state.deleteOpen && <DeleteProject specificProject={this.state.deleteOpenProject} handleDeleteModal={this.handleDelete} />
                 }
                 {/* Display Create Project card */}
-                <div className="card__createCard">
+                <div className="card__createCardProject">
+                    
                     <div className="card__plusIconDiv">
                         <i class="fas fa-clipboard-list fa-4x card__plusIcon"></i>
                         Create Project
@@ -66,12 +67,14 @@ class Projects extends Component {
                 {this.props.project.projectReducer.map(item => {
                     console.log('in projects map project is: ', item)
                     return (
-                        <div className="card__project">
+                        <div className="card__project card__Ear">
                             <ProjectItem key={item.id} item={item} deleteProject={this.handleDelete} />
+                            {/* <div className="r">
+                            </div> */}
                         </div>
                     )
                 })}
-                <pre>{JSON.stringify(this.props.project.projectReducer, null, 2)}</pre>
+                {/* <pre>{JSON.stringify(this.props.project.projectReducer, null, 2)}</pre> */}
             </div>
         )
     }

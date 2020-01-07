@@ -41,6 +41,13 @@ app.use('/report', reportRouter);
 app.use('/automl',autoMLRouter);
 app.use('/category', categoryRouter);
 
+// S3 Buckets and react-dropzone-s3 need
+app.use('/s3', require('react-dropzone-s3-uploader/s3router')({
+    bucket: 'siid',                           // required
+    region: 'us-east-2',                            // optional
+    headers: {'Access-Control-Allow-Origin': '*'},  // optional
+    ACL: 'private',                                 // this is the default - set to `public-read` to let anyone view uploads
+  }));
 
 // Serve static files
 app.use(express.static('build'));
