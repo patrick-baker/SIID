@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProgressStepper from '../ProgressStepper/ProgressStepper';
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+
 
 import SIIDTool from '../SIIDTool/SIIDTool';
 
@@ -15,11 +17,26 @@ class CreateProject extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_TONE' });
     this.props.dispatch({ type: 'FETCH_LITERARY_TECHNIQUES' });
+    Events.scrollEvent.register('begin', function () {
+      console.log("begin", arguments);
+    });
+
+    Events.scrollEvent.register('end', function () {
+      console.log("end", arguments);
+    });
   }
 
-  nextStep = () => {
+  nextStep = (id) => {
     this.props.dispatch({ type: 'NEXT_STEP' })
+    setTimeout(function() {
+      scroller.scrollTo(id, {
+        duration: 800,
+        delay: 0,
+        smooth: 'easeInOutQuart'
+      })
+    }, 200)
   }
+
   render() {
     return (
       <div className="flex-column">
@@ -46,40 +63,40 @@ class CreateProject extends Component {
           <h3 className="heading-secondary">Where did you create your marketing strategy?</h3>
           <div className="flex-row-center flex-row-center__project-form">
             <SelectIntegrations />
-            {this.props.step === 0 && <button className="button" onClick={this.nextStep}>Next</button>}
+            {this.props.step === 0 && <button className="button" onClick={() => this.nextStep('goals')}>Next</button>}
           </div>
         </div>
         {this.props.step > 0 && 
-          <div className="flex-column flex-column__project-form">
+          <div id="goals" className="flex-column flex-column__project-form">
             <h3 className="heading-secondary">Please describe your campaign goals.</h3>
             <div className="flex-row-center flex-row-center__project-form">
               <CampaignGoals />
-            {this.props.step === 1 && <button className="button" onClick={this.nextStep}>Next</button>}
+            {this.props.step === 1 && <button className="button" onClick={() => this.nextStep('audience')}>Next</button>}
             </div>
           </div>
         }
         {this.props.step > 1 && 
-          <div className="flex-column flex-column__project-form">
+          <div id="audience" className="flex-column flex-column__project-form">
             <h3 className="heading-secondary">Please describe your target audience.</h3>
             <div className="flex-row-center flex-row-center__project-form">
               <TargetAudience />
-            {this.props.step === 2 && <button className="button" onClick={this.nextStep}>Next</button>}
+            {this.props.step === 2 && <button className="button" onClick={() => this.nextStep('tones')}>Next</button>}
             </div>
           </div>
         }
         {this.props.step > 2 &&
-          <div className="flex-column flex-column__project-form">
+          <div id="tones" className="flex-column flex-column__project-form">
             <h3 className="heading-secondary">Please choose the Tones and Techniques associated with your strategy document.</h3> 
               <div className="flex-row-center flex-row-center__project-form">
                 <CampaignStyle />
-              {this.props.step === 3 && <button className="button" onClick={this.nextStep}>Next</button>}
+              {this.props.step === 3 && <button className="button" onClick={() => this.nextStep('tool')}>Next</button>}
               </div>
         </div>}
         {this.props.step === 4 && 
         (
-          <>
+          <div id="tool">
           <SIIDTool/>
-          </>
+          </div>
         )}
       </div>
     );
