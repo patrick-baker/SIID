@@ -4,6 +4,7 @@ import axios from 'axios';
 // sends axios request to server to post results from text analysis, both for rules flags and ML findings
 function* ANALYZE_TEXT(action) {
   try {
+    console.log('WER IN THE ANALUZE STESTTSETSETSETSETSET',action.payload)
     // posts rules-based results
     const flags = yield axios.post('/rule',{text:action.payload.text,project_id:action.payload.project_id})
     yield put({type:"SET_FLAGS",payload:flags.data});
