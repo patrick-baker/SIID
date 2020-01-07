@@ -53,6 +53,7 @@ CREATE TABLE "project" (
     "target_audience_language" VARCHAR (120),
     "talent_demographic" VARCHAR (120),
     "formal" BOOLEAN,
+    "analyzed" BOOLEAN DEFAULT FALSE,
     "project_strategy" INT REFERENCES "strategy",
     "project_token" VARCHAR (120),
     "date_created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -73,7 +74,7 @@ CREATE TABLE "bias" (
 	"type" VARCHAR (150)
 );
 
-INSERT INTO "bias" ("type") VALUES ('gender'), ('race'), ('disability'), ('religion'), ('lgbtq');
+INSERT INTO "bias" ("type") VALUES ('gender'), ('race'), ('disability'), ('religion'), ('lgbtq'),('total');
 
 -- Create table to store educator's bias expertise categories
 CREATE TABLE "educator_bias" (
