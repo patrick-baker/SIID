@@ -67,9 +67,13 @@ class CreateProject extends Component {
             </div>
           </div>
         }
-        {this.props.step > 2 && <div className="flex-row-center flex-row-center__project-form">
-          <CampaignStyle />
-          {this.props.step === 3 && <button className="button" onClick={this.nextStep}>Next</button>}
+        {this.props.step > 2 &&
+          <div className="flex-column flex-column__project-form">
+            <h3 className="heading-secondary">Please choose the Tones and Techniques associated with your strategy document.</h3> 
+              <div className="flex-row-center flex-row-center__project-form">
+                <CampaignStyle />
+              {this.props.step === 3 && <button className="button" onClick={this.nextStep}>Next</button>}
+              </div>
         </div>}
         {this.props.step === 4 && 
         (

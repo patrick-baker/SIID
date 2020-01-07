@@ -19,16 +19,13 @@ async function sh(cmd) {
 }
 
 router.post("/", async (req, res) => {
-    console.log(req.body)
     try {
         let text = req.body.text.replace(/\r?\n|\r/g, '').split(/[.?!]/);
         let data = await getData(text);
-
         for (biasKey of Object.keys(data)) {
-            if (data[biasKey].count > 0) {
+            if (data[biasKey] > 0) {
                 let biasId = await pool.query(`SELECT id FROM bias WHERE type=$1;`,[biasKey])
-                console.log('in autoML router the biasID is:', biasId.rows[0].id, 'bias count is:', data[biasKey].count, 'project_id',req.body.project_id)
-                await pool.query(`INSERT INTO "project_bias" (project_id,bias_id,bias_count) VALUES($1,$2,$3)`,[req.body.project_id,biasId.rows[0].id,data[biasKey].count])
+                await pool.query(`INSERT INTO project_bias(project_id,bias_id,bias_count) VALUES($1,$2,$3)`,[req.body.project_id,biasId.rows[0].id,data[biasKey]])
             }
         }
         await pool.query('UPDATE project SET analyzed=$1 WHERE id=$2;',[true,req.body.project_id])

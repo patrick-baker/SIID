@@ -42,57 +42,60 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
+          <h1 className="login__header">SIID</h1>
           <div>
-            <label htmlFor="username">
+            <label htmlFor="username" className="login__inputLabel">
               Username:
-              <input
-                type="text"
-                className="login__input"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
+              </label>
             <input
-              className="log-in"
-              type="submit"
-              name="submit"
-              value="Log In"
+              placeholder='Username'
+              type="text"
+              className="login__input"
+              name="username"
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+            />
+
+          </div>
+          <div>
+            <label htmlFor="password" className="login__inputLabel">
+              Password:
+              </label>
+            <input
+              placeholder="Password"
+              type="password"
+              name="password"
+              className="login__input"
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
             />
           </div>
-        </form>
+          <div>
+            <span
+              type="button"
+              className="link-button login__forgotPassword"
+              onClick={() => { this.props.history.push('/forgotPassword') }}
+            >
+              Forgot Password?
+          </span>
+          </div>
+          <div>
+            <button
+              className="log-in login__loginButton"
+              type="submit"
+              name="submit"
+            >Log In</button>
 
-        <div>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
-          >
-            Register
+            <button
+              type="button"
+              className="link-button login__loginButton"
+              onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
+            >
+              Register
           </button>
-        </div>
-        <div>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => { this.props.history.push('/forgotPassword') }}
-          >
-            Forgot Password
-          </button>
-        </div>
+          </div>
+
+        </form>
       </div>
     );
   }
