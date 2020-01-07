@@ -56,10 +56,10 @@ class Projects extends Component {
                     this.state.deleteOpen && <DeleteProject specificProject={this.state.deleteOpenProject} handleDeleteModal={this.handleDelete} />
                 }
                 {/* Display Create Project card */}
-                <div className="card__createCardProject">
+                <div className="card__createCardProject" onClick={this.handleClick}>
                     
                     <div className="card__plusIconDiv">
-                        <i class="fas fa-clipboard-list fa-4x card__plusIcon"></i>
+                    <i class="fas fa-clipboard-list fa-4x card__plusIcon"></i>
                         Create Project
                     </div>
                 </div>
@@ -69,8 +69,7 @@ class Projects extends Component {
                     return (
                         <div className="card__project card__Ear">
                             <ProjectItem key={item.id} item={item} deleteProject={this.handleDelete} />
-                            {/* <div className="r">
-                            </div> */}
+                           
                         </div>
                     )
                 })}
