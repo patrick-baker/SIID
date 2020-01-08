@@ -55,11 +55,11 @@ class ReAnalyze extends Component {
             type:"CLEAR_REPORT"
         })
     }
-    componentDidUpdate() {
-        if (this.props.reportReducer.id && this.props.reportReducer.project_token && !this.state.analyze) {
-          this.props.history.push(`/report/${this.props.reportReducer.id}/${this.props.reportReducer.project_token}`);
-        }
-      }
+    // componentDidUpdate() {
+    //     if (this.props.reportReducer.id && this.props.reportReducer.project_token && !this.state.analyze) {
+    //       this.props.history.push(`/report/${this.props.reportReducer.id}/${this.props.reportReducer.project_token}`);
+    //     }
+    //   }
 
     render() {
         return (
