@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 
 const Nav = (props) => (
-  <div className="navigation">
+  <div className="navigation no-print">
     <div className="navigation__background">
 
       <div className="navigation__list">
