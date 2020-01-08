@@ -4,6 +4,8 @@ import BubbleChart from './BubbleChartWrapper';
 import DonutChartWrapper from './DonutChart.js/DonutChartWrapper';
 import Spinner from '../Spinner/Spinner';
 import moment from 'moment';
+import SIIDTool from '../SIIDTool/SIIDTool';
+import ReAnalyze from '../ReAnalyze/ReAnalyze';
 
 class Report extends Component {
     state = {
@@ -86,6 +88,9 @@ class Report extends Component {
                                 <p>{this.props.reportReducer.target_audience_region}</p>
 
 
+                                <ReAnalyze />
+
+
                         </div>
                         {
                     this.props.flagReducer[0] 
@@ -97,6 +102,9 @@ class Report extends Component {
                     {this.props.biasDataReducer.status &&
                         <DonutChartWrapper />
                     }
+
+
+                    
 
                  {/*         <pre>
                             Report Reducer:

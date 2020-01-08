@@ -15,6 +15,7 @@ function* getProject() {
 function* createProject(action) {
   try {
     const newProject = action.payload;
+    console.log('NEW PROJECT',newProject);
     let project = yield axios.post(`/project`, newProject);
     // retrieves metadata for this created project, to be displayed on the report
     yield put ({type:"GET_SPECIFIC_PROJECT",payload:{id:project.data.project_id}});
