@@ -21,7 +21,9 @@ class Report extends Component {
         this.setState({
             url: `http://localhost:3000/#/report/${this.props.match.params.id}/${this.props.match.params.token}`
         })
+        console.log(this.props);
     }
+
 
     copyToClipboard = (e) => {
         this.textArea.select();
