@@ -87,7 +87,7 @@ class RuleTable extends Component {
 
             // Show the table
             return (
-                <>
+                <div className="content">
                     <div className="page__pad" >
                         <button className="button__generic" style={{ marginLeft: '0' }} onClick={this.addRule}><i class="fas fa-plus"></i><span style={{ marginLeft: '1rem' }}>Add rule</span></button>
                         {/* <pre>{JSON.stringify(this.state,null,2)}</pre> */}
@@ -128,7 +128,7 @@ class RuleTable extends Component {
                             }}
                         />
                     </div>
-                </>
+                </div>
             )
         }
         return <Spinner message="Loading Table" />
