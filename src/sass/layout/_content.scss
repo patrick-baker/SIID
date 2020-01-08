@@ -3,5 +3,12 @@
     position: absolute;
     top: 0px;
     right: 0px;
+}
 
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
 }

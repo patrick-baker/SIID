@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProgressStepper from '../ProgressStepper/ProgressStepper';
-import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import { Events, animateScroll as scroll, scroller } from 'react-scroll'
 
 
 import SIIDTool from '../SIIDTool/SIIDTool';
@@ -17,24 +17,17 @@ class CreateProject extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_TONE' });
     this.props.dispatch({ type: 'FETCH_LITERARY_TECHNIQUES' });
-    Events.scrollEvent.register('begin', function () {
-      console.log("begin", arguments);
-    });
-
-    Events.scrollEvent.register('end', function () {
-      console.log("end", arguments);
-    });
   }
 
   nextStep = (id) => {
     this.props.dispatch({ type: 'NEXT_STEP' })
     setTimeout(function() {
       scroller.scrollTo(id, {
-        duration: 800,
+        duration: 1000,
         delay: 0,
-        smooth: 'easeInOutQuart'
+        smooth: 'easeInOutCubic'
       })
-    }, 200)
+    }, 0)
   }
 
   render() {
