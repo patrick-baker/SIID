@@ -4,3 +4,11 @@
     width: 85vw;
     height: 100vh;
 }
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
