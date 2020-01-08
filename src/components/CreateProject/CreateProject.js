@@ -32,7 +32,7 @@ class CreateProject extends Component {
 
   render() {
     return (
-      <div className="flex-column">
+      <div className="flex-column content">
         <div className="project-metadata-page flex-column">
           <p className="heading-primary">Steps to Make a Project:</p>
           <div className="flex-row-center overview-boxes">

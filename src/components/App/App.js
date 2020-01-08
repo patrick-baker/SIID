@@ -34,9 +34,9 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App" >
+        <div className="App">
           {this.props.user.id && <Nav />}
-          <div className="content">
+          {/* <div className="content"> */}
             <Switch>
               {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
               <Redirect exact from="/" to="/home" />
@@ -50,7 +50,7 @@ class App extends Component {
                 path="/reset/:token"
                 component={ResetPassword}
               />
-              <Route
+              <ProtectedRoute
                 exact
                 path="/createProject"
                 component={CreateProject}
@@ -86,7 +86,7 @@ class App extends Component {
               <Route render={() => <h1>404</h1>} />
             </Switch>
           </div>
-        </div>
+        {/* </div> */}
       </Router>
     )
   }
@@ -94,6 +94,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
+  report: state.reportReducer
 });
 
 export default connect(mapStateToProps)(App);

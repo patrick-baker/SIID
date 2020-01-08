@@ -71,7 +71,7 @@ class ResetPassword extends Component {
       );
     }
     return (
-      <div>
+      <div className="no_user">
         <h1>Password Reset</h1>
         <form className="password-form" onSubmit={this.updatePassword}>
           <input

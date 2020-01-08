@@ -1,8 +1,8 @@
 .content {
-    position:  absolute;
+    width: calc(100vw - 20rem) !important;
+    position: absolute;
+    top: 0px;
     right: 0px;
-    width: 85vw;
-    height: 100vh;
 }
 
 @media print

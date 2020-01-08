@@ -65,7 +65,7 @@ class Educators extends Component {
     render() {
         return (
             // <div className="educatorPage__background">
-                <div>
+                <div className="content">
                 {this.props.user.admin && (
 
                     <AddCard addEducator={this.addEducator}>
