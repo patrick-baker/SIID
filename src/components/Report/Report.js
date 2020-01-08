@@ -110,11 +110,11 @@ class Report extends Component {
                         </pre>  */}
 
                             {/* Holds urls value */}
-                    {/*         <textarea
+                            <textarea
                                 className="formInput__report-textarea"
                                 ref={(textarea) => this.textArea = textarea}
                                 value={this.state.url}
-                            /> */}
+                            />
                     </div>
                 }
             </div>
