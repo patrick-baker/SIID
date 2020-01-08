@@ -38,7 +38,7 @@ class Report extends Component {
 
     render() {
         return (
-            <>
+            <div className="content">
             {
                 this.props.reportReducer.analyzed === false &&
                 <Spinner/>
@@ -127,7 +127,7 @@ class Report extends Component {
                 }
             </div>
             }
-        </>
+        </div>
         )
     }
 }
