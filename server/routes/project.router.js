@@ -44,11 +44,13 @@ router.put('/:id',async (req,res) => {
 
         const queryText=`
         UPDATE project
-        SET "text"=$1
-        WHERE id=$2;
+        SET "text"=$1,
+        "analyzed"=$2
+
+        WHERE id=$3;
         `
         console.log('req.body.text',req.body.text);
-        let idk = await client.query(queryText,[req.body.text,projectId]);
+        let idk = await client.query(queryText,[req.body.text,false,projectId]);
 
         console.log('IDKDKDK',idk);
 
