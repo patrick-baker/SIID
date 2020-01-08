@@ -1,8 +1,16 @@
 .login {
+    &__background {
+        position: fixed;
+        width: 200vw;
+        height: 200vh;
+        z-index: 0;
+        background: rgb(243, 243, 243);
+        top: -50%;
+        left: -50%;
+    }
 
     &__main {
         text-align: center;
-        background: rgb(243, 243, 243);
         height:100%;
         width:100%;
         margin:0;

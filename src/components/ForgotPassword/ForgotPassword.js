@@ -26,7 +26,7 @@ class ForgotPassword extends Component {
         const { messageFromServer, showNullError, showError } = this.props.forgotPassword
 
         return (
-            <div className="login__main">
+            <div className="login__main no_user">
                 <h1 className="login__header" >Forgot Password?</h1>
                 <form className="profile-form" onSubmit={this.sendEmail}>
                     <label htmlFor="email" className="login__inputLabel">Recovery Email:</label>

@@ -35,6 +35,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App" >
+          {!this.props.user.id && <div className="login__background"></div>}
           {this.props.user.id && <Nav />}
           <div className="content">
             <Switch>
