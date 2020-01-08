@@ -50,7 +50,7 @@ class Projects extends Component {
 
     render() {
         return (
-            <div>
+            <div className="content">
                 {/* Show the Delete Educator Modal */}
                 {
                     this.state.deleteOpen && <DeleteProject specificProject={this.state.deleteOpenProject} handleDeleteModal={this.handleDelete} />
