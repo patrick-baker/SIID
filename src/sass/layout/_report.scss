@@ -1,8 +1,10 @@
 .report {
     display: grid;
     width: 100%;
-    grid-template-columns: 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem;
-    grid-template-rows: 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem;
+    //grid-template-columns: 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem;
+    //grid-template-rows: 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem;
+    grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
 
     &__header{
         grid-area: header;
