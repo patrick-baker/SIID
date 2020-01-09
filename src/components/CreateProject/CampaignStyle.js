@@ -56,8 +56,8 @@ class CampaignStyle extends React.Component {
   handleRadioChange = event => {
     this.props.dispatch({
       type: 'SET_FORM_METADATA', payload: {
-        property: 'formal', 
-        value: event.target.value 
+        property: 'formal',
+        value: event.target.value
       }
     });
   };
@@ -68,65 +68,71 @@ class CampaignStyle extends React.Component {
     return (
       <div className="flex-row-center">
         {this.props.form.tones &&
-        <div className="flex-column">
-          <p className="heading-tertiary">Select the Strategy's Tones</p>
-          <FormGroup column>
-            {this.props.tone[0] &&
-              this.props.tone.map(item =>
-                <FormControlLabel
-                  key={item.id}
-                  control={
-                    <Checkbox
-                      name={item.type}
-                      value={this.props.form.tones[item.type]}
-                      onChange={this.handleToneChange}
-                      classes={{
-                        root: classes.root,
-                        checked: classes.checked,
-                      }}
-                    />
-                  }
-                  label={item.type}
-                />)}
-          </FormGroup>
-          </div>}
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">Formality</FormLabel>
-            <RadioGroup
-              aria-label="Formality"
-              name="formality"
-              value={this.props.form.formal}
-              className={classes.group}
-              onChange={this.handleRadioChange}
-            >
-              <FormControlLabel value= "true" control={<Radio />} label="Formal" />
-              <FormControlLabel value= "false" control={<Radio />} label="Informal" />
-            </RadioGroup>
-          </FormControl>
-          {this.props.form.literaryTechniques &&
+          <>
+            <div>
+              <h3 className="heading-tertiary" style={{width:'20rem'}}>Select the Strategy's Tones</h3>
+            
+            <FormGroup column style={{padding:'1.5rem 6rem 0 6rem',alignContent:'center',justifyContent:'center',textAlign:'center'}}>
+                {this.props.tone[0] &&
+                  this.props.tone.map(item =>
+                    <FormControlLabel
+                      key={item.id}
+                      control={
+                        <Checkbox
+                          name={item.type}
+                          value={this.props.form.tones[item.type]}
+                          onChange={this.handleToneChange}
+                          classes={{
+                            root: classes.root,
+                            checked: classes.checked,
+                          }}
+                        />
+                      }
+                      label={item.type}
+                    />)}
+              </FormGroup>
+           
+            </div>
+          </>
+        }
+        <FormControl component="fieldset" className={classes.formControl} style={{marginTop:'.45rem'}}>
+          <FormLabel component="legend" style={{ fontSize: '2rem', color: 'black',width:'20rem'}}>Formality</FormLabel>
+          <RadioGroup
+            aria-label="Formality"
+            name="formality"
+            value={this.props.form.formal}
+            className={classes.group}
+            onChange={this.handleRadioChange}
+            style={{alignContent:'center',justifyContent:'center',textAlign:'center',marginTop:'4rem'}}
+          >
+            <FormControlLabel value="true" control={<Radio />} label="Formal" />
+            <FormControlLabel value="false" control={<Radio />} label="Informal" />
+          </RadioGroup>
+        </FormControl>
+        {this.props.form.literaryTechniques &&
           <div className="flex-column">
-          <p className="heading-tertiary">Select the Strategy's Literary Techniques</p>
-          <FormGroup column>
-            {this.props.literaryTechnique[0] &&
-              this.props.literaryTechnique.map(item =>
-                <FormControlLabel
-                  key={item.id}
-                  control={
-                    <Checkbox
-                      name={item.type}
-                      onChange={this.handleLiteraryTechniqueChange}
-                      value={this.props.form.literaryTechniques[item.type]}
-                      classes={{
-                        root: classes.root,
-                        checked: classes.checked,
-                      }}
-                    />
-                  }
-                  label={item.type}
-                />)}
-          </FormGroup>
+            <p className="heading-tertiary" style={{width:'20rem'}}>Select the Strategy's Literary Techniques</p>
+            <FormGroup column style={{marginTop:'1.8rem'}}>
+              {this.props.literaryTechnique[0] &&
+                this.props.literaryTechnique.map(item =>
+                  <FormControlLabel
+                    key={item.id}
+                    control={
+                      <Checkbox
+                        name={item.type}
+                        onChange={this.handleLiteraryTechniqueChange}
+                        value={this.props.form.literaryTechniques[item.type]}
+                        classes={{
+                          root: classes.root,
+                          checked: classes.checked,
+                        }}
+                      />
+                    }
+                    label={item.type}
+                  />)}
+            </FormGroup>
           </div>
-          }
+        }
       </div>
     );
   }

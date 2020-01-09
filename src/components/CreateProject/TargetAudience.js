@@ -29,7 +29,7 @@ class TargetAudience extends React.Component {
     const { classes } = this.props;
 
     return (
-      <form className={classes.container} noValidate autoComplete="off" className="flex-column">
+      <form className={classes.container} noValidate autoComplete="off" style={{display:'grid',gridTemplateColumns:'10rem 10rem 10rem 10rem',gridGap:'5rem'}}>
         <ModalInput label={"Age"}>
           <input placeholder="Place text here..."
             value={this.props.form.target_audience_age}
@@ -44,7 +44,7 @@ class TargetAudience extends React.Component {
             className="formInput__average formInput__project-form"
             name="target_audience_race"
             onChange={this.handleChange}
-          />
+          /> 
         </ModalInput>
         <ModalInput label={"Region"}>
           <input placeholder="Place text here..."
@@ -86,7 +86,7 @@ class TargetAudience extends React.Component {
             onChange={this.handleChange}
           />
         </ModalInput>
-        <ModalInput label={"Talent Demographic"}>
+        <ModalInput label={"Talent Demo"}>
           <input placeholder="Place text here..."
             value={this.props.form.talent_demographic}
             className="formInput__average formInput__project-form"

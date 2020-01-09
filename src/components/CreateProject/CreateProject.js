@@ -87,37 +87,38 @@ class CreateProject extends Component {
             <BasicInfo />
           </div>
 
-          <h3 className="heading-secondary">Where did you create your marketing strategy?</h3>
-          <div className="flex-row-center flex-row-center__project-form">
+          <h3 className="heading-secondary" style={{margin:'0 0 3rem 0'}}>Where did you create your marketing strategy?</h3>
+          <div className="">
             <SelectIntegrations />
-            {this.props.step === 0 && <button className="button" onClick={() => this.nextStep('goals')}>Next</button>}
+            {this.props.step === 0 && <button className="button__next" onClick={() => this.nextStep('goals')}>Continue <i class="fas fa-arrow-down"></i></button>}
+            {/* <br/> */}
           </div>
         </div>
         {this.props.step > 0 &&
           <div id="goals" className="flex-column flex-column__project-form">
-            <h3 className="heading-secondary">Please describe your campaign goals.</h3>
-            <div className="flex-row-center flex-row-center__project-form">
+            <h3 className="heading-secondary" style={{margin:'3rem 0 3rem 0'}}>Please describe your campaign goals.</h3>
+            <div className="">
               <CampaignGoals />
-              {this.props.step === 1 && <button className="button" onClick={() => this.nextStep('audience')}>Next</button>}
+              {this.props.step === 1 && <button className="button__next" onClick={() => this.nextStep('audience')}>Continue <i class="fas fa-arrow-down"></i></button>}
             </div>
           </div>
         }
         {this.props.step > 1 &&
           <div id="audience" className="flex-column flex-column__project-form">
-            <h3 className="heading-secondary">Please describe your target audience.</h3>
-            <div className="flex-row-center flex-row-center__project-form">
+            <h3 className="heading-secondary" style={{margin:'3rem 0 3rem 0'}}>Please describe your target audience.</h3>
+            <div className="">
               <TargetAudience />
-              {this.props.step === 2 && <button className="button" onClick={() => this.nextStep('tones')}>Next</button>}
+              {this.props.step === 2 && <button className="button__next" onClick={() => this.nextStep('tones')}>Continue <i class="fas fa-arrow-down"></i></button>}
             </div>
           </div>
         }
         {this.props.step > 2 &&
           <div id="tones" className="flex-column flex-column__project-form">
-            <h3 className="heading-secondary">Please choose the Tones and Techniques associated with your strategy document.</h3>
+            <h3 className="heading-secondary" style={{margin:'3rem 0 3rem 0'}}>Please choose the Tones and Techniques associated with your strategy document.</h3>
             <div className="flex-row-center flex-row-center__project-form">
               <CampaignStyle />
-              {this.props.step === 3 && <button className="button" onClick={() => this.nextStep('tool')}>Next</button>}
             </div>
+            {this.props.step === 3 && <button className="button__next" onClick={() => this.nextStep('tool')}>Continue <i class="fas fa-arrow-down"></i></button>}
           </div>}
         {this.props.step === 4 &&
           (
