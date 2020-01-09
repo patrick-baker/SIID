@@ -13,8 +13,8 @@ function* ANALYZE_TEXT(action) {
     yield put({type:'SET_BIAS_DATA',payload:bias.data})
     yield put ({type:"GET_SPECIFIC_PROJECT",payload:{id:action.payload.project_id}});
     // dispatches to getProjectEducators in reportSaga, to retrieve educators for this project
-    console.log('bias data in analyzeText saga', bias.data);
-    yield put ({type: "GET_PROJECT_EDUCATORS", payload: {id: action.payload.project_id,}})
+    yield put({type: "GET_PROJECT_EDUCATORS", payload: {id: action.payload.id}});
+    // console.log('bias data in analyzeText saga', bias.data);
  } catch (error) {
      console.log('error in ANALYZE TEXT saga', error);
  }

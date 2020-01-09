@@ -1,6 +1,8 @@
 const reportReducer = (state = {}, action) => {
     if (action.type === 'SET_REPORT') {
-        return action.payload;
+        return {...state, ...action.payload};
+    } else if (action.type === 'SET_PROJECT_EDUCATORS') {
+        return {...state, educators: action.payload}
     }
     if (action.type === 'CLEAR_REPORT') {
         return {}

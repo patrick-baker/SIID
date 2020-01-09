@@ -117,7 +117,8 @@ router.get('/educators/:id', async (req, res) => {
         JOIN "bias"
         ON "educator_bias"."bias_id" = "bias"."id"
         WHERE "bias"."id" = $1
-        GROUP BY "name", "bio", "contact_info", "image_url";`;
+        GROUP BY "name", "bio", "contact_info", "image_url"
+        LIMIT 4;`;
 
         const queryText2 = `SELECT "name", "bio", "contact_info", "image_url", ARRAY_AGG("bias"."type")
         FROM "educator"
@@ -126,7 +127,8 @@ router.get('/educators/:id', async (req, res) => {
         JOIN "bias"
         ON "educator_bias"."bias_id" = "bias"."id"
         WHERE "bias"."id" = $1 OR "bias"."id" = $2
-        GROUP BY "name", "bio", "contact_info", "image_url";`;
+        GROUP BY "name", "bio", "contact_info", "image_url"
+        LIMIT 4;`;
 
         let results;
         if (biasArray.length === 1) {

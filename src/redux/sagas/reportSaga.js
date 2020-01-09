@@ -25,7 +25,7 @@ function* getProjectEducators(action) {
     try {
         const educators = yield axios.get(`/report/educators/${action.payload.id}`);
         console.log('educator data in getProjectEducators in reportSaga:', educators);
-        // yield put({ type: 'SET_REPORT_EDUCATORS', payload: { id: action.payload.id, ...project.data } });
+        yield put({ type: 'SET_PROJECT_EDUCATORS', payload: educators.data });
     } catch (error) {
         console.log('error in getProjectEducators in reportSaga', error);
     }
