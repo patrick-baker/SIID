@@ -5,11 +5,12 @@ export default class DonutChart {
         console.log('Hello World');
 
         // SET WIDTH, HEIGHT & RADIUS
-        const width = 600;
-        const height = 400;
-        const donutWidth = 40;
+        const width = 300;
+        const height = 300;
+        const donutBiasWidth = 40;
+        const donutTotalWidth= 30;
         const radius1 = Math.min(width, height) / 2;
-        const radius2 = radius1 - donutWidth;
+        const radius2 = radius1 - donutBiasWidth;
 
         // SET COLOR SCHEME
         const colorBias = d3.scaleOrdinal(d3.schemeCategory10)
@@ -90,8 +91,8 @@ export default class DonutChart {
 
         // SET TOTAL ARC
         const totalArc = d3.arc()
-            .innerRadius(radius2 - donutWidth)
-            .outerRadius(radius2);
+            .innerRadius(radius2 - donutTotalWidth)
+            .outerRadius(radius2-1);
 
         // CREATE GROUP
         const gTotal = svgTotal.selectAll(".arcTotal")
