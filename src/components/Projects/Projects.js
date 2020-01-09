@@ -73,7 +73,7 @@ class Projects extends Component {
                         </div>
                     )
                 })}
-                {/* <pre>{JSON.stringify(this.props.project.projectReducer, null, 2)}</pre> */}
+                {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
             </div>
         )
     }

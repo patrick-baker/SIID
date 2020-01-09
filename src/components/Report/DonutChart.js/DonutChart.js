@@ -5,15 +5,20 @@ export default class DonutChart {
         console.log('Hello World');
 
         // SET WIDTH, HEIGHT & RADIUS
-        const width = 600;
-        const height = 400;
-        const radius = Math.min(width, height) / 2;
+        const width = 300;
+        const height = 300;
+        const donutBiasWidth = 40;
+        const donutTotalWidth= 30;
+        const radius1 = Math.min(width, height) / 2;
+        const radius2 = radius1 - donutBiasWidth;
 
         // SET COLOR SCHEME
-        const color = d3.scaleOrdinal(d3.schemeCategory10)
-            .range(["#5B63DA", "#9E8DF8", "#7793F0", "#E9E5FC", "#D9B8E6"]);
+        const colorBias = d3.scaleOrdinal(d3.schemeCategory10)
+            .range(["#B534E6", "#B76AD4", "#D9B8E6", "#704AD6", "#9E8DF8"]);
+        const colorTotal = d3.scaleOrdinal(d3.schemeCategory10)
+            .range(["#9E8DF8", "#7793F0"]);
 
-        // SET PIE
+        // SET BIAS TYPES PIE
         const pie = d3.pie()
             .value(function (d) { return d.value; })
             .sort(null);
@@ -23,37 +28,88 @@ export default class DonutChart {
         // REMOVE KEY OF 'TOTAL'
         function checkBias(type) {
             return type.key != "total";
-        }
+        }  
+
         // ADD DATA TO PIE LAYOUT
         const data_clean = pie(data_all.filter(checkBias));
 
-        // SET ARC
+        console.log('data_all is: ', data_all);
+        console.log('data_clean is: ', data_clean);
+        
+
+        // SET BIAS TYPES ARC
         const arc = d3.arc()
-            .innerRadius(radius - 80)
-            .outerRadius(radius - 20);
-
-        // SET ARC FOR LABEL POSITIONING (WILL NOT BE DRAWN)
-        // const outerArc = d3.arc()
-        //     .innerRadius(radius * 0.9)
-        //     .outerRadius(radius * 0.9);
-
+            .innerRadius(radius2)
+            .outerRadius(radius1);
+        
         // SETUP SVG
         const svg = d3.select(element)
             .append("svg")
             .attr("width", width)
             .attr("height", height)
-            .append("g")
+        
+        const svgBias = svg.append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+        
+        const svgTotal = svg.append("g")
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
         // CREATE GROUP
-        const g = svg.selectAll(".arc")
+        const g = svgBias.selectAll(".arc")
             .data(data_clean)
             .enter().append("g")
             .attr("class", "arc");
 
         g.append("path")
             .attr("d", arc)
-            .style("fill", function (d) { return color(d.data.key); });
+            .style("fill", function (d) { return colorBias(d.data.key); });
+        
+////////////////////////////////////////////////////////////////////////////////
+
+        function sumBiases(data) {
+            let sum = 0;
+            for (let property in data) {
+                if(property !== 'total') {
+                    sum += data[property]
+                }
+            }
+            return sum;
+        }
+
+        console.log('sum of biased counts: ', sumBiases(biasData));
+        const biasSum = sumBiases(biasData)
+
+        // ARRAY FOR TOTAL SENSITIVITIES
+        const totalData = [{"key": 'Sensitive', "value": biasSum}, {"key": 'total', "value": biasData.total - biasSum}];
+        
+
+        // 
+        const total_clean = pie(totalData);
+
+        console.log('totalData is: ', totalData);
+        console.log('total_clean is: ', total_clean);
+
+        // SET TOTAL ARC
+        const totalArc = d3.arc()
+            .innerRadius(radius2 - donutTotalWidth)
+            .outerRadius(radius2-1);
+
+        // CREATE GROUP
+        const gTotal = svgTotal.selectAll(".arcTotal")
+            .data(total_clean)
+            .enter().append("g")
+            .attr("class", "arcTotal");
+
+        gTotal.append("path")
+            .attr("d", totalArc)
+            .style("fill", function (d) { return colorTotal(d.data.key); });
+
+        // // SET ARC FOR LABEL POSITIONING (WILL NOT BE DRAWN)
+        // const outerArc = d3.arc()
+        //     .innerRadius(radius * 0.9)
+        //     .outerRadius(radius * 0.9);
+
+        
 
         // ADD POLYLINES BETWEEN CHART & LABELS
         // svg.selectAll("allPolylines")

@@ -22,6 +22,51 @@ router.get('/', (req, res) => {
         })
 });
 
+
+router.put('/:id',async (req,res) => {
+    const client = await pool.connect();
+
+    console.log(`in PUT /project/${req.params.id}, req.body:`,req.body);
+
+    try{
+        await client.query('BEGIN');
+
+        //delete the row from project_bias
+        const queryBiasText=`DELETE FROM "project_bias" WHERE project_id=$1`;
+        const projectId=req.params.id;
+        await client.query(queryBiasText,[projectId]);
+
+        //delete the row from flags
+        const queryFlagText=`DELETE FROM "flags" WHERE project_id=$1`;
+        await client.query(queryFlagText,[projectId]);
+
+
+
+        const queryText=`
+        UPDATE project
+        SET "text"=$1,
+        "analyzed"=$2
+
+        WHERE id=$3;
+        `
+        console.log('req.body.text',req.body.text);
+        let idk = await client.query(queryText,[req.body.text,false,projectId]);
+
+        console.log('IDKDKDK',idk);
+
+        await client.query('COMMIT')
+        res.sendStatus(200)
+    } catch (error) {
+        await client.query('ROLLBACK')
+        if(verbose)console.log('Error delete /project', error);
+        res.sendStatus(500);
+    } finally {
+        client.release();
+    }
+})
+
+
+
 /**
  * DELETE project from flag, tone, literary_techniques and projects 
  */
@@ -157,6 +202,7 @@ router.post('/', async (req, res) => {
         client.release();
     }
 });
+
 // Get Request to retrieve all entries in Tone table	
 router.get('/tone', (req, res) => {	
     const queryText=`SELECT "id","type"	

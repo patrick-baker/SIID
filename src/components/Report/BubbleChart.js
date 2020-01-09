@@ -58,8 +58,8 @@ import * as d3 from 'd3';
 //     }
 // ];
 
-const width = 300; 
-const height = width;
+const width = 500; 
+const height = 400;
 const format = d3.format(",d");
 //const color = d3.scaleOrdinal(data.map(d => d.group), d3.schemeCategory10);
 
@@ -71,7 +71,7 @@ export default class BubbleChart {
                                 (d3.hierarchy({children: data}).sum(d => d.count));
         const root = pack(clean);
         const color = d3.scaleOrdinal(clean.map(d => d.actual), d3.schemeCategory10)
-                        .range(["#9E8DF8","#7793F0","#D9B8E6","#704AD6","#5B63DA","#B76AD4","#B534E6","#E9E5FC","#FAFAFA", "#F8EDFC"]);
+            .range(["#704AD6", "#7793F0", "#B76AD4", "#E9E5FC", "#4035A3", "#D9B8E6", "#5B63DA", "#B534E6","#9E8DF8"]);
         const svg = d3.select(element).append("svg")
             .attr("viewBox", [0, 0, width, height])
             .attr("font-size", 10)

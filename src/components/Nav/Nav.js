@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import { withRouter } from 'react-router-dom';
+
+const logout = (props) => {
+  props.dispatch({ type: 'LOGOUT' });
+  props.history.push('/home');
+}
 
 const Nav = (props) => (
   <div className="navigation no-print">
@@ -35,7 +40,7 @@ const Nav = (props) => (
 
         <div className="navigation__item">
           {props.user.id &&
-            <Link className="navigation__link" onClick={() => props.dispatch({ type: 'LOGOUT' })}>
+            <Link className="navigation__link" onClick={() => logout(props)}>
               <i class="fas fa-sign-out-alt fa-2x navigation__icon"></i>Log out
             </Link>
           }
@@ -55,4 +60,4 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps)(Nav);
+export default withRouter(connect(mapStateToProps)(Nav));

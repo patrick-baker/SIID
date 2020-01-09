@@ -12,7 +12,6 @@ function* ANALYZE_TEXT(action) {
     const bias = yield axios.post('/automl',{text:action.payload.text, project_id: action.payload.project_id});
     yield put({type:'SET_BIAS_DATA',payload:bias.data})
     yield put ({type:"GET_SPECIFIC_PROJECT",payload:{id:action.payload.project_id}});
-
  } catch (error) {
      console.log('error in ANALYZE TEXT saga', error);
  }
