@@ -14,20 +14,51 @@ import BasicInfo from './BasicInfo'
 
 class CreateProject extends Component {
 
+  state = {
+    inputError: false
+  }
+
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_TONE' });
     this.props.dispatch({ type: 'FETCH_LITERARY_TECHNIQUES' });
   }
 
   nextStep = (id) => {
-    this.props.dispatch({ type: 'NEXT_STEP' })
-    setTimeout(function() {
-      scroller.scrollTo(id, {
-        duration: 1000,
-        delay: 0,
-        smooth: 'easeInOutCubic'
+
+    if (this.props.form.title &&
+      this.props.form.client &&
+      this.props.form.description
+    ) {
+
+
+
+      this.props.dispatch({ type: 'NEXT_STEP' })
+      setTimeout(function () {
+        scroller.scrollTo(id, {
+          duration: 1000,
+          delay: 0,
+          smooth: 'easeInOutCubic'
+        })
+      }, 0)
+
+      this.setState({
+        inputError: false
       })
-    }, 0)
+
+    } else {
+
+      setTimeout(function () {
+        scroller.scrollTo('basic', {
+          duration: 1000,
+          delay: 0,
+          smooth: 'easeInOutCubic'
+        })
+      }, 0)
+
+      this.setState({
+        inputError: true
+      })
+    }
   }
 
   render() {
@@ -48,10 +79,13 @@ class CreateProject extends Component {
           </div>
         </div>
         <div className="flex-column flex-column__project-form">
-        <h3 className="heading-secondary">Campaign Basics</h3>
-        <div className="flex-row-center flex-row-center__project-form">
+          <h3 className="heading-secondary">Campaign Basics</h3>
+          {
+            this.state.inputError && <span className="errorMessage">Campaign Basics are required</span>
+          }
+          <div className="flex-row-center flex-row-center__project-form">
             <BasicInfo />
-        </div>
+          </div>
 
           <h3 className="heading-secondary">Where did you create your marketing strategy?</h3>
           <div className="flex-row-center flex-row-center__project-form">
@@ -59,38 +93,38 @@ class CreateProject extends Component {
             {this.props.step === 0 && <button className="button" onClick={() => this.nextStep('goals')}>Next</button>}
           </div>
         </div>
-        {this.props.step > 0 && 
+        {this.props.step > 0 &&
           <div id="goals" className="flex-column flex-column__project-form">
             <h3 className="heading-secondary">Please describe your campaign goals.</h3>
             <div className="flex-row-center flex-row-center__project-form">
               <CampaignGoals />
-            {this.props.step === 1 && <button className="button" onClick={() => this.nextStep('audience')}>Next</button>}
+              {this.props.step === 1 && <button className="button" onClick={() => this.nextStep('audience')}>Next</button>}
             </div>
           </div>
         }
-        {this.props.step > 1 && 
+        {this.props.step > 1 &&
           <div id="audience" className="flex-column flex-column__project-form">
             <h3 className="heading-secondary">Please describe your target audience.</h3>
             <div className="flex-row-center flex-row-center__project-form">
               <TargetAudience />
-            {this.props.step === 2 && <button className="button" onClick={() => this.nextStep('tones')}>Next</button>}
+              {this.props.step === 2 && <button className="button" onClick={() => this.nextStep('tones')}>Next</button>}
             </div>
           </div>
         }
         {this.props.step > 2 &&
           <div id="tones" className="flex-column flex-column__project-form">
-            <h3 className="heading-secondary">Please choose the Tones and Techniques associated with your strategy document.</h3> 
-              <div className="flex-row-center flex-row-center__project-form">
-                <CampaignStyle />
+            <h3 className="heading-secondary">Please choose the Tones and Techniques associated with your strategy document.</h3>
+            <div className="flex-row-center flex-row-center__project-form">
+              <CampaignStyle />
               {this.props.step === 3 && <button className="button" onClick={() => this.nextStep('tool')}>Next</button>}
-              </div>
-        </div>}
-        {this.props.step === 4 && 
-        (
-          <div id="tool">
-          <SIIDTool/>
-          </div>
-        )}
+            </div>
+          </div>}
+        {this.props.step === 4 &&
+          (
+            <div id="tool">
+              <SIIDTool />
+            </div>
+          )}
       </div>
     );
   }

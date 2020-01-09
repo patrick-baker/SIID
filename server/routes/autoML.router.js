@@ -20,7 +20,7 @@ async function sh(cmd) {
 
 router.post("/", async (req, res) => {
     try {
-        let text = req.body.text.replace(/\r?\n|\r/g, '').split(/[.?!]/);
+        let text = req.body.text.replace(/\r?\n|\r/g, '').replace(/\n/g,'').split(/[.?!]/).filter(sentence => sentence != '');
         let data = await getData(text);
         for (biasKey of Object.keys(data)) {
             if (data[biasKey] > 0) {

@@ -139,13 +139,13 @@ class Report extends Component {
                             <h2>Tone</h2>
                             <ul>
                                 {this.props.reportReducer.formal ? <li>Formal</li> : <li>Informal</li>}
-                                {this.props.reportReducer.tone.map(type => {
+                                {this.props.reportReducer.tone && this.props.reportReducer.tone.map(type => {
                                     return <li>{type}</li>
                                 })}
                             </ul>
                             <h2>Literary Techniques</h2>
                             <ul>
-                                {this.props.reportReducer.literaryTechniques.map(lit => {
+                                {this.props.reportReducer.literaryTechniques && this.props.reportReducer.literaryTechniques.map(lit => {
                                     return <li>{lit}</li>
                                 })}
                             </ul>
