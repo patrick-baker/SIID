@@ -4,6 +4,8 @@ import BubbleChart from './BubbleChartWrapper';
 import DonutChartWrapper from './DonutChart.js/DonutChartWrapper';
 import Spinner from '../Spinner/Spinner';
 import moment from 'moment';
+import SIIDTool from '../SIIDTool/SIIDTool';
+import ReAnalyze from '../ReAnalyze/ReAnalyze';
 
 class Report extends Component {
     state = {
@@ -19,6 +21,7 @@ class Report extends Component {
         this.setState({
             url: `http://localhost:3000/#/report/${this.props.match.params.id}/${this.props.match.params.token}`
         })
+        console.log(this.props);
     }
 
     cleanBubbleData = (data) => {
@@ -47,6 +50,7 @@ class Report extends Component {
 
         return clean;
     }
+
 
     copyToClipboard = (e) => {
         this.textArea.select();
@@ -105,7 +109,11 @@ class Report extends Component {
                             <p>{this.props.reportReducer.goals_comments}</p>
                             <p>{this.props.reportReducer.goals_ctr}</p></>}
 
+                                <ReAnalyze />
+
+
                         </div>
+
 
                         <div className="report__bubble__chart">
                             {this.props.flagReducer[0]
