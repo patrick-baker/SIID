@@ -19,7 +19,7 @@ class DeleteEducator extends Component {
                             <>
                                 <h2 className="heading-secondary">Are you sure you want to delete this educator?</h2>
                                 <br />
-                                <h3 className="heading-tertiary">Name: {this.props.specificEducator.name}</h3> {/* FIND this  */}
+                                <h3 className="heading-tertiary" >Name: {this.props.specificEducator.name}</h3> {/* FIND this  */}
                                 <br />
                                 
                                 <div className="modal__centeredButtons">
