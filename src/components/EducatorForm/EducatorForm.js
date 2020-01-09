@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from '../Modal/Modal'
 import { Checkbox } from '@material-ui/core';
+import UploadButton from '../UploadButton/UploadButton';
+
 
 class EducatorForm extends Component {
     state = {
@@ -135,6 +137,7 @@ class EducatorForm extends Component {
                                     className="formInput__average"
                                     onChange={(event) => this.handleChangeFor('image_url', event)} />
                             </label>
+                            <UploadButton />
                         </div>
 
                         <div className="formInput__labelText">Specialties:</div>
