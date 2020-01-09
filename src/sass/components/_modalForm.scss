@@ -14,7 +14,7 @@
       &__modal-content {
         background-color: #ffffffda;
         margin: 10% auto; /* 15% from the top and centered */
-        height:45rem;
+        height:46rem;
         border: 1px solid $color-neutral-blue;
         border-radius: 4px;
         width: 45rem; /* Could be more or less, depending on screen size */
@@ -60,6 +60,13 @@
         justify-content: center;
         align-items: flex-end;
         padding: 2rem 0;
+      }
+      &__centeredButtonsNoTop {
+        display:flex;
+        // flex-direction: row;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 0 0 2rem 0;
       }
       /* The Close Button */
 }
