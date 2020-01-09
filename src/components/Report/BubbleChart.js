@@ -58,8 +58,8 @@ import * as d3 from 'd3';
 //     }
 // ];
 
-const width = 300; 
-const height = width;
+const width = 500; 
+const height = 400;
 const format = d3.format(",d");
 //const color = d3.scaleOrdinal(data.map(d => d.group), d3.schemeCategory10);
 
