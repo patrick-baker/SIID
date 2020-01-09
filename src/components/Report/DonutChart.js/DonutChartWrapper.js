@@ -10,7 +10,7 @@ class DonutChartWrapper extends Component {
 
     render() {
         return (
-            <div ref="chart" className="chart">
+            <div ref="chart" className="donutChart">
 
             </div>
         );

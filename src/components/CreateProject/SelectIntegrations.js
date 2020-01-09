@@ -35,18 +35,19 @@ class IntegrationsDropdown extends React.Component {
     return (
       <form className={classes.root} autoComplete="off" className="flex-column">
         <FormControl variant="filled" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-filled-label">Choose Integration</InputLabel>
+        <InputLabel style={{fontSize:'13px',color:'#5B63DA'}} id="demo-simple-select-filled-label">Choose Integration</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
           name='integration'
           value={this.props.form.integration}
           onChange={this.handleChange}
+          style={{width:'20rem',height:'5rem',border:'1px solid #5B63DA',borderBottom:'none',backgroundColor:'#f4f4f4'}}
         >
-          <MenuItem value={'None'}>None</MenuItem>
-          <MenuItem value={'Salesforce'}>Salesforce</MenuItem>
-          <MenuItem value={'Adobe'}>Adobe Marketing</MenuItem>
-          <MenuItem value={'Hubspot'}>Hubspot</MenuItem>
+          <MenuItem style={{height:'5rem',widht:'6rem'}} value={'None'}>None</MenuItem>
+          <MenuItem style={{height:'5rem',widht:'6rem'}} value={'Salesforce'}>Salesforce</MenuItem>
+          <MenuItem style={{height:'5rem',widht:'6rem'}} value={'Adobe'}>Adobe Marketing</MenuItem>
+          <MenuItem style={{height:'5rem',widht:'6rem'}} value={'Hubspot'}>Hubspot</MenuItem>
         </Select>
       </FormControl>
       </form>

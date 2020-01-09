@@ -77,4 +77,72 @@ router.get('/bias/:id', async (req, res) => {
         res.sendStatus(500);
     }
 });
+
+/**
+ * GET selected educators for report
+ */
+router.get('/educators/:id', async (req, res) => {
+
+    try {
+        if (verbose) console.log('in report.router /educators GET, req.params.id is: ', req.params.id);
+        // CREATE VAR FOR PROJECT ID
+        const projectId = req.params.id;
+        // SELECT BIAS TYPES AND COUNTS OF PROJECT
+        const biasesQueryText = `SELECT "bias"."id", "project_bias"."bias_count", "bias"."type"
+        FROM "bias"
+        JOIN "project_bias"
+        ON "bias"."id" = "project_bias"."bias_id"
+        WHERE "project_bias"."project_id" = $1;`
+
+        // returned bias objects that match the project
+        let projectBiases = await pool.query(biasesQueryText, [projectId]);
+        console.log(`This project's biases:`, projectBiases);
+        // removes total project bias count from bias array
+        let biasArray = projectBiases.rows.filter(function(obj) {
+            return obj.type !== "total"
+        })
+        console.log('biasArray =', biasArray);
+        // narrows down bias array if more than two bias values by sorting and cutting off end values
+        if (biasArray.length > 2) {
+            biasArray.sort((a, b) => (a.bias_count > b.bias_count) ? -1 : 1);
+            biasArray.length = 2;
+        }
+        console.log('biasArray before selecting educators:', biasArray);
+
+        // SELECT BIAS TYPES AND COUNTS
+        const queryText1 = `SELECT "name", "bio", "contact_info", "image_url", ARRAY_AGG("bias"."type")
+        FROM "educator"
+        JOIN "educator_bias"
+        ON "educator_bias"."educator_id" = "educator"."id"
+        JOIN "bias"
+        ON "educator_bias"."bias_id" = "bias"."id"
+        WHERE "bias"."id" = $1
+        GROUP BY "name", "bio", "contact_info", "image_url"
+        LIMIT 4;`;
+
+        const queryText2 = `SELECT "name", "bio", "contact_info", "image_url", ARRAY_AGG("bias"."type")
+        FROM "educator"
+        JOIN "educator_bias"
+        ON "educator_bias"."educator_id" = "educator"."id"
+        JOIN "bias"
+        ON "educator_bias"."bias_id" = "bias"."id"
+        WHERE "bias"."id" = $1 OR "bias"."id" = $2
+        GROUP BY "name", "bio", "contact_info", "image_url"
+        LIMIT 4;`;
+
+        let results;
+        if (biasArray.length === 1) {
+            results = await pool.query(queryText1, [biasArray[0].id]);
+        }
+        else if (biasArray.length === 2) {
+            results = await pool.query(queryText2, [biasArray[0].id, biasArray[1].id]);
+        }
+
+        res.send(results.rows);
+
+    } catch (error) {
+        console.log('error in GET educators for report:', error);
+        res.sendStatus(500);
+    }
+});
 module.exports = router;

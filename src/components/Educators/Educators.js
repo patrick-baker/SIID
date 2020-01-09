@@ -65,7 +65,8 @@ class Educators extends Component {
     render() {
         return (
             // <div className="educatorPage__background">
-                <div className="content">
+            <div className="content">
+                <h1 style={{color:'#5B63DA',borderBottom:'1px solid #5B63DA',fontSize:'3rem',padding:'2rem',marginLeft:'1rem'}} >Educators</h1>
                 {this.props.user.admin && (
 
                     <AddCard addEducator={this.addEducator}>
@@ -76,6 +77,9 @@ class Educators extends Component {
                 )}
                 {
                     this.state.add && <EducatorForm addEducator={this.addEducator} singleEducator={{}} />
+                }
+                {
+                    this.state.edit && <EducatorForm addEducator={this.editToggle} singleEducator={this.state.toEdit} />
                 }
                 {/* Show the Delete Educator Modal */}
                 {
@@ -106,9 +110,7 @@ class Educators extends Component {
                                 <i className="far fa-envelope fa-xs"></i> {edu.contact_info}
                             </div>
 
-                            {
-                                this.state.edit && <EducatorForm addEducator={this.editToggle} singleEducator={this.state.toEdit} />
-                            }
+
 
                             {
                                 this.props.user.admin &&

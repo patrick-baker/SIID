@@ -42,6 +42,7 @@ class BasicInfo extends React.Component {
                         className="formInput__average"
                         name="title"
                         onChange={this.handleChange}
+                        style={{margin:'0 0 2rem 0'}}
                     />
                 </ModalInput>
                 <ModalInput label={"Client"} >
@@ -50,12 +51,13 @@ class BasicInfo extends React.Component {
                         className="formInput__average"
                         name="client"
                         onChange={this.handleChange}
+                        style={{margin:'0 0 2rem 0'}}
                     />
                 </ModalInput>
                 <ModalInput label={"Description"} >
                     <textarea placeholder="Place text here..."
                         value={this.props.form.description}
-                        className="formInput__average"
+                        className="formInput__large"
                         name="description"
                         onChange={this.handleChange}
                     />
