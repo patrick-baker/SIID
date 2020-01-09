@@ -33,19 +33,16 @@ class SIIDTool extends Component {
 
   render() {
     return (
-      <div style={{ height: '90vh', width: '100%' }} >
+      <div style={{textAlign:'center'}}>
         <textarea
-          // className='formInput__large' 
-          style={{
-            width: '90%',
-            height: '100%',
-            borderColor: '#422997'
-          }}
           value={this.state.text}
-          onChange={(event) => this.addText(event)} />
+          onChange={(event) => this.addText(event)} 
+          className='formInput__large'
+          style={{width:'60rem',height:'30rem'}}
+          />
 
 
-        <button className="button button__analyze" onClick={this.analyze}><i class="fas fa-cog"></i> Analyze</button>
+        <button className="button__next" onClick={this.analyze}><i class="fas fa-cog"></i> Analyze</button>
 
       </div>
 

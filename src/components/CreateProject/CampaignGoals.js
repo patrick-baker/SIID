@@ -42,21 +42,22 @@ class IntegrationsDropdown extends React.Component {
     <>
       <form className={classes.root} autoComplete="off">
         <FormControl variant="filled" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-filled-label">Campaign Goals</InputLabel>
+        <InputLabel style={{fontSize:'13px',color:'#5B63DA'}} id="demo-simple-select-filled-label">Campaign Goals</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
           name='campaign_goals'
           value={this.props.form.goal}
           onChange={this.handleChange}
+          style={{width:'20rem',height:'5rem',border:'1px solid #5B63DA',borderBottom:'none',backgroundColor:'#f4f4f4'}}
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={'Lead Generation'}>Lead Generation</MenuItem>
-          <MenuItem value={'Sales Enablement'}>Sales Enablement</MenuItem>
-          <MenuItem value={'Brand Awareness'}>Brand Awareness</MenuItem>
-          <MenuItem value={'Audience Engagement'}>Audience Engagement</MenuItem>
+          <MenuItem style={{height:'5rem',widht:'6rem'}} value={'Lead Generation'}>Lead Generation</MenuItem>
+          <MenuItem style={{height:'5rem',widht:'6rem'}} value={'Sales Enablement'}>Sales Enablement</MenuItem>
+          <MenuItem style={{height:'5rem',widht:'6rem'}} value={'Brand Awareness'}>Brand Awareness</MenuItem>
+          <MenuItem style={{height:'5rem',widht:'6rem'}} value={'Audience Engagement'}>Audience Engagement</MenuItem>
         </Select>
       </FormControl>
       </form>
