@@ -16,7 +16,7 @@ class EducatorForm extends Component {
             //if this is an existing educator clean up so it's just the id's 
             //first check if this list is populated since it's not for the add new educator action
             //then check if the specialty value is null and don't bother mapping if it is
-            specialties: this.props.singleEducator.specialties&&this.props.singleEducator.specialties[0][0] !== null && this.props.singleEducator.specialties.map(x => {
+            specialties: this.props.singleEducator.specialties && this.props.singleEducator.specialties[0][0] !== null && this.props.singleEducator.specialties.map(x => {
                 return Number(x[0]);
             }) || [],
         }
@@ -35,6 +35,14 @@ class EducatorForm extends Component {
             }
         })
     }
+    handleChangeImage = (url) => {
+        this.setState({
+            newEducator: {
+                ...this.state.newEducator,
+                image_url: url
+            }
+        })
+    }
 
 
     submitEducator = () => {
@@ -45,8 +53,8 @@ class EducatorForm extends Component {
             this.state.newEducator.contact_info &&
             this.state.newEducator.specialties
         ) {
-           //check if the new educator id is blank. if blank do add and if not run an update
-            if (this.state.newEducator.id!=='') {
+            //check if the new educator id is blank. if blank do add and if not run an update
+            if (this.state.newEducator.id !== '') {
                 this.props.dispatch({ type: "UPDATE_EDUCATOR", payload: this.state.newEducator })
             } else {
                 this.props.dispatch({ type: "ADD_EDUCATOR", payload: this.state.newEducator });
@@ -102,7 +110,11 @@ class EducatorForm extends Component {
 
                     <div className="modal__form">
                         <div>
-                            
+
+                            <div className="card__centered">
+                                <UploadButton currentImage={this.state.newEducator.image_url} handleChangeImage={this.handleChangeImage} />
+                            </div>
+
                             <label>
                                 <div className="formInput__labelText" >Name:</div>
                                 <input placeholder="Name"
@@ -129,7 +141,7 @@ class EducatorForm extends Component {
                                     onChange={(event) => this.handleChangeFor('contact_info', event)} />
                             </label>
                         </div>
-                        <div>
+                        {/* <div>
                             <label>
                                 <div className="formInput__labelText">Image:</div>
                                 <input placeholder="Image"
@@ -137,28 +149,12 @@ class EducatorForm extends Component {
                                     className="formInput__average"
                                     onChange={(event) => this.handleChangeFor('image_url', event)} />
                             </label>
-                            <UploadButton />
-                        </div>
+                        </div> */}
 
                         <div className="formInput__labelText">Specialties:</div>
-                        {/* <select onChange={(event) => this.addSpecialites(event)}>
-                            {this.props.category.map((category)=>{
-                                return <option key={category.id} value={category.id}>{category.type}</option>
-                            })}
-                            {/* <option value="gender">gender</option>
-                            <option value="race">race</option>
-                            <option value="lgbtq">lgbtq</option>
-                            <option value="religion">religion</option>
-                            <option value="disability">disability</option> 
-                        </select>
-                        <ul>
-                            {this.state.newEducator.specialties.map((specialty) => {
-                            return <li key={specialty.id} 
-                                onClick={() => this.removeSpecialty(specialty)} 
-                                className="formInput__specialtyDisplay">- {specialty.type}</li>})}
-                        </ul> */}
+
                         <div className="checkboxArray">
-                            {this.props.category.map(item => {
+                            {this.props.category.filter(item => item.type != 'total').map(item => {
                                 return <><label key={item.id}>
 
                                     <Checkbox
@@ -172,7 +168,7 @@ class EducatorForm extends Component {
                                 </label> <br></br> </>
                             })}
                         </div>
-                        <div className="modal__centeredButtons">
+                        <div className="modal__centeredButtonsNoTop">
                             <button className="formInput__submitButton" onClick={this.submitEducator} >Submit</button>
                         </div>
                     </div>
