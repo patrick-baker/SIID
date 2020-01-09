@@ -172,12 +172,8 @@ class Report extends Component {
                             ref={(textarea) => this.textArea = textarea}
                             value={this.state.url} />
                             </div>
-                                          
-
                         }  
                     </div>
-                                
-                
                 }
             </div>
 

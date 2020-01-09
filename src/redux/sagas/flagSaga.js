@@ -4,7 +4,7 @@ import axios from 'axios';
 // sends axios request to server to post results from text analysis, both for rules flags and ML findings
 function* ANALYZE_TEXT(action) {
   try {
-    console.log('WER IN THE ANALUZE STESTTSETSETSETSETSET',action.payload)
+    console.log('In analyzeText in flagSaga',action.payload)
     // posts rules-based results
     const flags = yield axios.post('/rule',{text:action.payload.text,project_id:action.payload.project_id})
     yield put({type:"SET_FLAGS",payload:flags.data});
@@ -12,6 +12,8 @@ function* ANALYZE_TEXT(action) {
     const bias = yield axios.post('/automl',{text:action.payload.text, project_id: action.payload.project_id});
     yield put({type:'SET_BIAS_DATA',payload:bias.data})
     yield put ({type:"GET_SPECIFIC_PROJECT",payload:{id:action.payload.project_id}});
+    // dispatches to getProjectEducators in reportSaga, to retrieve educators for this project
+    yield put({type: "GET_PROJECT_EDUCATORS", payload: {id: action.payload.id}});
  } catch (error) {
      console.log('error in ANALYZE TEXT saga', error);
  }

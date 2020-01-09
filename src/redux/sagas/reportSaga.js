@@ -21,9 +21,20 @@ function* getProjectReportData(action) {
     }
 }
 
+function* getProjectEducators(action) {
+    try {
+        const educators = yield axios.get(`/report/educators/${action.payload.id}`);
+        console.log('educator data in getProjectEducators in reportSaga:', educators);
+        yield put({ type: 'SET_PROJECT_EDUCATORS', payload: educators.data });
+    } catch (error) {
+        console.log('error in getProjectEducators in reportSaga', error);
+    }
+}
+
 function* ReportSaga() {
     yield takeEvery('GET_PROJECT_METADATA', getMetaData);
     yield takeEvery('GET_SPECIFIC_PROJECT', getProjectReportData);
+    yield takeEvery('GET_PROJECT_EDUCATORS', getProjectEducators);
 }
 
 export default ReportSaga;
