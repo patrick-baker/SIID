@@ -11,22 +11,27 @@ const dropStyles = {
 
 
 class UploadButton extends React.Component {
+
+
+    state = {
+        url: ''
+    }
+    componentDidMount = () => {
+        this.setState({ url: this.props.currentImage })
+    }
     innerEl = (
         <div className="card__imageContainerSmall">
-            {this.props.currentImage ?
+            {this.state.url ?
                 <img className="card__image" src={this.props.currentImage} /> :
-                <p className="card__description" style={{marginLeft:'10px'}} >Click to Upload or Drag File Here</p>}
+                <p className="card__description" style={{ marginLeft: '10px' }} >Click to Upload or Drag File Here</p>}
         </div>
     )
-    state = {
-        url: this.props.imageUrl
-    }
-
     handleFinishedUpload = info => {
         console.log("info from uploadButton", info)
         // console.log('File uploaded with filename', info.filename)
         // console.log('Access it on s3 at', info.fileUrl)
         // this.props.dispatch({type:'POST_IMAGE', payload: info.fileUrl})
+        this.setState({ url: info.fileUrl })
         this.props.handleChangeImage(info.fileUrl)
 
     }
@@ -41,7 +46,13 @@ class UploadButton extends React.Component {
         return (
             <DropzoneS3Uploader
                 // style={{previewImage: ''||this.props.currentImage}}
-                children={this.innerEl}
+                children={(
+                    <div className="card__imageContainerSmall">
+                        {this.state.url ?
+                            <img className="card__image" src={this.props.currentImage} /> :
+                            <p className="card__description" style={{ marginLeft: '10px' }} >Click to Upload or Drag File Here</p>}
+                    </div>
+                )}
                 style={dropStyles}
                 onFinish={this.handleFinishedUpload}
                 s3Url={s3Url}
