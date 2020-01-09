@@ -58,8 +58,8 @@ import * as d3 from 'd3';
 //     }
 // ];
 
-const width = 500; 
-const height = 400;
+const width = 300; 
+const height = 300;
 const format = d3.format(",d");
 //const color = d3.scaleOrdinal(data.map(d => d.group), d3.schemeCategory10);
 
@@ -103,7 +103,8 @@ export default class BubbleChart {
           .join("tspan")
             .attr("x", 0)
             .attr("y", (d, i, nodes) => `${i - nodes.length / 2 + 0.8}em`)
-            .text(d => d);
+            .text(d => d)
+                .attr("font-size", '1.5rem')
       
         leaf.append("title")
             .text(d => `Instead use: ${d.data.expected}\n This word was used: ${format(d.data.count)} time(s)`);

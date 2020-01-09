@@ -1,8 +1,6 @@
 .report {
   display: grid;
   width: 100%;
-  // grid-template-columns: 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem;
-  // grid-template-rows: 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem 10rem;
   grid-template-columns: repeat(10, 10%);
   grid-template-rows: repeat(10, 10%);
 
