@@ -15,6 +15,7 @@ function* getProject() {
 function* createProject(action) {
   try {
     const newProject = action.payload;
+    console.log('NEW PROJECT',newProject);
     let project = yield axios.post(`/project`, newProject);
     // retrieves metadata for this created project, to be displayed on the report
     yield put ({type:"GET_SPECIFIC_PROJECT",payload:{id:project.data.project_id}});
@@ -39,11 +40,26 @@ function* deleteProject(action) {
     }
 }
 
+function* updateProject(action) {
+  try {
+    
+    const projectId=action.payload.id;
+    yield axios.put(`/project/${projectId}`,action.payload);
+    yield put({type:"GET_SPECIFIC_PROJECT",payload:{id:projectId}});
+    yield put({type:'GET_PROJECT'});
+    yield put({type:"ANALYZE_TEXT",payload:{text:action.payload.text,project_id:projectId}});
+    } catch (error) {
+        yield put({ type: "PROJECT_DEL_FAILURE" })
+    console.log('error in deleteProject for projectSaga', error);
+    }
+}
+
 
 function* ProjectSaga() {
   yield takeEvery('GET_PROJECT', getProject);
   yield takeEvery('CREATE_PROJECT', createProject);
   yield takeEvery('DELETE_PROJECT', deleteProject);
+  yield takeEvery('UPDATE_PROJECT',updateProject)
 }
 
 export default ProjectSaga;

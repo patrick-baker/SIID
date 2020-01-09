@@ -13,6 +13,7 @@ import toneSaga from './toneSaga';
 import literaryTechniques from './literaryTechniquesSaga';
 import biasSaga from './biasSaga';
 import reportSaga from './reportSaga';
+import imageSaga from './imageSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -37,5 +38,6 @@ export default function* rootSaga() {
     literaryTechniques(),
     biasSaga(),
     reportSaga(),
+    imageSaga(),
   ]);
 }

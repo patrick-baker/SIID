@@ -18,6 +18,8 @@ const flagRouter = require('./routes/flag.router');
 const reportRouter = require('./routes/report.router');
 const autoMLRouter = require('./routes/autoML.router');
 const categoryRouter =require('./routes/category.router');
+const uploadS3Router = require('react-dropzone-s3-uploader/s3router');
+const imageURLRouter = require('./routes/image-url.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -40,13 +42,14 @@ app.use('/flag', flagRouter);
 app.use('/report', reportRouter);
 app.use('/automl',autoMLRouter);
 app.use('/category', categoryRouter);
+app.use('/api/image', imageURLRouter);
 
 // S3 Buckets and react-dropzone-s3 need
-app.use('/s3', require('react-dropzone-s3-uploader/s3router')({
+app.use('/s3', uploadS3Router({
     bucket: 'siid',                           // required
     region: 'us-east-2',                            // optional
     headers: {'Access-Control-Allow-Origin': '*'},  // optional
-    ACL: 'private',                                 // this is the default - set to `public-read` to let anyone view uploads
+    ACL: 'public-read',                                 // this is the default - set to `public-read` to let anyone view uploads
   }));
 
 // Serve static files
