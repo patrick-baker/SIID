@@ -55,8 +55,8 @@ let getData = async (text) => {
                 let sentenceData = await getBias(sentence);
                 if (sentenceData != 'NO BIAS') {
                     biasCounter[sentenceData]++;
-                    biasCounter['total']++;
                 }
+                biasCounter['total']++;
             }
 
         } catch (error) {
