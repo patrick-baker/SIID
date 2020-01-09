@@ -5,8 +5,8 @@ export default class DonutChart {
         console.log('Hello World');
 
         // SET WIDTH, HEIGHT & RADIUS
-        const width = 300;
-        const height = 300;
+        const width = 400;
+        const height = 400;
         const donutBiasWidth = 40;
         const donutTotalWidth= 30;
         const radius1 = Math.min(width, height) / 2;
@@ -30,8 +30,16 @@ export default class DonutChart {
             return type.key != "total";
         }  
 
+        //REMOVE ALL ZERO VALUES 
+        function removeZero(data) {
+            return data.value != 0;
+        }  
+        //
+        const data_noZero=data_all.filter(removeZero);
+
         // ADD DATA TO PIE LAYOUT
-        const data_clean = pie(data_all.filter(checkBias));
+        //const data_clean = pie(data_all.filter(checkBias));
+        const data_clean = pie(data_noZero.filter(checkBias));
 
         console.log('data_all is: ', data_all);
         console.log('data_clean is: ', data_clean);
@@ -45,20 +53,21 @@ export default class DonutChart {
         // SETUP SVG
         const svg = d3.select(element)
             .append("svg")
-            .attr("width", width)
-            .attr("height", height)
+            .attr("width", '100%')
+            .attr("height", '100%')
+            .attr("viewBox", [0, 0, 550, 550]);
         
         const svgBias = svg.append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+            .attr("transform", "translate(" + 550 / 2 + "," + 550 / 2 + ")");
         
         const svgTotal = svg.append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+            .attr("transform", "translate(" + 550 / 2 + "," + 550 / 2 + ")");
 
         // CREATE GROUP
         const g = svgBias.selectAll(".arc")
             .data(data_clean)
             .enter().append("g")
-            .attr("class", "arc");
+            .attr("class", "sliceArc");
 
         g.append("path")
             .attr("d", arc)
@@ -79,9 +88,11 @@ export default class DonutChart {
         console.log('sum of biased counts: ', sumBiases(biasData));
         const biasSum = sumBiases(biasData)
 
+        const biasDifference = biasData.total - biasSum;
+        console.log('total minus sum is: ', biasDifference);
+        
         // ARRAY FOR TOTAL SENSITIVITIES
         const totalData = [{"key": 'Sensitive', "value": biasSum}, {"key": 'total', "value": biasData.total - biasSum}];
-        
 
         // 
         const total_clean = pie(totalData);
@@ -104,44 +115,43 @@ export default class DonutChart {
             .attr("d", totalArc)
             .style("fill", function (d) { return colorTotal(d.data.key); });
 
-        // // SET ARC FOR LABEL POSITIONING (WILL NOT BE DRAWN)
-        // const outerArc = d3.arc()
-        //     .innerRadius(radius * 0.9)
-        //     .outerRadius(radius * 0.9);
-
-        
+        // SET ARC FOR LABEL POSITIONING (WILL NOT BE DRAWN)
+        const outerArc = d3.arc()
+            .innerRadius(radius1 * 0.9)
+            .outerRadius(radius1 * 0.9);
 
         // ADD POLYLINES BETWEEN CHART & LABELS
-        // svg.selectAll("allPolylines")
-        //     .data(data_clean)
-        //     .enter()
-        //     .append("polyline")
-        //     .attr("stroke", "black")
-        //     .style("fill", "none")
-        //     .attr("stroke-width", 1)
-        //     .attr('points', function (d) {
-        //         var posA = arc.centroid(d) // line insertion in the slice
-        //         var posB = outerArc.centroid(d) // line break: we use the other arc generator that has been built only for that
-        //         var posC = outerArc.centroid(d); // Label position = almost the same as posB
-        //         var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 // we need the angle to see if the X position will be at the extreme right or extreme left
-        //         posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
-        //         return [posA, posB, posC]
-        //     });
+        svgBias.selectAll("allPolylines")
+            .data(data_clean)
+            .enter()
+            .append("polyline")
+            .attr("stroke", "black")
+            .style("fill", "none")
+            .attr("stroke-width", 1)
+            .attr('points', function (d) {
+                var posA = arc.centroid(d) // line insertion in the slice
+                var posB = outerArc.centroid(d) // line break: we use the other arc generator that has been built only for that
+                var posC = outerArc.centroid(d); // Label position = almost the same as posB
+                var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 // we need the angle to see if the X position will be at the extreme right or extreme left
+                posC[0] = radius1 * 1.05 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
+                return [posA, posB, posC]
+            });
 
         // ADD LABELS
-        // svg.selectAll("allLabels")
-        //     .data(data_clean)
-        //     .enter()
-        //     .append("text")
-        //     .text(function (d) { console.log(d.data.key); return d.data.key })
-        //     .attr('transform', function (d) {
-        //         var pos = outerArc.centroid(d);
-        //         var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-        //         pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
-        //         return 'translate(' + pos + ') ';
-        //     }).style('text - anchor', function (d) {
-        //         var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-        //         return (midangle < Math.PI ? 'start' : 'end')
-        //     });
+        svgBias.selectAll("allLabels")
+            .data(data_clean)
+            .enter()
+            .append("text")
+            .text(function (d) { console.log(d.data.key); return d.data.key })
+            .attr("font-size", '3rem')
+            .attr('transform', function (d) {
+                var pos = outerArc.centroid(d);
+                var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+                pos[0] = (radius1+1 )* 1.15 * (midangle < Math.PI ? 1 : -1);
+                return 'translate(' + pos + ') ';
+            }).style('text - anchor', function (d) {
+                var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+                return (midangle < Math.PI ? 'start' : 'end')
+            });
     }
 }
