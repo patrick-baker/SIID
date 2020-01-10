@@ -43,6 +43,25 @@ body {
   line-height: 2.4rem;
 }
 
+.problem{
+  font-size: 1.5rem;
+}
+.message{
+  font-size: 1rem;
+}
+
+.report{
+  &__header1{
+    font-size: 3.8rem;
+    font-weight: normal;
+    line-height: 4rem;
+  }
+  &__header2{
+    font-size: 2rem;
+    font-weight: normal;
+    line-height: 2.8rem;
+  }
+}
 .caption {
   color:rgb(31, 31, 31);
   margin-left:5%;

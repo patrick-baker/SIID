@@ -9,6 +9,7 @@ import SIIDTool from '../SIIDTool/SIIDTool';
 import ReAnalyze from '../ReAnalyze/ReAnalyze';
 import BiasTable from '../BiasTable/BiasTable'
 import ExpansionPanel from '../ExpansionPanel/ExpansionPanel';
+import Tone from './Tone/Tone';
 
 
 class Report extends Component {
@@ -80,9 +81,9 @@ class Report extends Component {
                             <div className="report">
                                 <div className="report__header">
 
-                                    <h1 className="heading__noMargin">{this.props.reportReducer.title} </h1>
-                                    <h2>Date:</h2><p>{moment(this.props.reportReducer.date_created).format("MMM Do, YYYY")}</p>
-                                    <h2>Client:</h2><p>{this.props.reportReducer.client}</p>
+                                    <h1 className="report__header1">{this.props.reportReducer.title} </h1>
+                                    <h2 className="report__header2">{moment(this.props.reportReducer.date_created).format("MMM Do, YYYY")}</h2>
+                                    <h2 className="report__header2">{this.props.reportReducer.client}</h2>
                                     <h2>Description:</h2><p>{this.props.reportReducer.description}</p>
 
                                     <h2>GOALS:</h2>
@@ -120,7 +121,6 @@ class Report extends Component {
                                         && <BubbleChart data={this.cleanBubbleData(this.props.flagReducer[0].messages.messages)} />}
                                 </div>
                                 <div className="report__bubble__text">
-                                    <h2>This is text in bubble</h2>
                                     {this.props.flagReducer[0]
                                         && this.props.flagReducer[0].messages
                                         && this.props.flagReducer[0].messages.messages
@@ -130,29 +130,7 @@ class Report extends Component {
                                 </div>
 
                                 <div className="report__donut__text">
-                                    <h2>Target Audience:</h2>
-                                    <p>{this.props.reportReducer.target_audience_age}</p>
-                                    <p>{this.props.reportReducer.talent_demographic}</p>
-                                    <p>{this.props.reportReducer.target_audience_ethnicity}</p>
-                                    <p>{this.props.reportReducer.target_audience_gender}</p>
-                                    <p>{this.props.reportReducer.target_audience_interests}</p>
-                                    <p>{this.props.reportReducer.target_audience_language}</p>
-                                    <p>{this.props.reportReducer.target_audience_race}</p>
-                                    <p>{this.props.reportReducer.target_audience_region}</p>
-
-                                    <h2>Tone</h2>
-                                    <ul>
-                                        {this.props.reportReducer.formal ? <li>Formal</li> : <li>Informal</li>}
-                                        {this.props.reportReducer.tone.map(type => {
-                                            return <li>{type}</li>
-                                        })}
-                                    </ul>
-                                    <h2>Literary Techniques</h2>
-                                    <ul>
-                                        {this.props.reportReducer.literaryTechniques.map(lit => {
-                                            return <li>{lit}</li>
-                                        })}
-                                    </ul>
+                                   <Tone />
                                 </div>
                                 <div className="report__donut__chart">
                                     {this.props.biasDataReducer.status && <DonutChartWrapper />}
