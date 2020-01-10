@@ -214,7 +214,8 @@ class Report extends Component {
                             </div>
                         }
                     </div>
-                }<BiasTable data={this.props.biasDataReducer.data} />
+                }
+                <BiasTable data={this.props.biasDataReducer.data} />
             </div>
 
 

@@ -3,9 +3,10 @@ import React from 'react'
 const BiasTable = ({ data }) => {
 
     const { race, total, gender, lgbtq, disability, religion } = data
+    const biasSum = [race, lgbtq, gender, disability, religion].reduce(function (acc, val) { return acc + val; }, 0)
 
     return (<>
-        <table className="dataTable__table">
+        <table className="dataTable__table data">
             <thead>
                 <th className="dataTable__label">Sensitivity Areas</th>
                 <th>Count</th>
@@ -17,7 +18,6 @@ const BiasTable = ({ data }) => {
                     <td>{race}</td>
                     <td>{race / total * 100}%</td>
                 </tr>
-
                 <tr>
                     <td>Gender</td>
                     <td>{gender}</td>
@@ -40,7 +40,7 @@ const BiasTable = ({ data }) => {
                 <tr>
                     <td>None</td>
                     <td></td>
-                    <td>{(total - [race, lgbtq, gender, disability, religion].reduce(function (acc, val) { return acc + val; }, 0)) / total * 100}%</td>
+                    <td>{(total - biasSum) / total * 100}%</td>
                 </tr>
             </tbody>
             <tfoot>
