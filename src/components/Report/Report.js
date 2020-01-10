@@ -11,6 +11,7 @@ import BiasTable from '../BiasTable/BiasTable'
 import ExpansionPanel from '../ExpansionPanel/ExpansionPanel';
 import Tone from './Tone/Tone';
 
+import EducatorsOnReport from '../EducatorsOnReport/EducatorsOnReport'
 
 class Report extends Component {
     state = {
@@ -188,19 +189,15 @@ class Report extends Component {
                                 <textarea className="formInput__report-textarea"
                                     ref={(textarea) => this.textArea = textarea}
                                     value={this.state.url} />
-                                
-                                <ReAnalyze />
-                                
 
                             </div>
                         }
                     </div>
                 }
 
+                <EducatorsOnReport educators={this.props.reportReducer.educators} />
                 <BiasTable data={this.props.biasDataReducer.data} />
-
-
-                <ExpansionPanel text={this.props.reportReducer.text} />
+                  <ExpansionPanel />
 
             </div>
 
