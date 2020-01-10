@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 
+// stores all educators to be rendered on educator page
 const educatorReducer = (state = [], action) => {
     if (action.type === 'SET_EDUCATORS') {
         return action.payload;
@@ -8,7 +9,7 @@ const educatorReducer = (state = [], action) => {
  
   };
 
-
+// changes error message and its status for rendering on the educator page when attempting to delete
 const educatorDeleteStatus = (state = {
     showError: false,
     messageFromServer: '',

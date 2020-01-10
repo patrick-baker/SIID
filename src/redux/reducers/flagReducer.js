@@ -1,3 +1,4 @@
+// stores flagged words for the created or chosen project report
 const flagReducer = (state = {}, action) => {
     if (action.type === "SET_FLAGS") {
         return action.payload
@@ -5,6 +6,4 @@ const flagReducer = (state = {}, action) => {
     return state;
 };
 
-// user will be on the redux state at:
-// state.user
 export default flagReducer;

@@ -1,3 +1,4 @@
+// stores bias categories from bias table
 const categoryReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_CATEGORY':

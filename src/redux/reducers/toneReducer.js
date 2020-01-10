@@ -1,5 +1,4 @@
-import { combineReducers } from 'redux';
-
+// stores tones from the GET request to literary_techniques table in DB
 const toneReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_TONE':
@@ -8,6 +7,4 @@ const toneReducer = (state = [], action) => {
         return state; 
   }
 }
-  // user will be on the redux state at:
-  // state.user
   export default toneReducer;

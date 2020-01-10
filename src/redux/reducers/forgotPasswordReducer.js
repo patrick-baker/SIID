@@ -1,3 +1,4 @@
+// stores error status and sends message contingent upon success of get request for user's email in DB
 const forgotPassword = (state = {
     showError: false,
     messageFromServer: '',
