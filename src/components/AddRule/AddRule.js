@@ -30,6 +30,7 @@ class AddRule extends Component {
             "id": `Use ${this.state.considerate} not ${this.state.inconsiderate}`, // Insetad of this.state.id
             "type": "simple",
             "note": this.state.note,
+            "message": this.state.message,
             "categories": [
                 "a"
             ],
@@ -48,14 +49,6 @@ class AddRule extends Component {
             <Modal>
                 <i onClick={this.props.addRule} className="fas fa-times fa-2x modal__cancelIcon"></i>
                 <ModalForm>
-                    {/* <ModalInput label={"Name"} >
-                        <input placeholder="Name"
-                            value={this.state.id}
-                            className="formInput__average"
-                            name="id"
-                            onChange={this.handleChangeFor}
-                        />
-                    </ModalInput> */}
                     <div style={{paddingTop:'2rem'}} ></div>
                     <ModalInput label={"Inconsiderate word/phrase"} >
                         <input placeholder="Inconsiderate"
@@ -73,6 +66,14 @@ class AddRule extends Component {
                             onChange={this.handleChangeFor}
                         />
                     </ModalInput>
+                    <ModalInput label={"Message"} >
+                        <input placeholder="Message"
+                            value={this.state.message}
+                            className="formInput__average"
+                            name="message"
+                            onChange={this.handleChangeFor}
+                        />
+                    </ModalInput>
                     <ModalInput label={"Note"} >
                         <textarea
                             rows="5"
@@ -86,8 +87,6 @@ class AddRule extends Component {
                     <div className="modal__centeredButtons">
                         <button className="formInput__submitButton" onClick={this.handleSubmit} >Submit</button>
                     </div>
-                    {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
-
                 </ModalForm>
             </Modal >
         )
