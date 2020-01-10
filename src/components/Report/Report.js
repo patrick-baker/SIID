@@ -207,7 +207,6 @@ class Report extends Component {
                                 <textarea className="formInput__report-textarea"
                                     ref={(textarea) => this.textArea = textarea}
                                     value={this.state.url} />
-                                <ReAnalyze />
 
 
                             </div>
@@ -215,7 +214,7 @@ class Report extends Component {
                     </div>
                 }
 
-                <ExpansionPanel text={this.props.reportReducer.text} />
+                <ExpansionPanel />
             </div>
 
 
