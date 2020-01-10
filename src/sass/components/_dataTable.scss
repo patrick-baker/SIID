@@ -1,0 +1,39 @@
+.dataTable{
+    &__table {
+    width: 270px;
+    border-collapse: collapse;
+    }
+
+    &__label {
+        width: 170px;
+        font-weight: 900;
+    }
+    
+}
+
+
+.data tr td:last-child{
+    text-align:center;
+    }
+.data thead th:last-child{
+    text-align:center;
+}
+.data tfoot td:last-child{
+    text-align:center;
+}
+.data tr:hover {background-color: #f5f5f5;}
+.data thead{
+    // font-size: 1.5rem;
+    text-align:left;
+    border-bottom: 1px solid #ddd;
+}
+.data th{
+    border-bottom: 1px solid #ddd;
+}
+.data tr td:first-child{
+    // font-size: 1.5rem;
+}
+.data tfoot td:first-child{
+    // font-size: 1.5rem;
+}
+

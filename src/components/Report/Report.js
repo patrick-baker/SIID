@@ -7,7 +7,9 @@ import Spinner from '../Spinner/Spinner';
 import moment from 'moment';
 import SIIDTool from '../SIIDTool/SIIDTool';
 import ReAnalyze from '../ReAnalyze/ReAnalyze';
+import BiasTable from '../BiasTable/BiasTable'
 import ExpansionPanel from '../ExpansionPanel/ExpansionPanel';
+
 
 class Report extends Component {
     state = {
@@ -72,6 +74,7 @@ class Report extends Component {
                 {this.props.reportReducer.analyzed === false && <Spinner />}
                 {this.props.reportReducer.analyzed === true &&
                     <div className='page__pad' style={{ background: 'white' }}>
+                        
                         {/* Only loads report if the url token matches the project token in DB */}
                         {this.props.reportReducer.project_token === this.props.match.params.token &&
                             <div className="report">
@@ -207,15 +210,20 @@ class Report extends Component {
                                 <textarea className="formInput__report-textarea"
                                     ref={(textarea) => this.textArea = textarea}
                                     value={this.state.url} />
+                                
                                 <ReAnalyze />
-
+                                
 
                             </div>
                         }
                     </div>
                 }
 
+                <BiasTable data={this.props.biasDataReducer.data} />
+
+
                 <ExpansionPanel text={this.props.reportReducer.text} />
+
             </div>
 
 
