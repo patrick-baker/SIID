@@ -8,44 +8,81 @@
     grid-area: header;
     border: 1px solid black;
     grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+
+  &__goals {
+    border: 1px solid black;
+    grid-column-start: 6;
+    grid-column-end: 9;
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+
+  &__copy {
+    border: 1px solid black;
+    grid-column-start: 9;
     grid-column-end: 11;
     grid-row-start: 1;
     grid-row-end: 2;
   }
 
   &__bubble__text {
-    grid-area: bubbleText;
+    border: 1px solid black;
     grid-column-start: 6;
     grid-column-end: 11;
-    grid-row-start: 2;
-    grid-row-end: 5;
-  }
-
-  &__bubble__chart {
-    grid-area: bubbleChart;
-    grid-column-start: 1;
-    grid-column-end: 6;
-    grid-row-start: 2;
+    grid-row-start: 3;
     grid-row-end: 6;
   }
 
-  &__donut__text {
+  &__bubble__chart {
+    border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 6;
-    grid-row-start: 8;
-    grid-row-end: 11;
+    grid-row-start: 3;
+    grid-row-end: 6;
   }
 
-  &__donut__chart {
+  &__targetInfo {
+    border: 1px solid black;
+    grid-column-start: 1;
+    grid-column-end: 11;
+    grid-row-start: 6;
+    grid-row-end: 9;
+  }
+
+  &__pie__text {
+    border: 1px solid black;
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 9;
+    grid-row-end: 12;
+  }
+
+  &__pie__chart {
+    border: 1px solid black;
     grid-column-start: 6;
     grid-column-end: 11;
-    grid-row-start: 8;
-    grid-row-end: 11;
+    grid-row-start: 9;
+    grid-row-end: 12;
     margin: auto;
   }
 
   &__educator {
-    grid-area: educator;
     border: 1px solid black;
+    grid-column-start: 1;
+    grid-column-end: 11;
+    grid-row-start: 12;
+    grid-row-end: 16;
+  }
+
+  &__reanalyze {
+    border: 1px solid black;
+    grid-column-start: 1;
+    grid-column-end: 11;
+    grid-row-start: 16;
+    grid-row-end: 17;
   }
 }
