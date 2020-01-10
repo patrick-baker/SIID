@@ -5,6 +5,7 @@ class CampaignGoals extends Component {
     render() {
         return (
             <div className="campaignGoals">
+                <h2>CAMPAIGN GOALS:</h2>
                 {/*conditionally rendered based on form selected goal*/}
                 {
                     this.props.reportReducer.campaign_goals === "Lead Generation" &&
