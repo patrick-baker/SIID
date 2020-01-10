@@ -1,0 +1,37 @@
+.dataTable{
+    &__table {
+    width: 300px;
+    border-collapse: collapse;
+    }
+
+    &__label {
+        width: 200px;
+        font-weight: 900;
+    }
+}
+
+
+tr td:last-child{
+    text-align:center;
+}
+thead th:last-child{
+    text-align:center;
+}
+tfoot td:last-child{
+    text-align:center;
+}
+tr:hover {background-color: #f5f5f5;}
+thead{
+    font-size: 1.5rem;
+    text-align:left;
+    border-bottom: 1px solid #ddd;
+}
+th{
+    border-bottom: 1px solid #ddd;
+}
+tr td:first-child{
+    font-size: 1.5rem;
+}
+tfoot td:first-child{
+    font-size: 1.5rem;
+}
