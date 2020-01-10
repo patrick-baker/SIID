@@ -210,19 +210,17 @@ class Report extends Component {
                                 <textarea className="formInput__report-textarea"
                                     ref={(textarea) => this.textArea = textarea}
                                     value={this.state.url} />
-                                
-                                <ReAnalyze />
-                                
 
                             </div>
                         }
                     </div>
                 }
 
+
+                
+
                 <BiasTable data={this.props.biasDataReducer.data} />
-
-
-                <ExpansionPanel text={this.props.reportReducer.text} />
+                  <ExpansionPanel />
 
             </div>
 
