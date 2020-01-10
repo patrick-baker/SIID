@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+// stores the array of projects to be displayed on the landing page
 const projectReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_PROJECT':
@@ -11,6 +12,7 @@ const projectReducer = (state = [], action) => {
     }
   };
   
+// stores message status and message for delete project functionality
   const projectDeleteStatus = (state = {
     showError: false,
     messageFromServer: '',
@@ -36,6 +38,7 @@ const projectReducer = (state = [], action) => {
     }
 };
 
+// reducer for projects storage and deletion
 export default combineReducers({
     projectReducer,
     projectDeleteStatus
