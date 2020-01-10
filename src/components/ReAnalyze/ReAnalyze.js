@@ -5,15 +5,12 @@ import { withRouter } from 'react-router-dom';
 
 class ReAnalyze extends Component {
 
-    state = {
-        text: this.props.reportReducer.text || "",
-        currentId:'',
+    componentDidMount = () => {
+        console.log('REPORT REDUCER',this.props.reportReducer);
     }
 
     handleChange = (event) => {
-        this.setState({
-            text: event.target.value
-        })
+        this.props.dispatch({type:'EDIT_TEXT',payload:event.target.value})
     }
 
     literaryTechniquesStructure = () => {
@@ -45,30 +42,16 @@ class ReAnalyze extends Component {
         });
     }
 
-    // componentDidMount = () => {
-    //     this.setState({
-    //         currentId:this.props.reportReducer.id
-    //     })
-
-    // }
-
-
-    // componentDidUpdate = () => {
-    //     console.log('DJDJSKNNKJNDSJKC');
-    //     if (this.state.currentId != this.props.reportReducer.id) {
-    //         console.log('CURRENT ID',this.state.currentId)
-    //         console.log('props id',this.props.reportReducer.id);
-    //         this.props.history.push(`/report/${this.props.reportReducer.id}/${this.props.reportReducer.project_token}`);
-    //     }
-    // }
-
-
-
     render() {
         return (
             <div>
-                <textarea value={this.state.text} onChange={event => this.handleChange(event)} />
-                <button onClick={this.analyze}>Analyze</button>
+                <textarea 
+                    value={this.props.reportReducer.text} 
+                    onChange={event => this.handleChange(event)} 
+                    className='formInput__large'
+                    style={{width:'40rem',height:'20rem'}}
+                />
+                <button className="button__next" onClick={this.analyze}><i class="fas fa-cog"></i> Analyze</button>
             </div>
         );
     }
