@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 
+// stores the autoML data returned for the created or chosen report 
 const data = (state = {}, action) => {
     if (action.type === 'SET_BIAS_DATA') {
         return action.payload;
@@ -7,11 +8,13 @@ const data = (state = {}, action) => {
     return state;
 };
 
+// updates status code, effecting rendering on the report page, turns the spinner off
 const status = (state = {
     isDone: false,
     messageFromServer: '',
 }, action) => {
     switch (action.type) {
+        // renders the relevant charts on the report page
         case 'AUTO_ML_DONE':
             return {
                 isDone: true,
