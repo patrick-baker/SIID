@@ -6,6 +6,7 @@ import Spinner from '../Spinner/Spinner';
 import moment from 'moment';
 import SIIDTool from '../SIIDTool/SIIDTool';
 import ReAnalyze from '../ReAnalyze/ReAnalyze';
+import ExpansionPanel from '../ExpansionPanel/ExpansionPanel';
 
 class Report extends Component {
     state = {
@@ -109,9 +110,6 @@ class Report extends Component {
                             <p>{this.props.reportReducer.goals_comments}</p>
                             <p>{this.props.reportReducer.goals_ctr}</p></>}
 
-                                <ReAnalyze />
-
-
                         </div>
 
 
@@ -154,8 +152,7 @@ class Report extends Component {
                             {this.props.biasDataReducer.status && <DonutChartWrapper />}
                         </div>
 
-                                
-                        <div></div>
+                        
                                 {/*      <pre>
                                      Report Reducer:
                         {JSON.stringify(this.props.reportReducer, null, 2)}
@@ -171,10 +168,14 @@ class Report extends Component {
                         <textarea className="formInput__report-textarea"
                             ref={(textarea) => this.textArea = textarea}
                             value={this.state.url} />
-                            </div>
+                        
+                        
+                        </div>
                         }  
-                    </div>
+                    </div>                   
                 }
+
+                <ExpansionPanel text={this.props.reportReducer.text} />
             </div>
 
                     )   
