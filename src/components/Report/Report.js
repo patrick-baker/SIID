@@ -9,7 +9,7 @@ import SIIDTool from '../SIIDTool/SIIDTool';
 import ReAnalyze from '../ReAnalyze/ReAnalyze';
 import BiasTable from '../BiasTable/BiasTable'
 import ExpansionPanel from '../ExpansionPanel/ExpansionPanel';
-
+import EducatorsOnReport from '../EducatorsOnReport/EducatorsOnReport'
 
 class Report extends Component {
     state = {
