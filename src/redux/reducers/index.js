@@ -29,16 +29,16 @@ const rootReducer = combineReducers({
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
   forgotPassword, // will contain message to the user contingent on forgotPassword submission
-  resetPassword, 
+  resetPassword, // stores username and status information for resetPassword component
   project, // reducer for projects storage and deletion
-  rule,
+  rule, // reducer for displaying and deleting rules from admin rules view
   flagReducer, // stores flagged words for the created or chosen project
   educator, // stores educator info for educator page and message status for delete educator functionality
   biasDataReducer, // stores autoML bias information from DB for chosen project
-  step,
-  tone,
+  step, // changes stage of stepper on createProject form page
+  tone, // stores tones from the GET request to literary_techniques table in DB
   literaryTechnique, // stores literary techniques from the GET request to literary_techniques table in DB
-  reportReducer,
+  reportReducer, // stores information to be displayed in report, other than chart information
   form, // holds all form data for create project form
   category, // stores bias entries from DB
 });
