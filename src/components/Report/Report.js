@@ -7,6 +7,7 @@ import Spinner from '../Spinner/Spinner';
 import moment from 'moment';
 import SIIDTool from '../SIIDTool/SIIDTool';
 import ReAnalyze from '../ReAnalyze/ReAnalyze';
+import EducatorsOnReport from '../EducatorsOnReport/EducatorsOnReport';
 
 class Report extends Component {
     state = {
@@ -212,6 +213,7 @@ class Report extends Component {
                         }
                     </div>
                 }
+                <EducatorsOnReport educators={this.props.reportReducer.educators} />
             </div>
 
 
