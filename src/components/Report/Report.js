@@ -9,6 +9,7 @@ import SIIDTool from '../SIIDTool/SIIDTool';
 import ReAnalyze from '../ReAnalyze/ReAnalyze';
 import BiasTable from '../BiasTable/BiasTable'
 import ExpansionPanel from '../ExpansionPanel/ExpansionPanel';
+import CampaignGoals from './CampaignGoals';
 
 
 class Report extends Component {
@@ -86,8 +87,9 @@ class Report extends Component {
                                     <h2>Description:</h2><p>{this.props.reportReducer.description}</p>
 
                                     <h2>GOALS:</h2>
+                                    <CampaignGoals />
                                     {/*conditionally rendered based on form selected goal*/}
-                                    {this.props.reportReducer.campaign_goals === "Lead Generation" &&
+                                    {/* {this.props.reportReducer.campaign_goals === "Lead Generation" &&
                                         <><p>Lead Generation</p>
                                             <p>{this.props.reportReducer.goals_conversion}</p>
                                             <p>{this.props.reportReducer.goals_ctr}</p></>}
@@ -109,7 +111,7 @@ class Report extends Component {
                                         <><p>Audience Engagement</p>
                                             <p>{this.props.reportReducer.goals_social_shares}</p>
                                             <p>{this.props.reportReducer.goals_comments}</p>
-                                            <p>{this.props.reportReducer.goals_ctr}</p></>}
+                                            <p>{this.props.reportReducer.goals_ctr}</p></>} */}
                                 </div>
 
 
