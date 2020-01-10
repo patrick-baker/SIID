@@ -88,6 +88,8 @@ router.get('/educators/:id', async (req, res) => {
         // CREATE VAR FOR PROJECT ID
         const projectId = req.params.id;
         // SELECT BIAS TYPES AND COUNTS OF PROJECT
+
+        
         const biasesQueryText = `SELECT "bias"."id", "project_bias"."bias_count", "bias"."type"
         FROM "bias"
         JOIN "project_bias"
@@ -110,25 +112,29 @@ router.get('/educators/:id', async (req, res) => {
         console.log('biasArray before selecting educators:', biasArray);
 
         // SELECT BIAS TYPES AND COUNTS
-        const queryText1 = `SELECT "name", "bio", "contact_info", "image_url", ARRAY_AGG("bias"."type")
-        FROM "educator"
-        JOIN "educator_bias"
-        ON "educator_bias"."educator_id" = "educator"."id"
-        JOIN "bias"
-        ON "educator_bias"."bias_id" = "bias"."id"
-        WHERE "bias"."id" = $1
-        GROUP BY "name", "bio", "contact_info", "image_url"
-        LIMIT 4;`;
+        const queryText1 = `
+        SELECT educator.id, name, bio, contact_info, image_url, ARRAY_AGG(ARRAY[bias.id::text,bias."type"]) AS specialties FROM educator 
+        LEFT OUTER JOIN educator_bias eb ON eb.educator_id = educator.id
+        LEFT OUTER JOIN bias ON eb.bias_id=bias.id
+        WHERE educator.id IN (SELECT educator.id
+            FROM "educator"
+            JOIN "educator_bias"
+            ON "educator_bias"."educator_id" = "educator"."id"
+            WHERE "educator_bias"."bias_id" = $1)
+        GROUP BY educator.id,name,bio,contact_info,image_url
+        ;`;
 
-        const queryText2 = `SELECT "name", "bio", "contact_info", "image_url", ARRAY_AGG("bias"."type")
-        FROM "educator"
-        JOIN "educator_bias"
-        ON "educator_bias"."educator_id" = "educator"."id"
-        JOIN "bias"
-        ON "educator_bias"."bias_id" = "bias"."id"
-        WHERE "bias"."id" = $1 OR "bias"."id" = $2
-        GROUP BY "name", "bio", "contact_info", "image_url"
-        LIMIT 4;`;
+        const queryText2 = `
+        SELECT educator.id, name, bio, contact_info, image_url, ARRAY_AGG(ARRAY[bias.id::text,bias."type"]) AS specialties FROM educator 
+        LEFT OUTER JOIN educator_bias eb ON eb.educator_id = educator.id
+        LEFT OUTER JOIN bias ON eb.bias_id=bias.id
+        WHERE educator.id IN (SELECT DISTINCT educator.id
+            FROM "educator"
+            JOIN "educator_bias"
+            ON "educator_bias"."educator_id" = "educator"."id"
+            WHERE "educator_bias"."bias_id" = $1 OR "educator_bias"."bias_id" = $2)
+        GROUP BY educator.id,name,bio,contact_info,image_url
+        ;`;
 
         let results;
         if (biasArray.length === 1) {

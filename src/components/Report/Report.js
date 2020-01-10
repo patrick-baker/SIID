@@ -216,9 +216,7 @@ class Report extends Component {
                     </div>
                 }
 
-
-                
-
+                <EducatorsOnReport educators={this.props.reportReducer.educators} />
                 <BiasTable data={this.props.biasDataReducer.data} />
                   <ExpansionPanel />
 
