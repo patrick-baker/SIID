@@ -88,7 +88,8 @@ export default class BubbleChart {
             .attr("id", (d,i) => (d.leafUid = i))
             .attr("r", d => d.r)
             .attr("fill-opacity", 0.7)
-            .attr("fill", d => color(d.data.actual));
+            .attr("fill", d => color(d.data.actual))
+            .attr("stroke", '#DCDDDE')
       
         leaf.append("clipPath")
             //.attr("id", d => (d.clipUid = DOM.uid("clip")).id)
@@ -104,7 +105,7 @@ export default class BubbleChart {
             .attr("x", 0)
             .attr("y", (d, i, nodes) => `${i - nodes.length / 2 + 0.8}em`)
             .text(d => d)
-                .attr("font-size", '1.5rem')
+                .attr("font-size", '1rem')
       
         leaf.append("title")
             .text(d => `Instead use: ${d.data.expected}\n This word was used: ${format(d.data.count)} time(s)`);
