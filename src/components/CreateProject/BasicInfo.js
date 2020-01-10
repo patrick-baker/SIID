@@ -42,7 +42,7 @@ class BasicInfo extends React.Component {
                         className="formInput__average"
                         name="title"
                         onChange={this.handleChange}
-                        style={{margin:'0 0 2rem 0'}}
+                        style={{margin:'0 0 2rem 0',padding:'.75rem',width:'20rem'}}
                     />
                 </ModalInput>
                 <ModalInput label={"Client"} >
@@ -51,7 +51,7 @@ class BasicInfo extends React.Component {
                         className="formInput__average"
                         name="client"
                         onChange={this.handleChange}
-                        style={{margin:'0 0 2rem 0'}}
+                        style={{margin:'0 0 2rem 0',padding:'.75rem',width:'20rem'}}
                     />
                 </ModalInput>
                 <ModalInput label={"Description"} >

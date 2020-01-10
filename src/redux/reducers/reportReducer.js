@@ -6,6 +6,8 @@ const reportReducer = (state = defaultState, action) => {
         return {...state, ...action.payload};
     } else if (action.type === 'SET_PROJECT_EDUCATORS') {
         return {...state, educators: action.payload}
+    } else if (action.type=== 'EDIT_TEXT') {
+        return {...state,text:action.payload}
     }
     if (action.type === 'CLEAR_REPORT') {
         return defaultState
