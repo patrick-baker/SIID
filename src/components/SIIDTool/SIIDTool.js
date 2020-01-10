@@ -38,7 +38,7 @@ class SIIDTool extends Component {
           value={this.state.text}
           onChange={(event) => this.addText(event)} 
           className='formInput__large'
-          style={{width:'60rem',height:'30rem'}}
+          style={{width:'80rem',height:'30rem',fontSize:'1.6rem',lineHeight:'2.15rem'}}
           />
 
 

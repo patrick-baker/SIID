@@ -11,7 +11,8 @@ import BiasTable from '../BiasTable/BiasTable'
 import ExpansionPanel from '../ExpansionPanel/ExpansionPanel';
 import CampaignGoals from './CampaignGoals';
 import Header from './Header';
-
+import Tone from './Tone/Tone';
+import EducatorsOnReport from '../EducatorsOnReport/EducatorsOnReport'
 
 class Report extends Component {
     state = {
@@ -110,7 +111,6 @@ class Report extends Component {
 
                                 {/* Re-Text Bubble Chart Words & Suggestions */}
                                 <div className="report__bubble__text">
-                                    <h2>This is text in bubble</h2>
                                     {this.props.flagReducer[0]
                                         && this.props.flagReducer[0].messages
                                         && this.props.flagReducer[0].messages.messages
@@ -120,29 +120,7 @@ class Report extends Component {
 
                                 {/* Target Audience, Tone, and Literary Techniques information */}
                                 <div className="report__targetInfo">
-                                    <h2>Target Audience:</h2>
-                                    <p>{this.props.reportReducer.target_audience_age}</p>
-                                    <p>{this.props.reportReducer.talent_demographic}</p>
-                                    <p>{this.props.reportReducer.target_audience_ethnicity}</p>
-                                    <p>{this.props.reportReducer.target_audience_gender}</p>
-                                    <p>{this.props.reportReducer.target_audience_interests}</p>
-                                    <p>{this.props.reportReducer.target_audience_language}</p>
-                                    <p>{this.props.reportReducer.target_audience_race}</p>
-                                    <p>{this.props.reportReducer.target_audience_region}</p>
-
-                                    <h2>Tone</h2>
-                                    <ul>
-                                        {this.props.reportReducer.formal ? <li>Formal</li> : <li>Informal</li>}
-                                        {this.props.reportReducer.tone.map(type => {
-                                            return <li>{type}</li>
-                                        })}
-                                    </ul>
-                                    <h2>Literary Techniques</h2>
-                                    <ul>
-                                        {this.props.reportReducer.literaryTechniques.map(lit => {
-                                            return <li>{lit}</li>
-                                        })}
-                                    </ul>
+                                    <Tone />
                                 </div>
 
                                 {/* Pie Chart for Bias Counts */}
@@ -157,7 +135,7 @@ class Report extends Component {
 
                                 {/* List of suggested educators */}
                                 <div className="report__educator">
-
+                                        <EducatorsOnReport educators={this.props.reportReducer.educators} />
                                 </div>
 
                                 {/* Popup to re-analyze text */}

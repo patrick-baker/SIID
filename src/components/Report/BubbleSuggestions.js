@@ -2,20 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class BubbleSuggestions extends Component {
-
+ 
     render() {
-        // let item = this.props.item;
-        //console.log(this.props.data.expected);
-
         return (            
-            <div>
+            <div className="report__suggestions">
+                <h2 className="report__header2">Consider the context of these words:</h2>
                 {this.props.data.map((x,i)=>{
                     console.log('this is the x', x, 'this is i', i, 'this is .message', x.messsage);
-                    return <>
-                     <p className="problemWord">{x.actual}</p>
-                     <p className="message">{x.messsage}
-                         
-                     </p></>
+                    return <p><span class="problem">{x.actual}</span> <span class="message">{x.messsage}</span></p>
+                    
                 })}
                
             </div>
