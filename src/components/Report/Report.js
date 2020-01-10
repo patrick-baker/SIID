@@ -70,7 +70,8 @@ class Report extends Component {
             <div className="content">
                 {this.props.reportReducer.analyzed === false && <Spinner />}
                 {this.props.reportReducer.analyzed === true &&
-                    <div className='page__pad' style={{ background: 'white' }}>
+                    // <div className='page__pad' style={{ background: 'white' }}>
+                    <div>
                         {/* Only loads report if the url token matches the project token in DB */}
                         {this.props.reportReducer.project_token === this.props.match.params.token &&
                             <div className="report">

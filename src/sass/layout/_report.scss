@@ -2,7 +2,7 @@
   display: grid;
   width: 100%;
   grid-template-columns: repeat(10, 10%);
-  grid-template-rows: repeat(10, 10%);
+  grid-template-rows: repeat(20, 10%);
 
   &__header {
     grid-area: header;
@@ -32,15 +32,15 @@
   &__donut__text {
     grid-column-start: 1;
     grid-column-end: 6;
-    grid-row-start: 6;
-    grid-row-end: 9;
+    grid-row-start: 8;
+    grid-row-end: 11;
   }
 
   &__donut__chart {
     grid-column-start: 6;
     grid-column-end: 11;
-    grid-row-start: 5;
-    grid-row-end: 9;
+    grid-row-start: 8;
+    grid-row-end: 11;
     margin: auto;
   }
 
