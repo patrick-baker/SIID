@@ -18,7 +18,7 @@ const EducatorsOnReport = ({ educators }) => {
         educatorsSubArray = educators
     }
 
-    return (<>
+    return (<div className="flex-row-space-evenly">
         {educatorsSubArray[0] && educatorsSubArray.map((edu, i) => (
             <div className="card__structure" key={i}>
                 <div className="card__imageContainer">
@@ -41,7 +41,7 @@ const EducatorsOnReport = ({ educators }) => {
                     </div>
                 </div>
             </div>
-        ))}</>
+        ))}</div>
     )
 }
 
