@@ -99,6 +99,34 @@
     grid-column-end: 11;
     grid-row-start: 7;
     grid-row-end: 10;
+    margin-top: auto;
+    margin-bottom: auto;
+    justify-content: space-around;
+    //margin: auto;
+
+    &__left{
+      text-align: left;
+      display: inline-block;
+      padding: .5rem;
+      
+    }
+    &__middle{
+      text-align: center;
+      display: inline-block;
+      padding: .5rem;
+      
+    }
+    &__right{
+      text-align: right;
+      display: inline-block;
+      padding: .5rem;
+      
+    }
+    &__list{
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
   }
 
   &__pie__text {
