@@ -56,7 +56,7 @@ class Projects extends Component {
                     this.state.deleteOpen && <DeleteProject specificProject={this.state.deleteOpenProject} handleDeleteModal={this.handleDelete} />
                 }
                 {/* Display Create Project card */}
-                <h1 style={{color:'#5B63DA',borderBottom:'1px solid #5B63DA',fontSize:'3rem',padding:'2rem',marginLeft:'1rem'}} >Projects</h1>
+                <h1 className="content__header" >Projects</h1>
                 <div className="card__createCardProject" onClick={this.handleClick}>
                     
                     <div className="card__plusIconDiv">
