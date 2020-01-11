@@ -46,7 +46,7 @@ class BasicInfo extends React.Component {
                     />
                 </ModalInput>
                 <ModalInput label={"Client"} >
-                    <input placeholder="Client Name"
+                    <input placeholder="Client Namgve"
                         value={this.props.form.client}
                         className="formInput__average"
                         name="client"
