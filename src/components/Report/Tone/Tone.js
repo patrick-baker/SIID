@@ -29,7 +29,9 @@ class Tone extends Component {
                 <h2>Tone</h2>
                 <ul className="report__targetInfo__list">
                     {this.props.reportReducer.formal ? <li>Formal</li> : <li>Informal</li>}
-                    {this.props.reportReducer.tone[0] && this.props.reportReducer.tone.map(type => {
+                    {this.props.reportReducer.tone && 
+                    this.props.reportReducer.tone[0] && 
+                    this.props.reportReducer.tone.map(type => {
                         return <li>{type}</li>
                     })}
                 </ul>
@@ -37,7 +39,9 @@ class Tone extends Component {
                 <div className="report__targetInfo__right">
                 <h2>Literary Techniques</h2>
                 <ul className="report__targetInfo__list">
-                    {this.props.reportReducer.literaryTechniques[0] && this.props.reportReducer.literaryTechniques.map(lit => {
+                    {this.props.reportReducer.literaryTechniques && 
+                    this.props.reportReducer.literaryTechniques[0] && 
+                    this.props.reportReducer.literaryTechniques.map(lit => {
                         return <li>{lit}</li>
                     })}
                 </ul>
