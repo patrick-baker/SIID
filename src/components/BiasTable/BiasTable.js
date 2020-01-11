@@ -46,7 +46,7 @@ const BiasTable = ({ data }) => {
             <tfoot>
                 <td>Total</td>
                 <td>{total}</td>
-                <td>100%</td>
+                <td>{/*100%*/}</td>
             </tfoot>
         </table>
     </>

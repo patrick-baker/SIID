@@ -10,7 +10,7 @@ class BubbleSuggestions extends Component {
             <div className="report__bubble__text__suggestions">
                 {/* <h2 className="report__header2">Consider the context of these words:</h2> */}
                 {this.props.data.map((x,i)=>{
-                    console.log('this is the x', x, 'this is i', i, 'this is .message', x.messsage);
+                    //console.log('this is the x', x, 'this is i', i, 'this is .message', x.messsage);
                     return <p><span class="problem">{x.actual}</span> <span class="message">{x.messsage}</span></p>
                     
                 })}
