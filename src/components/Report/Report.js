@@ -17,7 +17,6 @@ import EducatorsOnReport from '../EducatorsOnReport/EducatorsOnReport'
 class Report extends Component {
     state = {
         url: '',
-        successMessage: '',
     }
 
     componentDidMount = () => {
@@ -28,7 +27,7 @@ class Report extends Component {
         this.setState({
             url: `http://localhost:3000/#/report/${this.props.match.params.id}/${this.props.match.params.token}`
         })
-        this.props.dispatch({type: "GET_PROJECT_EDUCATORS", payload: {id: this.props.match.params.id}});
+        this.props.dispatch({ type: "GET_PROJECT_EDUCATORS", payload: { id: this.props.match.params.id } });
         console.log(this.props);
     }
 
@@ -59,14 +58,6 @@ class Report extends Component {
     }
 
 
-    copyToClipboard = (e) => {
-        this.textArea.select();
-        document.execCommand('copy');
-        // This is just personal preference.
-        // I prefer to not show the the whole text area selected.
-        e.target.focus();
-        this.setState({ successMessage: 'Copied!' });
-    };
 
     componentWillUnmount = () => {
         this.props.dispatch({ type: "AUTO_ML_RESET" })
@@ -84,23 +75,11 @@ class Report extends Component {
                             <div className="report">
                                 {/* Project title, client, date and description */}
                                 <div className="report__header">
-                                    <Header />
+                                    <Header url={`http://localhost:3000/#/report/${this.props.match.params.id}/${this.props.match.params.token}`} />
                                 </div>
 
-                                {/* Campaign Goals */}
-                                <div className="report__goals">
-                                    <CampaignGoals />
-                                </div>
+                                {/* <div className="report__header__dateClient" style={{ display: 'inline-block', border: '1px solid black' }}> */}
 
-                                {/* Copy link to clipboard */}
-                                <div className="report__copy">
-                                    {this.props.user.id === this.props.reportReducer.user_id &&
-                                        <button onClick={(e) => this.copyToClipboard(e)} className="formInput__submitButton">SHARE LINK</button>}
-                                </div>
-                                {/* Holds urls value for copy to link to clipboard*/}
-                                <textarea className="invisible formInput__report-textarea"
-                                    ref={(textarea) => this.textArea = textarea}
-                                    value={this.state.url} />
 
                                 {/* Re-text Bubble Chart */}
                                 <div className="report__bubble__chart">
