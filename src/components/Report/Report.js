@@ -94,7 +94,7 @@ class Report extends Component {
                                 {/* Copy link to clipboard */}
                                 <div className="report__copy">
                                     {this.props.user.id === this.props.reportReducer.user_id &&
-                                        <button onClick={(e) => this.copyToClipboard(e)}>Copy to Clipboard</button>}
+                                        <button onClick={(e) => this.copyToClipboard(e)} className="formInput__submitButton">SHARE LINK</button>}
                                 </div>
                                 {/* Holds urls value for copy to link to clipboard*/}
                                 <textarea className="invisible formInput__report-textarea"

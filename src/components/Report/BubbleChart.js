@@ -58,8 +58,8 @@ import * as d3 from 'd3';
 //     }
 // ];
 
-const width = 300; 
-const height = 300;
+const width = 350; 
+const height = width;
 const format = d3.format(",d");
 //const color = d3.scaleOrdinal(data.map(d => d.group), d3.schemeCategory10);
 
@@ -68,20 +68,37 @@ export default class BubbleChart {
         const pack = data => d3.pack()
                                 .size([width - 2, height - 2])
                                 .padding(3)
-                                (d3.hierarchy({children: data}).sum(d => d.count));
+                                (d3.hierarchy({children: data})
+                                    .sum(d => d.count));
+                                    //.sort(function(a, b) { return b.count - a.count; })
         const root = pack(clean);
         const color = d3.scaleOrdinal(clean.map(d => d.actual), d3.schemeCategory10)
             .range(["#704AD6", "#7793F0", "#B76AD4", "#E9E5FC", "#4035A3", "#D9B8E6", "#5B63DA", "#B534E6","#9E8DF8"]);
-        const svg = d3.select(element).append("svg")
+        
+            const svg = d3.select(element).append("svg")
             .attr("viewBox", [0, 0, width, height])
             .attr("font-size", 10)
             .attr("font-family", "sans-serif")
-            .attr("text-anchor", "middle");
+            .attr("text-anchor", "middle")
+            //chartio suggestions
+            //.attr("preserveAspectRatio","xMidYMid meet")
+            //.classed("svg-content", true)
+            // .attr("display", "inline-block")
+            // .attr("position","absolute")
+            // .attr("top", "0")
+            // .attr("left", "0")
+                
+        //add parent circle
+      /*   svg.data(root)
+            .append("circle")
+            .attr("r", d => d.r) */
+
       
         const leaf = svg.selectAll("g")
           .data(root.leaves())
           .join("g")
             .attr("transform", d => `translate(${d.x + 1},${d.y + 1})`);
+            //.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
       
         leaf.append("circle")
             //.attr("id", d => (d.leafUid = DOM.uid("leaf")).id)
@@ -90,22 +107,26 @@ export default class BubbleChart {
             .attr("fill-opacity", 0.7)
             .attr("fill", d => color(d.data.actual))
             .attr("stroke", '#DCDDDE')
+            //.attr("z-index", '-1') 
+            //.attr("position", 'relative')
       
-        leaf.append("clipPath")
-            //.attr("id", d => (d.clipUid = DOM.uid("clip")).id)
-              .attr("id", (d,i) => (d.clipUid = i))
-          .append("use")
-            .attr("xlink:href", d => d.leafUid.href);
+        // leaf.append("clipPath")
+        //     //.attr("id", d => (d.clipUid = DOM.uid("clip")).id)
+        //       .attr("id", (d,i) => (d.clipUid = i))
+        //   .append("use")
+        //     .attr("xlink:href", d => d.leafUid.href);
       
         leaf.append("text")
-            .attr("clip-path", d => d.clipUid)
+            //.attr("clip-path", d => d.clipUid)
           .selectAll("tspan")
           .data(d => d.data.actual.split(/(?=[A-Z][^A-Z])/g))
           .join("tspan")
             .attr("x", 0)
             .attr("y", (d, i, nodes) => `${i - nodes.length / 2 + 0.8}em`)
             .text(d => d)
-                .attr("font-size", '1rem')
+                .attr("font-size", '2rem')
+                //.attr("z-index", '4') 
+                //.attr("position", 'relative')
       
         leaf.append("title")
             .text(d => `Instead use: ${d.data.expected}\n This word was used: ${format(d.data.count)} time(s)`);
