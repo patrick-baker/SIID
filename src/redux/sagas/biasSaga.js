@@ -9,7 +9,7 @@ function* GET_BIAS_DATA(action) {
         yield put({type:"SET_BIAS_DATA",payload:biasData.data});
         yield put({type:"AUTO_ML_DONE"});
         // dispatches to getProjectEducators in reportSaga, to retrieve educators for this project
-        yield put({type: "GET_PROJECT_EDUCATORS", payload: {id: action.payload.id}});
+        // yield put({type: "GET_PROJECT_EDUCATORS", payload: {id: action.payload.id}});  // do we need this?
     } catch (error) {
         yield put({type:'AUTO_ML_FAILURE'})
         console.log('error in FETCH_RULES saga', error);
