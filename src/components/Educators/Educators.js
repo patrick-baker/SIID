@@ -66,7 +66,7 @@ class Educators extends Component {
         return (
             // <div className="educatorPage__background">
             <div className="content">
-                <h1 style={{color:'#5B63DA',borderBottom:'1px solid #5B63DA',fontSize:'3rem',padding:'2rem',marginLeft:'1rem'}} >Educators</h1>
+                <h1 className="content__header">Educators</h1>
                 {this.props.user.admin && (
 
                     <AddCard addEducator={this.addEducator}>

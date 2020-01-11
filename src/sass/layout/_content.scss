@@ -3,7 +3,16 @@
     position: absolute;
     top: 0px;
     right: 0px;
+
+    &__header {
+        color :#5B63DA;
+        border-bottom: 1px solid #5B63DA;
+        font-size: 3rem;
+        padding: 2rem;
+        margin: 0 1rem 0 1rem;
+    }
 }
+
 
 @media print
 {    

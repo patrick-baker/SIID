@@ -88,11 +88,8 @@ class RuleTable extends Component {
             // Show the table
             return (
                 <div className="content">
-                    <div className="page__pad" >
-                        <button className="button__generic" style={{ marginLeft: '0' }} onClick={this.addRule}><i class="fas fa-plus"></i><span style={{ marginLeft: '1rem' }}>Add rule</span></button>
-                        {/* <pre>{JSON.stringify(this.state,null,2)}</pre> */}
-
-                    </div>
+                    <h1 className="content__header" >Rules</h1>
+                        <button className="button__generic" style={{ position: 'absolute', left: '13rem', top: '-2rem' }} onClick={this.addRule}><i class="fas fa-plus"></i><span style={{ marginLeft: '1rem' }}>Add rule</span></button>
                     {/* Show the Add Rule Modal */}
                     {
                         this.state.add && <AddRule addRule={this.addRule} />
@@ -102,7 +99,7 @@ class RuleTable extends Component {
                     {
                         this.state.deleteOpen && <DeleteRule specificRule={this.state.deleteOpenRule} handleDeleteModal={this.handleDelete} />
                     }
-                    <div className="page__pad" style={{width:'95%'}} >
+                    <div style={{width:'calc(100% - 2rem)', margin: '1rem'}} >
                         <MaterialTable
                             icons={tableIcons}
                             title="Rule Table"
