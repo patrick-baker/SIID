@@ -42,7 +42,7 @@ class IntegrationsDropdown extends React.Component {
           name='integration'
           value={this.props.form.integration}
           onChange={this.handleChange}
-          style={{width:'20rem',height:'5rem',border:'1px solid #5B63DA',borderBottom:'none',backgroundColor:'#f4f4f4'}}
+          style={{width:'20rem',height:'5rem',border:'1px solid #5B63DA',borderBottom:'none',backgroundColor:'white'}}
         >
           <MenuItem style={{height:'5rem',widht:'6rem'}} value={'None'}>None</MenuItem>
           <MenuItem style={{height:'5rem',widht:'6rem'}} value={'Salesforce'}>Salesforce</MenuItem>

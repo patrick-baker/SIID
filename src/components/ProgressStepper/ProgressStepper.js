@@ -38,14 +38,14 @@ const styles = theme => ({
   },
   connectorDisabled: {
     '& $connectorLine': {
-      borderColor: 'grey',
+      borderColor: 'white',
     },
   },
   connectorLine: {
     transition: theme.transitions.create('border-color'),
     height: 5,
     border: 2,
-    backgroundColor: '#eaeaf0',
+    backgroundColor: 'white',
     borderRadius: 4,
     position: 'relative',
     top: '15px'
@@ -54,9 +54,9 @@ const styles = theme => ({
 
 const useColorlibStepIconStyles = makeStyles({
   root: {
-    backgroundColor: '#ccc',
+    backgroundColor: 'white',
     zIndex: 1,
-    color: '#fff',
+    color: '#5B63DA',
     width: 60,
     height: 60,
     display: 'flex',
@@ -68,10 +68,12 @@ const useColorlibStepIconStyles = makeStyles({
     backgroundImage:
       'linear-gradient( 136deg, #422997 0%, #5B63DA 100%)',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+    color: '#F3F3F3'
   },
   completed: {
     backgroundImage:
       'linear-gradient( 136deg, #704AD6 0%, #5B63DA 100%)',
+    color: '#F3F3F3'
   },
 });
 

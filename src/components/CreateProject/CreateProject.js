@@ -67,7 +67,7 @@ class CreateProject extends Component {
         <div className="project-metadata-page flex-column">
           <p className="heading-primary">Steps to Make a Project:</p>
           <div className="flex-row-center overview-boxes">
-            <div className="project-box flex-column"><p className="heading-secondary">Integrations</p></div>
+            <div className="project-box flex-column"><p className="heading-secondary">Basics & Integrations</p></div>
             <div className="project-box flex-column"><p className="heading-secondary">Campaign Goals</p></div>
             <div className="project-box flex-column"><p className="heading-secondary">Target Audience</p></div>
             <div className="project-box flex-column"><p className="heading-secondary">Tone & Style</p></div>
