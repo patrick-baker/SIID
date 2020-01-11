@@ -30,11 +30,11 @@ const EducatorsOnReport = ({ educators }) => {
                     </div>
 
                     <div className="horizontal-card__details__description" >
-                        {edu.bio}
+                        {edu.bio.substring(0,54)}
                     </div>
                     <ul className="horizontal-card__details__specialties">
-                        Specialties:
-        {edu.specialties[0][0] !== null && edu.specialties.map((specialty, i) => { return <li key={i} > - {specialty[1]}</li> })}
+                        <p className="horizontal-card__details__specialties__specialties-title">Specialties:</p>
+        {edu.specialties[0][0] !== null && edu.specialties.map((specialty, i) => { return <li key={i}> - {specialty[1]}</li> })}
                     </ul>
                     <div className="horizontal-card__details__contact" >
                         <i className="far fa-envelope fa-xs"></i> {edu.contact_info}
