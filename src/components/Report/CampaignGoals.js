@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class CampaignGoals extends Component {
     render() {
         return (
-            <div className="campaignGoals">
+            <div className="report__goals__textBox">
                 <h2>CAMPAIGN GOALS:</h2>
                 {/*conditionally rendered based on form selected goal*/}
                 {

@@ -49,7 +49,8 @@ class ReAnalyze extends Component {
                     value={this.props.reportReducer.text} 
                     onChange={event => this.handleChange(event)} 
                     className='formInput__large'
-                    style={{width:'110rem',height:'20rem',fontSize:'1.6rem'}}
+                    // style={{width:'110rem',height:'20rem',fontSize:'1.6rem'}}
+                    style={{width:'100%',height:'20rem',fontSize:'1.6rem'}}
                 />
                 <button className="button__next"  style={{marginLeft:'90rem'}} onClick={this.analyze}><i class="fas fa-cog"></i> Analyze</button>
             </div>
