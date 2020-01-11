@@ -111,8 +111,8 @@ class Report extends Component {
 
                                 {/* Re-Text Bubble Chart Words & Suggestions */}
                                 <div className="report__bubble__header">
-                                    <h1 className="report__header1">BUBBLE CHART</h1>
-                                    <h2 className="report__header2">Consider the context of these words:</h2>
+                                    <h1 className="report__header2">BUBBLE CHART</h1>
+                                    <h2 >Consider the context of these words:</h2>
                                 </div>
                                 <div className="report__bubble__text">
                                     {this.props.flagReducer[0]

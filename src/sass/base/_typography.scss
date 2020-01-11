@@ -1,6 +1,7 @@
 body {
   font-family: $open-sans;
   color: $color-black;
+  background-color:#f3f3f3
 }
 
 .heading-primary {
@@ -98,4 +99,8 @@ body {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.italicize {
+  font-style: italic;
 }
