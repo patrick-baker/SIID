@@ -96,21 +96,6 @@
         flex-direction: column;
     }
     
-    // &__Ear{
-        
-    //         position: relative;
-            
-    //         &:before {
-    //           content: '';
-    //           display: inline-block;
-    //           clip-path: polygon(0 0, 0 30px, 30px 0);
-    //           background-color:$color-neutral-blue ;
-    //           height: 100%;
-    //           width: 100%;
-    //           position: absolute;
-    //         }
-          
-    // }
     &__Ear{
         
         position: relative;
@@ -192,6 +177,73 @@
 
         &:hover {
             cursor: pointer;
+        }
+    }
+}
+
+.horizontal-card {
+    &__structure {
+        display: flex;
+        width: 32rem;
+        height:20rem;
+        border:.2rem solid $color-neutral-blue;
+        margin:1rem;
+        border-radius: .4rem;
+        box-shadow: 0 .3rem .8rem -.3rem #313131;
+        overflow:hidden;
+        &:hover {
+            box-shadow: 0rem .3rem .8rem -.1rem #313131;
+        }
+    }
+
+    &__imageContainer{
+        width:20rem;
+        height:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        overflow:hidden;
+
+        &__image {
+            flex-shrink:0;
+            -webkit-flex-shrink: 0;
+            // max-width:100%;
+            max-height:100%;
+            
+        } 
+    }
+
+    &__details {
+        padding-left:.5rem;
+        padding-right:.5rem;
+        width: 10rem;
+
+        &__title {
+            font-weight: bold;
+            font-size: 2rem;
+            margin-bottom:3%;
+            color:rgb(37, 37, 37);
+        }
+
+        &__description {
+            font-size:1rem;
+            color:rgb(155, 155, 155);
+        }
+
+        &__specialties {
+            color:rgb(155, 155, 155);
+            margin-top:.8rem;
+            list-style: none;
+            padding: 0;
+
+            &__specialties-title {
+                padding-bottom: .5rem;
+            }
+        }
+
+        &__contact {
+            color:rgb(155, 155, 155);
+            margin-top:.8rem;
         }
     }
 }
