@@ -30,7 +30,7 @@ export default function SimpleExpansionPanel() {
         >
           <Typography className={classes.heading} style={{color:'#5B63DA',fontSize:'2rem'}} >Analyze Text</Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        <ExpansionPanelDetails className="report__analyze__textarea">
           <Typography>
             <ReAnalyze/>
           </Typography>
