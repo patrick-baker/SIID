@@ -2,7 +2,7 @@
   display: grid;
   width: 100%;
   grid-template-columns: repeat(10, 10%);
-  grid-template-rows: repeat(20, 10%);
+  grid-template-rows: repeat(20, 10vh);
 
   &__header {
     grid-area: header;
@@ -27,46 +27,59 @@
     grid-column-end: 11;
     grid-row-start: 1;
     grid-row-end: 2;
+    margin: auto;
   }
 
   &__bubble__text {
     border: 1px solid black;
-    grid-column-start: 6;
+    grid-column-start: 5;
     grid-column-end: 11;
     grid-row-start: 3;
-    grid-row-end: 6;
+    grid-row-end: 7;
+    height: 40vh;
+    overflow: scroll;
   }
 
   &__bubble__chart {
     border: 1px solid black;
     grid-column-start: 1;
-    grid-column-end: 6;
+    grid-column-end: 5;
     grid-row-start: 3;
-    grid-row-end: 6;
+    grid-row-end: 7;
+    // //added  for positioning suggestion on chartio
+    // display: inline-block;
+    // position: relative;
+    // width: 100%;
+    // padding-bottom: 100%;
+    // vertical-align: top;
+    // overflow: hidden;
+    width: 70%;
+    margin: auto;
+    //height: 40vh;
   }
 
   &__targetInfo {
     border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 11;
-    grid-row-start: 6;
-    grid-row-end: 9;
+    grid-row-start: 7;
+    grid-row-end: 10;
   }
 
   &__pie__text {
     border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 6;
-    grid-row-start: 9;
-    grid-row-end: 12;
+    grid-row-start: 10;
+    grid-row-end: 13;
   }
 
   &__pie__chart {
     border: 1px solid black;
     grid-column-start: 6;
     grid-column-end: 11;
-    grid-row-start: 9;
-    grid-row-end: 12;
+    grid-row-start: 10;
+    grid-row-end: 13;
     margin: auto;
   }
 
@@ -74,7 +87,7 @@
     border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 11;
-    grid-row-start: 12;
+    grid-row-start: 13;
     grid-row-end: 16;
   }
 
