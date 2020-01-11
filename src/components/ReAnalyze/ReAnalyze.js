@@ -35,7 +35,7 @@ class ReAnalyze extends Component {
             type: "UPDATE_PROJECT",
             payload: {
                 ...this.props.reportReducer,
-                text: this.state.text,
+                text: this.props.reportReducer.text,
                 literaryTechniques: this.literaryTechniquesStructure(),
                 tones: this.tonesStructure()
             }
