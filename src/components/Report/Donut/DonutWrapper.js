@@ -32,7 +32,7 @@ class DonutWrapper extends Component {
         return (
             <div ref="chart" className="donut__total">
                 {/*making sure this number and the none value percentages add to 100 even though there would be some rounding*/}
-                <p className="report__percent">{100-(Math.floor((this.state.total-this.state.bias)/this.state.total*100))}%</p>
+                {/* <p className="report__percent">{100-(Math.floor((this.state.total-this.state.bias)/this.state.total*100))}%</p> */}
             </div>
         );
     }
