@@ -22,7 +22,7 @@ export default function SimpleExpansionPanel() {
 
   return (
     <div className={classes.root}>
-      <ExpansionPanel style={{width:'83%',border:'1px solid #5B63DA',boxShadow:'1px 1px 10px -5px #363636',position:'fixed',bottom:'0',right:'2rem'}}>
+      <ExpansionPanel style={{width:'100%',border:'1px solid #5B63DA',boxShadow:'1px 1px 10px -5px #363636',position:'relative',bottom:'0'}}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon style={{color:'#5B63DA',fontSize:'2rem'}} />}
           aria-controls="panel1a-content"
@@ -30,7 +30,7 @@ export default function SimpleExpansionPanel() {
         >
           <Typography className={classes.heading} style={{color:'#5B63DA',fontSize:'2rem'}} >Analyze Text</Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        <ExpansionPanelDetails className="report__analyze__textarea">
           <Typography>
             <ReAnalyze/>
           </Typography>

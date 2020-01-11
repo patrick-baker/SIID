@@ -1,12 +1,12 @@
 import * as d3 from 'd3';
 
-export default class DonutChart {
+export default class PieChart {
     constructor(element, biasData) {
         console.log('Hello World');
 
         // SET WIDTH, HEIGHT & RADIUS
-        const width = 400;
-        const height = 400;
+        const width = 350;
+        const height = width;
         const radius1 = Math.min(width, height) / 2;
 
         // SET COLOR SCHEME
@@ -70,7 +70,7 @@ export default class DonutChart {
             .text(function (d) { return d.data.key })
             .attr('transform', function (d) { return "translate(" + arc.centroid(d) + ")"; })
             .style("text-anchor", 'middle')
-            .style("font-size", '2.5rem')
+            .style("font-size", '2rem')
             .style("font", `'Open Sans', sans-serif`);
 
         g.append("path")

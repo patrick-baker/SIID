@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BubbleChart from './BubbleChartWrapper';
-import DonutChartWrapper from './DonutChart.js/DonutChartWrapper';
+import PieChart from './PieChart.js/PieChartWrapper';
 import BubbleSuggestions from './BubbleSuggestions';
 import Spinner from '../Spinner/Spinner';
 import moment from 'moment';
@@ -110,6 +110,10 @@ class Report extends Component {
                                 </div>
 
                                 {/* Re-Text Bubble Chart Words & Suggestions */}
+                                <div className="report__bubble__header">
+                                    <h1 className="report__header1">BUBBLE CHART</h1>
+                                    <h2 className="report__header2">Consider the context of these words:</h2>
+                                </div>
                                 <div className="report__bubble__text">
                                     {this.props.flagReducer[0]
                                         && this.props.flagReducer[0].messages
@@ -125,8 +129,13 @@ class Report extends Component {
 
                                 {/* Pie Chart for Bias Counts */}
                                 <div className="report__pie__chart">
-                                    {this.props.biasDataReducer.status && <DonutChartWrapper />}
+                                    {this.props.biasDataReducer.status && <PieChart />}
                                 </div>
+
+                                {/* Percentage of sentences flagged biased */}
+                                {/* <div className="report__pie__total">
+                                    <BiasPercent data={this.props.biasDataReducer.data} />
+                                </div> */}
 
                                 {/* Bias Counts for Pie Chart */}
                                 <div className="report__pie__text">
@@ -135,7 +144,7 @@ class Report extends Component {
 
                                 {/* List of suggested educators */}
                                 <div className="report__educator">
-                                        <EducatorsOnReport educators={this.props.reportReducer.educators} />
+                                    <EducatorsOnReport educators={this.props.reportReducer.educators} />
                                 </div>
 
                                 {/* Popup to re-analyze text */}
@@ -144,8 +153,12 @@ class Report extends Component {
                                 </div>
                             </div>
                         }
+
                     </div>
                 }
+
+                <pre>{JSON.stringify(this.props.reportReducer.data, 2, null)}</pre>
+
             </div>
         )
     }
