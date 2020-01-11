@@ -60,7 +60,7 @@ class Projects extends Component {
                 <div className="card__createCardProject" onClick={this.handleClick}>
                     
                     <div className="card__plusIconDiv">
-                    <i class="fas fa-clipboard-list fa-4x card__plusIcon"></i>
+                    <i class="fas  fa-chart-line fa-4x card__plusIcon"></i>
                         Create Project
                     </div>
                 </div>
