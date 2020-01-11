@@ -5,38 +5,37 @@ class CampaignGoals extends Component {
     render() {
         return (
             <div className="report__goals__textBox">
-                <h2>CAMPAIGN GOALS:</h2>
                 {/*conditionally rendered based on form selected goal*/}
                 {
                     this.props.reportReducer.campaign_goals === "Lead Generation" &&
-                    <><p>Lead Generation</p>
-                        <p>{this.props.reportReducer.goals_conversion}</p>
-                        <p>{this.props.reportReducer.goals_ctr}</p></>
+                    <><h2>CAMPAIGN GOALS: <span>Lead Generation</span></h2>
+                        <p>Conversion: <span>{this.props.reportReducer.goals_conversion}</span></p>
+                        <p>CTR: <span>{this.props.reportReducer.goals_ctr}</span></p></>
                 }
 
                 {
                     this.props.reportReducer.campaign_goals === "Sales Enablement" &&
-                    <><p>Sales Enablement</p>
-                        <p>{this.props.reportReducer.goals_sales_conversion}</p>
-                        <p>{this.props.reportReducer.goals_sales_length}</p>
-                        <p>{this.props.reportReducer.goals_social_shares}</p></>
+                    <><h2>CAMPAIGN GOALS: <span>Sales Enablement</span></h2>
+                        <p>Sales Conversion: <span>{this.props.reportReducer.goals_sales_conversion}</span></p>
+                        <p>Sales Length: <span>{this.props.reportReducer.goals_sales_length}</span></p>
+                        <p>Social Shares: <span>{this.props.reportReducer.goals_social_shares}</span></p></>
                 }
 
                 {
                     this.props.reportReducer.campaign_goals === "Brand Awareness" &&
-                    <><p>Brand Awareness </p>
-                        <p>{this.props.reportReducer.goals_social_shares}</p>
-                        <p>{this.props.reportReducer.goals_follow}</p>
-                        <p>{this.props.reportReducer.goals_impressions}</p>
-                        <p>{this.props.reportReducer.goals_views}</p></>
+                    <><h2>CAMPAIGN GOALS: <span>Brand Awareness</span></h2>
+                        <p>Social Shares: <span>{this.props.reportReducer.goals_social_shares}</span></p>
+                        <p>Follows: <span>{this.props.reportReducer.goals_follow}</span></p>
+                        <p>Impressions: <span>{this.props.reportReducer.goals_impressions}</span></p>
+                        <p>Views: <span>{this.props.reportReducer.goals_views}</span></p></>
                 }
 
                 {
                     this.props.reportReducer.campaign_goals === "Audience Engagement" &&
-                    <><p>Audience Engagement</p>
-                        <p>{this.props.reportReducer.goals_social_shares}</p>
-                        <p>{this.props.reportReducer.goals_comments}</p>
-                        <p>{this.props.reportReducer.goals_ctr}</p></>
+                    <><h2>CAMPAIGN GOALS: <span>Audience Engagement</span></h2>
+                        <p>Social Shares: <span>{this.props.reportReducer.goals_social_shares}</span></p>
+                        <p>Comments: <span>{this.props.reportReducer.goals_comments}</span></p>
+                        <p>CTR: <span>{this.props.reportReducer.goals_ctr}</span></p></>
                 }
             </div>
         );
