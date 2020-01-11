@@ -69,14 +69,23 @@
   &__pie__text {
     border: 1px solid black;
     grid-column-start: 1;
-    grid-column-end: 6;
+    grid-column-end: 4;
     grid-row-start: 10;
     grid-row-end: 13;
   }
 
   &__pie__chart {
     border: 1px solid black;
-    grid-column-start: 6;
+    grid-column-start: 4;
+    grid-column-end: 7;
+    grid-row-start: 10;
+    grid-row-end: 13;
+    margin: auto;
+  }
+
+  &__pie__total {
+    border: 1px solid black;
+    grid-column-start: 7;
     grid-column-end: 11;
     grid-row-start: 10;
     grid-row-end: 13;

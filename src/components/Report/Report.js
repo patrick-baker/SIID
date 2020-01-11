@@ -12,7 +12,8 @@ import ExpansionPanel from '../ExpansionPanel/ExpansionPanel';
 import CampaignGoals from './CampaignGoals';
 import Header from './Header';
 import Tone from './Tone/Tone';
-import EducatorsOnReport from '../EducatorsOnReport/EducatorsOnReport'
+import EducatorsOnReport from '../EducatorsOnReport/EducatorsOnReport';
+import DonutWrapper from './Donut/DonutWrapper';
 
 class Report extends Component {
     state = {
@@ -33,7 +34,7 @@ class Report extends Component {
 
     cleanBubbleData = (data) => {
         //const data=this.props.flagReducer[0].messages.messages;
-        console.log('this is flag reducer data', data);
+        //console.log('this is flag reducer data', data);
         //grab array of distinct problem words
         const distinctWords = [...new Set(data.map(obj => obj.actual))];
 
@@ -131,6 +132,10 @@ class Report extends Component {
                                 {/* Bias Counts for Pie Chart */}
                                 <div className="report__pie__text">
                                     <BiasTable data={this.props.biasDataReducer.data} />
+                                </div>
+
+                                <div className="report__pie__total">
+                                    {this.props.biasDataReducer.status && <DonutWrapper />}
                                 </div>
 
                                 {/* List of suggested educators */}

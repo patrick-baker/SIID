@@ -16,37 +16,37 @@ const BiasTable = ({ data }) => {
                 <tr>
                     <td>Race</td>
                     <td>{race}</td>
-                    <td>{race / total * 100}%</td>
+                    <td>{Math.floor(race / total * 100)}%</td>
                 </tr>
                 <tr>
                     <td>Gender</td>
                     <td>{gender}</td>
-                    <td>{gender / total * 100}%</td>
+                    <td>{Math.floor(gender / total * 100)}%</td>
                 </tr>
                 <tr>
                     <td>Religion</td>
                     <td>{religion}</td>
-                    <td>{religion / total * 100}%</td>
+                    <td>{Math.floor(religion / total * 100)}%</td>
                 </tr>
                 <tr>
                     <td>Disability</td>
                     <td>{disability}</td>
-                    <td>{disability / total * 100}%</td>
+                    <td>{Math.floor(disability / total * 100)}%</td>
                 </tr><tr>
                     <td>Sexual Orientation</td>
                     <td>{lgbtq}</td>
-                    <td>{lgbtq / total * 100}%</td>
+                    <td>{Math.floor(lgbtq / total * 100)}%</td>
                 </tr>
                 <tr>
                     <td>None</td>
                     <td></td>
-                    <td>{(total - biasSum) / total * 100}%</td>
+                    <td>{Math.floor((total - biasSum) / total * 100)}%</td>
                 </tr>
             </tbody>
             <tfoot>
                 <td>Total</td>
                 <td>{total}</td>
-                <td>100%</td>
+                <td>{/*100%*/}</td>
             </tfoot>
         </table>
     </>
