@@ -31,13 +31,23 @@
   }
 
   &__bubble__text {
-    border: 1px solid black;
+    // border: 1px solid black;
     grid-column-start: 5;
     grid-column-end: 11;
     grid-row-start: 3;
     grid-row-end: 7;
     height: 40vh;
     overflow: scroll;
+
+    overflow-x:hidden;
+    background-color: #F5F5F5;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 0 4px 0;
+    color: #3B3C3E;
+    font-size: 12px;
+    font-weight: bold;
+    left: -1px;
+    padding: 10px 7px 5px;
   }
 
   &__bubble__chart {
@@ -71,15 +81,15 @@
     grid-column-start: 1;
     grid-column-end: 6;
     grid-row-start: 10;
-    grid-row-end: 13;
+    grid-row-end: 14;
   }
 
   &__pie__chart {
     border: 1px solid black;
-    grid-column-start: 6;
+    grid-column-start: 8;
     grid-column-end: 11;
     grid-row-start: 10;
-    grid-row-end: 13;
+    grid-row-end: 14;
     margin: auto;
   }
 
@@ -87,15 +97,15 @@
     border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 11;
-    grid-row-start: 13;
-    grid-row-end: 16;
+    grid-row-start: 14;
+    grid-row-end: 18;
   }
 
   &__reanalyze {
     border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 11;
-    grid-row-start: 16;
-    grid-row-end: 17;
+    grid-row-start: 18;
+    grid-row-end: 19;
   }
 }

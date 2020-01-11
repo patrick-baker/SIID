@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BubbleChart from './BubbleChartWrapper';
-import DonutChartWrapper from './DonutChart.js/DonutChartWrapper';
+import PieChart from './PieChart.js/PieChartWrapper';
 import BubbleSuggestions from './BubbleSuggestions';
 import Spinner from '../Spinner/Spinner';
 import moment from 'moment';
@@ -125,8 +125,13 @@ class Report extends Component {
 
                                 {/* Pie Chart for Bias Counts */}
                                 <div className="report__pie__chart">
-                                    {this.props.biasDataReducer.status && <DonutChartWrapper />}
+                                    {this.props.biasDataReducer.status && <PieChart />}
                                 </div>
+
+                                {/* Percentage of sentences flagged biased */}
+                                {/* <div className="report__pie__total">
+                                    <BiasPercent data={this.props.biasDataReducer.data} />
+                                </div> */}
 
                                 {/* Bias Counts for Pie Chart */}
                                 <div className="report__pie__text">
@@ -135,17 +140,21 @@ class Report extends Component {
 
                                 {/* List of suggested educators */}
                                 <div className="report__educator">
-                                        <EducatorsOnReport educators={this.props.reportReducer.educators} />
+                                    <EducatorsOnReport educators={this.props.reportReducer.educators} />
                                 </div>
 
                                 {/* Popup to re-analyze text */}
                                 <div className="report__reanalyze">
-                                    <ExpansionPanel text={this.props.reportReducer.text} />
+                                    <ExpansionPanel className="report__reanalyze"text={this.props.reportReducer.text} />
                                 </div>
                             </div>
                         }
+
                     </div>
                 }
+
+                <pre>{JSON.stringify(this.props.reportReducer.data, 2, null)}</pre>
+
             </div>
         )
     }

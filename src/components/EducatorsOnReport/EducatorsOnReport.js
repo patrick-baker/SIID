@@ -19,6 +19,8 @@ const EducatorsOnReport = ({ educators }) => {
     }
 
     return (<>
+    <h1>Educators</h1>
+    <h2>See these educators if you're interested in further advice or training on the areas of sensitivity that were raised in your strategy document.</h2>
         {educatorsSubArray[0] && educatorsSubArray.map((edu, i) => (
             <div className="card__structure" key={i}>
                 <div className="card__imageContainer">
