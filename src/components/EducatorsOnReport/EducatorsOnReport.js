@@ -36,7 +36,7 @@ const EducatorsOnReport = ({ educators }) => {
                         Specialties:
         {edu.specialties[0][0] !== null && edu.specialties.map((specialty, i) => { return <li key={i} > - {specialty[1]}</li> })}
                     </ul>
-                    <div className="card__contact" >
+                    <div className="horizontal-card__details__contact" >
                         <i className="far fa-envelope fa-xs"></i> {edu.contact_info}
                     </div>
                 </div>
