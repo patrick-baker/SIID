@@ -183,8 +183,7 @@
 
 .horizontal-card {
     &__structure {
-        display: inline-block;
-        position: relative;
+        display: flex;
         width: 32rem;
         height:20rem;
         border:.2rem solid $color-neutral-blue;
@@ -217,6 +216,7 @@
     &__details {
         padding-left:1rem;
         padding-right:1rem;
+        width: 10rem;
 
         &__title {
             font-weight: bold;

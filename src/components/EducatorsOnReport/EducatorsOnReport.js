@@ -12,27 +12,27 @@ const getRandomSubarray = (arr, size) =>{
 
 const EducatorsOnReport = ({ educators }) => {
     let educatorsSubArray = []
-    if (educators.length>2){
-        educatorsSubArray = getRandomSubarray(educators,2)
-    } else if ( educators.length === 1){
+    if (educators.length>3){
+        educatorsSubArray = getRandomSubarray(educators,3)
+    } else if ( educators.length === 1 || educators.length === 2){
         educatorsSubArray = educators
     }
 
     return (<div className="flex-row-space-evenly">
         {educatorsSubArray[0] && educatorsSubArray.map((edu, i) => (
-            <div className="card__structure" key={i}>
-                <div className="card__imageContainer">
-                    <img className="card__image" src={edu.image_url} />
+            <div className="horizontal-card__structure" key={i}>
+                <div className="horizontal-card__imageContainer">
+                    <img className="horizontal-card__imageContainer__image" src={edu.image_url} />
                 </div>
-                <div className="card__details" >
-                    <div className="card__title">
+                <div className="horizontal-card__details" >
+                    <div className="horizontal-card__details__title">
                         {edu.name}
                     </div>
 
-                    <div className="card__description" >
+                    <div className="horizontal-card__details__description" >
                         {edu.bio}
                     </div>
-                    <ul className="card__specialties">
+                    <ul className="horizontal-card__details__specialties">
                         Specialties:
         {edu.specialties[0][0] !== null && edu.specialties.map((specialty, i) => { return <li key={i} > - {specialty[1]}</li> })}
                     </ul>
