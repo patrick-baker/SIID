@@ -28,6 +28,7 @@ class Report extends Component {
         this.setState({
             url: `http://localhost:3000/#/report/${this.props.match.params.id}/${this.props.match.params.token}`
         })
+        this.props.dispatch({type: "GET_PROJECT_EDUCATORS", payload: {id: this.props.match.params.id}});
         console.log(this.props);
     }
 

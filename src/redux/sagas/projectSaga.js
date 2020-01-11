@@ -20,7 +20,7 @@ function* createProject(action) {
     // retrieves metadata for this created project, to be displayed on the report
     yield put ({type:"GET_SPECIFIC_PROJECT",payload:{id:project.data.project_id}});
     yield put({type: 'GET_PROJECT'});
-    yield put({type:"ANALYZE_TEXT",payload:{text:newProject.text,project_id:project.data.project_id}});
+    yield put({type:"ANALYZE_TEXT",payload:{text:newProject.text, project_id:project.data.project_id}});
     } catch (error) {
     console.log('error in createProject for projectSaga', error);
     }
