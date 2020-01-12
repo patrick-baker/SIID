@@ -36,7 +36,7 @@ router.post("/", rejectUnauthenticated, async (req, res) => {
 
     patterns_bad = pattern_db.rows[0].array_agg;
     // console.log('from db', patterns_bad)
-
+  
     let response = "";
 
     const runMe = async function (textIn) {
