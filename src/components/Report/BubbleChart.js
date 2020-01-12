@@ -114,7 +114,7 @@ export default class BubbleChart {
                 d3.select(this).transition()
                      .duration('50')
                      .attr('opacity', '1')
-                     .attr('stroke', "black")
+                     .attr('stroke', "#422997")
                     })
                     
 
@@ -144,20 +144,6 @@ export default class BubbleChart {
                 //.attr("z-index", '4') 
                 //.attr("position", 'relative')
 
-            .on('mouseover', function (d, i) {
-                    d3.select(this.closest("circle")).transition()
-                         .duration('50')
-                         //.attr('opacity', '1')
-                         .attr('stroke', "blue")
-                        })
-                        
-    
-            .on('mouseout', function (d, i) {
-                    d3.select(this.closest("circle")).transition()
-                         .duration('50')
-                         //.attr('opacity', '.7')
-                         .attr('stroke', "white")
-                        })
       
         leaf.append("title")
             .text(d => `Instead use: ${d.data.expected}\n This word was used: ${format(d.data.count)} time(s)`);
