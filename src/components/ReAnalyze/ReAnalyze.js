@@ -35,7 +35,7 @@ class ReAnalyze extends Component {
             type: "UPDATE_PROJECT",
             payload: {
                 ...this.props.reportReducer,
-                text: this.state.text,
+                text: this.props.reportReducer.text,
                 literaryTechniques: this.literaryTechniquesStructure(),
                 tones: this.tonesStructure()
             }
@@ -52,7 +52,7 @@ class ReAnalyze extends Component {
                     // style={{width:'110rem',height:'20rem',fontSize:'1.6rem'}}
                     style={{width:'100%',height:'20rem',fontSize:'1.6rem'}}
                 />
-                <button className="button__next"  style={{marginLeft:'90rem'}} onClick={this.analyze}><i class="fas fa-cog"></i> Analyze</button>
+                <button className="button__next"  style={{float: 'right'}} onClick={this.analyze}><i class="fas fa-cog"></i> Analyze</button>
             </div>
         );
     }
