@@ -9,14 +9,13 @@
     grid-column-start: 1;
     grid-column-end: 11;
     grid-row-start: 1;
-    grid-row-end: 4;
-
+    grid-row-end: 3;
   }
 
-  &__dateClient{
+  &__dateClient {
     grid-column-start: 1;
     grid-column-end: 5;
-    display:block;
+    display: block;
   }
 
   &__goals {
@@ -24,8 +23,8 @@
     grid-row-end: 3;
     justify-content: center;
     align-items: center;
-    height:100%;
-    display:inline-block;
+    height: 100%;
+    display: inline-block;
   }
 
   &__copy {
@@ -35,28 +34,36 @@
     grid-row-start: 1;
     grid-row-end: 2;
     margin: auto auto auto 1rem;
-    display:inline-block;
+    display: inline-block;
+  }
+
+  &__bubble__connector {
+    grid-column-start: 4;
+    grid-column-end: 6;
+    grid-row-start: 3;
+    grid-row-end: 3;
+    // border-bottom: .5rem dotted #422997;
   }
 
   &__bubble__header {
     // border: 1px solid black;
-    grid-column-start: 5;
-    grid-column-end: 10;
+    // border-right: .5rem double #422997;
+    grid-column-start: 6;
+    grid-column-end: 11;
     grid-row-start: 3;
     grid-row-end: 4;
+    margin-top: 1rem;
+    margin-right: 2rem;
+    padding-left: 3rem;
   }
 
   &__bubble__text {
-    border: 1px solid black;
-    grid-column-start: 5;
-    grid-column-end: 10;
+    // border: 1px solid black;
+    grid-column-start: 6;
+    grid-column-end: 11;
     grid-row-start: 4;
     grid-row-end: 7;
-    // height: 40vh;
     overflow: scroll;
-
-    // &__suggestions{
-    // overflow: scroll;
     overflow-x: hidden;
     background-color: #f5f5f5;
     border: 1px solid #dddddd;
@@ -67,25 +74,24 @@
     left: -1px;
     padding: 1rem;
     margin-bottom: 1rem;
-    // }
+    margin-right: 2rem;
+    margin-left: 3rem;
+    // border-left: .5rem double #422997;
+  }
+
+  &__bubble {
+    border-left: 1rem solid #422997;
   }
 
   &__bubble__chart {
     // border: 1px solid black;
+    // border-left: 1rem solid #422997;
     grid-column-start: 1;
     grid-column-end: 5;
     grid-row-start: 3;
     grid-row-end: 7;
-    // //added  for positioning suggestion on chartio
-    // display: inline-block;
-    // position: relative;
-    // width: 100%;
-    // padding-bottom: 100%;
-    // vertical-align: top;
-    // overflow: hidden;
     width: 70%;
     margin: auto;
-    //height: 40vh;
   }
 
   &__targetInfo {
@@ -99,25 +105,22 @@
     justify-content: space-around;
     //margin: auto;
 
-    &__left{
+    &__left {
       text-align: left;
       display: inline-block;
-      padding: .5rem;
-      
+      padding: 0.5rem;
     }
-    &__middle{
+    &__middle {
       text-align: center;
       display: inline-block;
-      padding: .5rem;
-      
+      padding: 0.5rem;
     }
-    &__right{
+    &__right {
       text-align: right;
       display: inline-block;
-      padding: .5rem;
-      
+      padding: 0.5rem;
     }
-    &__list{
+    &__list {
       list-style-type: none;
       margin: 0;
       padding: 0;
@@ -125,12 +128,26 @@
   }
 
   &__pie__text {
-    border: 1px solid black;
+    // border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 10;
     grid-row-end: 14;
+    margin: auto 0rem;
+
+    &__header {
+      border: 1px solid black;
+      margin-bottom: 6rem;
+    }
   }
+
+  // &__pie__header {
+  //   // border: 1px solid black;
+  //   grid-column-start: 1;
+  //   grid-column-end: 4;
+  //   grid-row-start: 10;
+  //   grid-row-end: 11;
+  // }
 
   &__pie__chart {
     // border: 1px solid black;

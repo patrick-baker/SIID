@@ -70,6 +70,10 @@ body {
     font-size: 2rem;
     font-weight: normal;
     line-height: 2.8rem;
+
+    &__noMargin {
+      padding: 0rem;
+    }
   }
 
   &__header3{

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BubbleChart from './BubbleChartWrapper';
 import PieChart from './PieChart.js/PieChartWrapper';
+import TotalBias from './TotalBias.js/TotalBias';
 import BubbleSuggestions from './BubbleSuggestions';
 import Spinner from '../Spinner/Spinner';
 import moment from 'moment';
@@ -13,7 +14,7 @@ import CampaignGoals from './CampaignGoals';
 import Header from './Header';
 import Tone from './Tone/Tone';
 import EducatorsOnReport from '../EducatorsOnReport/EducatorsOnReport';
-import DonutWrapper from './Donut/DonutWrapper';
+import DonutWrapper from './TotalBias.js/TotalBias';
 
 class Report extends Component {
     state = {
@@ -91,9 +92,11 @@ class Report extends Component {
                                 </div>
 
                                 {/* Re-Text Bubble Chart Words & Suggestions */}
+                                <div className="report__bubble__connector ">
+                                </div>
                                 <div className="report__bubble__header">
-                                    <h1 className="report__header2">BUBBLE CHART</h1>
-                                    <h2 >Consider the context of these words:</h2>
+                                    <h1 className="report__header2__noMargin">Words to Consider</h1>
+                                    <h2>These words were flagged by the rules-based system as being possibly problematic if used in the wrong context.</h2>
                                 </div>
                                 <div className="report__bubble__text">
                                     {this.props.flagReducer[0]
@@ -108,23 +111,26 @@ class Report extends Component {
                                     <Tone />
                                 </div>
 
-                                {/* Pie Chart for Bias Counts */}
-                                <div className="report__pie__chart">
-                                    {this.props.biasDataReducer.status && <PieChart />}
-                                </div>
 
-                                {/* Percentage of sentences flagged biased */}
-                                {/* <div className="report__pie__total">
-                                    <BiasPercent data={this.props.biasDataReducer.data} />
+                                {/* Header for Bias/Machine Learning section */}
+                                {/* <div className="report__pie__text__header">
+                                    <h1>PIE CHART OF BIASES</h1>
+                                    <h2>Areas of sensitivity flagged by machine learning.</h2>
                                 </div> */}
 
-                                {/* Bias Counts for Pie Chart */}
+                                {/* Table of Bias breakdown */}
                                 <div className="report__pie__text">
                                     <BiasTable data={this.props.biasDataReducer.data} />
                                 </div>
 
-                                <div className="report__pie__total">
-                                    {this.props.biasDataReducer.status && <DonutWrapper />}
+                                {/* Total Percentage for Bias Counts */}
+                                <div className="report__total__bias">
+                                    {this.props.biasDataReducer.status && <TotalBias />}
+                                </div>
+
+                                {/* Pie Chart for Bias Counts */}
+                                <div className="report__pie__chart">
+                                    {this.props.biasDataReducer.status && <PieChart />}
                                 </div>
 
                                 {/* List of suggested educators */}
