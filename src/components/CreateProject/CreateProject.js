@@ -17,9 +17,9 @@ class CreateProject extends Component {
     autoSubmitOne = () => {
         this.props.dispatch({
             type: 'SET_FORM_AUTOFILL', payload: {
-                "title": "Autofill",
-                "client": "Bic Pens",
-                "description": "Pens for women",
+                "title": "Bicycle Safety",
+                "client": "Schwinn",
+                "description": "Pushing for higher Bicycle Safety Standards",
                 "integration": 'Hubspot'
             }
         });
@@ -27,9 +27,9 @@ class CreateProject extends Component {
     autoSubmitTwo = () => {
         this.props.dispatch({
             type: 'SET_FORM_AUTOFILL', payload: {
-                "goals_social_shares": "250 shares",
+                "goals_social_shares": "2,500 shares",
                 "goals_follow": "5,000 new followers",
-                "goals_impressions": "600,000",
+                "goals_impressions": "600,000 impressions",
                 "goals_views": '500,000 unique views'
             }
         });

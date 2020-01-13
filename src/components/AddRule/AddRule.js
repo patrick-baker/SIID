@@ -11,6 +11,7 @@ class AddRule extends Component {
         note: '',
         considerate: '',
         inconsiderate: '',
+        message:''
 
     }
     handleChangeFor = (e) => {
@@ -43,6 +44,16 @@ class AddRule extends Component {
         this.props.dispatch({ type: "ADD_RULE", payload: preparedObject })
         this.props.addRule() // Get rid of when it works.
     }
+    autoFill = () =>{
+        this.setState({
+            id:'ok boomer',
+            message:'Ok Boomer is an inconsiderate meme',
+            note: 'Using new phrases like ok boomer can make you say inconsiderate things without knowing.',
+            considerate: 'I disagree with your opinion',
+            inconsiderate: 'ok boomer'
+    
+        })
+    }
 
     render() {
         return (
@@ -52,6 +63,7 @@ class AddRule extends Component {
                     <div style={{paddingTop:'2rem'}} ></div>
                     <ModalInput label={"Inconsiderate word/phrase"} >
                         <input placeholder="Inconsiderate"
+                        onClick={this.autoFill}
                             value={this.state.inconsiderate}
                             className="formInput__average"
                             name="inconsiderate"

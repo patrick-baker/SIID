@@ -88,7 +88,7 @@ class CampaignStyle extends React.Component {
                           }}
                         />
                       }
-                      label={item.type}
+                      label={item.type.replace(/^\w/, c => c.toUpperCase())}
                     />)}
               </FormGroup>
            
@@ -128,7 +128,7 @@ class CampaignStyle extends React.Component {
                         }}
                       />
                     }
-                    label={item.type}
+                    label={item.type.replace(/^\w/, c => c.toUpperCase())}
                   />)}
             </FormGroup>
           </div>

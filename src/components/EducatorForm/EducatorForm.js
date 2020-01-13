@@ -21,7 +21,15 @@ class EducatorForm extends Component {
             }) || [],
         }
     }
-
+    
+    autoFill = () =>{
+        this.setState({...this.state, newEducator: {
+            ...this.state.newEducator,
+            name:"Nancy McGlynn",
+            bio: "MD and Educator",
+            contact_info:"drnancy@juno.com",
+        }})
+    }
     componentDidMount = () => {
         this.props.dispatch({ type: "GET_CATEGORY" });
     }
@@ -118,6 +126,7 @@ class EducatorForm extends Component {
                             <label>
                                 <div className="formInput__labelText" >Name:</div>
                                 <input placeholder="Name"
+                                    onClick={this.autoFill}
                                     value={this.state.newEducator.name}
                                     className="formInput__average"
                                     onChange={(event) => this.handleChangeFor('name', event)} />
