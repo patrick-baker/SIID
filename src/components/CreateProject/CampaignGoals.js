@@ -49,7 +49,7 @@ class IntegrationsDropdown extends React.Component {
           name='campaign_goals'
           value={this.props.form.goal}
           onChange={this.handleChange}
-          style={{width:'20rem',height:'5rem',border:'1px solid #5B63DA',borderBottom:'none',backgroundColor:'#f4f4f4'}}
+          style={{width:'20rem',height:'5rem',border:'1px solid #5B63DA',borderBottom:'none',backgroundColor:'white'}}
         >
           <MenuItem value="">
             <em>None</em>
