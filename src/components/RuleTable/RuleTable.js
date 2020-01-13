@@ -89,7 +89,7 @@ class RuleTable extends Component {
             return (
                 <div className="content">
                     <h1 className="content__header" >Rules</h1>
-                        <button className="button__generic" style={{ position: 'absolute', left: '13rem', top: '-2rem' }} onClick={this.addRule}><i class="fas fa-plus"></i><span style={{ marginLeft: '1rem' }}>Add rule</span></button>
+                        <button className="button__generic" style={{ position: 'absolute', right: '1rem', top: '-2rem', }} onClick={this.addRule}><i class="fas fa-plus"></i><span style={{ marginLeft: '1rem' }}>Add rule</span></button>
                     {/* Show the Add Rule Modal */}
                     {
                         this.state.add && <AddRule addRule={this.addRule} />
