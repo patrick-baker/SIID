@@ -1,12 +1,15 @@
 .dataTable{
     &__table {
-    width: 270px;
+    // width: 270px;
+    width: 100%;
     border-collapse: collapse;
+    font-size: 1.5rem;
     }
 
     &__label {
-        width: 170px;
-        font-weight: 900;
+        // width: 170px;
+        width: 100%;
+        // font-weight: 900;
     }
     
 }
@@ -20,10 +23,17 @@
 }
 .data tfoot td:last-child{
     text-align:center;
+    font-weight: 900;
 }
-.data tr:hover {background-color: #f5f5f5;}
+
+.data tfoot td{
+    // text-align:center;
+    font-weight: 900;
+}
+
+.data tr:hover {background-color: #9EA1A4;}
 .data thead{
-    // font-size: 1.5rem;
+    font-size: 1.75rem;
     text-align:left;
     border-bottom: 1px solid #ddd;
 }
@@ -31,9 +41,10 @@
     border-bottom: 1px solid #ddd;
 }
 .data tr td:first-child{
-    // font-size: 1.5rem;
+    font-size: 1.5rem;
 }
 .data tfoot td:first-child{
-    // font-size: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 900;
 }
 

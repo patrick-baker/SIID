@@ -6,6 +6,10 @@ const BiasTable = ({ data }) => {
     const biasSum = [race, lgbtq, gender, disability, religion].reduce(function (acc, val) { return acc + val; }, 0)
 
     return (<>
+        <div className="report__pie__text__header">
+            <h1 className="report__header2__noMargin">PIE CHART OF BIASES</h1>
+            <h2>Areas of sensitivity flagged by machine learning.</h2>
+        </div>
         <table className="dataTable__table data">
             <thead>
                 <th className="dataTable__label">Sensitivity Areas</th>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 //import Donut from './Donut';
 
-class DonutWrapper extends Component {
+class TotalBias extends Component {
     state={
         total: 0||this.props.biasDataReducer.data.total,
         bias: 0,
@@ -30,7 +30,7 @@ class DonutWrapper extends Component {
 
     render() {
         return (
-            <div ref="chart" className="donut__total">
+            <div ref="chart" className="TotalBias">
                 {/*making sure this number and the none value percentages add to 100 even though there would be some rounding*/}
                 <p className="report__percent">{100-(Math.floor((this.state.total-this.state.bias)/this.state.total*100))}%</p>
             </div>
@@ -40,4 +40,4 @@ class DonutWrapper extends Component {
 
 const mapStateToProps = state => state;
 
-export default connect(mapStateToProps)(DonutWrapper);
+export default connect(mapStateToProps)(TotalBias);
