@@ -7,7 +7,7 @@ function* ANALYZE_TEXT(action) {
     console.log('In analyzeText in flagSaga',action.payload)
     // posts rules-based results
     const flags = yield axios.post('/rule',{text:action.payload.text,project_id:action.payload.project_id})
-    yield put({type:"SET_FLAGS",payload:flags.data});
+    yield put({type:"GET_FLAGS",payload:{id:action.payload.project_id}});
     // posts results for ML 
     const bias = yield axios.post('/automl',{text:action.payload.text, project_id: action.payload.project_id});
     yield put({type:'SET_BIAS_DATA',payload:bias.data})
