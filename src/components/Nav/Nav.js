@@ -33,7 +33,7 @@ const Nav = (props) => (
         <div className="navigation__item">
           {props.user.id &&
             <Link className="navigation__link" to="/educators">
-              <i class="fas fa-graduation-cap fa-2x navigation__icon"></i>Educators
+              <i class="fas fa-graduation-cap fa-2x navigation__icon"></i>Experts
             </Link>
           }
         </div>
