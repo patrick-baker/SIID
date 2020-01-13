@@ -82,34 +82,35 @@ class Report extends Component {
 
                                 {/* <div className="report__header__dateClient" style={{ display: 'inline-block', border: '1px solid black' }}> */}
 
+                                {/* <div style={{ border: '1px solid black', width: '100%', gridColumnStart: '1', gridColumnEnd: '11', gridRowStart: '3', gridRowEnd: '7' }}> */}
 
-                                {/* Re-text Bubble Chart */}
-                                <div className="report__bubble__chart">
-                                    {this.props.flagReducer[0]
-                                        && this.props.flagReducer[0].messages
-                                        && this.props.flagReducer[0].messages.messages
-                                        && <BubbleChart data={this.cleanBubbleData(this.props.flagReducer[0].messages.messages)} />}
-                                </div>
+                                    {/* Re-text Bubble Chart */}
+                                    <div className="report__bubble__chart">
+                                        {this.props.flagReducer[0]
+                                            && this.props.flagReducer[0].messages
+                                            && this.props.flagReducer[0].messages.messages
+                                            && <BubbleChart data={this.cleanBubbleData(this.props.flagReducer[0].messages.messages)} />}
+                                    </div>
 
-                                {/* Re-Text Bubble Chart Words & Suggestions */}
-                                <div className="report__bubble__connector ">
-                                </div>
+                                    {/* Re-Text Bubble Chart Words & Suggestions */}
+                                    <div className="report__bubble__connector ">
+                                    </div>
 
-                                <div className="report__bubble__background">
-                                </div>
+                                    <div className="report__bubble__background">
+                                    </div>
 
-                                <div className="report__bubble__header">
-                                    <h1 className="report__header2__noMargin">Words to Consider</h1>
-                                    <h2>These words were flagged by the rules-based system as being possibly problematic if used in the wrong context.</h2>
-                                </div>
-                                <div className="report__bubble__text">
-                                    {this.props.flagReducer[0]
-                                        && this.props.flagReducer[0].messages
-                                        && this.props.flagReducer[0].messages.messages
-                                        && <BubbleSuggestions data={this.cleanBubbleData(this.props.flagReducer[0].messages.messages)} />
-                                    }
-                                </div>
-
+                                    <div className="report__bubble__header">
+                                        <h1 className="report__header2__noMargin">Words to Consider</h1>
+                                        <h2>These words were flagged by the rules-based system as being possibly problematic if used in the wrong context.</h2>
+                                    </div>
+                                    <div className="report__bubble__text">
+                                        {this.props.flagReducer[0]
+                                            && this.props.flagReducer[0].messages
+                                            && this.props.flagReducer[0].messages.messages
+                                            && <BubbleSuggestions data={this.cleanBubbleData(this.props.flagReducer[0].messages.messages)} />
+                                        }
+                                    </div>
+                                {/* </div> */}
                                 {/* Target Audience, Tone, and Literary Techniques information */}
                                 <div className="report__targetInfo">
                                     <Tone />
