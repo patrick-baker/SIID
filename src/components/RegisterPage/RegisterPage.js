@@ -44,14 +44,16 @@ class RegisterPage extends Component {
           </h2>
         )}
         <form onSubmit={this.registerUser}>
-          <h1 className="login__header" >Register User</h1>
+        <img src='./siidlogo.png' style={{width:"120px", paddingTop:'1rem', paddingBottom:'1.5rem'}}/>
+
           <div>
-            <label htmlFor="username" className="login__inputLabel">
+            {/* <label htmlFor="username" className="login__inputLabel">
               Username:
-              </label>
+              </label> */}
             <input
               type="text"
               name="username"
+              placeholder="Register Username"
               className="login__input"
               value={this.state.username}
               onChange={this.handleInputChangeFor('username')}
@@ -59,12 +61,13 @@ class RegisterPage extends Component {
 
           </div>
           <div>
-            <label htmlFor="email" className="login__inputLabel">
+            {/* <label htmlFor="email" className="login__inputLabel">
               Email:
-              </label>
+              </label> */}
             <input
               type="text"
               name="email"
+              placeholder="E-mail"
               className="login__input"
               value={this.state.email}
               onChange={this.handleInputChangeFor('email')}
@@ -72,25 +75,27 @@ class RegisterPage extends Component {
 
           </div>
           <div>
-            <label htmlFor="password" className="login__inputLabel">
+            {/* <label htmlFor="password" className="login__inputLabel">
               Password:
-              </label>
+              </label> */}
             <input
               type="password"
               name="password"
               className="login__input"
+              placeholder="Password"
               value={this.state.password}
               onChange={this.handleInputChangeFor('password')}
             />
 
           </div>
           <div>
-            <label htmlFor="confirmPassword" className="login__inputLabel">
+            {/* <label htmlFor="confirmPassword" className="login__inputLabel">
               Confirm password:
-            </label>
+            </label> */}
             <input
               type="password"
               name="confirmPassword"
+              placeholder="Confirm Password"
               className="login__input"
               value={this.state.confirmPassword}
               onChange={this.handleInputChangeFor('confirmPassword')}
