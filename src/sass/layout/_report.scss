@@ -55,7 +55,7 @@
     margin-top: 1rem;
     margin-right: 2rem;
     padding: 0rem 3rem;
-    color: #EBEBFA
+    color: #ebebfa;
   }
 
   &__bubble__text {
@@ -66,10 +66,10 @@
     grid-row-end: 7;
     overflow: scroll;
     overflow-x: hidden;
-    background-color: white;
+    background-color: #EBEBFA;
     border: 1px solid darkgray;
     box-shadow: 10px 10px 10px gray;
-    border-radius: .4rem .4rem;
+    border-radius: 0.4rem 0.4rem;
     // color: #3b3c3e;
     font-size: 1.2rem;
     font-weight: bold;
@@ -88,7 +88,7 @@
     grid-column-end: 10;
     grid-row-start: 3;
     grid-row-end: 6;
-    background-color: #5B63DA;
+    background-color: #5b63da;
     border-radius: 10px 50px;
     // box-shadow: 10px 10px 10px blue;
   }
@@ -176,8 +176,16 @@
     // border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 11;
-    grid-row-start: 14;
+    grid-row-start: 15;
     grid-row-end: 18;
+  }
+
+  &__educator__heading {
+    // border: 1px solid black;
+    grid-column-start: 1;
+    grid-column-end: 11;
+    grid-row-start: 14;
+    grid-row-end: 15;
   }
 
   &__reanalyze {

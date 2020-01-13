@@ -20,8 +20,8 @@ const EducatorsOnReport = ({ educators }) => {
 
 
     return (<>
-    <h1>Educators</h1>
-    <h2>See these educators if you're interested in further advice or training on the areas of sensitivity that were raised in your strategy document.</h2>
+    {/* <h1>Educators</h1>
+    <h2>See these educators if you're interested in further advice or training on the areas of sensitivity that were raised in your strategy document.</h2> */}
         <div className="flex-row-space-evenly">
         {educatorsSubArray[0] && educatorsSubArray.map((edu, i) => (
             <div className="horizontal-card__structure" key={i}>
