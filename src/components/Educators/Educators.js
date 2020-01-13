@@ -66,12 +66,12 @@ class Educators extends Component {
         return (
             // <div className="educatorPage__background">
             <div className="content">
-                <h1 className="content__header">Educators</h1>
+                <h1 className="content__header">Experts</h1>
                 {this.props.user.admin && (
 
                     <AddCard addEducator={this.addEducator}>
                         <i class="fas fa-user-graduate fa-4x card__plusIcon"></i> <br />
-                        <span>Add Educator</span>
+                        <span>Add Expert</span>
                     </AddCard>
 
                 )}

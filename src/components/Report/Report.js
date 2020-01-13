@@ -146,12 +146,12 @@ class Report extends Component {
                                 {/* List of suggested educators */}
                                 <div className="report__educator__container">
                                     <div className="report__educator__heading">
-                                        <h1>Educators</h1>
-                                        <h2>See these educators if you're interested in further advice or training on the areas of sensitivity that were raised in your strategy document.</h2>
+                                        <h1>Experts</h1>
+                                        <h2>These experts match the sensitivities in your text.</h2>
                                     </div>
                                     <div className="report__educator">
-                                        <EducatorsOnReport educators={this.props.reportReducer.educators} />
-                                    </div>
+                                       {this.props.reportReducer.educators.length > 0 && <EducatorsOnReport educators={this.props.reportReducer.educators} />
+     } </div>
                                 </div>
 
                                 {/* Popup to re-analyze text */}
