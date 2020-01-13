@@ -94,6 +94,10 @@ class Report extends Component {
                                 {/* Re-Text Bubble Chart Words & Suggestions */}
                                 <div className="report__bubble__connector ">
                                 </div>
+
+                                <div className="report__bubble__background">
+                                </div>
+
                                 <div className="report__bubble__header">
                                     <h1 className="report__header2__noMargin">Words to Consider</h1>
                                     <h2>These words were flagged by the rules-based system as being possibly problematic if used in the wrong context.</h2>
@@ -123,10 +127,13 @@ class Report extends Component {
                                     <BiasTable data={this.props.biasDataReducer.data} />
                                 </div>
 
+                                {/* <div className="report__bubble__background">
+                                </div> */}
+
                                 {/* Total Percentage for Bias Counts */}
-                                <div className="report__total__bias">
+                                {/* <div className="report__total__bias">
                                     {this.props.biasDataReducer.status && <TotalBias />}
-                                </div>
+                                </div> */}
 
                                 {/* Pie Chart for Bias Counts */}
                                 <div className="report__pie__chart">

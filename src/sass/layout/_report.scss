@@ -48,13 +48,14 @@
   &__bubble__header {
     // border: 1px solid black;
     // border-right: .5rem double #422997;
-    grid-column-start: 6;
-    grid-column-end: 11;
+    grid-column-start: 5;
+    grid-column-end: 10;
     grid-row-start: 3;
     grid-row-end: 4;
     margin-top: 1rem;
     margin-right: 2rem;
-    padding-left: 3rem;
+    padding: 0rem 3rem;
+    color: #EBEBFA
   }
 
   &__bubble__text {
@@ -65,18 +66,31 @@
     grid-row-end: 7;
     overflow: scroll;
     overflow-x: hidden;
-    background-color: #f5f5f5;
-    border: 1px solid #dddddd;
-    border-radius: 4px 0 4px 0;
-    color: #3b3c3e;
+    background-color: white;
+    border: 1px solid darkgray;
+    box-shadow: 10px 10px 10px gray;
+    border-radius: .4rem .4rem;
+    // color: #3b3c3e;
     font-size: 1.2rem;
     font-weight: bold;
     left: -1px;
     padding: 1rem;
-    margin-bottom: 1rem;
     margin-right: 2rem;
-    margin-left: 3rem;
+    // margin-bottom: 1rem;
+    // margin-right: 2rem;
+    // margin-left: 3rem;
     // border-left: .5rem double #422997;
+  }
+
+  &__bubble__background {
+    // border: 1px solid black;
+    grid-column-start: 5;
+    grid-column-end: 10;
+    grid-row-start: 3;
+    grid-row-end: 6;
+    background-color: #5B63DA;
+    border-radius: 10px 50px;
+    // box-shadow: 10px 10px 10px blue;
   }
 
   &__bubble {
@@ -95,7 +109,7 @@
   }
 
   &__targetInfo {
-    border: 1px solid black;
+    // border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 11;
     grid-row-start: 7;
@@ -159,7 +173,7 @@
   }
 
   &__educator {
-    border: 1px solid black;
+    // border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 11;
     grid-row-start: 14;
@@ -167,7 +181,7 @@
   }
 
   &__reanalyze {
-    border: 1px solid black;
+    // border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 11;
     grid-row-start: 18;
@@ -179,7 +193,7 @@
   }
 
   .MuiTypography-body1 {
-    width: 100%
+    width: 100%;
   }
 
   .formInput__large {
