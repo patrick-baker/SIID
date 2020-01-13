@@ -17,7 +17,7 @@ class DeleteEducator extends Component {
 
                         {this.props.educator.educatorDeleteStatus.messageFromServer === '' &&
                             <>
-                                <h2 className="heading-secondary">Are you sure you want to delete this educator?</h2>
+                                <h2 className="heading-secondary">Are you sure you want to delete this expert?</h2>
                                 <br />
                                 <h3 className="heading-tertiary" >Name: {this.props.specificEducator.name}</h3> {/* FIND this  */}
                                 <br />
