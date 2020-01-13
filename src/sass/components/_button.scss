@@ -118,6 +118,11 @@
         }
     }
 
+    &__copyButton {
+        position: absolute;
+        right: 1rem;
+        top: .5rem;
+    }
     &__stepper {
         
         height:2.5rem;
