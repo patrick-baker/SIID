@@ -23,6 +23,9 @@ class Header extends Component {
         // I prefer to not show the the whole text area selected.
         e.target.focus();
         this.setState({ successMessage: 'Copied!' });
+        setTimeout(() => {
+            this.setState({ successMessage: ''})
+        }, 1000);
     };
 
 
@@ -34,8 +37,8 @@ class Header extends Component {
                     {/* Copy link to clipboard */}
                     <div className="report__copy">
                         {this.props.user.id === this.props.reportReducer.user_id &&
-                            <button onClick={(e) => this.copyToClipboard(e)} className="login__loginButton"> <i class="fas fa-link"></i> Copy Link</button>}
-                        <span style={{}}>{this.state.successMessage}</span>
+                            <button onClick={(e) => this.copyToClipboard(e)} className="login__loginButton button__copyButton"> <i class="fas fa-link"></i> Copy Link</button>}
+                        <p className="button__copyButton message" style={{size: '2rem', right: '15rem'}}>{this.state.successMessage}</p>
                     </div>
                 </h1>
 
