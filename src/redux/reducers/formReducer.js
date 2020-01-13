@@ -7,6 +7,8 @@ const formReducer = (state = {formal: true}, action) => {
         // stores updated metadata property value on change
         case 'SET_FORM_METADATA':
             return { ...state, [action.payload.property]: action.payload.value };
+            case 'SET_FORM_AUTOFILL':
+            return { ...state, ...action.payload};
         // initially sets tones from GET request to tone tables
         case 'INITIALIZE_FORM_TONE':
             return {
