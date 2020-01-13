@@ -50,7 +50,7 @@ class Header extends Component {
                     <div>
                         <h2 className="report__header2" >Date: <span style={{ color: '#5B63DA' }}> {moment(this.props.reportReducer.date_created).format("MMM Do, YYYY")}</span></h2>
                         <h2 className="report__header2">Client: <span style={{ color: '#5B63DA' }}>{this.props.reportReducer.client}</span></h2>
-                        <h2 className="report__header2">{this.props.reportReducer.description}</h2>
+                        <h2 className="report__header2__noInline">{this.props.reportReducer.description}</h2>
                     </div>
 
                     {/* <CampaignGoals /> */}
