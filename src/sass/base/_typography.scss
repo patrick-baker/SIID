@@ -90,14 +90,14 @@ body {
     line-height: 2rem;
   }
 
-  &__description {
-    display:block;
-    padding:.75rem;
-    font-size: 1.4rem;
-    font-weight: normal;
-    line-height: 1.6rem;
-    width:50%;
-  }
+  // &__description {
+  //   display:block;
+  //   padding:.75rem;
+  //   font-size: 1.4rem;
+  //   font-weight: normal;
+  //   line-height: 1.6rem;
+  //   width:50%;
+  // }
 
   &__flexBox {
     display:flex;
@@ -107,6 +107,10 @@ body {
     margin:0 0 0 1rem;
     font-size: 1.5rem;
     line-height: 1.7rem;
+
+    &__noMargin {
+      margin: 0rem;
+    }
   }
 
 }

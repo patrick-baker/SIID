@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class CampaignGoals extends Component {
     render() {
         return (
-            <div style={{}}>
+            <div className="report__campaignContainer">
                 {/*conditionally rendered based on form selected goal*/}
                 {
                     this.props.reportReducer.campaign_goals === "Lead Generation" &&

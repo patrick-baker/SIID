@@ -122,6 +122,7 @@ class Report extends Component {
                                     <h2>Areas of sensitivity flagged by machine learning.</h2>
                                 </div> */}
 
+
                                 {/* Table of Bias breakdown */}
                                 <div className="report__pie__text">
                                     <BiasTable data={this.props.biasDataReducer.data} />
@@ -135,18 +136,21 @@ class Report extends Component {
                                     {this.props.biasDataReducer.status && <TotalBias />}
                                 </div> */}
 
+
                                 {/* Pie Chart for Bias Counts */}
                                 <div className="report__pie__chart">
                                     {this.props.biasDataReducer.status && <PieChart />}
                                 </div>
 
                                 {/* List of suggested educators */}
-                                <div className="report__educator__heading">
-                                    <h1>Educators</h1>
-                                    <h2>See these educators if you're interested in further advice or training on the areas of sensitivity that were raised in your strategy document.</h2>
-                                </div>
-                                <div className="report__educator">
-                                    <EducatorsOnReport educators={this.props.reportReducer.educators} />
+                                <div className="report__educator__container">
+                                    <div className="report__educator__heading">
+                                        <h1>Educators</h1>
+                                        <h2>See these educators if you're interested in further advice or training on the areas of sensitivity that were raised in your strategy document.</h2>
+                                    </div>
+                                    <div className="report__educator">
+                                        <EducatorsOnReport educators={this.props.reportReducer.educators} />
+                                    </div>
                                 </div>
 
                                 {/* Popup to re-analyze text */}
