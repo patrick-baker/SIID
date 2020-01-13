@@ -42,11 +42,12 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <h1 className="login__header">SIID</h1>
+          <img src='./siidlogo.png' style={{width:"120px", paddingTop:'1rem', paddingBottom:'1.5rem'}}/>
+
           <div>
-            <label htmlFor="username" className="login__inputLabel">
+            {/* <label htmlFor="username" className="login__inputLabel">
               Username:
-              </label>
+              </label> */}
             <input
               placeholder='Username'
               type="text"
@@ -58,9 +59,9 @@ class LoginPage extends Component {
 
           </div>
           <div>
-            <label htmlFor="password" className="login__inputLabel">
+            {/* <label htmlFor="password" className="login__inputLabel">
               Password:
-              </label>
+              </label> */}
             <input
               placeholder="Password"
               type="password"

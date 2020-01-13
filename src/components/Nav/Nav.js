@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
+import '../../'
 const logout = (props) => {
   props.dispatch({ type: 'LOGOUT' });
   props.history.push('/home');
@@ -14,7 +14,8 @@ const Nav = (props) => (
 
       <div className="navigation__list">
         <div className="navigation__logo" >
-          <h1 className="heading-primary" >SIID</h1>
+          {/* <h1 className="heading-primary" >SIID</h1> */}
+          <img src='./siidlogo.png' style={{width:"120px", paddingTop:'1rem', paddingBottom:'1.5rem'}}/>
         </div>
         <div className="navigation__item" >
           <Link className="navigation__link" to="/home">
