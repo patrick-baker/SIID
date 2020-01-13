@@ -1,6 +1,6 @@
 import React from 'react'
 const getRandomSubarray = (arr, size) =>{
-        var shuffled = arr.slice(0), i = arr.length, temp, index;
+        let shuffled = arr.slice(0), i = arr.length, temp, index;
         while (i--) {
             index = Math.floor((i + 1) * Math.random());
             temp = shuffled[index];
@@ -11,14 +11,17 @@ const getRandomSubarray = (arr, size) =>{
     }
 
 const EducatorsOnReport = ({ educators }) => {
+
+
     let educatorsSubArray = []
+
     if (educators.length>3){
         educatorsSubArray = getRandomSubarray(educators,3)
-    } else if ( educators.length === 1 || educators.length === 2){
+    } else if ( educators.length <=3){
         educatorsSubArray = educators
     }
 
-
+    console.log('EDU ARRAY',educatorsSubArray);
     return (<>
     {/* <h1>Educators</h1>
     <h2>See these educators if you're interested in further advice or training on the areas of sensitivity that were raised in your strategy document.</h2> */}
