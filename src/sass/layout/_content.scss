@@ -16,6 +16,9 @@
 
 @media print
 {    
+    .content{
+        width:100% !important;
+    }
     .no-print, .no-print *
     {
         display: none !important;
