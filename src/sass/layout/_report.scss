@@ -9,14 +9,19 @@
     grid-column-start: 1;
     grid-column-end: 11;
     grid-row-start: 1;
-    grid-row-end: 4;
-
+    grid-row-end: 3;
   }
 
-  &__dateClient{
+  &__description {
+    font-size: 2rem;
+    font-weight: normal;
+    line-height: 2.8rem;
+  }
+
+  &__dateClient {
     grid-column-start: 1;
     grid-column-end: 5;
-    display:block;
+    display: block;
   }
 
   &__goals {
@@ -24,8 +29,8 @@
     grid-row-end: 3;
     justify-content: center;
     align-items: center;
-    height:100%;
-    display:inline-block;
+    height: 100%;
+    display: inline-block;
   }
 
   &__copy {
@@ -35,105 +40,170 @@
     grid-row-start: 1;
     grid-row-end: 2;
     margin: auto auto auto 1rem;
-    display:inline-block;
+    display: inline-block;
+  }
+
+  &__bubble__connector {
+    grid-column-start: 4;
+    grid-column-end: 6;
+    grid-row-start: 3;
+    grid-row-end: 3;
+    // border-bottom: .5rem dotted #422997;
   }
 
   &__bubble__header {
     // border: 1px solid black;
+    // border-right: .5rem double #422997;
     grid-column-start: 5;
     grid-column-end: 10;
     grid-row-start: 3;
     grid-row-end: 4;
+    margin-top: 1rem;
+    margin-right: 2rem;
+    padding: 0rem 3rem;
+    color: #ebebfa;
   }
 
   &__bubble__text {
-    border: 1px solid black;
-    grid-column-start: 5;
-    grid-column-end: 10;
+    // border: 1px solid black;
+    grid-column-start: 6;
+    grid-column-end: 11;
     grid-row-start: 4;
     grid-row-end: 7;
-    // height: 40vh;
     overflow: scroll;
-
-    // &__suggestions{
-    // overflow: scroll;
     overflow-x: hidden;
-    background-color: #f5f5f5;
-    border: 1px solid #dddddd;
-    border-radius: 4px 0 4px 0;
-    color: #3b3c3e;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    box-shadow: 10px 10px 10px gray;
+    border-radius: 0.4rem 0.4rem;
+    // color: #3b3c3e;
     font-size: 1.2rem;
     font-weight: bold;
     left: -1px;
     padding: 1rem;
-    margin-bottom: 1rem;
-    // }
+    margin-right: 2rem;
+    // margin-bottom: 1rem;
+    // margin-right: 2rem;
+    // margin-left: 3rem;
+    // border-left: .5rem double #422997;
+  }
+
+  &__bubble__background {
+    // border: 1px solid black;
+    grid-column-start: 5;
+    grid-column-end: 10;
+    grid-row-start: 3;
+    grid-row-end: 6;
+    background-color: #5b63da;
+    border-radius: 10px 50px;
+    // box-shadow: 10px 10px 10px blue;
+  }
+
+  &__bubble {
+    border-left: 1rem solid #422997;
   }
 
   &__bubble__chart {
     // border: 1px solid black;
+    // border-left: 1rem solid #422997;
     grid-column-start: 1;
     grid-column-end: 5;
     grid-row-start: 3;
     grid-row-end: 7;
-    // //added  for positioning suggestion on chartio
-    // display: inline-block;
-    // position: relative;
-    // width: 100%;
-    // padding-bottom: 100%;
-    // vertical-align: top;
-    // overflow: hidden;
     width: 70%;
     margin: auto;
-    //height: 40vh;
+  }
+
+  &__campaignContainer {
+    grid-column-start: 5;
+    grid-column-end: 11;
+    grid-row-start: 7;
+    grid-row-end: 10;
+  }
+
+  &__targetContainer {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 7;
+    grid-row-end: 10;
+  }
+
+  &__toneTable {
+    grid-column-start: 7;
+    grid-column-end: 9;
+    grid-row-start: 8;
+    grid-row-end: 10;
   }
 
   &__targetInfo {
-    border: 1px solid black;
+    // border: 1px solid black;
+    border-left: 1rem solid #b76ad4;
     grid-column-start: 1;
     grid-column-end: 11;
     grid-row-start: 7;
     grid-row-end: 10;
     margin-top: auto;
     margin-bottom: auto;
+    padding-left: 2rem;
     justify-content: space-around;
     //margin: auto;
 
-    &__left{
+    &__left {
       text-align: left;
       display: inline-block;
-      padding: .5rem;
-      
+      padding: 0.5rem;
     }
-    &__middle{
+    &__middle {
       text-align: center;
       display: inline-block;
-      padding: .5rem;
-      
+      padding: 0.5rem;
     }
-    &__right{
-      text-align: center;
-      display: inline-block;
-      padding: .5rem;
-      
+
+    &__right {
+      // text-align: center;
+      // text-align: right;
+      // display: inline-block;
+      // padding: 0.5rem;
+      grid-column-start: 9;
+      grid-column-end: 11;
+      grid-row-start: 8;
+      grid-row-end: 10;
     }
-    &__list{
+    &__list {
       list-style-type: none;
       margin: 0;
       padding: 0;
-      li{
+      li {
         padding-bottom: 1rem;
       }
     }
   }
 
   &__pie__text {
-    border: 1px solid black;
+    // border: 1px solid black;
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 5;
     grid-row-start: 10;
     grid-row-end: 14;
+    margin: auto 0rem;
+
+    &__header {
+      // border: 1px solid black;
+      margin-bottom: 2rem;
+      padding: 2rem;
+      background-color: #5b63da;
+      border-radius: 10px 30px;
+      color: whitesmoke;
+    }
   }
+
+  // &__pie__header {
+  //   // border: 1px solid black;
+  //   grid-column-start: 1;
+  //   grid-column-end: 4;
+  //   grid-row-start: 10;
+  //   grid-row-end: 11;
+  // }
 
   &__pie__chart {
     // border: 1px solid black;
@@ -144,16 +214,36 @@
     margin: auto;
   }
 
-  &__educator {
-    border: 1px solid black;
+  &__educator__container {
+    border-left: 1rem solid #b76ad4;
+    padding-right: 1rem;
     grid-column-start: 1;
     grid-column-end: 11;
     grid-row-start: 14;
     grid-row-end: 18;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  &__educator {
+    // border: 1px solid black;
+    grid-column-start: 1;
+    grid-column-end: 11;
+    grid-row-start: 15;
+    grid-row-end: 18;
+  }
+
+  &__educator__heading {
+    // border: 1px solid black;
+    grid-column-start: 1;
+    grid-column-end: 11;
+    grid-row-start: 14;
+    grid-row-end: 15;
+    margin-bottom: 4rem;
   }
 
   &__reanalyze {
-    border: 1px solid black;
+    // border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 11;
     grid-row-start: 18;
@@ -165,14 +255,14 @@
   }
 
   .MuiTypography-body1 {
-    width: 100%
+    width: 100%;
   }
 
   .formInput__large {
     width: 95% !important;
   }
-  table{
-      padding: 1rem;
-      column-gap: 2rem;
+  table {
+    padding: 1rem;
+    column-gap: 2rem;
   }
 }

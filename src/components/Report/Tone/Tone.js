@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import CampaignGoals from '../CampaignGoals';
+
 
 
 class Tone extends Component {
     render() {
         return (
             <div className='report__flexBox'>
-                <div style={{ width: '50%' }}>
-                
+                {/* <div style={{ width: '50%' }}> */}
+                <div className="report__targetContainer">
+
 
                     <div>
                         <i className="fas fa-users fa-2x"></i><h2 className="report__header2" >Target Audience</h2>
@@ -29,31 +32,59 @@ class Tone extends Component {
                 </div>
 
 
+                {/* <div className="report__campaignContainer"> */}
+                    <CampaignGoals />
 
+                    {/* <div className="report__targetInfo__middle">
+                        <h2 className="report__header2" >Tone</h2>
+                        <ul className="report__targetInfo__list">
+                            {this.props.reportReducer.formal ? <li>Formal</li> : <li>Informal</li>}
+                            {this.props.reportReducer.tone &&
+                                this.props.reportReducer.tone[0] &&
+                                this.props.reportReducer.tone.map(type => {
+                                    return <li>{type.replace(/^\w/, c => c.toUpperCase())}</li>
+                                })}
+                        </ul>
+                    </div> */}
 
-
-                <div className="report__targetInfo__middle">
-                    <h2 className="report__header2" >Campaign Tone</h2>
-                    <ul className="report__targetInfo__list">
-                        {this.props.reportReducer.formal ? <li>Formal</li> : <li>Informal</li>}
+                    <table className="report__toneTable">
+                        {this.props.reportReducer.formal ?
+                            <>
+                                <tr><td className="label"><p className='report__goalsData__noMargin' >Tone:</p></td></tr>
+                                <tr><td className="datum">Formal</td></tr>
+                            </>
+                            :
+                            <>
+                                <tr><td className="label"><p className='report__goalsData__noMargin' >Tone:</p></td></tr>
+                                <tr><td className="datum">Informal</td></tr>
+                            </>
+                            // <li>Formal</li> : <li>Informal</li>
+                        }
                         {this.props.reportReducer.tone &&
                             this.props.reportReducer.tone[0] &&
                             this.props.reportReducer.tone.map(type => {
-                                return <li>{type.replace(/^\w/, c => c.toUpperCase())}</li>
+                                return <tr><td className="datum">{type.replace(/^\w/, c => c.toUpperCase())}</td></tr>
+                                // return <li>{type.replace(/^\w/, c => c.toUpperCase())}</li>
                             })}
-                    </ul>
+                    </table>
+
+                    <div className="report__targetInfo__right">
+                        {/* <h2 className="report__header2" >Literary Techniques</h2>
+                        <ul className="report__targetInfo__list"> */}
+                        <table className="report__toneTable">
+                            <tr><td className="label"><p className='report__goalsData__noMargin' >Literary Techniques:</p></td></tr>
+
+                            {this.props.reportReducer.literaryTechniques &&
+                                this.props.reportReducer.literaryTechniques[0] &&
+                                this.props.reportReducer.literaryTechniques.map(lit => {
+                                    return <tr><td className="datum">{lit.replace(/^\w/, c => c.toUpperCase())}</td></tr>
+                                    // return <li>{lit.replace(/^\w/, c => c.toUpperCase())}</li>
+                                })}
+                        </table>
+                        {/* </ul> */}
+                    </div>
                 </div>
-                <div className="report__targetInfo__right">
-                    <h2 className="report__header2" >Literary Techniques Used</h2>
-                    <ul className="report__targetInfo__list">
-                        {this.props.reportReducer.literaryTechniques &&
-                            this.props.reportReducer.literaryTechniques[0] &&
-                            this.props.reportReducer.literaryTechniques.map(lit => {
-                                return <li>{lit.replace(/^\w/, c => c.toUpperCase())}</li>
-                            })}
-                    </ul>
-                </div>
-            </div >
+            // </div >
         );
     }
 }

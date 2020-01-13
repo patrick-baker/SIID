@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import CampaignGoals from './CampaignGoals';
+// import CampaignGoals from './CampaignGoals';
 
 class Header extends Component {
 
@@ -43,15 +43,14 @@ class Header extends Component {
 
 
                 <div className='report__flexBox'>
-                    <div style={{width:'50%'}}>
+                    {/* <div style={{width:'50%'}}> */}
+                    <div>
                         <h2 className="report__header2" >Date: <span style={{ color: '#5B63DA' }}> {moment(this.props.reportReducer.date_created).format("MMM Do, YYYY")}</span></h2>
                         <h2 className="report__header2">Client: <span style={{ color: '#5B63DA' }}>{this.props.reportReducer.client}</span></h2>
-                    
-
-                    <span className='report__description'>{this.props.reportReducer.description}</span>
+                        <h2 className="report__header2">{this.props.reportReducer.description}</h2>
                     </div>
 
-                    <CampaignGoals />
+                    {/* <CampaignGoals /> */}
                 </div>
 
 
