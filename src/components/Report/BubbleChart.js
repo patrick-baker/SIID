@@ -117,7 +117,6 @@ export default class BubbleChart {
                      .attr('stroke', "#422997")
                     })
                     
-
            .on('mouseout', function (d, i) {
                 d3.select(this).transition()
                      .duration('50')

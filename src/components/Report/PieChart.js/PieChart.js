@@ -76,6 +76,24 @@ export default class PieChart {
         g.append("path")
             .attr("d", arc)
             .style("fill", function (d) { return colorBias(d.data.key); })
+            .attr("opacity", ".9")
+            .on('mouseover', function (d, i) {
+                d3.select(this).transition()
+                     .duration('50')
+                     .attr("opacity", '1')
+                     .attr('stroke', "#422997")
+                    })
+                    
+           .on('mouseout', function (d, i) {
+                d3.select(this).transition()
+                     .duration('50')
+                     .attr('opacity', '.9')
+                     //.attr("fill")
+                     .attr("stroke", '#DCDDDE')
+                    })
+
+        g.append("title")
+            .text(d => ` ${d.data.value} Sentence(s) were flagged with ${d.data.key}`);
             
         // function sumBiases(data) {
         //     let sum = 0;
