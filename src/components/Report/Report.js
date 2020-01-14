@@ -12,9 +12,12 @@ import BiasTable from '../BiasTable/BiasTable'
 import ExpansionPanel from '../ExpansionPanel/ExpansionPanel';
 import CampaignGoals from './CampaignGoals';
 import Header from './Header';
-import Tone from './Tone/Tone';
+// import Tone from './Tone/Tone';
 import EducatorsOnReport from '../EducatorsOnReport/EducatorsOnReport';
 import DonutWrapper from './TotalBias.js/TotalBias';
+import TargetAudience from './TargetAudience';
+import Tone from './Tone';
+import LiteraryTechniques from './LiteraryTechniques';
 
 class Report extends Component {
     state = {
@@ -84,38 +87,55 @@ class Report extends Component {
 
                                 {/* <div style={{ border: '1px solid black', width: '100%', gridColumnStart: '1', gridColumnEnd: '11', gridRowStart: '3', gridRowEnd: '7' }}> */}
 
-                                    {/* Re-text Bubble Chart */}
-                                    <div className="report__bubble__chart">
-                                        {this.props.flagReducer[0]
-                                            && this.props.flagReducer[0].messages
-                                            && this.props.flagReducer[0].messages.messages
-                                            && <BubbleChart data={this.cleanBubbleData(this.props.flagReducer[0].messages.messages)} />}
-                                    </div>
-
-                                    {/* Re-Text Bubble Chart Words & Suggestions */}
-                                    <div className="report__bubble__connector ">
-                                    </div>
-
-                                    <div className="report__bubble__background">
-                                    </div>
-
-                                    <div className="report__bubble__header">
-                                        <h1 className="report__header2__noMargin">Words to Consider</h1>
-                                        <h2>These words were flagged by the rules-based system as being possibly problematic if used in the wrong context.</h2>
-                                    </div>
-                                    <div className="report__bubble__text">
-                                        {this.props.flagReducer[0]
-                                            && this.props.flagReducer[0].messages
-                                            && this.props.flagReducer[0].messages.messages
-                                            && <BubbleSuggestions data={this.cleanBubbleData(this.props.flagReducer[0].messages.messages)} />
-                                        }
-                                    </div>
-                                {/* </div> */}
-                                {/* Target Audience, Tone, and Literary Techniques information */}
-                                <div className="report__targetInfo">
-                                    <Tone />
+                                {/* Re-text Bubble Chart */}
+                                <div className="report__bubble__chart">
+                                    {this.props.flagReducer[0]
+                                        && this.props.flagReducer[0].messages
+                                        && this.props.flagReducer[0].messages.messages
+                                        && <BubbleChart data={this.cleanBubbleData(this.props.flagReducer[0].messages.messages)} />}
                                 </div>
 
+                                {/* Re-Text Bubble Chart Words & Suggestions */}
+                                <div className="report__bubble__connector ">
+                                </div>
+
+                                <div className="report__bubble__background">
+                                </div>
+
+                                <div className="report__bubble__header">
+                                    <h1 className="report__header2__noMargin">Words to Consider</h1>
+                                    <h2>These words were flagged by the rules-based system as being possibly problematic if used in the wrong context.</h2>
+                                </div>
+                                <div className="report__bubble__text">
+                                    {this.props.flagReducer[0]
+                                        && this.props.flagReducer[0].messages
+                                        && this.props.flagReducer[0].messages.messages
+                                        && <BubbleSuggestions data={this.cleanBubbleData(this.props.flagReducer[0].messages.messages)} />
+                                    }
+                                </div>
+                                {/* </div> */}
+                                {/* Target Audience, Tone, and Literary Techniques information */}
+                                {/* <div className="report__targetInfo">
+                                    <Tone />
+                                </div> */}
+
+                                <div className="report__targetAudience">
+                                    <TargetAudience />
+                                </div>
+
+                                <div className="report__dottedBorder">
+                                    <div className="report__tone">
+                                        <Tone />
+                                    </div>
+
+                                    <div className="report__literaryTechniques">
+                                        <LiteraryTechniques />
+                                    </div>
+
+                                    <div className="report__campaignGoals">
+                                        <CampaignGoals />
+                                    </div>
+                                </div>
 
                                 {/* Header for Bias/Machine Learning section */}
                                 {/* <div className="report__pie__text__header">
@@ -133,10 +153,10 @@ class Report extends Component {
                                 </div> */}
 
                                 {/* Total Percentage for Bias Counts */}
-                                {/* <div className="report__total__bias">
+                                <div className="report__totalBias">
                                     {this.props.biasDataReducer.status && <TotalBias />}
-                                </div> */}
-
+                                </div>
+                                
 
                                 {/* Pie Chart for Bias Counts */}
                                 <div className="report__pie__chart">

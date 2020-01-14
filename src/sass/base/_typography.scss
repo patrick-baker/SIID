@@ -80,6 +80,13 @@ body {
     &__noMargin {
       padding: 0rem;
     }
+
+    &__noInline{
+    padding:.75rem;
+    font-size: 2rem;
+    font-weight: normal;
+    line-height: 2.8rem;
+    }
   }
 
   &__header3{

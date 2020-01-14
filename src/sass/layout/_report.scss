@@ -75,13 +75,14 @@
     background-color: whitesmoke;
     border: 1px solid darkgray;
     box-shadow: 10px 10px 10px gray;
-    border-radius: 0.4rem 0.4rem;
+    border-radius: 1.5rem 5rem;
     // color: #3b3c3e;
     font-size: 1.2rem;
     font-weight: bold;
     left: -1px;
-    padding: 1rem;
-    margin-right: 2rem;
+    padding: 1rem 2rem;
+    margin-left: -15%;
+    margin-right: 15%;
     // margin-bottom: 1rem;
     // margin-right: 2rem;
     // margin-left: 3rem;
@@ -114,26 +115,73 @@
     margin: auto;
   }
 
-  &__campaignContainer {
-    grid-column-start: 5;
+  &__targetAudience {
+    border-left: 1rem solid #b76ad4;
+    padding-left: 2rem;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 7;
+    grid-row-end: 10;
+    // margin-top:2rem;
+  }
+
+  &__dottedBorder {
+    border-top: 0.5rem dotted $color-dark-gray;
+    grid-column-start: 4;
     grid-column-end: 11;
     grid-row-start: 7;
     grid-row-end: 10;
+    margin-top: 3rem;
+    display: flex;
   }
 
-  &__targetContainer {
-    grid-column-start: 1;
-    grid-column-end: 5;
-    grid-row-start: 7;
-    grid-row-end: 10;
+  &__tone {
+    // grid-column-start: 6;
+    // grid-column-end: 8;
+    // grid-row-start: 7;
+    // grid-row-end: 10;
+    width: 20%;
+    margin-top: 2rem;
   }
 
-  &__toneTable {
-    grid-column-start: 7;
-    grid-column-end: 9;
-    grid-row-start: 8;
-    grid-row-end: 10;
+  &__literaryTechniques {
+    // grid-column-start: 4;
+    // grid-column-end: 6;
+    // grid-row-start: 7;
+    // grid-row-end: 10;
+    width: 20%;
+    margin-top: 2rem;
   }
+
+  &__campaignGoals {
+    // grid-column-start: 8;
+    // grid-column-end: 11;
+    // grid-row-start: 7;
+    // grid-row-end: 10;
+    width: 60%;
+    margin-top: 2rem;
+  }
+
+  // &__campaignContainer {
+  //   grid-column-start: 5;
+  //   grid-column-end: 11;
+  //   grid-row-start: 7;
+  //   grid-row-end: 10;
+  // }
+
+  // &__targetContainer {
+  //   grid-column-start: 1;
+  //   grid-column-end: 5;
+  //   grid-row-start: 7;
+  //   grid-row-end: 10;
+  // }
+
+  // &__toneTable {
+  //   grid-column-start: 7;
+  //   grid-column-end: 9;
+  //   grid-row-start: 8;
+  //   grid-row-end: 10;
+  // }
 
   &__targetInfo {
     // border: 1px solid black;
@@ -176,6 +224,35 @@
       li {
         padding-bottom: 1rem;
       }
+    }
+  }
+
+  &__totalBias {
+    //border: 1px solid black;
+    grid-column-start: 5;
+    grid-column-end: 8;
+    grid-row-start: 10;
+    grid-row-end: 14;
+    margin: auto;
+    &__all{
+      border: 2px dotted $color-dark-gray;
+      max-width: 70%;
+      color: $color-dark-gray;
+      text-align: center;
+      margin-left: 10rem;
+      padding-bottom: 3rem;
+      background-color: whitesmoke;
+    }
+
+    &__percent {
+      font-size: 12rem;
+      font-weight: bold;
+    }
+    &__text {
+      max-width: 70%;
+      margin: auto;
+      font-size: 2rem;
+      text-align: end;
     }
   }
 
