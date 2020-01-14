@@ -7,8 +7,8 @@ const BiasTable = ({ data }) => {
 
     return (<>
         <div className="report__pie__text__header">
-            <h1 className="report__header2__noMargin">PIE CHART OF BIASES</h1>
-            <h2>Areas of sensitivity flagged by machine learning.</h2>
+            <h1 className="report__header2__noMargin">Areas of Sensitivity</h1>
+            <h2>These sentences were flagged by machine learning for possibly containing biased language.</h2>
         </div>
         <table className="dataTable__table data">
             <thead>
@@ -43,7 +43,7 @@ const BiasTable = ({ data }) => {
                 </tr>
                 <tr>
                     <td>None</td>
-                    <td></td>
+                    <td>{total - biasSum}</td>
                     <td>{Math.round((total - biasSum) / total * 100)}%</td>
                 </tr>
             </tbody>
