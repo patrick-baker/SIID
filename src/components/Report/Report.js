@@ -153,10 +153,10 @@ class Report extends Component {
                                 </div> */}
 
                                 {/* Total Percentage for Bias Counts */}
-                                {/* <div className="report__total__bias">
+                                <div className="report__totalBias">
                                     {this.props.biasDataReducer.status && <TotalBias />}
-                                </div> */}
-
+                                </div>
+                                
 
                                 {/* Pie Chart for Bias Counts */}
                                 <div className="report__pie__chart">

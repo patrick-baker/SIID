@@ -126,7 +126,7 @@
   }
 
   &__dottedBorder {
-    border-top: 0.5rem dotted $color-medium-gray;
+    border-top: 0.5rem dotted $color-dark-gray;
     grid-column-start: 4;
     grid-column-end: 11;
     grid-row-start: 7;
@@ -224,6 +224,35 @@
       li {
         padding-bottom: 1rem;
       }
+    }
+  }
+
+  &__totalBias {
+    //border: 1px solid black;
+    grid-column-start: 5;
+    grid-column-end: 8;
+    grid-row-start: 10;
+    grid-row-end: 14;
+    margin: auto;
+    &__all{
+      border: 2px dotted $color-dark-gray;
+      max-width: 70%;
+      color: $color-dark-gray;
+      text-align: center;
+      margin-left: 10rem;
+      padding-bottom: 3rem;
+      background-color: whitesmoke;
+    }
+
+    &__percent {
+      font-size: 12rem;
+      font-weight: bold;
+    }
+    &__text {
+      max-width: 70%;
+      margin: auto;
+      font-size: 2rem;
+      text-align: end;
     }
   }
 
