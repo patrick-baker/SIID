@@ -1,14 +1,16 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+
 // import for project report link
 const crypto = require('crypto');
-let verbose = true;
+
 
 /**
  * GET projects created by the user
  */
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     const queryText =`SELECT "id","title","client", "description", "date_created", "project_token" 
     FROM "project" WHERE "user_id"=$1 ORDER BY "date_created"`;
     const queryValues=[req.user.id];
@@ -23,7 +25,7 @@ router.get('/', (req, res) => {
 });
 
 
-router.put('/:id',async (req,res) => {
+router.put('/:id', rejectUnauthenticated, async (req,res) => {
     const client = await pool.connect();
 
     console.log(`in PUT /project/${req.params.id}, req.body:`,req.body);
@@ -70,7 +72,7 @@ router.put('/:id',async (req,res) => {
 /**
  * DELETE project from flag, tone, literary_techniques and projects 
  */
-router.delete('/:id', async (req, res) => { 
+router.delete('/:id', rejectUnauthenticated, async (req, res) => { 
     const client = await pool.connect();
       
     try{ 
@@ -122,7 +124,7 @@ router.delete('/:id', async (req, res) => {
 /*
  * POST new project
  */
-router.post('/', async (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
     if(verbose)console.log('in project.router POST, req.user is: ', req.user);
     if(verbose)console.log('in project.router POST, req.body is: ', req.body);
     // SETUP POOL CONNECT

@@ -8,7 +8,6 @@ const router = express.Router();
 
 // imports for password reset request
 const crypto = require('crypto');
-require('dotenv').config();
 const nodemailer = require('nodemailer');
 
 // Handles Ajax request for user information if user is authenticated
@@ -52,14 +51,14 @@ router.post('/forgotPassword', (req, res) => {
   if (email === '') {
     res.status(400).send('email required');
   }
-  // console.log("user's email:", email);
+  // if (VERBOSE) console.log("user's email:", email);
 
   const sqlSelect = `SELECT * FROM "user" WHERE "email" = $1;`;
   pool.query(sqlSelect, [email])
     .then((user) => {
-      console.log("user result from server:", user);
+      if (VERBOSE) console.log("user result from server:", user);
       if (user.rowCount === 0) {
-        console.log('email not in database');
+        if (VERBOSE) console.log('email not in database');
         res.status(403).json('email not in db');
       } else {
         const token = crypto.randomBytes(20).toString('hex');
@@ -91,26 +90,26 @@ router.post('/forgotPassword', (req, res) => {
                 + 'If you did not request this, please ignore this email and your password will remain unchanged.\n\n' 
                 + 'Please do not respond to this email.\n',
             };
-            console.log('sending mail');
+            if (VERBOSE) console.log('sending mail');
 
             // nodemailer options
             transporter.sendMail(mailOptions, (err, response) => {
               if (err) {
                 console.error('there was an error: ', err);
               } else {
-                console.log('here is the res: ', response);
+                if (VERBOSE) console.log('here is the res: ', response);
                 res.status(200).json('recovery email sent');
               }
             });
           })
           .catch((err) => {
-            console.log('Error in updating token of user', err);
+            if (VERBOSE) console.log('Error in updating token of user', err);
             res.sendStatus(500);
           })
       }
     })
     .catch(err => {
-      console.log('error in selecting user by email in DB', err);
+      if (VERBOSE) console.log('error in selecting user by email in DB', err);
       res.sendStatus(500);
     })
 });
@@ -122,7 +121,7 @@ router.get('/reset/:token', (req, res) => {
   sqlText = `SELECT * from "user" WHERE "resetPasswordToken" = $1 AND "resetPasswordExpires" > CURRENT_TIMESTAMP;`; 
   pool.query(sqlText, [token])
     .then((user) => {
-      console.log("user result from server in reset query:", user);
+      if (VERBOSE) console.log("user result from server in reset query:", user);
       if (user.rowCount === 0) {
         console.error('password reset link is invalid or has expired');
         res.status(403).send('password reset link is invalid or has expired');
@@ -138,21 +137,21 @@ router.get('/reset/:token', (req, res) => {
 // updates the database with the user's new password
 router.put('/updatePasswordViaEmail', (req, res) => {
   const { username, resetPasswordToken } = req.body;
-  console.log('req.body in updatePasswordViaEmail query:', req.body);
+  if (VERBOSE) console.log('req.body in updatePasswordViaEmail query:', req.body);
   sqlText = `SELECT * FROM "user" 
     WHERE "username" = $1
     AND "resetPasswordToken" = $2
     AND "resetPasswordExpires" > CURRENT_TIMESTAMP;`; 
   pool.query(sqlText, [username, resetPasswordToken])
     .then(user => {
-      console.log("user result from server in update query:", user);
+      if (VERBOSE) console.log("user result from server in update query:", user);
       if (user.rowCount === 0) {
           // runs if the query finds no match
         console.error('password reset link is invalid or has expired');
         res.status(403).send('password reset link is invalid or has expired');
       } else if (user.rowCount !== 0) {
           // sets the DB password to the correct encrypted password
-        console.log('user exists in db');
+        if (VERBOSE) console.log('user exists in db');
         const password = encryptLib.encryptPassword(req.body.password);
         sqlUpdate = `UPDATE "user"
         SET "password" = $1,
@@ -161,7 +160,7 @@ router.put('/updatePasswordViaEmail', (req, res) => {
         WHERE "username" = $2;`;
         pool.query(sqlUpdate, [password, username])
           .then(() => {
-            console.log('password updated');
+            if (VERBOSE) console.log('password updated');
             res.status(200).send({ message: 'password updated' });
           });
       } else {

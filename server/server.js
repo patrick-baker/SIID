@@ -1,4 +1,3 @@
-
 const express = require('express');
 require('dotenv').config();
 
@@ -18,8 +17,9 @@ const flagRouter = require('./routes/flag.router');
 const reportRouter = require('./routes/report.router');
 const autoMLRouter = require('./routes/autoML.router');
 const categoryRouter =require('./routes/category.router');
+
+// Needed for S3 uploader
 const uploadS3Router = require('react-dropzone-s3-uploader/s3router');
-const imageURLRouter = require('./routes/image-url.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -42,13 +42,16 @@ app.use('/flag', flagRouter);
 app.use('/report', reportRouter);
 app.use('/automl',autoMLRouter);
 app.use('/category', categoryRouter);
-app.use('/api/image', imageURLRouter);
 
-// S3 Buckets and react-dropzone-s3 need
+// S3 Buckets and react-dropzone-s3 need this setup
+// These variables will need to match your AWS setup.
+// bucket: and region: are the most likely to change.
+// To lookup what your region variable is goto:
+// https://amzn.to/2NtySt0
 app.use('/s3', uploadS3Router({
-    bucket: 'siid',                           // required
-    region: 'us-east-2',                            // optional
-    headers: {'Access-Control-Allow-Origin': '*'},  // optional
+    bucket: 'siid',                           // Name of bucket
+    region: 'us-east-2',                            // Lookup variable that matches your region. This is Ohio
+    headers: {'Access-Control-Allow-Origin': '*'},  
     ACL: 'public-read',                                 // this is the default - set to `public-read` to let anyone view uploads
   }));
 

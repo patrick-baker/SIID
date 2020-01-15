@@ -2,7 +2,6 @@ const badSecret = `
 ----------------------------
 
 *** WARNING ***
-Your application is not very secure.
 You need to set SERVER_SESSION_SECRET to a better secret
 Please follow the README and add a .env file
 

@@ -2,6 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// Used to update biasSaga.js
+// Counter creates counts of the biases that return from google cloud http request.
 
 router.get('/:id', async(req, res) => {
     

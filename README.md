@@ -1,3 +1,25 @@
+# SIID - Social Impact IDentification tool
+
+## Prerequisites
+
+Before you get started, make sure you have the following software installed on your computer:
+
+- [Node.js](https://nodejs.org/en/)
+- [PostrgeSQL](https://www.postgresql.org/)
+- [Nodemon](https://nodemon.io/)
+
+Next you'll need a Google account and Google Cloud Console running on your computer
+1. The SIID model is the Google Cloud Platform project (named Rankchoice) if you are using this ML model get access from SIID. If you are using a different one you'll need to update the cloud console endpoint in the /server/routes/autoML.router.js 
+2. Once your google account is associated with the SIID model, or another model, you'll need to setup the Cloud Console on your local machine. [Quick Start](https://cloud.google.com/sdk/docs/quickstart-macos)
+3. Make sure you follow the instructions that include both the .json key in your PATH variable, and update your .bash_profile so Google can access the console.  If you are seeing a `gcloud auth ...` error double check these settings.
+
+
+
+## Create database and table
+
+Create a new database called `SIID` and use the `database.sql` file to re-create the database.
+You will also want to import the rules by running the SQL commands in the `/ruleset_sql_files` folder.
+
 # Prime Project
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 

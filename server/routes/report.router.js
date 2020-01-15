@@ -1,13 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-let verbose = false;
+
 
 /**
  * GET selected project meta data for report
  */
 router.get('/project/:id', async (req, res) => {
-    if (verbose) console.log('in report.router GET, req.params.id is: ', req.params.id);
+    if (VERBOSE) console.log('in report.router GET, req.params.id is: ', req.params.id);
     // CREATE VAR FOR PROJECT ID
     const projectId = req.params.id;
     // SETUP POOL CONNECT
@@ -22,7 +22,7 @@ router.get('/project/:id', async (req, res) => {
         "target_audience_language", "talent_demographic", "formal", "project_strategy", "project_token", "date_created", "analyzed"
         FROM "project" WHERE "id"=$1;`;
         const projectTableData = await client.query(projectQueryText, [projectId]);
-        if (verbose) console.log('In report.router /project get, projectTableData.rows[0] is: ', projectTableData.rows[0]);
+        if (VERBOSE) console.log('In report.router /project get, projectTableData.rows[0] is: ', projectTableData.rows[0]);
         // SELECT FROM PROJECT_TONE TABLE
         const toneQueryText = `SELECT ARRAY_AGG("tone"."type") as "tones"
         FROM "project_tone"
@@ -30,7 +30,7 @@ router.get('/project/:id', async (req, res) => {
         ON "project_tone"."tone_id" = "tone"."id"
         WHERE "project_tone"."project_id" = $1;`;
         const tone = await client.query(toneQueryText, [projectId]);
-        if (verbose) console.log('In report.router /project get, tone.rows[0].tones is: ', tone.rows[0].tones);
+        if (VERBOSE) console.log('In report.router /project get, tone.rows[0].tones is: ', tone.rows[0].tones);
         // SELECT FROM PROJECT_LITERARY TABLE
         const literaryQueryText = `SELECT ARRAY_AGG("literary_techniques"."type") as "techniques"
         FROM "project_literary"
@@ -38,7 +38,7 @@ router.get('/project/:id', async (req, res) => {
         ON "project_literary"."literary_id" = "literary_techniques"."id"
         WHERE "project_literary"."project_id" = $1;`;
         const literaryTechniques = await client.query(literaryQueryText, [projectId]);
-        if (verbose) console.log('In report.router /project get, literaryTechniques.rows[0].techniques is: ', literaryTechniques.rows[0].techniques);
+        if (VERBOSE) console.log('In report.router /project get, literaryTechniques.rows[0].techniques is: ', literaryTechniques.rows[0].techniques);
         // SEND MAIN PROJECT DATA TOGETHER
         res.send({ ...projectTableData.rows[0], tone: tone.rows[0].tones, literaryTechniques: literaryTechniques.rows[0].techniques });
         // END SQL TRX
@@ -60,7 +60,7 @@ router.get('/project/:id', async (req, res) => {
 router.get('/bias/:id', async (req, res) => {
 
     try {
-        if (verbose) console.log('in report.router /bias GET, req.params.id is: ', req.params.id);
+        if (VERBOSE) console.log('in report.router /bias GET, req.params.id is: ', req.params.id);
         // CREATE VAR FOR PROJECT ID
         const projectId = req.params.id;
         // SELECT BIAS TYPES AND COUNTS
@@ -73,7 +73,7 @@ router.get('/bias/:id', async (req, res) => {
         res.send(results.rows);
 
     } catch (error) {
-        console.log(error);
+        if (VERBOSE) console.log(error);
         res.sendStatus(500);
     }
 });
@@ -84,7 +84,7 @@ router.get('/bias/:id', async (req, res) => {
 router.get('/educators/:id', async (req, res) => {
 
     try {
-        if (verbose) console.log('in report.router /educators GET, req.params.id is: ', req.params.id);
+        if (VERBOSE) console.log('in report.router /educators GET, req.params.id is: ', req.params.id);
         // CREATE VAR FOR PROJECT ID
         const projectId = req.params.id;
         // SELECT BIAS TYPES AND COUNTS OF PROJECT
@@ -98,18 +98,18 @@ router.get('/educators/:id', async (req, res) => {
 
         // returned bias objects that match the project
         let projectBiases = await pool.query(biasesQueryText, [projectId]);
-        console.log(`This project's biases:`, projectBiases);
+        if (VERBOSE) console.log(`This project's biases:`, projectBiases);
         // removes total project bias count from bias array
         let biasArray = projectBiases.rows.filter(function(obj) {
             return obj.type !== "total"
         })
-        console.log('biasArray =', biasArray);
+        if (VERBOSE) console.log('biasArray =', biasArray);
         // narrows down bias array if more than two bias values by sorting and cutting off end values
         if (biasArray.length > 2) {
             biasArray.sort((a, b) => (a.bias_count > b.bias_count) ? -1 : 1);
             biasArray.length = 2;
         }
-        console.log('biasArray before selecting educators:', biasArray);
+        if (VERBOSE) console.log('biasArray before selecting educators:', biasArray);
 
         // SELECT BIAS TYPES AND COUNTS
         const queryText1 = `
@@ -147,7 +147,7 @@ router.get('/educators/:id', async (req, res) => {
         res.send(results.rows);
 
     } catch (error) {
-        console.log('error in GET educators for report:', error);
+        if (VERBOSE) console.log('error in GET educators for report:', error);
         res.sendStatus(500);
     }
 });

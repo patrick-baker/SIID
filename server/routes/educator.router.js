@@ -4,6 +4,11 @@ const router = express.Router();
 const { rejectNonAdmin } = require('../modules/admin-middleware');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+// Used to update educatorSaga.js
+// 
+// GET route is open to people who are logged in
+// PUT, POST, DELETE educator is limited to administrators
+
 // GET educators
 router.get('/', rejectUnauthenticated, async (req, res) => {
     const query =
@@ -26,7 +31,8 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
 
 
 // POST route requires you being authenticated
-router.post('/',rejectUnauthenticated, async (req, res) => {
+// 
+router.post('/', rejectNonAdmin, async (req, res) => {
     const client = await pool.connect();
     try {
         const queryEducator = `INSERT INTO educator (name,bio,contact_info,image_url) VALUES ($1,$2,$3,$4) RETURNING id;`;
@@ -82,7 +88,7 @@ router.delete('/:id', rejectNonAdmin, async (req, res) => {
 })
 
 // PUT route - Updating of educator details.
-router.put('/', rejectUnauthenticated, async (req, res) => {
+router.put('/', rejectNonAdmin, async (req, res) => {
     const client = await pool.connect();
     try {
         await client.query(`BEGIN`);
