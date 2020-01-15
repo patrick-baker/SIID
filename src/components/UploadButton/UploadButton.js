@@ -37,10 +37,11 @@ class UploadButton extends React.Component {
     }
     render() {
         const uploadOptions = {
+            // If deploying to Heroku put heroku name here
             server: 'http://localhost:5000',
             // signingUrlQueryParams: {uploadType: 'avatar'},
         }
-
+        // SET to your S3 Bucket path
         const s3Url = 'https://siid.s3.amazonaws.com'
 
         return (
