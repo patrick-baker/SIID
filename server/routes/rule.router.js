@@ -23,7 +23,7 @@ router.get("/", rejectNonAdmin, (req, res) => {
     res.send(result.rows);
   })
   .catch((error)=>{
-      if (VERBOSE) console.log("Error in rule.router getting rules from database",error)
+      if (process.env.VERBOSE) console.log("Error in rule.router getting rules from database",error)
       res.sendStatus(500)
   });
 });
@@ -35,15 +35,15 @@ router.post("/", rejectUnauthenticated, async (req, res) => {
     const textInput = req.body.text;
     const project_id = req.body.project_id;
     let pattern_db = await pool.query(`SELECT array_agg("data") FROM rules`);
-    // if (VERBOSE) console.log('pattern: ', pattern_db);
+    // if (process.env.VERBOSE) console.log('pattern: ', pattern_db);
 
     patterns_bad = pattern_db.rows[0].array_agg;
-    // if (VERBOSE) console.log('from db', patterns_bad)
+    // if (process.env.VERBOSE) console.log('from db', patterns_bad)
   
     let response = "";
 
     const runMe = async function (textIn) {
-      // if (VERBOSE) console.log('runMe running');
+      // if (process.env.VERBOSE) console.log('runMe running');
 
       try {
         response = await unified()
@@ -52,16 +52,16 @@ router.post("/", rejectUnauthenticated, async (req, res) => {
           .use(await stringify)
           .process(textIn);
       } catch (error) {
-        if (VERBOSE) console.log(error);
+        if (process.env.VERBOSE) console.log(error);
       }
     };
     await runMe(textInput);
-    if (VERBOSE) console.log("Rule based system returns:", response);
+    if (process.env.VERBOSE) console.log("Rule based system returns:", response);
     await pool.query(`INSERT INTO flags(project_id,messages) VALUES($1,$2)`, [project_id, { messages: response.messages }]);
 
     res.send(response.messages);
   } catch (error) {
-    if (VERBOSE) console.log('Error testing the text:',req.body.text,'\nError message is:',error)
+    if (process.env.VERBOSE) console.log('Error testing the text:',req.body.text,'\nError message is:',error)
     res.sendStatus(500);
   }
 });
@@ -73,11 +73,11 @@ router.post("/add", rejectNonAdmin, (req, res) => {
   const queryArgs = [req.body]
   pool.query(queryText, queryArgs)
     .then((response) => {
-      if (VERBOSE) console.log("Rule Add Success", response);
+      if (process.env.VERBOSE) console.log("Rule Add Success", response);
       res.sendStatus(200);
     })
     .catch((error) => {
-      if (VERBOSE) console.log("Rule Add Error", error);
+      if (process.env.VERBOSE) console.log("Rule Add Error", error);
       res.sendStatus(500);
     })
 })
@@ -89,11 +89,11 @@ router.delete('/:id', rejectNonAdmin, (req, res) => {
   const queryText = 'DELETE FROM rules WHERE id=$1'
   pool.query(queryText, [rule_id])
     .then((response) => {
-      if (VERBOSE) console.log("DELETE SUCCESS for rule", rule_id)
+      if (process.env.VERBOSE) console.log("DELETE SUCCESS for rule", rule_id)
       res.sendStatus(200);
     })
     .catch((error) => {
-      if (VERBOSE) console.log("Error in DELETE route:", error)
+      if (process.env.VERBOSE) console.log("Error in DELETE route:", error)
       res.sendStatus(500)
     })
 })

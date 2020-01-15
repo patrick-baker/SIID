@@ -19,7 +19,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         .then(results=>{
             res.send(results.rows);})
             .catch((error)=>{
-            if(verbose)console.log('Error GET /project', error);
+            if(process.env.VERBOSE)console.log('Error GET /project', error);
             res.sendStatus(500);
         })
 });
@@ -60,7 +60,7 @@ router.put('/:id', rejectUnauthenticated, async (req,res) => {
         res.sendStatus(200)
     } catch (error) {
         await client.query('ROLLBACK')
-        if(verbose)console.log('Error delete /project', error);
+        if(process.env.VERBOSE)console.log('Error delete /project', error);
         res.sendStatus(500);
     } finally {
         client.release();
@@ -114,7 +114,7 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) => {
         res.sendStatus(201);
     } catch (error) {
         await client.query('ROLLBACK')
-        if(verbose)console.log('Error delete /project', error);
+        if(process.env.VERBOSE)console.log('Error delete /project', error);
         res.sendStatus(500);
     } finally {
         client.release();
@@ -125,15 +125,15 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) => {
  * POST new project
  */
 router.post('/', rejectUnauthenticated, async (req, res) => {
-    if(verbose)console.log('in project.router POST, req.user is: ', req.user);
-    if(verbose)console.log('in project.router POST, req.body is: ', req.body);
+    if(process.env.VERBOSE)console.log('in project.router POST, req.user is: ', req.user);
+    if(process.env.VERBOSE)console.log('in project.router POST, req.body is: ', req.body);
     // SETUP POOL CONNECT
     const client = await pool.connect();
     try {
         // Create mappable literaryTechnique array for promise requests from iterating over req.body object, checking for true values of keys
         const literaryTechnique = [];
         Object.keys(req.body.literaryTechniques).forEach(function (key) {
-            if(verbose)console.log('literaryTechniques key, value:', key, req.body.literaryTechniques[key])
+            if(process.env.VERBOSE)console.log('literaryTechniques key, value:', key, req.body.literaryTechniques[key])
             if (req.body.literaryTechniques[key]) {
                 literaryTechnique.push(key);
             }
@@ -143,7 +143,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         // Create mappable tone array for promise requests from iterating over req.body object, checking for true values of keys
         const tone = [];
         for (key in req.body.tones) {
-            if(verbose)console.log('tones key, value:', key, req.body.tones[key])
+            if(process.env.VERBOSE)console.log('tones key, value:', key, req.body.tones[key])
             if (req.body.tones[key]) {
                 tone.push(key);
             }

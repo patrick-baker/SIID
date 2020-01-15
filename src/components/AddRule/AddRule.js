@@ -3,7 +3,7 @@ import Modal from '../Modal/Modal'
 import ModalForm from '../Modal/ModalForm'
 import ModalInput from '../Modal/ModalInputAvg'
 import { connect } from 'react-redux';
-let verbose = false; // console.logs run if verbose = true
+let verbose = false; // console.logs run if process.env.VERBOSE = true
 
 class AddRule extends Component {
     // Add rule function runs 
