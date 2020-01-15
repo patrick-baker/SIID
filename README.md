@@ -100,6 +100,9 @@ AWS_SECRET_ACCESS_KEY= (the secret key we just made)
 bucket:  (name of bucket)
 region: (code of region. 'us-east-2' is Ohio but if you have a different one look at link in comments)
 
+/src/components/UploadButton/UploadButton.js
+set the const s3Url = (name of bucket).s3.amazonaws.com
+
 ## Create database and table
 
 Create a new database called `SIID` and use the `database.sql` file to re-create the database.
