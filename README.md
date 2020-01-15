@@ -16,13 +16,21 @@ Before you get started, make sure you have the following software installed on y
 - [Nodemon](https://nodemon.io/)
 - [Postico](https://eggerapps.at/postico/) Or a similar PostgreSQL GUI
 
+## Steps
+1. Google Cloud setup
+2. AWS Bucket setup
+3. Database setup
+4. NPM Install
+
+## Google Cloud 
 
 Next you'll need a Google account and Google Cloud Console running on your computer
-1. The SIID model is the Google Cloud Platform project (named Rankchoice) if you are using this ML model get access from SIID. If you are using a different one you'll need to update the cloud console endpoint in the /server/routes/autoML.router.js 
+1. The SIID model is the Google Cloud Platform project (named Rankchoice) if you are using this ML model get access from SIID. If you are using a different one you'll need to update the cloud console endpoint in the /server/routes/`autoML.router.js`. This shows up in two different places in the `autoML.router.js` file
+    - You'll find the information in the "Test & Use" tab starts with `https://automl...` ends with `...predict`
 2. Once your google account is associated with the SIID model, or another model, you'll need to setup the Cloud Console on your local machine. [Quick Start](https://cloud.google.com/sdk/docs/quickstart-macos)
 3. Make sure you follow the instructions that include both the .json key in your PATH variable, and update your .bash_profile so Google can access the console.  If you are seeing a `gcloud auth ...` error double check these settings.
 
-#AWS Management Console
+## AWS Management Console
 
 We'll be using S3 and IAM
 We'll setup the Group, Then the bucket, then the user. 
