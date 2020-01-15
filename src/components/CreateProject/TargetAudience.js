@@ -5,18 +5,17 @@ import { withStyles } from '@material-ui/core/styles';
 import ModalInput from '../Modal/ModalInputAvg';
 
 const styles = () => ({
+  // styles container for the target audience inputs
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-  },
-  input: {
-    margin: '10px',
   }
 });
 
 class TargetAudience extends React.Component {
 
   handleChange = event => {
+    // dispatches corresponding form info to the formReducer
     this.props.dispatch({
       type: 'SET_FORM_METADATA', payload: {
         property: event.target.name,

@@ -8,20 +8,15 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 const styles = theme => ({
+  // styles for the form component
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
-  },
+  }
 });
 
 class IntegrationsDropdown extends React.Component {
+  // dispatches corresponding form information to the formReducer
   handleChange = event => {
     this.props.dispatch({type: 'SET_FORM_METADATA', payload: {
       property: event.target.name, 
