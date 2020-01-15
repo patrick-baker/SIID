@@ -4,7 +4,7 @@ let verbose = false; // shows relevant console logs if true
 
 class DeleteProject extends Component {
     handleDeleteConfirmation = () => {
-        // shows console.log if above verbose variable is true
+        // shows console.log if above process.env.VERBOSE variable is true
         if (verbose) console.log("in handleDelete Confirmation with project", this.props.specificProject.title, this.props.specificProject.client)
         // dispatches educator to projectSaga for deletion
         this.props.dispatch({ type: "DELETE_PROJECT", payload: this.props.specificProject.id })

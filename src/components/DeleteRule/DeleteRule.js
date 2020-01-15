@@ -4,7 +4,7 @@ let verbose = false; // shows relevant console logs if true
 
 class DeleteRule extends Component {
     handleDeleteConfirmation = () => {
-        // shows console.log if above verbose variable is true
+        // shows console.log if above process.env.VERBOSE variable is true
         if (verbose) console.log("in handleDelete Confirmation with id", this.props.specificRule.id);
         // dispatches educator to projectSaga for deletion
         this.props.dispatch({ type: "DELETE_RULE", payload: this.props.specificRule.id })

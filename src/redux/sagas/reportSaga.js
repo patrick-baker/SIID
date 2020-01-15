@@ -29,7 +29,6 @@ function* getProjectEducators(action) {
 }
 
 function* ReportSaga() {
-    yield takeEvery('GET_PROJECT_METADATA', getMetaData);
     yield takeEvery('GET_SPECIFIC_PROJECT', getProjectReportData);
     yield takeEvery('GET_PROJECT_EDUCATORS', getProjectEducators);
 }

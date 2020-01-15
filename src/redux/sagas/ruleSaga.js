@@ -13,8 +13,14 @@ function* FETCH_RULES() {
 }
 
 
-// JSON object is created in the AddRule.js and sent as payload
+
 function* ADD_RULE(action) {
+
+  /*
+    JSON object is created in the AddRule.js and sent as payload
+    adds rule to db in rule.router.js
+    calls fetch rules now that a new one is added
+  */
   try {
        yield axios.post('/rule/add', action.payload)
        yield put({ type: "FETCH_RULES"})
@@ -22,8 +28,12 @@ function* ADD_RULE(action) {
         console.log('error in ADD_RULE saga', error);
     }
 }
-// Pass ID as action.payload to delete, then fetch new set of rules.
+
 function* DELETE_RULE(action) {
+
+  /*
+    Pass ID as action.payload to delete, then fetch new set of rules.
+  */
     try {
         console.log("in delete rule saga with", action.payload)
          yield axios.delete(`/rule/${action.payload}`)
