@@ -1,16 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import ModalInput from '../Modal/ModalInputAvg';
-
-const styles = theme => ({
-  // styles to be applied to form
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  }
-});
 
 // brought into CreateProject.js
 class BasicInfo extends React.Component {
@@ -23,10 +14,8 @@ class BasicInfo extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-
     return (
-      <form className={classes.root} autoComplete="off" className="flex-column">
+      <form autoComplete="off" className="flex-column">
 
         <ModalInput label={"Title"} >
                     <input placeholder="Campaign Title"
@@ -68,4 +57,4 @@ const mapStateToProps = state => ({
    form: state.form
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(BasicInfo));
+export default connect(mapStateToProps)(BasicInfo);

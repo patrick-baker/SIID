@@ -105,21 +105,6 @@ function getSteps() {
   return ['Integrations', 'Campaign Goals', 'Target Audience', 'Style and Tone', 'Analyze'];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return 'What application is the text from?';
-    case 1:
-      return 'What is your Campaign Goal?';
-    case 2:
-      return 'Who are you targeting your ad to?';
-    case 3:
-        return 'What is the Style and Tone of your strategy?'
-    default:
-      return 'Unknown stepIndex';
-  }
-}
-
 class ProgressStepper extends React.Component {
 
   render() {
