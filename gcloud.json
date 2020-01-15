@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "rankchoice-1574619997268",
+    "private_key_id": "fb57027ca447ae8045aacb08afdb3c3d8638c39e",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCkgJRB1LdK/sNB\naPPSLCEwbxxEo1iEEmszvIIj9vq3B+5nWZdnsA8jOV+Lng3f+oGM3aR4y2tUSKjE\nJOI+3u36zcGwZEulCO1Aa00GOMTKWSZvEAd8efQUSReohNwkG/IjlhRTeShq6W10\nIiFvO45Iz/0CXC229ioeReXpNtBtFRRtR47k1RPMG9u4It46A0hBdy5FHkzn/vE2\nANO+4MHVaIds5WcOjm7ChV3vyZwS9xsflaW2x1/knlU9q7gcIb3PJ4CaFBF5/8b4\nz137S2iwj0oXK3X7ZXyWt/fAAYF8NBgTXk4OqIKtPt3Pcv/f7Rs9pdR6wTompprG\nZzLhQ1yLAgMBAAECggEAOY0CUUWqGoKmrOua4Zyuv9MfgKPlA8+t0ZvRq+NsMzyD\nG4UsgwoFQb2Av8e78vAhArdIIzqHgiUpZfXBcV1sxKHXcW6lSEenOTJQ8CxMLL6j\nw5dIBzRjP/WSYVKZ8cgVHn4S/mEU0tJ3iHmoWNHtJWweiATXuXrFoXGyzbRvlrmJ\nol9ESxnav1zpOn3sxhCErRx/SlSzx48PLmAulwFMQQx4VFzunG041ig5Xd03523y\nbflayCEhG2k5fI6QPz7jmE+GLgWbZYU3nUbANn1K50LXdQovysh3nXmqADHoGoRS\n6bRF3gkUMPoZx2xGyTkJ2tBLqaLIs/L8HraMLddXAQKBgQDPt81Uzzvjxt3qENtY\n0MBzkYxTZ6gOlpRwzwvtKyvWtrQSff47lVx6S7X/Nr3jal0n6/wozJ6jpprprLnN\ntygs2DMFKRU6YU+M9HWjDvBK5Tlx5pP6rWmIc5bzjhXTkti5iuC1JPUnie/raQnD\n1eRjxxQ5spUSD/6rtombpOHp+QKBgQDKvT0OM0Y6/l4u2K87w6+vYGggSD9rjqjz\n1hTpiKHEU9gUz/A/YJanEpPi2mEMv8KSPgITrO3bi0B2Ziid9VSk5IUGGSYJh3Ey\nTq+CJQO+Ku+sVV/eZdSf7bMQxNBA+jCF23sZ3qLlTDzIlG8mXJIPq97i2BbfICwh\nmZJwEDc7owKBgQCkGLJv859+nJan2VVP3uqK4ksXgOY1UCRI0mi7nsVtRL0RdtOn\nwqFiQ/mte1OcG2Uoqrd0i+Ivqujq/fdzWuS0OMBlrUUF7+ZmlqFwhdazdE9jeiMh\ngGnE0HxKQM9ha7snKV3H/UBnUgNl2H9MZOefI6EIy9oUgOpSQUyI10NaEQKBgQCn\nWK0dG5XM/EohwRpj6pMJ4DoS64/t6EPtgbihS/a7Z7nk8/8LUV8JaXxItJmHPIIO\n1MBCHWv43GjJUmoUeHz13usurXOIShRVwj1837DHOAm95nrLyKJJoJs+LDb6a4nB\n8/kY0X0EaHmD14In2CF4bhX8iQHYC2ZiFbGabsgooQKBgQCIMnTes2mtEYLr+SaP\nJ2ITjkOrgbf5SiY8IVLs13+bgJRx3JwYjemdiqZvGN5h+69sVbM68zTgMfs0UPHX\n6TSNSECdyvOyVRWGVbqt+GDgmFwMa4kLgyDrv6P28Mh1qyoRJ5mwLZLXJxuyjgb7\nI1guEjIcAR3maTxRAeBVmQ4G+A==\n-----END PRIVATE KEY-----\n",
+    "client_email": "siid-prime-project@rankchoice-1574619997268.iam.gserviceaccount.com",
+    "client_id": "107191402545927206627",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/siid-prime-project%40rankchoice-1574619997268.iam.gserviceaccount.com"
+  }
