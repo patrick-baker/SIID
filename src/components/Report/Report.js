@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import BubbleChart from './BubbleChartWrapper';
+import BubbleChart from './BubbleChart/BubbleChartWrapper';
 import PieChart from './PieChart.js/PieChartWrapper';
 import TotalBias from './TotalBias.js/TotalBias';
 import BubbleSuggestions from './BubbleSuggestions';
@@ -13,7 +13,7 @@ import ExpansionPanel from '../ExpansionPanel/ExpansionPanel';
 import CampaignGoals from './CampaignGoals';
 import Header from './Header';
 // import Tone from './Tone/Tone';
-import EducatorsOnReport from '../EducatorsOnReport/EducatorsOnReport';
+import EducatorsOnReport from './EducatorsOnReport';
 import DonutWrapper from './TotalBias.js/TotalBias';
 import TargetAudience from './TargetAudience';
 import Tone from './Tone';

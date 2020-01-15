@@ -4,7 +4,8 @@ import Modal from '../Modal/Modal'
 import { Checkbox } from '@material-ui/core';
 import UploadButton from '../UploadButton/UploadButton';
 
-
+//Educator was swapped to Expert on client side display values 
+//This is the form opened on add new expert and to update an existing
 class EducatorForm extends Component {
     state = {
         newEducator: {
@@ -16,9 +17,12 @@ class EducatorForm extends Component {
             //if this is an existing educator clean up so it's just the id's 
             //first check if this list is populated since it's not for the add new educator action
             //then check if the specialty value is null and don't bother mapping if it is
-            specialties: this.props.singleEducator.specialties && this.props.singleEducator.specialties[0][0] !== null && this.props.singleEducator.specialties.map(x => {
-                return Number(x[0]);
-            }) || [],
+            specialties: this.props.singleEducator.specialties 
+                            && this.props.singleEducator.specialties[0][0] !== null 
+                            && this.props.singleEducator.specialties.map(x => {
+                                return Number(x[0]);
+                            }) 
+                            || [],
         }
     }
 
@@ -26,7 +30,7 @@ class EducatorForm extends Component {
         this.props.dispatch({ type: "GET_CATEGORY" });
     }
 
-
+    //update local values on user entry
     handleChangeFor = (property, event) => {
         this.setState({
             newEducator: {
@@ -35,6 +39,7 @@ class EducatorForm extends Component {
             }
         })
     }
+    //update local value for image upload
     handleChangeImage = (url) => {
         this.setState({
             newEducator: {
@@ -46,7 +51,7 @@ class EducatorForm extends Component {
 
 
     submitEducator = () => {
-        console.log('in submitEdu')
+        //check each piece of the educator to make sure it is filled out
         if (
             this.state.newEducator.name &&
             this.state.newEducator.bio &&
@@ -59,9 +64,9 @@ class EducatorForm extends Component {
             } else {
                 this.props.dispatch({ type: "ADD_EDUCATOR", payload: this.state.newEducator });
             }
+            //close the modal
             this.props.addEducator();
-
-
+            //reset state
             this.setState({
                 newEducator: {
                     id: "",
@@ -71,20 +76,17 @@ class EducatorForm extends Component {
                     image_url: "",
                     specialties: []
                 }
-            }, () => {
-                console.log(this.state);
             })
-
-
         } else {
             alert('Please fill in all the fields')
         }
     }
-
+    //set the check box values for the specialties
     flipCheck = (event) => {
+        //make sure the id is a number 
         let id = Number(event.target.name);
-        console.log('in flip check', id)
         if (this.state.newEducator.specialties.includes(id)) {
+            //remove the id from the list if it was already present
             this.setState({
                 newEducator: {
                     ...this.state.newEducator,
@@ -92,6 +94,7 @@ class EducatorForm extends Component {
                 }
             })
         } else {
+            //add the id to the array if it is added 
             this.setState({
                 newEducator: {
                     ...this.state.newEducator,
@@ -104,13 +107,10 @@ class EducatorForm extends Component {
     render() {
         return (
             <>
-
                 <Modal>
                     <i onClick={this.props.addEducator} className="fas fa-times fa-2x modal__cancelIcon"></i>
-
                     <div className="modal__form">
                         <div>
-
                             <div className="card__centered">
                                 <UploadButton currentImage={this.state.newEducator.image_url} handleChangeImage={this.handleChangeImage} />
                             </div>
@@ -141,22 +141,11 @@ class EducatorForm extends Component {
                                     onChange={(event) => this.handleChangeFor('contact_info', event)} />
                             </label>
                         </div>
-                        {/* <div>
-                            <label>
-                                <div className="formInput__labelText">Image:</div>
-                                <input placeholder="Image"
-                                    value={this.state.newEducator.image_url}
-                                    className="formInput__average"
-                                    onChange={(event) => this.handleChangeFor('image_url', event)} />
-                            </label>
-                        </div> */}
-
                         <div className="formInput__labelText">Specialties:</div>
-
                         <div className="checkboxArray">
+                            {/*remove 'total' from the displayed checkboxes*/}
                             {this.props.category.filter(item => item.type != 'total').map(item => {
                                 return <><label key={item.id}>
-
                                     <Checkbox
                                         key={item.id}
                                         name={item.id}
@@ -172,8 +161,6 @@ class EducatorForm extends Component {
                             <button className="formInput__submitButton" onClick={this.submitEducator} >Submit</button>
                         </div>
                     </div>
-
-
                 </Modal>
             </>
         )
