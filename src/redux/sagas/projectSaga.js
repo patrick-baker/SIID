@@ -1,8 +1,12 @@
 import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-// gets the list of the user's projects
+
 function* getProject() {
+
+  /*
+    get array of projects from project.router.js and send array to reducer
+  */
   try {
     const project=yield axios.get(`/project`);
     yield put({type: 'SET_PROJECT', payload: project.data});
@@ -11,11 +15,15 @@ function* getProject() {
     }
 }
 
-// insert the project
+  /*
+    1. Post a project to db in project.router.js 
+    2. call the specific project saga to get that single project back from db
+    3. get all projects back from db now that a new one is added
+    4. send the text from the project to the analyze text
+  */
 function* createProject(action) {
   try {
     const newProject = action.payload;
-    console.log('NEW PROJECT',newProject);
     let project = yield axios.post(`/project`, newProject);
     // retrieves metadata for this created project, to be displayed on the report
     yield put ({type:"GET_SPECIFIC_PROJECT",payload:{id:project.data.project_id}});
@@ -29,6 +37,11 @@ function* createProject(action) {
 // delete the project
 function* deleteProject(action) {
   try {
+
+    /*
+      delete specific project based on id and 
+      call get projects saga to get updated projects list
+    */
     
     const projectId=action.payload;
     yield axios.delete(`/project/${projectId}`);
@@ -42,6 +55,13 @@ function* deleteProject(action) {
 
 function* updateProject(action) {
   try {
+
+    /*
+      uses id to identify which project to update in project.router.js
+      the new updated project is set as the new specific project
+      get all projects again now that one has been updated
+      analyze potentially new body of text
+    */
     
     const projectId=action.payload.id;
     yield axios.put(`/project/${projectId}`,action.payload);

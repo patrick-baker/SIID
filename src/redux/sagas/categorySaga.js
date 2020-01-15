@@ -1,9 +1,13 @@
 import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-// sends axios request to server to send update password email to user
+
 function* getCategory(action) {
   try {
+      /*
+      Gets the list of categories from categoryRouter.js
+      and sends the data to categoryReducer.js
+      */
       const category=yield axios.get(`/category`);
       yield put({type: 'SET_CATEGORY', payload: category.data});
     } catch (error) {

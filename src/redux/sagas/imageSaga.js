@@ -2,20 +2,21 @@ import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* postImage(action) {
-    console.log("HERE!")
+    /*
+        set config vars (don't change) and send data as an object to image-url.router.js
+    */
     try {
-        console.log("in postImageUrl saga");
         const config = {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
         }
+
         const data = {
             imageUrl: action.payload
         }
-        console.log("posting image url");
-        const response = yield axios.post('/api/image', data, config);
-        console.log(response);
-        // AFTER POST COMES BACK SUCCESSFUL, DO A GET
+
+        yield axios.post('/api/image', data, config);
+
 
     } catch (error) {
         console.log('Image URL POST failed: ', error)
