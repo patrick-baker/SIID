@@ -22,6 +22,83 @@ Next you'll need a Google account and Google Cloud Console running on your compu
 2. Once your google account is associated with the SIID model, or another model, you'll need to setup the Cloud Console on your local machine. [Quick Start](https://cloud.google.com/sdk/docs/quickstart-macos)
 3. Make sure you follow the instructions that include both the .json key in your PATH variable, and update your .bash_profile so Google can access the console.  If you are seeing a `gcloud auth ...` error double check these settings.
 
+#AWS Management Console
+
+We'll be using S3 and IAM
+We'll setup the Group, Then the bucket, then the user. 
+
+## At Find Services type IAM
+Click IAM and then on the left select Groups
+
+Step 1 : Group Name
+Click "Create New Group"
+Give it a group name
+
+Step 2:
+Policy Type: select   AmazonECS_FullAccess
+
+Step 3:
+Click "Create Group"
+
+## At Find Services type S3
+Click create bucket
+Step 1:
+Give the bucket a name
+Note the region
+
+Step 2: Configure
+Press Next
+
+Step 3: Permissions
+Uncheck "block all public access"
+
+Step 4: Review
+Click Create Bucket
+
+You've made a bucket!!
+Now click on the bucket. Goto Permissions Tab. Go to CORS configuration tab.
+Put in the default:
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+<CORSRule>
+    <AllowedOrigin>*</AllowedOrigin>
+    <AllowedMethod>GET</AllowedMethod>
+    <AllowedMethod>POST</AllowedMethod>
+    <AllowedMethod>PUT</AllowedMethod>
+    <AllowedHeader>*</AllowedHeader>
+</CORSRule>
+</CORSConfiguration>
+```
+
+Press "Save"
+
+## Add user
+
+### Create User
+Create a user name
+AWS access type is "Programatic Access"
+
+### Permissions
+Add user to group you created earlier
+
+### Tags
+Click "next
+
+### Review
+Click "Create User"
+
+Your Access Key is displayed we need our: Access key ID & Secret Access Key copy to your .env file. You cannot revisit this but if you need you can delete the file and "Create Access Key"  if you lose it or missed the chance.
+
+## Update the code with the credentials
+.env
+AWS_ACCESS_KEY_ID= (the ID we just made)
+AWS_SECRET_ACCESS_KEY= (the secret key we just made)
+
+/server/server.js
+(At the bottom of the file you'll find
+bucket:  (name of bucket)
+region: (code of region. 'us-east-2' is Ohio but if you have a different one look at link in comments)
 
 ## Create database and table
 
