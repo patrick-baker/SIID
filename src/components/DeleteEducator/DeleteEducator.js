@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-
+let verbose = false; // shows relevant console logs if true
 
 class DeleteEducator extends Component {
     handleDeleteConfirmation = () => {
-        console.log("in handleDeleteEducator Confirmation with id", this.props.specificEducator) // find
-        this.props.dispatch({ type: "DELETE_EDUCATOR", payload: this.props.specificEducator }) // find
+        // shows console.log if above verbose variable is true
+        if (verbose) console.log("in handleDeleteEducator Confirmation with id", this.props.specificEducator);
+        // dispatches educator to educatorSaga for deletion
+        this.props.dispatch({ type: "DELETE_EDUCATOR", payload: this.props.specificEducator });
     }
     render() {
         return (
@@ -14,12 +16,11 @@ class DeleteEducator extends Component {
                     <i onClick={this.props.handleDeleteModal} className="fas fa-times fa-2x modal__cancelIcon"></i>
                     <div className="modal__deleteBody">
                         {/* Regular Body of Delete Modal */}
-
                         {this.props.educator.educatorDeleteStatus.messageFromServer === '' &&
                             <>
                                 <h2 className="heading-secondary">Are you sure you want to delete this expert?</h2>
                                 <br />
-                                <h3 className="heading-tertiary" >Name: {this.props.specificEducator.name}</h3> {/* FIND this  */}
+                                <h3 className="heading-tertiary" >Name: {this.props.specificEducator.name}</h3>
                                 <br />
                                 
                                 <div className="modal__centeredButtons">

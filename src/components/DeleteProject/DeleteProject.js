@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-
+let verbose = false; // shows relevant console logs if true
 
 class DeleteProject extends Component {
     handleDeleteConfirmation = () => {
-        console.log("in handleDelete Confirmation with project", this.props.specificProject.title, this.props.specificProject.client)
+        // shows console.log if above verbose variable is true
+        if (verbose) console.log("in handleDelete Confirmation with project", this.props.specificProject.title, this.props.specificProject.client)
+        // dispatches educator to projectSaga for deletion
         this.props.dispatch({ type: "DELETE_PROJECT", payload: this.props.specificProject.id })
     }
     render() {
@@ -14,7 +16,6 @@ class DeleteProject extends Component {
                     <i onClick={this.props.handleDeleteModal} className="fas fa-times fa-2x modal__cancelIcon"></i>
                     <div className="modal__deleteBody">
                         {/* Regular Body of Delete Modal */}
-
                         {this.props.project.projectDeleteStatus.messageFromServer === '' &&
                             <>
                                 <h2 className="heading-secondary">Are you sure you want to delete this project?</h2>
