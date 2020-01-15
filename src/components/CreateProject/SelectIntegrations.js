@@ -1,27 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
-  },
-});
-
 class IntegrationsDropdown extends React.Component {
+  // dispatches corresponding form information to the formReducer
   handleChange = event => {
     this.props.dispatch({type: 'SET_FORM_METADATA', payload: {
       property: event.target.name, 
@@ -33,8 +19,8 @@ class IntegrationsDropdown extends React.Component {
     const { classes } = this.props;
 
     return (
-      <form className={classes.root} autoComplete="off" className="flex-column">
-        <FormControl variant="filled" className={classes.formControl}>
+      <form autoComplete="off" className="flex-column">
+        <FormControl variant="filled">
         <InputLabel style={{fontSize:'13px',color:'#5B63DA'}} id="demo-simple-select-filled-label">Choose Integration</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
@@ -63,4 +49,4 @@ const mapStateToProps = state => ({
    form: state.form
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(IntegrationsDropdown));
+export default connect(mapStateToProps)(IntegrationsDropdown);

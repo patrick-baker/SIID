@@ -9,6 +9,7 @@ import Select from '@material-ui/core/Select';
 import GoalFields from './CampaignGoalsFields';
 
 const styles = theme => ({
+  //style to be applied to form
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -16,18 +17,13 @@ const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
     minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
-  },
+  }
 });
 
+// brought into CreateProject.js
 class IntegrationsDropdown extends React.Component {
-  state = {
-    goal: '',
-    labelWidth: 0,
-  };
 
+  // updates metadata in formReducer
   handleChange = event => {
     this.props.dispatch({type: 'SET_FORM_METADATA', payload: {
       property: event.target.name, 
@@ -37,7 +33,6 @@ class IntegrationsDropdown extends React.Component {
 
   render() {
     const { classes } = this.props;
-
     return (
     <>
       <form className={classes.root} autoComplete="off">

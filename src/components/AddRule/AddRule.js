@@ -3,16 +3,19 @@ import Modal from '../Modal/Modal'
 import ModalForm from '../Modal/ModalForm'
 import ModalInput from '../Modal/ModalInputAvg'
 import { connect } from 'react-redux';
-
+let verbose = false; // console.logs run if verbose = true
 
 class AddRule extends Component {
+    // Add rule function runs 
     state = {
-        id: '',
         note: '',
         considerate: '',
         inconsiderate: '',
+        message: '',
 
     }
+    
+    // changes local state for corresponding input value
     handleChangeFor = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -21,13 +24,12 @@ class AddRule extends Component {
 
     // This will turn the state into the correct format 
     // then send as payload.
-    // Potential future improvment: currently only allows one 
+    // Potential future improvement: currently only allows one 
     // entry into considerate and inconsiderate.
-    // Next step, add dashes betwen spaces to find multiple word entries
     // ex: inconsiderate: dumb blonde should be in format: dumb-blonde
     handleSubmit = () => {
         const preparedObject = {
-            "id": `Use ${this.state.considerate} not ${this.state.inconsiderate}`, // Insetad of this.state.id
+            "id": `Use ${this.state.considerate} not ${this.state.inconsiderate}`, // Instead of this.state.id
             "type": "simple",
             "note": this.state.note,
             "message": this.state.message,
@@ -37,11 +39,15 @@ class AddRule extends Component {
             "considerate": {},
             "inconsiderate": {}
         }
-        preparedObject.considerate[this.state.considerate.toLowerCase()] = "a"
-        preparedObject.inconsiderate[this.state.inconsiderate.toLowerCase()] = "a"
-        console.log(preparedObject)
-        this.props.dispatch({ type: "ADD_RULE", payload: preparedObject })
-        this.props.addRule() // Get rid of when it works.
+        // Due to format of retext.js, creates a key of this.state.considerate, and a value of "a"
+        preparedObject.considerate[this.state.considerate.toLowerCase()] = "a";
+        // Due to format of retext.js, creates a key of this.state.considerate, and a value of "a"
+        preparedObject.inconsiderate[this.state.inconsiderate.toLowerCase()] = "a";
+        if (verbose) console.log(preparedObject);
+        // dispatches prepared object to ADD_RULE in ruleSaga.js
+        this.props.dispatch({ type: "ADD_RULE", payload: preparedObject });
+        // closes add ruled modal
+        this.props.addRule(); 
     }
 
     render() {

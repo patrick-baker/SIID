@@ -1,28 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import ModalInput from '../Modal/ModalInputAvg';
 
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
-  },
-});
-
+// brought into CreateProject.js
 class BasicInfo extends React.Component {
+  // updates metadata in formReducer
   handleChange = event => {
     this.props.dispatch({type: 'SET_FORM_METADATA', payload: {
       property: event.target.name, 
@@ -31,10 +14,8 @@ class BasicInfo extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-
     return (
-      <form className={classes.root} autoComplete="off" className="flex-column">
+      <form autoComplete="off" className="flex-column">
 
         <ModalInput label={"Title"} >
                     <input placeholder="Campaign Title"
@@ -76,4 +57,4 @@ const mapStateToProps = state => ({
    form: state.form
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(BasicInfo));
+export default connect(mapStateToProps)(BasicInfo);

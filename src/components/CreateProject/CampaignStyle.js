@@ -11,11 +11,13 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
 const styles = theme => ({
+  // styles checkboxes if checked
   root: {
     '&$checked': {
       color: '#422997',
     },
   },
+  // for radio buttons
   checked: {},
   formControl: {
     margin: theme.spacing.unit * 3,
@@ -36,7 +38,7 @@ class CampaignStyle extends React.Component {
     });
   }
 
-
+  // flips boolean state of tone checkboxes in formReducer
   handleToneChange = event => {
     this.props.dispatch({
       type: 'FLIP_FORM_TONE', payload: {
@@ -45,6 +47,7 @@ class CampaignStyle extends React.Component {
     });
   };
 
+  // flips boolean state of literary technique checkboxes in formReducer
   handleLiteraryTechniqueChange = event => {
     this.props.dispatch({
       type: 'FLIP_FORM_LITERARY_TECHNIQUES', payload: {
@@ -53,6 +56,7 @@ class CampaignStyle extends React.Component {
     });
   };
 
+  // flips boolean state of formality radio buttons in formReducer
   handleRadioChange = event => {
     this.props.dispatch({
       type: 'SET_FORM_METADATA', payload: {
@@ -72,6 +76,7 @@ class CampaignStyle extends React.Component {
             <div>
               <h3 className="heading-tertiary" style={{width:'20rem'}}>Select the Strategy's Tones</h3>
             
+            {/* maps out all tones in database to checkboxes */}
             <FormGroup column style={{padding:'1.5rem 6rem 0 6rem',alignContent:'center',justifyContent:'center',textAlign:'center'}}>
                 {this.props.tone[0] &&
                   this.props.tone.map(item =>
@@ -95,6 +100,8 @@ class CampaignStyle extends React.Component {
             </div>
           </>
         }
+
+        {/* creates radio buttons to toggle formality of ad campaign */}
         <FormControl component="fieldset" className={classes.formControl} style={{marginTop:'.45rem'}}>
           <FormLabel component="legend" style={{ fontSize: '2rem', color: 'black',width:'20rem'}}>Formality</FormLabel>
           <RadioGroup
@@ -109,6 +116,8 @@ class CampaignStyle extends React.Component {
             <FormControlLabel value="false" control={<Radio />} label="Informal" />
           </RadioGroup>
         </FormControl>
+
+        {/* maps out all literary techniques in database to checkboxes */}
         {this.props.form.literaryTechniques &&
           <div className="flex-column">
             <p className="heading-tertiary" style={{width:'20rem'}}>Select the Strategy's Literary Techniques</p>

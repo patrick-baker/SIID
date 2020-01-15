@@ -23,9 +23,11 @@ class ForgotPassword extends Component {
 
     render() {
         const { email } = this.state;
+        // forgotPasswordReducer
         const { messageFromServer, showNullError, showError } = this.props.forgotPassword
 
         return (
+            // inputs and button for sending recovery email
             <div className="login__main">
                 <h1 className="login__header" >Forgot Password?</h1>
                 <form className="profile-form" onSubmit={this.sendEmail}>
@@ -40,11 +42,13 @@ class ForgotPassword extends Component {
                     />
                     <button className="login__loginButton"> Send Password Reset Email </button>
                 </form>
+                {/* Error if nothing entered in email input */}
                 {showNullError && (
                     <div>
                         <p>The email address cannot be null.</p>
                     </div>
                 )}
+                {/* Error if email is not found in database */}
                 {showError && (
                     <div>
                         <p>
@@ -56,6 +60,7 @@ class ForgotPassword extends Component {
                         > Register </button>
                     </div>
                 )}
+                {/* Success */}
                 {messageFromServer === 'recovery email sent' && (
                     <div>
                         <h3>Password Reset Email Successfully Sent!</h3>

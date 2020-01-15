@@ -8,7 +8,7 @@ import Spinner from '../Spinner/Spinner';
 import moment from 'moment';
 import SIIDTool from '../SIIDTool/SIIDTool';
 import ReAnalyze from '../ReAnalyze/ReAnalyze';
-import BiasTable from '../BiasTable/BiasTable'
+import BiasTable from './BiasTable/BiasTable'
 import ExpansionPanel from '../ExpansionPanel/ExpansionPanel';
 import CampaignGoals from './CampaignGoals';
 import Header from './Header';

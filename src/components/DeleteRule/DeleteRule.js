@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-
+let verbose = false; // shows relevant console logs if true
 
 class DeleteRule extends Component {
     handleDeleteConfirmation = () => {
-        console.log("in handleDelete Confirmation with id", this.props.specificRule.id)
+        // shows console.log if above verbose variable is true
+        if (verbose) console.log("in handleDelete Confirmation with id", this.props.specificRule.id);
+        // dispatches educator to projectSaga for deletion
         this.props.dispatch({ type: "DELETE_RULE", payload: this.props.specificRule.id })
     }
     render() {
