@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ModalInput from '../Modal/ModalInputAvg';
 
+// brought into CreateProject.js
 class CampaignGoalFields extends Component {
-
+    // updates metadata in formReducer
     handleChange = event => {
         this.props.dispatch({type: 'SET_FORM_METADATA', payload: {
           property: event.target.name, 
@@ -11,6 +12,7 @@ class CampaignGoalFields extends Component {
         }});
       };
 
+      // conditionally renders goal fields based on what the campaign goal dropdown choice is, in CampaignGoals.js
     renderGoalFields = () => {
         if (this.props.form.campaign_goals === 'Lead Generation') {
             return (<>

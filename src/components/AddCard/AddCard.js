@@ -1,7 +1,8 @@
 import React from 'react'
 
-const ThomasAddCard = (props) => {
+const AddCard = (props) => {
     return (
+        // addEducator function passed as props from educators component
         <div onClick={props.addEducator} className="card__createCard">
             <div className="card__plusIconDiv">
                 {props.children}
@@ -9,4 +10,4 @@ const ThomasAddCard = (props) => {
         </div>
     )
 }
-export default ThomasAddCard;
+export default AddCard;

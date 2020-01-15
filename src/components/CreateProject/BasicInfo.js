@@ -2,27 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import ModalInput from '../Modal/ModalInputAvg';
 
 const styles = theme => ({
+  // styles to be applied to form
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
-  },
+  }
 });
 
+// brought into CreateProject.js
 class BasicInfo extends React.Component {
+  // updates metadata in formReducer
   handleChange = event => {
     this.props.dispatch({type: 'SET_FORM_METADATA', payload: {
       property: event.target.name, 

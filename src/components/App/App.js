@@ -1,33 +1,22 @@
 import React, { Component } from 'react';
-import {
-  HashRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom';
-
+import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-
-
-import Nav from '../Nav/Nav';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-import UserPage from '../UserPage/UserPage';
-import ForgotPassword from '../ForgotPassword/ForgotPassword';
-import ResetPassword from '../ResetPassword/ResetPassword';
 import CreateProject from '../CreateProject/CreateProject';
-import RuleTable from '../RuleTable/RuleTable'
-import SIIDTool from '../SIIDTool/SIIDTool';
-import Report from '../Report/Report';
+import Educators from '../Educators/Educators';
+import ForgotPassword from '../ForgotPassword/ForgotPassword';
+import Nav from '../Nav/Nav';
 import Projects from '../Projects/Projects';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import Report from '../Report/Report';
+import ResetPassword from '../ResetPassword/ResetPassword';
+import RuleTable from '../RuleTable/RuleTable'
 
 import '../../sass/main.scss';
 
-import Educators from '../Educators/Educators';
-
-
 class App extends Component {
   componentDidMount() {
+    // updates redux state with user information after login
     this.props.dispatch({ type: 'FETCH_USER' })
   }
 
@@ -36,24 +25,19 @@ class App extends Component {
       <Router>
         <div className="App">
           {this.props.user.id && <Nav />}
-          {/* <div className="content"> */}
             <Switch>
               {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
               <Redirect exact from="/" to="/home" />
-              {/* Visiting localhost:3000/about will show the about page.
-            This is a route anyone can see, no login necessary */}
+
+              {/* Visiting forgotPassword is an open route and can be viewed by anyone */}
               <Route
                 path="/forgotPassword"
                 component={ForgotPassword}
               />
+              {/* Visiting reset is an open route and can be viewed by anyone, but only feasibly accessible by using reset pass link in forgotPassword email */}
               <Route
                 path="/reset/:token"
                 component={ResetPassword}
-              />
-              <ProtectedRoute
-                exact
-                path="/createProject"
-                component={CreateProject}
               />
               {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
@@ -65,23 +49,31 @@ class App extends Component {
                 component={Projects}
               />
 
+              {/* createProject route accessible by pressing create link from landing page */}
+              <ProtectedRoute
+                exact
+                path="/createProject"
+                component={CreateProject}
+              />
+
+              {/* rules route brings an authorized user to the rules page */}
               <ProtectedRoute
                 exact
                 path="/rules"
                 component={RuleTable}
               />
 
+              {/* educators route brings an authorized user to the educators page */}
               <ProtectedRoute
                 path="/educators"
                 component={Educators}
               />
 
+              {/* Unprotected report route, which is accessible to viewing past report of user or by user sharing link. */}
               <Route 
                 path="/report/:id/:token"
                 component={Report}
               />
-              {/* This works the same as the other protected route, except that if the user is logged in,
-            they will see the info page instead. */}
               {/* If none of the other routes matched, we will show a 404. */}
               <Route render={() => <h1>404</h1>} />
             </Switch>
