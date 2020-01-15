@@ -23,12 +23,24 @@ Next you'll need a Google account and Google Cloud Console running on your compu
 3. Make sure you follow the instructions that include both the .json key in your PATH variable, and update your .bash_profile so Google can access the console.  If you are seeing a `gcloud auth ...` error double check these settings.
 
 
-
 ## Create database and table
 
 Create a new database called `SIID` and use the `database.sql` file to re-create the database.
 You will also want to import the rules by running the SQL commands in the `/ruleset_sql_files` folder.
 
+## Setting Up Your ENV File
+1. Retrieve a randomly generated password of 16 or more characters and set your SERVER_SESSION_SECRET as such:
+```SERVER_SESSION_SECRET=RandomStr1ng```
+2. Create a gmail account and set email and password environment variables as such:
+```EMAIL_ADDRESS=EmailAddress@gmail.com```
+```EMAIL_PASSWORD=RandomStr1ng```
+3. After creating your AWS account, make environment variables of your access key id and secret access key as such:
+```AWS_ACCESS_KEY_ID=keyId```
+```AWS_SECRET_ACCESS_KEY=key```
+
+## Alter Settings of Gmail Account to Allow Nodemailer to Use it
+1. Disable two-step verification by going [here](myaccount.google.com), then click security on the left, and disabling 2-step verification.
+2. Allow less secure apps [here](https://myaccount.google.com/lesssecureapps?pli=1) 
 
 ## Usage
 
