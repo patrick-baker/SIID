@@ -96,12 +96,14 @@ AWS_ACCESS_KEY_ID= (the ID we just made)
 AWS_SECRET_ACCESS_KEY= (the secret key we just made)
 
 /server/server.js
-(At the bottom of the file you'll find
+At the bottom of the file you'll find
 bucket:  (name of bucket)
 region: (code of region. 'us-east-2' is Ohio but if you have a different one look at link in comments)
 
 /src/components/UploadButton/UploadButton.js
 set the const s3Url = (name of bucket).s3.amazonaws.com
+If deploying to Heroku set the server variable to your heroku project's path.
+
 
 ## Create database and table
 
