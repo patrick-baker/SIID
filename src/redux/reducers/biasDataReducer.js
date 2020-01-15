@@ -14,12 +14,6 @@ const status = (state = {
     messageFromServer: '',
 }, action) => {
     switch (action.type) {
-        // renders the relevant charts on the report page
-        case 'AUTO_ML_DONE':
-            return {
-                isDone: true,
-                messageFromServer: 'bias back',
-            };
         case 'AUTO_ML_FAILURE':
             return {
                 isDone: true,

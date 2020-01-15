@@ -1,9 +1,14 @@
 import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-// sends axios request to server to send update password email to user
+
 function* addEducator(action) {
-    // console.log('action.payload of ForgotPasswordSaga:', action.payload);
+
+    /*
+        sends single educator data to educator.router.js and then 
+        calls get Saga to get the new educator back in the reducer
+
+    */
     try {
         yield axios.post('/educator', action.payload);
         yield put({ type: "GET_EDUCATORS" });
@@ -13,6 +18,11 @@ function* addEducator(action) {
 }
 
 function* getEducators() {
+    /*
+        Gathers the list of educators and their data into array 
+        from educator.router.js and stores in reducer to map through in component
+
+    */
     try {
         let educators = yield axios.get('/educator');
         yield put({ type: "SET_EDUCATORS", payload: educators.data });
@@ -22,6 +32,12 @@ function* getEducators() {
 }
 
 function* deleteEducator(action) {
+
+    /*
+       deletes single educator using id in educator.router.js and calls
+       GET_EDUCATORS to get updated information
+
+    */
     try {
         yield axios.delete(`/educator/${action.payload.id}`);
         yield put({ type: "EDUCATOR_DEL_SUCCESS" })
@@ -33,6 +49,10 @@ function* deleteEducator(action) {
 }
 
 function* updateEducator(action) {
+    /*
+       updates single educator using educator.id in the payload
+       in educatorRouter.js and call GET_EDCUATORS to get updated info
+    */
     try {
         yield axios.put(`/educator/`, action.payload);
         yield put({ type: "GET_EDUCATORS" });
