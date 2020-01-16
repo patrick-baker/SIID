@@ -1,10 +1,9 @@
 # SIID - Social Impact IDentification tool
 
 ## Description
-_Duration: 3-Week Sprint_
+_Duration: 2-Week Sprint_
 
-
-
+The SIID tool allows users to analyze strategy documents, or other types of marketing documents, to help illuminute possible occurences of insensitive language use. By doing so, ad campaigns can be more sensitive to all demographic groups, and can avoid hazards due to marketing groups being far disconnected from their target audiences. Reports can be shared among marketing team members and are saved to be viewed later. The SIID tool also provides a space for marketers to get in touch with experts of specialties in sexual orientation, gender, race, disability, and religion to help educate team members in becoming more knowledgable marketers in the future. 
 
 
 ## Prerequisites
