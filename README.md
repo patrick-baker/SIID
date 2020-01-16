@@ -3,6 +3,7 @@
 ## Description
 _Duration: 3-Week Sprint_
 
+SIID is a web application that allows marketing teams to input their strategy documents or ad copy and generate a report about possible areas of sensitivity in their concepts and language. This app uses a rule based engine (ReText) to scan the text for words that may carry bias, and suggest replacements as well as a machine learning engine (AutoML) that evaluates sentences for sensitive sentiment. The final report contains data visualization (D3.js) to quickly give the marketing team the ability to assess the overall tone and re-consider how this aligns with the brand, campaign goals, and target demographic.
 
 ## Prerequisites
 
