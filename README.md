@@ -155,7 +155,7 @@ Register an administrator and then change their admin status in the user table t
 
 ```SERVER_SESSION_SECRET=RandomStr1ng```
 
-2. Create a gmail account and set email and password environment variables as such:
+2. Create a gmail account and set email and password environment variables as such (you'll need to alter gmail settings later, see below):
 
 ```EMAIL_ADDRESS=EmailAddress@gmail.com```
 
@@ -171,7 +171,7 @@ Register an administrator and then change their admin status in the user table t
 1. Disable two-step verification by going [here](myaccount.google.com), then click security on the left, and disabling 2-step verification.
 2. Allow less secure apps [here](https://myaccount.google.com/lesssecureapps?pli=1) 
 
-## Usage
+# Usage
 
 1. After logging in, users will be brought to their ```home``` page, which will list all of their projects.
 2. Clicking on the ```create``` button will allow the user to enter the project form, where they will create all of the project metadata and analyze the text of their strategy document.
@@ -198,16 +198,6 @@ If you have any questions, feel free to email me at bakerpj1992@gmail.com
 
 ## Acknowledgments
 
-* Shoutout to all of Prime staff for being so supportive and being such great teachers.
-* Thanks to Yandex and Unsplash for having great documentation and APIs that are quick and easy to implement.
 
 ---
-
-## Where I want to go from here
-
-- [ ] Study mode, which allows a user to study words from either origin language, and keeps track of their success throughout (correct guesses, date since last correct[most likely using moment.js], amount of times guessed, a guess timer, and some algorigthm for deciding the order in which to show the words).
-- [ ] A words information page that renders according to user, with their information in regards to study mode.
-- [ ] Some sort of gamification to encorage users to study more often.
-- [ ] A search feature which allows users to search all translations stored in the database.
-- [ ] Improvements to the UI which make it more intuitive for new users.
 
