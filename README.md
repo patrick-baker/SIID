@@ -193,12 +193,9 @@ Register an administrator and then change their admin status in the user table t
 - _MaterialUI_
 - _AWS-S3Buckets_
 
-## Support
-
-If you have any questions, feel free to email me at bakerpj1992@gmail.com
-
 ## Acknowledgments
 
+* Shoutout to all of Prime staff for being so supportive and being such great teachers.
 
 ---
 
