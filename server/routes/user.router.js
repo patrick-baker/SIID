@@ -3,12 +3,11 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
-
 const router = express.Router();
-
 // imports for password reset request
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const verbose = false;
 
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -48,14 +47,15 @@ router.post('/logout', (req, res) => {
 // Route for sending email with link to reset password
 router.post('/forgotPassword', (req, res) => {
   const { email } = req.body
+  // message sent if email field left blank
   if (email === '') {
     res.status(400).send('email required');
   }
-  // if (process.env.VERBOSE) console.log("user's email:", email);
-
+  // checks for users email from email field
   const sqlSelect = `SELECT * FROM "user" WHERE "email" = $1;`;
   pool.query(sqlSelect, [email])
     .then((user) => {
+      // if environment variable VERBOSE, shows console logs
       if (process.env.VERBOSE) console.log("user result from server:", user);
       if (user.rowCount === 0) {
         if (process.env.VERBOSE) console.log('email not in database');
