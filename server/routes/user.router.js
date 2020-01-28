@@ -3,12 +3,11 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
-
 const router = express.Router();
-
 // imports for password reset request
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const verbose = false;
 
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -48,19 +47,22 @@ router.post('/logout', (req, res) => {
 // Route for sending email with link to reset password
 router.post('/forgotPassword', (req, res) => {
   const { email } = req.body
+  // message sent if email field left blank
   if (email === '') {
     res.status(400).send('email required');
   }
-  // if (process.env.VERBOSE) console.log("user's email:", email);
-
+  // checks for users email from email field
   const sqlSelect = `SELECT * FROM "user" WHERE "email" = $1;`;
   pool.query(sqlSelect, [email])
     .then((user) => {
+      // if environment variable VERBOSE, shows console logs
       if (process.env.VERBOSE) console.log("user result from server:", user);
+      // runs if email does not match any in DB
       if (user.rowCount === 0) {
         if (process.env.VERBOSE) console.log('email not in database');
         res.status(403).json('email not in db');
       } else {
+        // creates token for email link for found user, expires after 10 minutes
         const token = crypto.randomBytes(20).toString('hex');
         const sqlUpdate = `UPDATE "user"
       SET "resetPasswordToken" = $1, 
@@ -103,13 +105,13 @@ router.post('/forgotPassword', (req, res) => {
             });
           })
           .catch((err) => {
-            if (process.env.VERBOSE) console.log('Error in updating token of user', err);
+            console.log('Error in updating token of user', err);
             res.sendStatus(500);
           })
       }
     })
     .catch(err => {
-      if (process.env.VERBOSE) console.log('error in selecting user by email in DB', err);
+      console.log('error in selecting user by email in DB', err);
       res.sendStatus(500);
     })
 });
@@ -117,15 +119,17 @@ router.post('/forgotPassword', (req, res) => {
 // matches token to username and retrieves information for reset link
 router.get('/reset/:token', (req, res) => {
   const { token } = req.params;
-  // need to also check timestamp for expiration, how it compares to current time
+  // checks timestamp for expiration, how it compares to current time
   sqlText = `SELECT * from "user" WHERE "resetPasswordToken" = $1 AND "resetPasswordExpires" > CURRENT_TIMESTAMP;`; 
   pool.query(sqlText, [token])
     .then((user) => {
       if (process.env.VERBOSE) console.log("user result from server in reset query:", user);
+        // if token is expired or error with the get request
       if (user.rowCount === 0) {
         console.error('password reset link is invalid or has expired');
         res.status(403).send('password reset link is invalid or has expired');
       } else {
+        // sends username to front end to allow user to change password
         res.status(200).send({
           username: user.rows[0].username,
           message: 'password reset link a-ok',
@@ -138,6 +142,7 @@ router.get('/reset/:token', (req, res) => {
 router.put('/updatePasswordViaEmail', (req, res) => {
   const { username, resetPasswordToken } = req.body;
   if (process.env.VERBOSE) console.log('req.body in updatePasswordViaEmail query:', req.body);
+  // last check that we have correct user, correct token, and unexpired timestamp
   sqlText = `SELECT * FROM "user" 
     WHERE "username" = $1
     AND "resetPasswordToken" = $2
